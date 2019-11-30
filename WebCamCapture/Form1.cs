@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 using System.Windows.Forms;
 using AForge.Video;
@@ -15,42 +16,31 @@ namespace WebCamCapture
 {
     public partial class Form1 : Form
     {
-        private FilterInfoCollection videoDevices;
-        private VideoCaptureDevice videoSource;
+        
         public Form1()
         {
             InitializeComponent();
         }
-
+        private WebCamCapture wcc;
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            wcc = new WebCamCapture();
             // инициализация, проверка наличия подключенных камер.
-            //init();
-
-            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            if (videoDevices.Count > 0)
+            if (wcc.init(CamView,this))
             {
-                foreach (FilterInfo device in videoDevices)
-                {
-                    CamList.Items.Add(device.Name);
-                }
-                CamList.SelectedIndex = 0;
-            }
-        }
+                ListCaptureDevices.Items.AddRange(wcc.Devices.ToArray());
+                wcc.SelectedDevice = 0; // устройстово по умолчанию
+                ListCaptureDevices.SelectedIndex = wcc.SelectedDevice;
+                
 
-        private void BtnVideoCapture_Click(object sender, EventArgs e)
-        {
-            videoSource = new VideoCaptureDevice(videoDevices[CamList.SelectedIndex].MonikerString);
-            videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
-            VideoCapabilities[] capabilities = videoSource.VideoCapabilities;
+                ListCaptutreModes.Items.AddRange(wcc.VideoModes.ToArray());
+                wcc.SelectedVideoMode = 0; // видеорежим по умолчанию.
+                ListCaptutreModes.SelectedIndex = wcc.SelectedVideoMode;
 
-            foreach (var item in videoSource.VideoCapabilities)
-            {
-                comboBox1.Items.Add(item.FrameSize.Width + "x" + item.FrameSize.Height);
+                btnScreenCapture.Enabled = true;
             }
-            //videoSource.VideoResolution = capabilities[17]; // устанавливаем разрешение 1280x720
-            videoSource.Start();
-            
+
         }
 
         private void BtnScreenCapture_Click(object sender, EventArgs e)
@@ -58,27 +48,138 @@ namespace WebCamCapture
             CamView.Image.Save(DateTime.Now.ToString().Replace(":", "-")+".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            wcc.Stop();
+        }
+
+
+        /// <summary>
+        /// Выбор устройства 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListCapureDevices_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            wcc.SelectedDevice = ListCaptureDevices.SelectedIndex;
+        }
+
+        /// <summary>
+        /// Выбор режима захвата
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListCaputreModes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            wcc.ChangeModeCapture(ListCaptutreModes.SelectedIndex);     
+        }
+
+    }
+
+    public class WebCamCapture {
+
+        private FilterInfoCollection videoDevices;
+        private VideoCaptureDevice videoSource;
+        private PictureBox CamView;
+        private ArrayList devices;
+        private ArrayList videoModes;
+        private int selectedDevice;
+        private int selectedVideoMode;
+        Form forms;
+
+        /// <summary>
+        /// Массив подключенных устройств
+        /// </summary>
+        public ArrayList Devices { get => devices; }
+
+        /// <summary>
+        /// Массив поддерживаемых режимов (разрешение видео).
+        /// </summary>
+        public ArrayList VideoModes { get => videoModes; }
+
+        /// <summary>
+        /// Выбранное устройстово.
+        /// </summary>
+        public int SelectedDevice { get => selectedDevice; set => selectedDevice = value; }
+        /// <summary>
+        /// Выбранный видеорежим (выбранное разрешение)
+        /// </summary>
+        public int SelectedVideoMode { get => selectedVideoMode; set => selectedVideoMode = value; }
+
+        public bool init(PictureBox cv, Form f)
+        {
+            forms = f;
+            CamView = cv;
+            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            if (videoDevices.Count > 0)
+            {
+                ArrayList mod = new ArrayList();
+                devices = new ArrayList();
+
+                foreach (FilterInfo device in videoDevices)
+                {
+                    devices.Add(device.Name);
+                }
+
+                //
+                videoSource = new VideoCaptureDevice(videoDevices[this.SelectedDevice].MonikerString);
+                videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+                videoSource.Start();
+
+                // ошибки камеры
+                videoSource.VideoSourceError += new VideoSourceErrorEventHandler(Error);
+                
+
+                
+
+                // поддерживаемые режимы работы камеры (разрешение)
+                foreach (var s in videoSource.VideoCapabilities)
+                {
+                    mod.Add(s.FrameSize.Width + "x" + s.FrameSize.Height);
+                }
+                this.videoModes = mod;
+                return true;
+            }
+            else {
+                //MessageBox.Show("Камера не подключена!");
+                return false;
+            }
+
+        }
+
+        public void Error(object sender, VideoSourceErrorEventArgs eventArgs)
+        {
+            MessageBox.Show("Ошибка");
+        }
+
+        /// <summary>
+        /// Обработчик события поступления кадра
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="eventArgs"></param>
         private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            Invoke((MethodInvoker)(() =>
+
+                forms.Invoke((MethodInvoker)(() =>
                 {
                     var image = CamView.Image;
 
                     if (image != null)
                     {
-                        CamView.Image = null;
                         image.Dispose();
+                        CamView.Image = null;
+
                     }
                     CamView.Image = (Bitmap)eventArgs.Frame.Clone();
                 }));
-
-
         }
 
- 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        /// <summary>
+        /// Завершение работы программы захвата
+        /// </summary>
+        public void Stop()
         {
-            Invoke((MethodInvoker)(() =>
+            forms.Invoke((MethodInvoker)(() =>
             {
                 if (videoSource != null)
                 {
@@ -88,42 +189,21 @@ namespace WebCamCapture
             }));
         }
 
-        private void BtnSetting_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Смена разрешения захвата
+        /// </summary>
+        public void ChangeModeCapture(int mode)
         {
-            
-            foreach (var item in videoSource.VideoCapabilities)
+            if (this.SelectedVideoMode != mode)
             {
-                comboBox1.Items.Add(item.FrameSize.Width+"x"+ item.FrameSize.Width);
+                this.SelectedVideoMode = mode;
+                this.Stop();
+                videoSource.VideoResolution = videoSource.VideoCapabilities[this.SelectedVideoMode];
+                videoSource.Start();
             }
-        }
 
-        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Invoke((MethodInvoker)(() =>
-            {
-                if (videoSource != null)
-                {
-                    videoSource.SignalToStop();
-                    videoSource.WaitForStop();
-                }
-            }));
 
-            VideoCapabilities[] capabilities = videoSource.VideoCapabilities;
-            videoSource.VideoResolution = capabilities[comboBox1.SelectedIndex];           
-            videoSource.Start();
-
-        }
-
-        private void CamList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-    }
-
-    public class WebCamCapture {
-        public void init()
-        {
-
+                   
         }
     }
 }
