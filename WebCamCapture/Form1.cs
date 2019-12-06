@@ -102,9 +102,20 @@ namespace WebCamCapture
         /// <param name="e"></param>
         private void Button1_Click(object sender, EventArgs e)
         {
-
-
+            ArrayList list = new ArrayList();
+            list.Add("Вова");
+            list.Add("Маша");
             
+            MessageBox.Show(list.IndexOf("Маша").ToString());
+            if (Properties.Settings.Default.SelectedDeviceName != "")
+            {
+                MessageBox.Show(Properties.Settings.Default.SelectedDeviceName);
+            }
+            else
+            {
+                MessageBox.Show("Выбранное устройство не подключено");
+            }
+           
         }
     }
 

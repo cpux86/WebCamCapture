@@ -20,22 +20,29 @@ namespace WebCamCapture
     public class WebCamCapture
     {
 
-        private FilterInfoCollection videoDevices;
+        //private FilterInfoCollection videoDevices;
         private VideoCaptureDevice videoSource;
         private PictureBox сamView;
         private ArrayList devices;
         private ArrayList videoModes;
+        private String selectedDeviceName;
         private int selectedDevice;
         private int selectedVideoMode;
         Form forms;
 
+        public WebCamCapture()
+        {
+            // выбранное устройство из пользовтельских конфикураций
+            selectedDeviceName = Properties.Settings.Default.SelectedDeviceName;
+        }
+
         /// <summary>
-        /// Массив подключенных устройств
+        /// Массив имен подключенных устройств
         /// </summary>
         public ArrayList Devices { get => devices; }
 
         /// <summary>
-        /// Массив поддерживаемых режимов (разрешение видео).
+        /// Массив поддерживаемых режимов (разрешение видео) выбранного устройства.
         /// </summary>
         public ArrayList VideoModes { get => videoModes; }
 
@@ -49,9 +56,11 @@ namespace WebCamCapture
         public int SelectedVideoMode { get => selectedVideoMode; set => selectedVideoMode = value; }
 
         /// <summary>
-        /// 1. Получить список всех подключенных устройств. Если устройства не обнаружены, то через N секунд повторно опрашиваем систему. 
-        /// 2. Установить устройство по умолчанию, получить его имя из настроек приложения. 
-        ///    Если устройство из настроек не подключено, то устойство по умолчанию будет первое в списке устройств.
+        /// init();
+        /// 1. Получить список всех подключенных устройств. 1.1. Сохранить список в devices.
+        ///    1.2. Если устройства не обнаружены, то через N секунд повторно опрашиваем систему. 
+        /// 2. Установить устройство по умолчанию, получить его имя (Config int GetSelectedDevice), из настроек приложения (SelectedDeviceName). 
+        ///    Если устройство из настроек не подключено, то устойство по умолчанию будет первое в списке устройств (selectedDevice = 0).
         /// 3. Получить список всех поддерживаемых режимов захвата (разрешение), сохранить его в - VideoModes. 
         ///    Если в настройках приложения имеются сведения о выбранном режиме, то 
         ///    сохраняем идентефикатор пользовательского режима (разрешения) в свойстве SelectedVideoMode. Если в настройках выбанный  режим не установлен,
@@ -64,35 +73,37 @@ namespace WebCamCapture
         {
             forms = f;
             сamView = cv;
-            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            FilterInfoCollection videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            // GetDivicesList();
+            
+            
             if (videoDevices.Count > 0)
             {
+                // 1.
                 ArrayList mod = new ArrayList();
                 devices = new ArrayList();
-
                 foreach (FilterInfo device in videoDevices)
                 {
                     
                     devices.Add(device.Name);
+                    
                 }
 
-                //
+                // 2. 
+                devices.IndexOf(selectedDeviceName);
+
+
                 videoSource = new VideoCaptureDevice(videoDevices[this.SelectedDevice].MonikerString);
-                videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
-                videoSource.Start();
-                
-
-                // ошибки камеры
-                videoSource.VideoSourceError += new VideoSourceErrorEventHandler(Error);
-
-
-
 
                 // поддерживаемые режимы работы камеры (разрешение)
                 foreach (var s in videoSource.VideoCapabilities)
                 {
                     mod.Add(s.FrameSize.Width + "x" + s.FrameSize.Height);
                 }
+
+                videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+                videoSource.Start();
+                                
                 this.videoModes = mod;
                 return true;
             }
@@ -102,6 +113,15 @@ namespace WebCamCapture
                 return false;
             }
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool Start()
+        {
+            return true;
         }
 
         public void GetCamList()
