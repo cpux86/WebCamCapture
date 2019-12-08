@@ -74,6 +74,8 @@
             this.ListCaptureDevices.Size = new System.Drawing.Size(127, 21);
             this.ListCaptureDevices.TabIndex = 6;
             this.ListCaptureDevices.SelectedIndexChanged += new System.EventHandler(this.ListCapureDevices_SelectedIndexChanged);
+            this.ListCaptureDevices.SelectionChangeCommitted += new System.EventHandler(this.ListCaptureDevices_SelectionChangeCommitted);
+            this.ListCaptureDevices.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListCaptureDevices_MouseDown);
             // 
             // dataGridView1
             // 

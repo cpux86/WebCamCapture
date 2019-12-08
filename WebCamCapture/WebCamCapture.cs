@@ -20,26 +20,28 @@ namespace WebCamCapture
     public class WebCamCapture
     {
 
-        //private FilterInfoCollection videoDevices;
+        private FilterInfoCollection videoDevices;
         private VideoCaptureDevice videoSource;
-        private PictureBox сamView;
-        private ArrayList devices;
+        private PictureBox camView;
+        private List<string> listNameDevices;
         private ArrayList videoModes;
         private String selectedDeviceName;
-        private int selectedDevice;
+        private int selectedDeviceIndex = 0;
         private int selectedVideoMode;
+        public bool screen = false;
         Form forms;
 
         public WebCamCapture()
         {
             // выбранное устройство из пользовтельских конфикураций
-            selectedDeviceName = Properties.Settings.Default.SelectedDeviceName;
+           // selectedDeviceName = Properties.Settings.Default.SelectedDeviceName;
         }
 
         /// <summary>
-        /// Массив имен подключенных устройств
+        /// Список имен подключенных устройств
         /// </summary>
-        public ArrayList Devices { get => devices; }
+        public List<string> ListNameDevices { get => listNameDevices; }
+        
 
         /// <summary>
         /// Массив поддерживаемых режимов (разрешение видео) выбранного устройства.
@@ -47,9 +49,9 @@ namespace WebCamCapture
         public ArrayList VideoModes { get => videoModes; }
 
         /// <summary>
-        /// Выбранное устройстово.
+        /// Index выбранного устройстова.
         /// </summary>
-        public int SelectedDevice { get => selectedDevice; set => selectedDevice = value; }
+        public int SelectedDeviceIndex { get => selectedDeviceIndex; set => selectedDeviceIndex = value; }
         /// <summary>
         /// Выбранный видеорежим (выбранное разрешение)
         /// </summary>
@@ -57,7 +59,7 @@ namespace WebCamCapture
 
         /// <summary>
         /// init();
-        /// 1. Получить список всех подключенных устройств. 1.1. Сохранить список в devices.
+        /// 1. Получить список всех подключенных устройств. 1.1. Сохранить список в listNameDevices.
         ///    1.2. Если устройства не обнаружены, то через N секунд повторно опрашиваем систему. 
         /// 2. Установить устройство по умолчанию, получить его имя (Config int GetSelectedDevice), из настроек приложения (SelectedDeviceName). 
         ///    Если устройство из настроек не подключено, то устойство по умолчанию будет первое в списке устройств (selectedDevice = 0).
@@ -72,28 +74,25 @@ namespace WebCamCapture
         public bool init(PictureBox cv, Form f)
         {
             forms = f;
-            сamView = cv;
-            FilterInfoCollection videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            // GetDivicesList();
-            
-            
+            camView = cv;
+            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+
+            selectedDeviceName = Properties.Settings.Default.SelectedDeviceName;
+
             if (videoDevices.Count > 0)
             {
                 // 1.
+
+
+
+                UpdateDevicesNameList();
+
+                if (ListNameDevices.IndexOf(selectedDeviceName) != -1)
+                    selectedDeviceIndex = ListNameDevices.IndexOf(selectedDeviceName);
+
+
                 ArrayList mod = new ArrayList();
-                devices = new ArrayList();
-                foreach (FilterInfo device in videoDevices)
-                {
-                    
-                    devices.Add(device.Name);
-                    
-                }
-
-                // 2. 
-                devices.IndexOf(selectedDeviceName);
-
-
-                videoSource = new VideoCaptureDevice(videoDevices[this.SelectedDevice].MonikerString);
+                videoSource = new VideoCaptureDevice(videoDevices[this.SelectedDeviceIndex].MonikerString);
 
                 // поддерживаемые режимы работы камеры (разрешение)
                 foreach (var s in videoSource.VideoCapabilities)
@@ -114,7 +113,40 @@ namespace WebCamCapture
             }
 
         }
+        /// <summary>
+        /// Обновляет список подключенных устройств
+        /// </summary>
+        internal bool UpdateDevicesNameList()
+        {
+            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice); ;
+            List<string>  list = new List<string>();
+            foreach (FilterInfo device in videoDevices)
+            {
 
+                //listNameDevices.Add(device.Name);
+                list.Add(device.Name);
+
+            }
+            if (this.ListNameDevices == null)
+            {
+                listNameDevices = list;
+            }
+
+
+
+            //if (listNameDevices.IndexOf(selectedDeviceName) != -1)
+            //    selectedDeviceIndex = listNameDevices.IndexOf(selectedDeviceName);
+
+
+
+            if (!list.SequenceEqual<string>(listNameDevices))
+            {
+                listNameDevices = list;
+                return true;
+            }
+            return false;
+        }
+            
         /// <summary>
         /// 
         /// </summary>
@@ -143,15 +175,19 @@ namespace WebCamCapture
 
             forms.Invoke((MethodInvoker)(() =>
             {
-                var image = сamView.Image;
+                var image = camView.Image;
 
                 if (image != null)
                 {
                     image.Dispose();
-                    сamView.Image = null;
+                    camView.Image = null;
 
                 }
-                сamView.Image = (Bitmap)eventArgs.Frame.Clone();
+                camView.Image = (Bitmap)eventArgs.Frame.Clone();
+                if (screen)
+                {
+                    //ScreenView
+                }
             }));
         }
 
