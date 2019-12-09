@@ -28,7 +28,7 @@ namespace WebCamCapture
         private String selectedDeviceName;
         private int selectedDeviceIndex = 0;
         private int selectedVideoMode;
-        public bool screen = false;
+        public string PathSaveFile = null;
         Form forms;
 
         public WebCamCapture()
@@ -85,7 +85,7 @@ namespace WebCamCapture
 
 
 
-                UpdateDevicesNameList();
+                UpdateListNameDevices();
 
                 if (ListNameDevices.IndexOf(selectedDeviceName) != -1)
                     selectedDeviceIndex = ListNameDevices.IndexOf(selectedDeviceName);
@@ -114,9 +114,9 @@ namespace WebCamCapture
 
         }
         /// <summary>
-        /// Обновляет список подключенных устройств
+        /// Обновить список подключенных устройств
         /// </summary>
-        internal bool UpdateDevicesNameList()
+        internal bool UpdateListNameDevices()
         {
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice); ;
             List<string>  list = new List<string>();
@@ -184,9 +184,12 @@ namespace WebCamCapture
 
                 }
                 camView.Image = (Bitmap)eventArgs.Frame.Clone();
-                if (screen)
+                if (PathSaveFile != null)
                 {
-                    //ScreenView
+                    camView.Image.Save(PathSaveFile, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    PathSaveFile = null;
+
+
                 }
             }));
         }
@@ -211,15 +214,21 @@ namespace WebCamCapture
         /// </summary>
         public void ChangeModeCapture(int mode)
         {
-            if (this.SelectedVideoMode != mode)
+          
+            try
             {
-                this.SelectedVideoMode = mode;
-                this.Stop();
-                videoSource.VideoResolution = videoSource.VideoCapabilities[this.SelectedVideoMode];
-                videoSource.Start();
+                if (this.SelectedVideoMode != mode)
+                {
+                    this.SelectedVideoMode = mode;
+                    this.Stop();
+                    videoSource.VideoResolution = videoSource.VideoCapabilities[this.SelectedVideoMode];
+                    videoSource.Start();
+                }
             }
-
-
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
 
         }
     }

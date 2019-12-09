@@ -45,28 +45,29 @@ namespace WebCamCapture
                 ListCaptutreModes.SelectedIndex = wcc.SelectedVideoMode;
 
                 btnScreenCapture.Enabled = true;
+                wcc.UpdateListNameDevices();
+                ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
             }
             //
-            wcc.UpdateDevicesNameList();
-            ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
+            
         }
 
         private void BtnScreenCapture_Click(object sender, EventArgs e)
         {         
             string path;
             path = DateTime.Now.ToString().Replace(":", "-") + ".jpg";
-            CamView.Image.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
-
+            //CamView.Image.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
+            //ScreenView.Image = (Bitmap)CamView.Image.Clone();
             ScreenView.Image = CamView.Image;
-
-            wcc.screen = true;
+            wcc.PathSaveFile = path;
+            
 
             //if (img != null)
             //{
             //    img.Dispose();
             //}
-           
-           // ScreenView.ImageLocation = path;
+
+            // ScreenView.ImageLocation = path;
 
             //Invoke((MethodInvoker)(() =>
             //{
@@ -116,12 +117,13 @@ namespace WebCamCapture
         /// <param name="e"></param>
         private void Button1_Click(object sender, EventArgs e)
         {
-           
+            //Thread.Sleep(8000);
+
         }
         // Обновляет список устройств
         private void ListCaptureDevices_MouseDown(object sender, MouseEventArgs e)
         {
-            wcc.UpdateDevicesNameList();
+            wcc.UpdateListNameDevices();
             ListCaptureDevices.Items.Clear();
             ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
             ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
