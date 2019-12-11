@@ -19,8 +19,6 @@ namespace WebCamCapture
     public partial class Form1 : Form
     {
 
-        
-
         public Form1()
         {
             InitializeComponent();
@@ -55,17 +53,21 @@ namespace WebCamCapture
         private void BtnScreenCapture_Click(object sender, EventArgs e)
         {         
             string path;
-            path = DateTime.Now.ToString().Replace(":", "-") + ".jpg";
+            path = DateTime.Now.ToString().Replace(":", "-");
+            path += DateTime.Now.Ticks + ".jpg";
             //CamView.Image.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
             //ScreenView.Image = (Bitmap)CamView.Image.Clone();
-            ScreenView.Image = CamView.Image;
-            wcc.PathSaveFile = path;
-            
+            if (ScreenView.Image != null)
+            {
+                ScreenView.Image.Dispose();
+            }
+             
+            ScreenView.Image = (Bitmap)CamView.Image.Clone();
+            // wcc.PathSaveFile = path;
 
-            //if (img != null)
-            //{
-            //    img.Dispose();
-            //}
+
+            CamView.Image.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
+
 
             // ScreenView.ImageLocation = path;
 
@@ -118,6 +120,9 @@ namespace WebCamCapture
         private void Button1_Click(object sender, EventArgs e)
         {
             //Thread.Sleep(8000);
+            // wcc.Stop();
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
 
         }
         // Обновляет список устройств
@@ -133,6 +138,32 @@ namespace WebCamCapture
         private void ListCaptureDevices_SelectionChangeCommitted(object sender, EventArgs e)
         {
 
+        }
+
+        private void ScreenView_DoubleClick(object sender, EventArgs e)
+        {
+            //this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            //this.WindowState = FormWindowState.Maximized;
+            CamView.Width = SystemInformation.PrimaryMonitorSize.Width;
+            CamView.Height = SystemInformation.PrimaryMonitorSize.Height;
+        }
+
+        private void CamView_DoubleClick(object sender, EventArgs e)
+        {
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            CamView.Width = SystemInformation.PrimaryMonitorSize.Width;
+            CamView.Height = SystemInformation.PrimaryMonitorSize.Height;
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+        }
+
+        private void Button1_KeyDown(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show("Test");
         }
     }
 

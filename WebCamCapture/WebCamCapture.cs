@@ -17,7 +17,7 @@ namespace WebCamCapture
     /// <summary>
     /// Робота с web камерой, сознаие и сохнанение снимков
     /// </summary>
-    public class WebCamCapture
+    public class WebCamCapture : Form1
     {
 
         private FilterInfoCollection videoDevices;
@@ -99,8 +99,8 @@ namespace WebCamCapture
                 {
                     mod.Add(s.FrameSize.Width + "x" + s.FrameSize.Height);
                 }
-
                 videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+                //videoSource.S
                 videoSource.Start();
                                 
                 this.videoModes = mod;
@@ -132,10 +132,6 @@ namespace WebCamCapture
                 listNameDevices = list;
             }
 
-
-
-            //if (listNameDevices.IndexOf(selectedDeviceName) != -1)
-            //    selectedDeviceIndex = listNameDevices.IndexOf(selectedDeviceName);
 
 
 
@@ -171,12 +167,11 @@ namespace WebCamCapture
         /// <param name="sender"></param>
         /// <param name="eventArgs"></param>
         private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
-
+        {           
             forms.Invoke((MethodInvoker)(() =>
             {
                 var image = camView.Image;
-
+                
                 if (image != null)
                 {
                     image.Dispose();
@@ -187,8 +182,7 @@ namespace WebCamCapture
                 if (PathSaveFile != null)
                 {
                     camView.Image.Save(PathSaveFile, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    PathSaveFile = null;
-
+                    PathSaveFile = null; 
 
                 }
             }));
