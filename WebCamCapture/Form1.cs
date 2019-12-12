@@ -38,7 +38,7 @@ namespace WebCamCapture
                // wcc.SelectedDeviceIndex = 0; // индекс устройстова по умолчанию
                // ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
 
-                ListCaptutreModes.Items.AddRange(wcc.VideoModes.ToArray());
+                ListCaptutreModes.Items.AddRange(wcc.ListVideoModes.ToArray());
                 //wcc.SelectedVideoMode = 0; // видеорежим по умолчанию.
                 ListCaptutreModes.SelectedIndex = wcc.SelectedVideoMode;
 
@@ -52,37 +52,21 @@ namespace WebCamCapture
 
         private void BtnScreenCapture_Click(object sender, EventArgs e)
         {         
-            string path;
-            path = DateTime.Now.ToString().Replace(":", "-");
-            path += DateTime.Now.Ticks + ".jpg";
-            //CamView.Image.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
-            //ScreenView.Image = (Bitmap)CamView.Image.Clone();
+            string NameFile;
+            NameFile = DateTime.Now.ToString().Replace(":", "-");
+            NameFile += DateTime.Now.Ticks + ".jpg";
             if (ScreenView.Image != null)
             {
                 ScreenView.Image.Dispose();
-            }
-             
+            }          
             ScreenView.Image = (Bitmap)CamView.Image.Clone();
-            // wcc.PathSaveFile = path;
-
-
-            CamView.Image.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
-
-
-            // ScreenView.ImageLocation = path;
-
-            //Invoke((MethodInvoker)(() =>
-            //{
-            //    ScreenView.Image = CamView.Image;
-            //    ScreenView.ImageLocation = path;
-            //}));
-
+            CamView.Image.Save(NameFile, System.Drawing.Imaging.ImageFormat.Jpeg);
         }
-
 
         ///
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            wcc.SaveConfig();
             wcc.Stop();
             
         }
@@ -101,30 +85,6 @@ namespace WebCamCapture
             // GetCamList();
         }
 
-        /// <summary>
-        /// Выбор режима захвата
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ListCaputreModes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            wcc.ChangeModeCapture(ListCaptutreModes.SelectedIndex);     
-            
-        }
-
-        /// <summary>
-        /// test
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            //Thread.Sleep(8000);
-            // wcc.Stop();
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-
-        }
         // Обновляет список устройств
         private void ListCaptureDevices_MouseDown(object sender, MouseEventArgs e)
         {
@@ -134,10 +94,14 @@ namespace WebCamCapture
             ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
 
         }
-
+        /// <summary>
+        /// Обработчик выбора разрешения (режима) захвата из списка  
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListCaptureDevices_SelectionChangeCommitted(object sender, EventArgs e)
         {
-
+            wcc.ChangeModeCapture(ListCaptutreModes.SelectedIndex);
         }
 
         private void ScreenView_DoubleClick(object sender, EventArgs e)
@@ -156,10 +120,7 @@ namespace WebCamCapture
             CamView.Height = SystemInformation.PrimaryMonitorSize.Height;
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            
-        }
+
 
         private void Button1_KeyDown(object sender, KeyEventArgs e)
         {

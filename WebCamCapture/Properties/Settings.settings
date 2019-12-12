@@ -3,7 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="SelectedDeviceName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Logitech BRIO</Value>
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SelectedFrameSize" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1920 x 1080</Value>
     </Setting>
   </Settings>
 </SettingsFile>

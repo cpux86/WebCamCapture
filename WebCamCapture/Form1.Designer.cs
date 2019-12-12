@@ -67,7 +67,7 @@
             this.ListCaptutreModes.Name = "ListCaptutreModes";
             this.ListCaptutreModes.Size = new System.Drawing.Size(90, 21);
             this.ListCaptutreModes.TabIndex = 5;
-            this.ListCaptutreModes.SelectedIndexChanged += new System.EventHandler(this.ListCaputreModes_SelectedIndexChanged);
+            this.ListCaptutreModes.SelectionChangeCommitted += new System.EventHandler(this.ListCaptureDevices_SelectionChangeCommitted);
             // 
             // ListCaptureDevices
             // 
@@ -102,7 +102,6 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "TEST";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             this.button1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Button1_KeyDown);
             // 
             // ScreenView
@@ -157,7 +156,6 @@
             this.Text = "WebCamCapture";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScreenView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CamView)).EndInit();

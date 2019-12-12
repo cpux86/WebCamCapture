@@ -25,13 +25,25 @@ namespace WebCamCapture.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Logitech BRIO")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string SelectedDeviceName {
             get {
                 return ((string)(this["SelectedDeviceName"]));
             }
             set {
                 this["SelectedDeviceName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1920 x 1080")]
+        public string SelectedFrameSize {
+            get {
+                return ((string)(this["SelectedFrameSize"]));
+            }
+            set {
+                this["SelectedFrameSize"] = value;
             }
         }
     }

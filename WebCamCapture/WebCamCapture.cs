@@ -17,37 +17,36 @@ namespace WebCamCapture
     /// <summary>
     /// Робота с web камерой, сознаие и сохнанение снимков
     /// </summary>
-    public class WebCamCapture : Form1
+    public class WebCamCapture
     {
 
         private FilterInfoCollection videoDevices;
         private VideoCaptureDevice videoSource;
         private PictureBox camView;
         private List<string> listNameDevices;
-        private ArrayList videoModes;
-        private String selectedDeviceName;
+        private List<string> listVideoModes;
+        private string selectedDeviceName;
         private int selectedDeviceIndex = 0;
         private int selectedVideoMode;
-        public string PathSaveFile = null;
+        private string selectedFrameSize;
         Form forms;
 
         public WebCamCapture()
         {
-            // выбранное устройство из пользовтельских конфикураций
-           // selectedDeviceName = Properties.Settings.Default.SelectedDeviceName;
+            // Имя выбранного устройства из пользовтельских конфигураций, на момент завершения программы.
+            selectedDeviceName = Properties.Settings.Default.SelectedDeviceName;
+            // Текстовое предстовление размера кадра, в конфигурациях пользователя
+            selectedFrameSize = Properties.Settings.Default.SelectedFrameSize;
         }
 
         /// <summary>
         /// Список имен подключенных устройств
         /// </summary>
         public List<string> ListNameDevices { get => listNameDevices; }
-        
-
         /// <summary>
         /// Массив поддерживаемых режимов (разрешение видео) выбранного устройства.
         /// </summary>
-        public ArrayList VideoModes { get => videoModes; }
-
+        public List<string> ListVideoModes { get => listVideoModes; }
         /// <summary>
         /// Index выбранного устройстова.
         /// </summary>
@@ -59,15 +58,6 @@ namespace WebCamCapture
 
         /// <summary>
         /// init();
-        /// 1. Получить список всех подключенных устройств. 1.1. Сохранить список в listNameDevices.
-        ///    1.2. Если устройства не обнаружены, то через N секунд повторно опрашиваем систему. 
-        /// 2. Установить устройство по умолчанию, получить его имя (Config int GetSelectedDevice), из настроек приложения (SelectedDeviceName). 
-        ///    Если устройство из настроек не подключено, то устойство по умолчанию будет первое в списке устройств (selectedDevice = 0).
-        /// 3. Получить список всех поддерживаемых режимов захвата (разрешение), сохранить его в - VideoModes. 
-        ///    Если в настройках приложения имеются сведения о выбранном режиме, то 
-        ///    сохраняем идентефикатор пользовательского режима (разрешения) в свойстве SelectedVideoMode. Если в настройках выбанный  режим не установлен,
-        ///    то устанавливаем режим по умолчанию SelectedVideoMode = 0.
-        /// </summary>
         /// <param name="cv"></param>
         /// <param name="f"></param>
         /// <returns></returns>
@@ -77,33 +67,42 @@ namespace WebCamCapture
             camView = cv;
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
-            selectedDeviceName = Properties.Settings.Default.SelectedDeviceName;
+            // эта строка есть в конструкторе
+            //selectedDeviceName = Properties.Settings.Default.SelectedDeviceName;
 
             if (videoDevices.Count > 0)
             {
-                // 1.
+                this.UpdateListNameDevices();
 
-
-
-                UpdateListNameDevices();
-
+                // подключено ли выбранное устройство, имя которого получено из конфигураций, если да, selectedDeviceIndex будет хранить его системный индекс.
                 if (ListNameDevices.IndexOf(selectedDeviceName) != -1)
                     selectedDeviceIndex = ListNameDevices.IndexOf(selectedDeviceName);
 
+                //// Получаем имя устройства по его индексу
+                //this.selectedDeviceName = this.listNameDevices[selectedDeviceIndex];
 
-                ArrayList mod = new ArrayList();
+                List<string> fSize = new List<string>();
                 videoSource = new VideoCaptureDevice(videoDevices[this.SelectedDeviceIndex].MonikerString);
 
                 // поддерживаемые режимы работы камеры (разрешение)
                 foreach (var s in videoSource.VideoCapabilities)
                 {
-                    mod.Add(s.FrameSize.Width + "x" + s.FrameSize.Height);
+                    // формируем строку типа 640 x 480
+                    fSize.Add(String.Format("{0} x {1}", s.FrameSize.Width, s.FrameSize.Height));
                 }
                 videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
-                //videoSource.S
                 videoSource.Start();
                                 
-                this.videoModes = mod;
+                this.listVideoModes = fSize;
+
+
+                // поддерживает ли выбранное устройство размер када (разрешение), полученое из конфигураций пользователя.
+                if (ListVideoModes.IndexOf(selectedFrameSize) != -1)
+                {
+                    // устанавливаем текущий видеорежим равет режиму из настроек
+                    selectedVideoMode = ListVideoModes.IndexOf(selectedFrameSize);
+                }
+
                 return true;
             }
             else
@@ -113,27 +112,23 @@ namespace WebCamCapture
             }
 
         }
+
         /// <summary>
-        /// Обновить список подключенных устройств
+        /// Обновить список подключенных устройств. Список подключенных устройство доступен через свойство List<string> ListNameDevices. 
         /// </summary>
+        /// <returns></returns>
         internal bool UpdateListNameDevices()
         {
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice); ;
             List<string>  list = new List<string>();
             foreach (FilterInfo device in videoDevices)
             {
-
-                //listNameDevices.Add(device.Name);
                 list.Add(device.Name);
-
             }
             if (this.ListNameDevices == null)
             {
                 listNameDevices = list;
             }
-
-
-
 
             if (!list.SequenceEqual<string>(listNameDevices))
             {
@@ -143,35 +138,37 @@ namespace WebCamCapture
             return false;
         }
             
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool Start()
-        {
-            return true;
-        }
 
         public void GetCamList()
         {
 
         }
-        public void Error(object sender, VideoSourceErrorEventArgs eventArgs)
+
+        // сохранение конфигураций
+        public void SaveConfig()
         {
-            MessageBox.Show("Ошибка");
+            // Получаем имя устройства по его индексу
+            this.selectedDeviceName = this.listNameDevices[selectedDeviceIndex]; // так не годится!!!
+            this.selectedFrameSize = this.ListVideoModes[SelectedVideoMode];
+
+            Properties.Settings.Default.SelectedFrameSize = this.selectedFrameSize;
+
+            Properties.Settings.Default.SelectedDeviceName = this.selectedDeviceName;
+            Properties.Settings.Default.Save();
         }
 
+
         /// <summary>
-        /// Обработчик события поступления кадра
+        /// Обработчик события поступления кадра.
+        /// Из поступивших кадров в CamView формеруется видео. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="eventArgs"></param>
         private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {           
+        {
             forms.Invoke((MethodInvoker)(() =>
             {
-                var image = camView.Image;
-                
+                Image image = camView.Image;
                 if (image != null)
                 {
                     image.Dispose();
@@ -179,12 +176,6 @@ namespace WebCamCapture
 
                 }
                 camView.Image = (Bitmap)eventArgs.Frame.Clone();
-                if (PathSaveFile != null)
-                {
-                    camView.Image.Save(PathSaveFile, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    PathSaveFile = null; 
-
-                }
             }));
         }
 
