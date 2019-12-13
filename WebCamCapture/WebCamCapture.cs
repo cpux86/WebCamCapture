@@ -44,7 +44,7 @@ namespace WebCamCapture
         /// </summary>
         public List<string> ListNameDevices { get => listNameDevices; }
         /// <summary>
-        /// Массив поддерживаемых режимов (разрешение видео) выбранного устройства.
+        /// Список поддерживаемых режимов (разрешение видео) выбранного устройства.
         /// </summary>
         public List<string> ListVideoModes { get => listVideoModes; }
         /// <summary>
@@ -66,9 +66,7 @@ namespace WebCamCapture
             forms = f;
             camView = cv;
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-
-            // эта строка есть в конструкторе
-            //selectedDeviceName = Properties.Settings.Default.SelectedDeviceName;
+            
 
             if (videoDevices.Count > 0)
             {
@@ -90,8 +88,8 @@ namespace WebCamCapture
                     // формируем строку типа 640 x 480
                     fSize.Add(String.Format("{0} x {1}", s.FrameSize.Width, s.FrameSize.Height));
                 }
-                videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
-                videoSource.Start();
+                
+               
                                 
                 this.listVideoModes = fSize;
 
@@ -103,6 +101,26 @@ namespace WebCamCapture
                     selectedVideoMode = ListVideoModes.IndexOf(selectedFrameSize);
                 }
 
+                videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+                //
+                videoSource.VideoResolution = videoSource.VideoCapabilities[this.SelectedVideoMode];
+
+
+               // this.test();
+
+                //////////
+
+
+
+                ////////
+
+
+
+
+
+
+
+                videoSource.Start();
                 return true;
             }
             else
@@ -113,11 +131,18 @@ namespace WebCamCapture
 
         }
 
+        internal void test(int i)
+        {
+            videoSource.SetCameraProperty(CameraControlProperty.Zoom, i, CameraControlFlags.Manual);
+            //videoSource.SetCameraProperty(CameraControlProperty.Exposure, 0, CameraControlFlags.Auto);
+
+        }
+
         /// <summary>
-        /// Обновить список подключенных устройств. Список подключенных устройство доступен через свойство List<string> ListNameDevices. 
+        /// Возвращает список подключенных устройств, в том числе вновь подключенные.
         /// </summary>
-        /// <returns></returns>
-        internal bool UpdateListNameDevices()
+        /// <returns>список устройств</returns>
+        internal List<string> UpdateListNameDevices()
         {
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice); ;
             List<string>  list = new List<string>();
@@ -129,13 +154,12 @@ namespace WebCamCapture
             {
                 listNameDevices = list;
             }
-
+            // если новое устройстово обнаружено то возвращаем обновленный список и обновляем список listNameDevices
             if (!list.SequenceEqual<string>(listNameDevices))
             {
                 listNameDevices = list;
-                return true;
             }
-            return false;
+            return list;
         }
             
 

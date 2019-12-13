@@ -29,7 +29,7 @@ namespace WebCamCapture
         private ImageBrowser imgBrowser;
         private void Form1_Load(object sender, EventArgs e)
         {
-
+           
             wcc = new WebCamCapture();
             // инициализация, проверка наличия подключенных камер.
             if (wcc.init(CamView,this))
@@ -72,24 +72,12 @@ namespace WebCamCapture
         }
 
 
-        /// <summary>
-        /// Выбор устройства 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ListCapureDevices_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            wcc.SelectedDeviceIndex = ListCaptureDevices.SelectedIndex;
-            // получить список подключенных устройств
-            // 
-            // GetCamList();
-        }
-
         // Обновляет список устройств
         private void ListCaptureDevices_MouseDown(object sender, MouseEventArgs e)
         {
-            wcc.UpdateListNameDevices();
+            //wcc.UpdateListNameDevices();
             ListCaptureDevices.Items.Clear();
+            //ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
             ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
             ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
 
@@ -104,27 +92,14 @@ namespace WebCamCapture
             wcc.ChangeModeCapture(ListCaptutreModes.SelectedIndex);
         }
 
-        private void ScreenView_DoubleClick(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            //this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            //this.WindowState = FormWindowState.Maximized;
-            CamView.Width = SystemInformation.PrimaryMonitorSize.Width;
-            CamView.Height = SystemInformation.PrimaryMonitorSize.Height;
+            //wcc.test();
         }
 
-        private void CamView_DoubleClick(object sender, EventArgs e)
+        private void TrackBar1_Scroll(object sender, EventArgs e)
         {
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            CamView.Width = SystemInformation.PrimaryMonitorSize.Width;
-            CamView.Height = SystemInformation.PrimaryMonitorSize.Height;
-        }
-
-
-
-        private void Button1_KeyDown(object sender, KeyEventArgs e)
-        {
-            MessageBox.Show("Test");
+            wcc.test(trackBar1.Value * 10);
         }
     }
 
