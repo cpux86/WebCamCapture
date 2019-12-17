@@ -18,7 +18,6 @@ namespace WebCamCapture
 {
     public partial class Form1 : Form
     {
-
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +26,15 @@ namespace WebCamCapture
 
         private WebCamCapture wcc;
         private ImageBrowser imgBrowser;
+
+        /// <summary>
+        /// включены ли элементы упрвления устройством
+        /// </summary>
+        public bool EnableDeviceControl { get => btnScreenCapture.Enabled; set {
+                btnScreenCapture.Enabled = ListCaptutreModes.Enabled = value; 
+            }
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
            
@@ -46,8 +54,8 @@ namespace WebCamCapture
                 wcc.UpdateListNameDevices();
                 ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
             }
-            //
-            
+            wcc.UpdateListNameDevices();
+
         }
 
         private void BtnScreenCapture_Click(object sender, EventArgs e)
@@ -75,11 +83,13 @@ namespace WebCamCapture
         // Обновляет список устройств
         private void ListCaptureDevices_MouseDown(object sender, MouseEventArgs e)
         {
-            //wcc.UpdateListNameDevices();
-            ListCaptureDevices.Items.Clear();
+
+                
+
+            //ListCaptureDevices.Items.Clear();
             //ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
-            ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
-            ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
+            //ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
+            //ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
 
         }
         /// <summary>
@@ -94,13 +104,10 @@ namespace WebCamCapture
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            //wcc.test();
+            //this.EnableDeviceControl = !this.EnableDeviceControl;
+            MessageBox.Show(wcc.UpdateListNameDevices().ToString());
         }
 
-        private void TrackBar1_Scroll(object sender, EventArgs e)
-        {
-            wcc.test(trackBar1.Value * 10);
-        }
     }
 
     

@@ -66,7 +66,6 @@ namespace WebCamCapture
             forms = f;
             camView = cv;
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            
 
             if (videoDevices.Count > 0)
             {
@@ -81,7 +80,6 @@ namespace WebCamCapture
 
                 List<string> fSize = new List<string>();
                 videoSource = new VideoCaptureDevice(videoDevices[this.SelectedDeviceIndex].MonikerString);
-
                 // поддерживаемые режимы работы камеры (разрешение)
                 foreach (var s in videoSource.VideoCapabilities)
                 {
@@ -106,19 +104,6 @@ namespace WebCamCapture
                 videoSource.VideoResolution = videoSource.VideoCapabilities[this.SelectedVideoMode];
 
 
-               // this.test();
-
-                //////////
-
-
-
-                ////////
-
-
-
-
-
-
 
                 videoSource.Start();
                 return true;
@@ -139,34 +124,45 @@ namespace WebCamCapture
         }
 
         /// <summary>
-        /// Возвращает список подключенных устройств, в том числе вновь подключенные.
+        /// 
         /// </summary>
-        /// <returns>список устройств</returns>
-        internal List<string> UpdateListNameDevices()
+        public enum Status {
+            Clean,
+            CleanWite,
+            None
+        }
+
+        /// <summary>
+        /// Обновляет список подключенных устройств, в том числе вновь подключенные.
+        /// </summary>
+        /// <returns></returns>
+        public Enum UpdateListNameDevices()
         {
-            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice); ;
+            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+
+            if (videoDevices.Count == 0) return Status.Clean; // устройства не подключены
+            // заполняем список именами подклюен
             List<string>  list = new List<string>();
             foreach (FilterInfo device in videoDevices)
             {
                 list.Add(device.Name);
             }
+            // Первый старт. Инициализация listNameDevices списком подключенных устройств. Происходит при старте программы
+            // с подключенным устройстовом, либо устройстово было подключено во время работы программы. Или старый список равен новому 
             if (this.ListNameDevices == null)
             {
                 listNameDevices = list;
+                return Status.CleanWite;
             }
-            // если новое устройстово обнаружено то возвращаем обновленный список и обновляем список listNameDevices
+            // Обновление списка. Новый список не равен предидущему.Устройство было отключено или подключено, обновляем список listNameDevices
             if (!list.SequenceEqual<string>(listNameDevices))
             {
                 listNameDevices = list;
+                return Status.CleanWite;
             }
-            return list;
+            return Status.None;
         }
             
-
-        public void GetCamList()
-        {
-
-        }
 
         // сохранение конфигураций
         public void SaveConfig()

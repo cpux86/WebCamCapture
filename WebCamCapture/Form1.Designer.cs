@@ -36,12 +36,10 @@
             this.ScreenView = new System.Windows.Forms.PictureBox();
             this.CamView = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScreenView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CamView)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnScreenCapture
@@ -133,7 +131,6 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.trackBar1);
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.btnScreenCapture);
             this.panel1.Controls.Add(this.button1);
@@ -143,15 +140,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(320, 350);
             this.panel1.TabIndex = 10;
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(72, 130);
-            this.trackBar1.Maximum = 50;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(197, 45);
-            this.trackBar1.TabIndex = 9;
-            this.trackBar1.Scroll += new System.EventHandler(this.TrackBar1_Scroll);
             // 
             // Form1
             // 
@@ -169,8 +157,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ScreenView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CamView)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -184,7 +170,6 @@
         private System.Windows.Forms.PictureBox ScreenView;
         private System.Windows.Forms.PictureBox CamView;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TrackBar trackBar1;
     }
 }
 
