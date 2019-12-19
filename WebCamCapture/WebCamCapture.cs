@@ -55,6 +55,10 @@ namespace WebCamCapture
         /// Выбранный видеорежим (выбранное разрешение)
         /// </summary>
         public int SelectedVideoMode { get => selectedVideoMode; set => selectedVideoMode = value; }
+        /// <summary>
+        /// счетчик подключенных устройств.
+        /// </summary>
+        public int DevicesCounter { get; private set; }
 
         /// <summary>
         /// init();
@@ -116,31 +120,16 @@ namespace WebCamCapture
 
         }
 
-        internal void test(int i)
-        {
-            videoSource.SetCameraProperty(CameraControlProperty.Zoom, i, CameraControlFlags.Manual);
-            //videoSource.SetCameraProperty(CameraControlProperty.Exposure, 0, CameraControlFlags.Auto);
 
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public enum Status {
-            Clean,
-            CleanWite,
-            None
-        }
 
         /// <summary>
         /// Обновляет список подключенных устройств, в том числе вновь подключенные.
         /// </summary>
         /// <returns></returns>
-        public Enum UpdateListNameDevices()
+        public bool UpdateListNameDevices()
         {
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-
-            if (videoDevices.Count == 0) return Status.Clean; // устройства не подключены
+            DevicesCounter = videoDevices.Count;
             // заполняем список именами подклюен
             List<string>  list = new List<string>();
             foreach (FilterInfo device in videoDevices)
@@ -152,17 +141,21 @@ namespace WebCamCapture
             if (this.ListNameDevices == null)
             {
                 listNameDevices = list;
-                return Status.CleanWite;
+                return true;
             }
             // Обновление списка. Новый список не равен предидущему.Устройство было отключено или подключено, обновляем список listNameDevices
             if (!list.SequenceEqual<string>(listNameDevices))
             {
                 listNameDevices = list;
-                return Status.CleanWite;
+               
+                return true;
             }
-            return Status.None;
+            return false;
         }
-            
+        // получаем индекс выбранного элемента по его имени, если элемент не обнаружен то возращаем 0.
+        public int GetIndexByName(List<string> list, string name) {
+            return list.IndexOf(name) != -1 ? list.IndexOf(name) : 0;
+        }
 
         // сохранение конфигураций
         public void SaveConfig()

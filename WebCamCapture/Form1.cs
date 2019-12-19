@@ -43,11 +43,8 @@ namespace WebCamCapture
             if (wcc.init(CamView,this))
             {
                 ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
-               // wcc.SelectedDeviceIndex = 0; // индекс устройстова по умолчанию
-               // ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
 
                 ListCaptutreModes.Items.AddRange(wcc.ListVideoModes.ToArray());
-                //wcc.SelectedVideoMode = 0; // видеорежим по умолчанию.
                 ListCaptutreModes.SelectedIndex = wcc.SelectedVideoMode;
 
                 btnScreenCapture.Enabled = true;
@@ -57,18 +54,30 @@ namespace WebCamCapture
             wcc.UpdateListNameDevices();
 
         }
-
+        string NameFile;
+        string Path;
+        /// <summary>
+        /// Кнопка захвата
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnScreenCapture_Click(object sender, EventArgs e)
-        {         
-            string NameFile;
+        {
+            //string NameFile;
+            //Path = @"image\";
+            Directory.CreateDirectory(@"1\1");
+            Path = String.Format("{0}{1}_{2}_{3}", @".\image\", DateTime.Now.ToString().Replace(":", "-"), DateTime.Now.Ticks,".jpg");
             NameFile = DateTime.Now.ToString().Replace(":", "-");
             NameFile += DateTime.Now.Ticks + ".jpg";
+            NameFile = Path + "" + NameFile;
             if (ScreenView.Image != null)
             {
                 ScreenView.Image.Dispose();
             }          
             ScreenView.Image = (Bitmap)CamView.Image.Clone();
-            CamView.Image.Save(NameFile, System.Drawing.Imaging.ImageFormat.Jpeg);
+            CamView.Image.Save(Path, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+            this.PreviewPhotos();
         }
 
         ///
@@ -83,8 +92,23 @@ namespace WebCamCapture
         // Обновляет список устройств
         private void ListCaptureDevices_MouseDown(object sender, MouseEventArgs e)
         {
+            wcc.UpdateListNameDevices();
+            if (wcc.DevicesCounter > 0)
+            {
+                this.EnableDeviceControl = true;
+                ListCaptureDevices.Items.Clear();
+                ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
+                ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
+            }
+            else
+            {
+                this.EnableDeviceControl = false;
+                ListCaptureDevices.Items.Clear();
+            }
 
-                
+            // если устройства не подключены, отключаем контролы управления устройствами
+
+
 
             //ListCaptureDevices.Items.Clear();
             //ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
@@ -104,10 +128,59 @@ namespace WebCamCapture
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            //this.EnableDeviceControl = !this.EnableDeviceControl;
-            MessageBox.Show(wcc.UpdateListNameDevices().ToString());
+            this.PreviewPhotos();
+        }
+        public void PreviewPhotos()
+        {
+            ImageList imageList = new ImageList();
+            imageList.ImageSize = new Size(100, 100);
+            imageList.Images.Add(new Bitmap(Path));
+
+            Bitmap emptyImage = new Bitmap(100, 100);
+            using (Graphics gr = Graphics.FromImage(emptyImage))
+            {
+               // gr.Clear(Color.White);
+            }
+
+            photoGalleraya.SmallImageList = imageList;
+            string[] order = { "100/28", "19.12.2019 11:38:26" };
+
+            ListViewItem item = new ListViewItem(new string[] { "", order[0], order[1] });
+            item.ImageIndex = 0;
+
+            photoGalleraya.Items.Add(item);
         }
 
+        private void PhotoGalleraya_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //MessageBox.Show(photoGalleraya.SelectedItems[0].);
+            
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            Setting setting = new Setting();
+            setting.ShowDialog();
+        }
+
+        private void НастройкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("fdf", "gffg",MessageBoxButtons.YesNo);
+        }
+
+        private void ПутьСохраненияФайловToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show(folderBrowserDialog1.SelectedPath);
+            }
+        }
+
+        private void КамераToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingDevice settingDev = new SettingDevice();
+            settingDev.ShowDialog();
+        }
     }
 
     
