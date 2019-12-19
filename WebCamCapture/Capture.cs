@@ -17,7 +17,7 @@ namespace WebCamCapture
     /// <summary>
     /// Робота с web камерой, сознаие и сохнанение снимков
     /// </summary>
-    public class WebCamCapture
+    public class Capture
     {
 
         private FilterInfoCollection videoDevices;
@@ -31,7 +31,7 @@ namespace WebCamCapture
         private string selectedFrameSize;
         Form forms;
 
-        public WebCamCapture()
+        public Capture()
         {
             // Имя выбранного устройства из пользовтельских конфигураций, на момент завершения программы.
             selectedDeviceName = Properties.Settings.Default.SelectedDeviceName;
@@ -119,7 +119,18 @@ namespace WebCamCapture
             }
 
         }
-
+        // нужно 
+        public List<string> GetVideoModes(int deviceId) {
+            List<string> fSize = new List<string>();
+            videoSource = new VideoCaptureDevice(videoDevices[deviceId].MonikerString);
+            // поддерживаемые режимы работы камеры (разрешение)
+            foreach (var s in videoSource.VideoCapabilities)
+            {
+                // формируем строку типа 640 x 480
+                fSize.Add(String.Format("{0} x {1}", s.FrameSize.Width, s.FrameSize.Height));
+            }
+            return fSize;
+        }
 
 
         /// <summary>

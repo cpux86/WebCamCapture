@@ -61,11 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ImageBrowser.cs" />
-    <Compile Include="Setting.cs">
+    <Compile Include="OrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Setting.Designer.cs">
-      <DependentUpon>Setting.cs</DependentUpon>
+    <Compile Include="OrderForm.Designer.cs">
+      <DependentUpon>OrderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingDevice.cs">
       <SubType>Form</SubType>
@@ -73,19 +73,20 @@
     <Compile Include="SettingDevice.Designer.cs">
       <DependentUpon>SettingDevice.cs</DependentUpon>
     </Compile>
-    <Compile Include="WebCamCapture.cs">
+    <Compile Include="Capture.cs" />
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrderForm.resx">
+      <DependentUpon>OrderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -96,9 +97,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Setting.resx">
-      <DependentUpon>Setting.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SettingDevice.resx">
       <DependentUpon>SettingDevice.cs</DependentUpon>
     </EmbeddedResource>

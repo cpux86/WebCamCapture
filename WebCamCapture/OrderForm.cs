@@ -10,17 +10,16 @@ using System.Windows.Forms;
 
 namespace WebCamCapture
 {
-    public partial class Setting : Form1
+    public partial class OrderForm : Form
     {
-        public Setting()
+        public OrderForm()
         {
             InitializeComponent();
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void OrderForm_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("Test");
-            
+
         }
     }
 }

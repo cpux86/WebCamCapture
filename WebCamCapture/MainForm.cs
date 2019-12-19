@@ -16,15 +16,15 @@ using AForge.Video.DirectShow;
 
 namespace WebCamCapture
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
            
         }
 
-        private WebCamCapture wcc;
+        private Capture wcc;
         private ImageBrowser imgBrowser;
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace WebCamCapture
         private void Form1_Load(object sender, EventArgs e)
         {
            
-            wcc = new WebCamCapture();
+            wcc = new Capture();
             // инициализация, проверка наличия подключенных камер.
             if (wcc.init(CamView,this))
             {
@@ -116,30 +116,37 @@ namespace WebCamCapture
             //ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
 
         }
-        /// <summary>
-        /// Обработчик выбора разрешения (режима) захвата из списка  
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+       
         private void ListCaptureDevices_SelectionChangeCommitted(object sender, EventArgs e)
         {
             wcc.ChangeModeCapture(ListCaptutreModes.SelectedIndex);
+            wcc.SelectedDeviceIndex = ListCaptureDevices.SelectedIndex;
+            
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            this.PreviewPhotos();
+            //this.PreviewPhotos();
+            photoGalleraya.Clear();
+            photoGalleraya.Dispose();
         }
         public void PreviewPhotos()
         {
             ImageList imageList = new ImageList();
             imageList.ImageSize = new Size(100, 100);
-            imageList.Images.Add(new Bitmap(Path));
+            //imageList.Images.Add(new Bitmap(Path).GetThumbnailImage(100, 100, null, IntPtr.Zero));
+            Image m = Image.FromFile(Path);
+            //m.GetThumbnailImage(100, 100, null, IntPtr.Zero);
+            imageList.Images.Add(m);
+           // imageList.Dispose();
+            //imageList.Images.Add(Image.FromFile(Path).GetThumbnailImage(100,100,null,IntPtr.Zero));
+
+
 
             Bitmap emptyImage = new Bitmap(100, 100);
             using (Graphics gr = Graphics.FromImage(emptyImage))
             {
-               // gr.Clear(Color.White);
+                gr.Clear(Color.White);
             }
 
             photoGalleraya.SmallImageList = imageList;
@@ -149,6 +156,8 @@ namespace WebCamCapture
             item.ImageIndex = 0;
 
             photoGalleraya.Items.Add(item);
+            m.Dispose();
+            m = null;
         }
 
         private void PhotoGalleraya_SelectedIndexChanged(object sender, EventArgs e)
@@ -157,11 +166,6 @@ namespace WebCamCapture
             
         }
 
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            Setting setting = new Setting();
-            setting.ShowDialog();
-        }
 
         private void НастройкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -180,6 +184,22 @@ namespace WebCamCapture
         {
             SettingDevice settingDev = new SettingDevice();
             settingDev.ShowDialog();
+        }
+
+        /// <summary>
+        /// Обработчик выбора разрешения (режима) захвата из списка  
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListCaptutreModes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            wcc.ChangeModeCapture(ListCaptutreModes.SelectedIndex);
+        }
+
+        private void BtnOrderEdit_Click(object sender, EventArgs e)
+        {
+            OrderForm orderForm = new OrderForm();
+            orderForm.ShowDialog();
         }
     }
 
