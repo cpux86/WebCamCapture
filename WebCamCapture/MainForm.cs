@@ -37,7 +37,16 @@ namespace WebCamCapture
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "orderDataSet2.user". При необходимости она может быть перемещена или удалена.
+            this.userTableAdapter.Fill(this.orderDataSet2.user);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "orderDataSet1.operation". При необходимости она может быть перемещена или удалена.
+            this.operationTableAdapter.Fill(this.orderDataSet1.operation);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "orderDataSet.roller". При необходимости она может быть перемещена или удалена.
+            this.rollerTableAdapter.Fill(this.orderDataSet.roller);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "orderDataSet.roller". При необходимости она может быть перемещена или удалена.
+            this.rollerTableAdapter.Fill(this.orderDataSet.roller);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "orderDataSet.Order". При необходимости она может быть перемещена или удалена.
+
             wcc = new Capture();
             // инициализация, проверка наличия подключенных камер.
             if (wcc.init(CamView,this))
@@ -51,7 +60,7 @@ namespace WebCamCapture
                 wcc.UpdateListNameDevices();
                 ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
             }
-            wcc.UpdateListNameDevices();
+           // wcc.UpdateListNameDevices();
 
         }
         string NameFile;
@@ -126,9 +135,7 @@ namespace WebCamCapture
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            //this.PreviewPhotos();
-            photoGalleraya.Clear();
-            photoGalleraya.Dispose();
+
         }
         public void PreviewPhotos()
         {
@@ -174,10 +181,7 @@ namespace WebCamCapture
 
         private void ПутьСохраненияФайловToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                MessageBox.Show(folderBrowserDialog1.SelectedPath);
-            }
+            
         }
 
         private void КамераToolStripMenuItem_Click(object sender, EventArgs e)
@@ -201,6 +205,16 @@ namespace WebCamCapture
             OrderForm orderForm = new OrderForm();
             orderForm.ShowDialog();
         }
+
+
+
+        private void BtnCardOrderOk_Click(object sender, EventArgs e)
+        {
+            nomberOrderText.Text += " " +nomberOrder.Text;
+            rollerNumberText.Text += " " + numberRollerList.Text;
+            numberOprerationText.Text += " " + numberOperationList.Text;
+            userCardText.Text += " " + userCardList.Text;
+        } 
     }
 
     

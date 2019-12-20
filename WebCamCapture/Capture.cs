@@ -17,7 +17,7 @@ namespace WebCamCapture
     /// <summary>
     /// Робота с web камерой, сознаие и сохнанение снимков
     /// </summary>
-    public class Capture
+    public class Capture : MainForm
     {
 
         private FilterInfoCollection videoDevices;
@@ -48,7 +48,7 @@ namespace WebCamCapture
         /// </summary>
         public List<string> ListVideoModes { get => listVideoModes; }
         /// <summary>
-        /// Index выбранного устройстова.
+        /// Index выбранного устройстова. 
         /// </summary>
         public int SelectedDeviceIndex { get => selectedDeviceIndex; set => selectedDeviceIndex = value; }
         /// <summary>
@@ -59,6 +59,8 @@ namespace WebCamCapture
         /// счетчик подключенных устройств.
         /// </summary>
         public int DevicesCounter { get; private set; }
+
+
 
         /// <summary>
         /// init();
@@ -78,9 +80,6 @@ namespace WebCamCapture
                 // подключено ли выбранное устройство, имя которого получено из конфигураций, если да, selectedDeviceIndex будет хранить его системный индекс.
                 if (ListNameDevices.IndexOf(selectedDeviceName) != -1)
                     selectedDeviceIndex = ListNameDevices.IndexOf(selectedDeviceName);
-
-                //// Получаем имя устройства по его индексу
-                //this.selectedDeviceName = this.listNameDevices[selectedDeviceIndex];
 
                 List<string> fSize = new List<string>();
                 videoSource = new VideoCaptureDevice(videoDevices[this.SelectedDeviceIndex].MonikerString);
@@ -105,7 +104,7 @@ namespace WebCamCapture
 
                 videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
                 //
-                videoSource.VideoResolution = videoSource.VideoCapabilities[this.SelectedVideoMode];
+               // videoSource.VideoResolution = videoSource.VideoCapabilities[this.SelectedVideoMode];
 
 
 
@@ -119,28 +118,49 @@ namespace WebCamCapture
             }
 
         }
-        // нужно 
-        public List<string> GetVideoModes(int deviceId) {
+        /// <summary>
+        /// Начинает захват видео 
+        /// </summary>
+        /// <param name="dev">устройстово</param>
+        /// <param name="mod">разрешение</param>
+        internal void Start(int dev, int mod)
+        {
+            //throw new NotImplementedException();
+            //this.Stop();
+            videoSource.VideoResolution = videoSource.VideoCapabilities[mod];
+            videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+            videoSource.Start();
+        }
+
+        /// <summary>
+        /// обновляет список доступных разрешений, список доступен через свойство ListVideoModes
+        /// </summary>
+        /// <param name="deviceId">id выбранного устройства</param>
+        /// <returns></returns>
+        public bool UpdateListVideoModes(int deviceId) {
             List<string> fSize = new List<string>();
             videoSource = new VideoCaptureDevice(videoDevices[deviceId].MonikerString);
+            if (videoSource.VideoCapabilities.Length == 0) return false;  // если в устройстве не передостовляет список доступных разрешений!
             // поддерживаемые режимы работы камеры (разрешение)
             foreach (var s in videoSource.VideoCapabilities)
             {
                 // формируем строку типа 640 x 480
                 fSize.Add(String.Format("{0} x {1}", s.FrameSize.Width, s.FrameSize.Height));
             }
-            return fSize;
+            
+            this.listVideoModes = fSize; // инициализируем или обновляем список доступных разрешений 
+            return true;
         }
 
 
         /// <summary>
-        /// Обновляет список подключенных устройств, в том числе вновь подключенные.
+        /// Обновляет список подключенных устройств и счетчик DevicesCounter.Обновленный список устройств доступен через свойство ListNameDevices.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Возращает TRUE если список был изменен</returns>
         public bool UpdateListNameDevices()
         {
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            DevicesCounter = videoDevices.Count;
+            this.DevicesCounter = videoDevices.Count;
             // заполняем список именами подклюен
             List<string>  list = new List<string>();
             foreach (FilterInfo device in videoDevices)
@@ -163,7 +183,12 @@ namespace WebCamCapture
             }
             return false;
         }
-        // получаем индекс выбранного элемента по его имени, если элемент не обнаружен то возращаем 0.
+        /// <summary>
+        /// получаем индекс выбранного элемента по его имени, если элемент не обнаружен то возращаем 0.
+        /// </summary>
+        /// <param name="list">список где искать</param>
+        /// <param name="name">что искать в списке</param>
+        /// <returns></returns>
         public int GetIndexByName(List<string> list, string name) {
             return list.IndexOf(name) != -1 ? list.IndexOf(name) : 0;
         }
@@ -189,7 +214,7 @@ namespace WebCamCapture
         /// <param name="sender"></param>
         /// <param name="eventArgs"></param>
         private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
+        {   
             forms.Invoke((MethodInvoker)(() =>
             {
                 Image image = camView.Image;

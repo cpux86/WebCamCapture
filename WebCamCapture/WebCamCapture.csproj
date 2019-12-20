@@ -61,6 +61,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ImageBrowser.cs" />
+    <Compile Include="orderDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>orderDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="orderDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>orderDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="orderDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>orderDataSet2.xsd</DependentUpon>
+    </Compile>
     <Compile Include="OrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,7 +88,9 @@
     <Compile Include="SettingDevice.Designer.cs">
       <DependentUpon>SettingDevice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Capture.cs" />
+    <Compile Include="Capture.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +117,39 @@
     <EmbeddedResource Include="SettingDevice.resx">
       <DependentUpon>SettingDevice.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="orderDataSet.xsc">
+      <DependentUpon>orderDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="orderDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>orderDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="orderDataSet.xss">
+      <DependentUpon>orderDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="orderDataSet1.xsc">
+      <DependentUpon>orderDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="orderDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>orderDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="orderDataSet1.xss">
+      <DependentUpon>orderDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="orderDataSet2.xsc">
+      <DependentUpon>orderDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="orderDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>orderDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="orderDataSet2.xss">
+      <DependentUpon>orderDataSet2.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -113,6 +163,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="order.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
