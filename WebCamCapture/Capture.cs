@@ -104,7 +104,7 @@ namespace WebCamCapture
 
                 videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
                 //
-               // videoSource.VideoResolution = videoSource.VideoCapabilities[this.SelectedVideoMode];
+                videoSource.VideoResolution = videoSource.VideoCapabilities[this.SelectedVideoMode];
 
 
 

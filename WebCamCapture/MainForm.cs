@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,16 +38,6 @@ namespace WebCamCapture
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "orderDataSet2.user". При необходимости она может быть перемещена или удалена.
-            this.userTableAdapter.Fill(this.orderDataSet2.user);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "orderDataSet1.operation". При необходимости она может быть перемещена или удалена.
-            this.operationTableAdapter.Fill(this.orderDataSet1.operation);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "orderDataSet.roller". При необходимости она может быть перемещена или удалена.
-            this.rollerTableAdapter.Fill(this.orderDataSet.roller);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "orderDataSet.roller". При необходимости она может быть перемещена или удалена.
-            this.rollerTableAdapter.Fill(this.orderDataSet.roller);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "orderDataSet.Order". При необходимости она может быть перемещена или удалена.
-
             wcc = new Capture();
             // инициализация, проверка наличия подключенных камер.
             if (wcc.init(CamView,this))
@@ -63,7 +54,7 @@ namespace WebCamCapture
            // wcc.UpdateListNameDevices();
 
         }
-        string NameFile;
+        
         string Path;
         /// <summary>
         /// Кнопка захвата
@@ -72,19 +63,30 @@ namespace WebCamCapture
         /// <param name="e"></param>
         private void BtnScreenCapture_Click(object sender, EventArgs e)
         {
-            //string NameFile;
-            //Path = @"image\";
-            Directory.CreateDirectory(@"1\1");
-            Path = String.Format("{0}{1}_{2}_{3}", @".\image\", DateTime.Now.ToString().Replace(":", "-"), DateTime.Now.Ticks,".jpg");
-            NameFile = DateTime.Now.ToString().Replace(":", "-");
-            NameFile += DateTime.Now.Ticks + ".jpg";
-            NameFile = Path + "" + NameFile;
+            string RootDir = @".\image\";
+            string FileName = String.Format("{0}_{1}_{2}{3}","заказ", DateTime.Now.ToString().Replace(":", "-"), Guid.NewGuid(),".jpg");
+            //Path = String.Format("{0}{1}_{2}_{3}", Path, DateTime.Now.ToString().Replace(":", "-"), DateTime.Now.Ticks,".jpg");
             if (ScreenView.Image != null)
             {
                 ScreenView.Image.Dispose();
             }          
             ScreenView.Image = (Bitmap)CamView.Image.Clone();
-            CamView.Image.Save(Path, System.Drawing.Imaging.ImageFormat.Jpeg);
+            try
+            {
+                Path = RootDir;
+                if (!Directory.Exists(Path))
+                {
+                    Directory.CreateDirectory(Path);
+                }
+                Path = Path + FileName;
+                CamView.Image.Save(Path, System.Drawing.Imaging.ImageFormat.Jpeg);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("не удалось сохранить файл!");
+
+            }
+           
 
             this.PreviewPhotos();
         }
@@ -214,14 +216,13 @@ namespace WebCamCapture
         }
 
 
-
-        private void BtnCardOrderOk_Click(object sender, EventArgs e)
+        private void btnFileDirOk_Click(object sender, EventArgs e)
         {
-            nomberOrderText.Text += " " +nomberOrder.Text;
-            rollerNumberText.Text += " " + numberRollerList.Text;
-            numberOprerationText.Text += " " + numberOperationList.Text;
-            userCardText.Text += " " + userCardList.Text;
-        } 
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                FileDirView.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
     }
 
     
