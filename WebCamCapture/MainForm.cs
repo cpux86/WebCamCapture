@@ -202,8 +202,15 @@ namespace WebCamCapture
 
         private void BtnOrderEdit_Click(object sender, EventArgs e)
         {
-            OrderForm orderForm = new OrderForm();
-            orderForm.ShowDialog();
+            OrderForm order = new OrderForm();
+            if (order.ShowDialog() == DialogResult.OK) 
+            {
+                nomberOrderText.Text = "№ ЗАКАЗА " + order.nomberOrder.Text;
+                MessageBox.Show(order.nomberOrder.Text);    
+            }
+
+           
+                 
         }
 
 

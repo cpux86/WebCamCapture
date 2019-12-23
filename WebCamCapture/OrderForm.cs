@@ -12,6 +12,10 @@ namespace WebCamCapture
 {
     public partial class OrderForm : Form
     {
+        string order; // заказ
+        string rller; // ролик
+        string action; // операция
+        string user; // исполнитель
         public OrderForm()
         {
             InitializeComponent();
@@ -21,5 +25,12 @@ namespace WebCamCapture
         {
 
         }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show(button1.DialogResult.ToString());
+
+        }
+
     }
 }
