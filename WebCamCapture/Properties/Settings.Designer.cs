@@ -47,13 +47,15 @@ namespace WebCamCapture.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\order.accdb")]
-        public string orderConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FileDir {
             get {
-                return ((string)(this["orderConnectionString"]));
+                return ((string)(this["FileDir"]));
+            }
+            set {
+                this["FileDir"] = value;
             }
         }
     }

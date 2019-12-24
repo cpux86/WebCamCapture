@@ -38,10 +38,10 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.userCardText = new System.Windows.Forms.Label();
-            this.numberOprerationText = new System.Windows.Forms.Label();
-            this.rollerNumberText = new System.Windows.Forms.Label();
-            this.nomberOrderText = new System.Windows.Forms.Label();
+            this.OrderPanel__TitleUser = new System.Windows.Forms.Label();
+            this.OrderPanel__TitleOpreration = new System.Windows.Forms.Label();
+            this.OrderPanel__TitleRoller = new System.Windows.Forms.Label();
+            this.OrderPanel__TitleOrder = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.новыйЗаказToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,24 +53,28 @@
             this.ScreenView = new System.Windows.Forms.PictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabScreenView = new System.Windows.Forms.TabPage();
+            this.OrderViewPanel = new System.Windows.Forms.Panel();
+            this.OrderPanel__TextUser = new System.Windows.Forms.Label();
+            this.OrderPanel__TextOpreration = new System.Windows.Forms.Label();
+            this.OrderPanel__TextRoller = new System.Windows.Forms.Label();
+            this.OrderPanel__TextOrder = new System.Windows.Forms.Label();
             this.tabSetting = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnFileDirOk = new System.Windows.Forms.Button();
-            this.FileDirView = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.SettingAppPanel = new System.Windows.Forms.Panel();
             this.ListCaptureDevices = new System.Windows.Forms.ComboBox();
+            this.SettingAppPanel__BtnOk = new System.Windows.Forms.Button();
             this.ListCaptutreModes = new System.Windows.Forms.ComboBox();
+            this.SettinAppPanel__FileDirView = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.CamView)).BeginInit();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScreenView)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabScreenView.SuspendLayout();
+            this.OrderViewPanel.SuspendLayout();
             this.tabSetting.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.SettingAppPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnScreenCapture
@@ -103,7 +107,7 @@
             // 
             this.CamView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CamView.BackColor = System.Drawing.Color.Black;
-            this.CamView.Location = new System.Drawing.Point(590, 12);
+            this.CamView.Location = new System.Drawing.Point(590, 22);
             this.CamView.Name = "CamView";
             this.CamView.Size = new System.Drawing.Size(350, 246);
             this.CamView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -118,9 +122,9 @@
             this.panel1.Controls.Add(this.photoGalleraya);
             this.panel1.Controls.Add(this.btnScreenCapture);
             this.panel1.Controls.Add(this.button1);
-            this.panel1.Location = new System.Drawing.Point(590, 259);
+            this.panel1.Location = new System.Drawing.Point(590, 263);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(350, 369);
+            this.panel1.Size = new System.Drawing.Size(350, 365);
             this.panel1.TabIndex = 10;
             // 
             // btnOrderEdit
@@ -149,7 +153,7 @@
             this.photoGalleraya.Location = new System.Drawing.Point(0, 65);
             this.photoGalleraya.MultiSelect = false;
             this.photoGalleraya.Name = "photoGalleraya";
-            this.photoGalleraya.Size = new System.Drawing.Size(350, 301);
+            this.photoGalleraya.Size = new System.Drawing.Size(350, 297);
             this.photoGalleraya.TabIndex = 9;
             this.photoGalleraya.UseCompatibleStateImageBehavior = false;
             this.photoGalleraya.View = System.Windows.Forms.View.Details;
@@ -172,45 +176,49 @@
             this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader3.Width = 97;
             // 
-            // userCardText
+            // OrderPanel__TitleUser
             // 
-            this.userCardText.AutoSize = true;
-            this.userCardText.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.userCardText.Location = new System.Drawing.Point(5, 121);
-            this.userCardText.Name = "userCardText";
-            this.userCardText.Size = new System.Drawing.Size(152, 21);
-            this.userCardText.TabIndex = 27;
-            this.userCardText.Text = "ИСПОЛНИТЕЛЬ:";
+            this.OrderPanel__TitleUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.OrderPanel__TitleUser.AutoSize = true;
+            this.OrderPanel__TitleUser.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OrderPanel__TitleUser.Location = new System.Drawing.Point(3, 111);
+            this.OrderPanel__TitleUser.Name = "OrderPanel__TitleUser";
+            this.OrderPanel__TitleUser.Size = new System.Drawing.Size(152, 21);
+            this.OrderPanel__TitleUser.TabIndex = 27;
+            this.OrderPanel__TitleUser.Text = "ИСПОЛНИТЕЛЬ:";
             // 
-            // numberOprerationText
+            // OrderPanel__TitleOpreration
             // 
-            this.numberOprerationText.AutoSize = true;
-            this.numberOprerationText.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.numberOprerationText.Location = new System.Drawing.Point(21, 88);
-            this.numberOprerationText.Name = "numberOprerationText";
-            this.numberOprerationText.Size = new System.Drawing.Size(136, 21);
-            this.numberOprerationText.TabIndex = 26;
-            this.numberOprerationText.Text = "ОПЕРАЦИЯ №:";
+            this.OrderPanel__TitleOpreration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.OrderPanel__TitleOpreration.AutoSize = true;
+            this.OrderPanel__TitleOpreration.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OrderPanel__TitleOpreration.Location = new System.Drawing.Point(19, 78);
+            this.OrderPanel__TitleOpreration.Name = "OrderPanel__TitleOpreration";
+            this.OrderPanel__TitleOpreration.Size = new System.Drawing.Size(136, 21);
+            this.OrderPanel__TitleOpreration.TabIndex = 26;
+            this.OrderPanel__TitleOpreration.Text = "ОПЕРАЦИЯ №:";
             // 
-            // rollerNumberText
+            // OrderPanel__TitleRoller
             // 
-            this.rollerNumberText.AutoSize = true;
-            this.rollerNumberText.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rollerNumberText.Location = new System.Drawing.Point(57, 55);
-            this.rollerNumberText.Name = "rollerNumberText";
-            this.rollerNumberText.Size = new System.Drawing.Size(100, 21);
-            this.rollerNumberText.TabIndex = 25;
-            this.rollerNumberText.Text = "РОЛИК №:";
+            this.OrderPanel__TitleRoller.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.OrderPanel__TitleRoller.AutoSize = true;
+            this.OrderPanel__TitleRoller.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OrderPanel__TitleRoller.Location = new System.Drawing.Point(55, 45);
+            this.OrderPanel__TitleRoller.Name = "OrderPanel__TitleRoller";
+            this.OrderPanel__TitleRoller.Size = new System.Drawing.Size(100, 21);
+            this.OrderPanel__TitleRoller.TabIndex = 25;
+            this.OrderPanel__TitleRoller.Text = "РОЛИК №:";
             // 
-            // nomberOrderText
+            // OrderPanel__TitleOrder
             // 
-            this.nomberOrderText.AutoSize = true;
-            this.nomberOrderText.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.nomberOrderText.Location = new System.Drawing.Point(61, 22);
-            this.nomberOrderText.Name = "nomberOrderText";
-            this.nomberOrderText.Size = new System.Drawing.Size(96, 21);
-            this.nomberOrderText.TabIndex = 24;
-            this.nomberOrderText.Text = "ЗАКАЗ №:";
+            this.OrderPanel__TitleOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.OrderPanel__TitleOrder.AutoSize = true;
+            this.OrderPanel__TitleOrder.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OrderPanel__TitleOrder.Location = new System.Drawing.Point(59, 12);
+            this.OrderPanel__TitleOrder.Name = "OrderPanel__TitleOrder";
+            this.OrderPanel__TitleOrder.Size = new System.Drawing.Size(96, 21);
+            this.OrderPanel__TitleOrder.TabIndex = 24;
+            this.OrderPanel__TitleOrder.Text = "ЗАКАЗ №:";
             // 
             // menuStrip1
             // 
@@ -230,19 +238,19 @@
             this.новыйЗаказToolStripMenuItem,
             this.выходToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
             // новыйЗаказToolStripMenuItem
             // 
             this.новыйЗаказToolStripMenuItem.Name = "новыйЗаказToolStripMenuItem";
-            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.новыйЗаказToolStripMenuItem.Text = "Новый заказ";
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             // 
             // настройкиToolStripMenuItem1
@@ -251,27 +259,27 @@
             this.камераToolStripMenuItem,
             this.путьСохраненияФайловToolStripMenuItem});
             this.настройкиToolStripMenuItem1.Name = "настройкиToolStripMenuItem1";
-            this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(79, 20);
+            this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(82, 20);
             this.настройкиToolStripMenuItem1.Text = "Настройки";
             // 
             // камераToolStripMenuItem
             // 
             this.камераToolStripMenuItem.Name = "камераToolStripMenuItem";
-            this.камераToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.камераToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.камераToolStripMenuItem.Text = "Камера";
             this.камераToolStripMenuItem.Click += new System.EventHandler(this.КамераToolStripMenuItem_Click);
             // 
             // путьСохраненияФайловToolStripMenuItem
             // 
             this.путьСохраненияФайловToolStripMenuItem.Name = "путьСохраненияФайловToolStripMenuItem";
-            this.путьСохраненияФайловToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.путьСохраненияФайловToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.путьСохраненияФайловToolStripMenuItem.Text = "Путь сохранения файлов";
             this.путьСохраненияФайловToolStripMenuItem.Click += new System.EventHandler(this.ПутьСохраненияФайловToolStripMenuItem_Click);
             // 
             // оПрограммеToolStripMenuItem
             // 
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             // 
             // ScreenView
@@ -280,7 +288,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ScreenView.BackColor = System.Drawing.Color.Black;
-            this.ScreenView.Location = new System.Drawing.Point(0, 154);
+            this.ScreenView.Location = new System.Drawing.Point(0, 0);
             this.ScreenView.Name = "ScreenView";
             this.ScreenView.Size = new System.Drawing.Size(576, 442);
             this.ScreenView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -302,11 +310,8 @@
             // 
             // tabScreenView
             // 
-            this.tabScreenView.Controls.Add(this.userCardText);
+            this.tabScreenView.Controls.Add(this.OrderViewPanel);
             this.tabScreenView.Controls.Add(this.ScreenView);
-            this.tabScreenView.Controls.Add(this.numberOprerationText);
-            this.tabScreenView.Controls.Add(this.nomberOrderText);
-            this.tabScreenView.Controls.Add(this.rollerNumberText);
             this.tabScreenView.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabScreenView.Location = new System.Drawing.Point(4, 22);
             this.tabScreenView.Name = "tabScreenView";
@@ -316,9 +321,70 @@
             this.tabScreenView.Text = "Обзор";
             this.tabScreenView.UseVisualStyleBackColor = true;
             // 
+            // OrderViewPanel
+            // 
+            this.OrderViewPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.OrderViewPanel.Controls.Add(this.OrderPanel__TextUser);
+            this.OrderViewPanel.Controls.Add(this.OrderPanel__TextOpreration);
+            this.OrderViewPanel.Controls.Add(this.OrderPanel__TextRoller);
+            this.OrderViewPanel.Controls.Add(this.OrderPanel__TextOrder);
+            this.OrderViewPanel.Controls.Add(this.OrderPanel__TitleUser);
+            this.OrderViewPanel.Controls.Add(this.OrderPanel__TitleRoller);
+            this.OrderViewPanel.Controls.Add(this.OrderPanel__TitleOpreration);
+            this.OrderViewPanel.Controls.Add(this.OrderPanel__TitleOrder);
+            this.OrderViewPanel.Location = new System.Drawing.Point(8, 448);
+            this.OrderViewPanel.Name = "OrderViewPanel";
+            this.OrderViewPanel.Size = new System.Drawing.Size(562, 145);
+            this.OrderViewPanel.TabIndex = 28;
+            // 
+            // OrderPanel__TextUser
+            // 
+            this.OrderPanel__TextUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.OrderPanel__TextUser.AutoSize = true;
+            this.OrderPanel__TextUser.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OrderPanel__TextUser.Location = new System.Drawing.Point(161, 111);
+            this.OrderPanel__TextUser.Name = "OrderPanel__TextUser";
+            this.OrderPanel__TextUser.Size = new System.Drawing.Size(127, 21);
+            this.OrderPanel__TextUser.TabIndex = 31;
+            this.OrderPanel__TextUser.Text = "ИВАНОВ. И.И";
+            // 
+            // OrderPanel__TextOpreration
+            // 
+            this.OrderPanel__TextOpreration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.OrderPanel__TextOpreration.AutoSize = true;
+            this.OrderPanel__TextOpreration.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OrderPanel__TextOpreration.Location = new System.Drawing.Point(161, 78);
+            this.OrderPanel__TextOpreration.Name = "OrderPanel__TextOpreration";
+            this.OrderPanel__TextOpreration.Size = new System.Drawing.Size(46, 21);
+            this.OrderPanel__TextOpreration.TabIndex = 30;
+            this.OrderPanel__TextOpreration.Text = "НЕТ";
+            // 
+            // OrderPanel__TextRoller
+            // 
+            this.OrderPanel__TextRoller.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.OrderPanel__TextRoller.AutoSize = true;
+            this.OrderPanel__TextRoller.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OrderPanel__TextRoller.Location = new System.Drawing.Point(161, 45);
+            this.OrderPanel__TextRoller.Name = "OrderPanel__TextRoller";
+            this.OrderPanel__TextRoller.Size = new System.Drawing.Size(19, 21);
+            this.OrderPanel__TextRoller.TabIndex = 29;
+            this.OrderPanel__TextRoller.Text = "0";
+            // 
+            // OrderPanel__TextOrder
+            // 
+            this.OrderPanel__TextOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.OrderPanel__TextOrder.AutoSize = true;
+            this.OrderPanel__TextOrder.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OrderPanel__TextOrder.Location = new System.Drawing.Point(161, 12);
+            this.OrderPanel__TextOrder.Name = "OrderPanel__TextOrder";
+            this.OrderPanel__TextOrder.Size = new System.Drawing.Size(46, 21);
+            this.OrderPanel__TextOrder.TabIndex = 28;
+            this.OrderPanel__TextOrder.Text = "НЕТ";
+            // 
             // tabSetting
             // 
-            this.tabSetting.Controls.Add(this.panel2);
+            this.tabSetting.Controls.Add(this.SettingAppPanel);
             this.tabSetting.Controls.Add(this.groupBox1);
             this.tabSetting.Location = new System.Drawing.Point(4, 22);
             this.tabSetting.Name = "tabSetting";
@@ -328,49 +394,16 @@
             this.tabSetting.Text = "Настройки";
             this.tabSetting.UseVisualStyleBackColor = true;
             // 
-            // panel2
+            // SettingAppPanel
             // 
-            this.panel2.Controls.Add(this.btnFileDirOk);
-            this.panel2.Controls.Add(this.FileDirView);
-            this.panel2.Location = new System.Drawing.Point(33, 288);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(498, 100);
-            this.panel2.TabIndex = 20;
-            // 
-            // btnFileDirOk
-            // 
-            this.btnFileDirOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFileDirOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnFileDirOk.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnFileDirOk.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnFileDirOk.ForeColor = System.Drawing.Color.Black;
-            this.btnFileDirOk.Location = new System.Drawing.Point(391, 38);
-            this.btnFileDirOk.Name = "btnFileDirOk";
-            this.btnFileDirOk.Size = new System.Drawing.Size(91, 30);
-            this.btnFileDirOk.TabIndex = 4;
-            this.btnFileDirOk.Text = "OK";
-            this.btnFileDirOk.UseVisualStyleBackColor = true;
-            this.btnFileDirOk.Click += new System.EventHandler(this.btnFileDirOk_Click);
-            // 
-            // FileDirView
-            // 
-            this.FileDirView.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.FileDirView.Location = new System.Drawing.Point(13, 40);
-            this.FileDirView.Name = "FileDirView";
-            this.FileDirView.Size = new System.Drawing.Size(372, 26);
-            this.FileDirView.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.ListCaptureDevices);
-            this.groupBox1.Controls.Add(this.ListCaptutreModes);
-            this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox1.Location = new System.Drawing.Point(33, 130);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(470, 143);
-            this.groupBox1.TabIndex = 19;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Настройки камеры";
+            this.SettingAppPanel.Controls.Add(this.ListCaptureDevices);
+            this.SettingAppPanel.Controls.Add(this.SettingAppPanel__BtnOk);
+            this.SettingAppPanel.Controls.Add(this.ListCaptutreModes);
+            this.SettingAppPanel.Controls.Add(this.SettinAppPanel__FileDirView);
+            this.SettingAppPanel.Location = new System.Drawing.Point(33, 362);
+            this.SettingAppPanel.Name = "SettingAppPanel";
+            this.SettingAppPanel.Size = new System.Drawing.Size(498, 124);
+            this.SettingAppPanel.TabIndex = 20;
             // 
             // ListCaptureDevices
             // 
@@ -379,12 +412,27 @@
             this.ListCaptureDevices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ListCaptureDevices.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ListCaptureDevices.FormattingEnabled = true;
-            this.ListCaptureDevices.Location = new System.Drawing.Point(190, 36);
+            this.ListCaptureDevices.Location = new System.Drawing.Point(86, 20);
             this.ListCaptureDevices.Name = "ListCaptureDevices";
             this.ListCaptureDevices.Size = new System.Drawing.Size(137, 27);
             this.ListCaptureDevices.TabIndex = 6;
             this.ListCaptureDevices.SelectionChangeCommitted += new System.EventHandler(this.ListCaptureDevices_SelectionChangeCommitted);
             this.ListCaptureDevices.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListCaptureDevices_MouseDown);
+            // 
+            // SettingAppPanel__BtnOk
+            // 
+            this.SettingAppPanel__BtnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SettingAppPanel__BtnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.SettingAppPanel__BtnOk.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.SettingAppPanel__BtnOk.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.SettingAppPanel__BtnOk.ForeColor = System.Drawing.Color.Black;
+            this.SettingAppPanel__BtnOk.Location = new System.Drawing.Point(398, 61);
+            this.SettingAppPanel__BtnOk.Name = "SettingAppPanel__BtnOk";
+            this.SettingAppPanel__BtnOk.Size = new System.Drawing.Size(91, 30);
+            this.SettingAppPanel__BtnOk.TabIndex = 4;
+            this.SettingAppPanel__BtnOk.Text = "OK";
+            this.SettingAppPanel__BtnOk.UseVisualStyleBackColor = true;
+            this.SettingAppPanel__BtnOk.Click += new System.EventHandler(this.btnFileDirOk_Click);
             // 
             // ListCaptutreModes
             // 
@@ -394,11 +442,29 @@
             this.ListCaptutreModes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ListCaptutreModes.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ListCaptutreModes.FormattingEnabled = true;
-            this.ListCaptutreModes.Location = new System.Drawing.Point(17, 36);
+            this.ListCaptutreModes.Location = new System.Drawing.Point(255, 20);
             this.ListCaptutreModes.Name = "ListCaptutreModes";
             this.ListCaptutreModes.Size = new System.Drawing.Size(137, 27);
             this.ListCaptutreModes.TabIndex = 5;
             this.ListCaptutreModes.SelectedIndexChanged += new System.EventHandler(this.ListCaptutreModes_SelectedIndexChanged);
+            // 
+            // SettinAppPanel__FileDirView
+            // 
+            this.SettinAppPanel__FileDirView.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.SettinAppPanel__FileDirView.Location = new System.Drawing.Point(20, 63);
+            this.SettinAppPanel__FileDirView.Name = "SettinAppPanel__FileDirView";
+            this.SettinAppPanel__FileDirView.Size = new System.Drawing.Size(372, 26);
+            this.SettinAppPanel__FileDirView.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBox1.Location = new System.Drawing.Point(33, 130);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(470, 143);
+            this.groupBox1.TabIndex = 19;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Настройки камеры";
             // 
             // MainForm
             // 
@@ -423,11 +489,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.ScreenView)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabScreenView.ResumeLayout(false);
-            this.tabScreenView.PerformLayout();
+            this.OrderViewPanel.ResumeLayout(false);
+            this.OrderViewPanel.PerformLayout();
             this.tabSetting.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
+            this.SettingAppPanel.ResumeLayout(false);
+            this.SettingAppPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -451,22 +517,26 @@
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem новыйЗаказToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
-        private System.Windows.Forms.Label userCardText;
-        private System.Windows.Forms.Label numberOprerationText;
-        private System.Windows.Forms.Label rollerNumberText;
-        private System.Windows.Forms.Label nomberOrderText;
+        private System.Windows.Forms.Label OrderPanel__TitleUser;
+        private System.Windows.Forms.Label OrderPanel__TitleOpreration;
+        private System.Windows.Forms.Label OrderPanel__TitleRoller;
+        private System.Windows.Forms.Label OrderPanel__TitleOrder;
         private System.Windows.Forms.PictureBox ScreenView;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabScreenView;
         private System.Windows.Forms.TabPage tabSetting;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnFileDirOk;
-        private System.Windows.Forms.TextBox FileDirView;
+        private System.Windows.Forms.Panel SettingAppPanel;
+        private System.Windows.Forms.Button SettingAppPanel__BtnOk;
+        private System.Windows.Forms.TextBox SettinAppPanel__FileDirView;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox ListCaptureDevices;
         private System.Windows.Forms.ComboBox ListCaptutreModes;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog2;
+        private System.Windows.Forms.Panel OrderViewPanel;
+        private System.Windows.Forms.Label OrderPanel__TextOrder;
+        private System.Windows.Forms.Label OrderPanel__TextUser;
+        private System.Windows.Forms.Label OrderPanel__TextOpreration;
+        private System.Windows.Forms.Label OrderPanel__TextRoller;
     }
 }
 

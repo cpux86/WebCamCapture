@@ -137,7 +137,9 @@ namespace WebCamCapture
 
         private void Button1_Click(object sender, EventArgs e)
         {
-
+            //OrderForm orderForm = new OrderForm();
+            //orderForm.ShowDialog();
+            //MessageBox.Show(orderForm.nomberOrder.Text);
         }
         public void PreviewPhotos()
         {
@@ -207,8 +209,10 @@ namespace WebCamCapture
             OrderForm order = new OrderForm();
             if (order.ShowDialog() == DialogResult.OK) 
             {
-                nomberOrderText.Text = "№ ЗАКАЗА " + order.nomberOrder.Text;
-                MessageBox.Show(order.nomberOrder.Text);    
+                OrderPanel__TextOrder.Text = order.Order;
+                OrderPanel__TextRoller.Text = order.Roller;
+                OrderPanel__TextOpreration.Text = order.Action;
+                OrderPanel__TextUser.Text = order.User;
             }
 
            
@@ -220,7 +224,7 @@ namespace WebCamCapture
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                FileDirView.Text = folderBrowserDialog1.SelectedPath;
+                SettinAppPanel__FileDirView.Text = folderBrowserDialog1.SelectedPath;
             }
         }
     }
