@@ -64,7 +64,6 @@
             this.SettingAppPanel__BtnOk = new System.Windows.Forms.Button();
             this.ListCaptutreModes = new System.Windows.Forms.ComboBox();
             this.SettinAppPanel__FileDirView = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.CamView)).BeginInit();
             this.panel1.SuspendLayout();
@@ -157,6 +156,10 @@
             this.photoGalleraya.TabIndex = 9;
             this.photoGalleraya.UseCompatibleStateImageBehavior = false;
             this.photoGalleraya.View = System.Windows.Forms.View.Details;
+            this.photoGalleraya.VirtualListSize = 25;
+            this.photoGalleraya.VirtualMode = true;
+            this.photoGalleraya.CacheVirtualItems += new System.Windows.Forms.CacheVirtualItemsEventHandler(this.photoGalleraya_CacheVirtualItems);
+            this.photoGalleraya.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.photoGalleraya_RetrieveVirtualItem);
             this.photoGalleraya.SelectedIndexChanged += new System.EventHandler(this.PhotoGalleraya_SelectedIndexChanged);
             // 
             // columnHeader1
@@ -238,19 +241,19 @@
             this.новыйЗаказToolStripMenuItem,
             this.выходToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
             // новыйЗаказToolStripMenuItem
             // 
             this.новыйЗаказToolStripMenuItem.Name = "новыйЗаказToolStripMenuItem";
-            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.новыйЗаказToolStripMenuItem.Text = "Новый заказ";
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             // 
             // настройкиToolStripMenuItem1
@@ -259,27 +262,27 @@
             this.камераToolStripMenuItem,
             this.путьСохраненияФайловToolStripMenuItem});
             this.настройкиToolStripMenuItem1.Name = "настройкиToolStripMenuItem1";
-            this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(82, 20);
+            this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(79, 20);
             this.настройкиToolStripMenuItem1.Text = "Настройки";
             // 
             // камераToolStripMenuItem
             // 
             this.камераToolStripMenuItem.Name = "камераToolStripMenuItem";
-            this.камераToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.камераToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.камераToolStripMenuItem.Text = "Камера";
             this.камераToolStripMenuItem.Click += new System.EventHandler(this.КамераToolStripMenuItem_Click);
             // 
             // путьСохраненияФайловToolStripMenuItem
             // 
             this.путьСохраненияФайловToolStripMenuItem.Name = "путьСохраненияФайловToolStripMenuItem";
-            this.путьСохраненияФайловToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.путьСохраненияФайловToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.путьСохраненияФайловToolStripMenuItem.Text = "Путь сохранения файлов";
             this.путьСохраненияФайловToolStripMenuItem.Click += new System.EventHandler(this.ПутьСохраненияФайловToolStripMenuItem_Click);
             // 
             // оПрограммеToolStripMenuItem
             // 
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             // 
             // ScreenView
@@ -385,7 +388,6 @@
             // tabSetting
             // 
             this.tabSetting.Controls.Add(this.SettingAppPanel);
-            this.tabSetting.Controls.Add(this.groupBox1);
             this.tabSetting.Location = new System.Drawing.Point(4, 22);
             this.tabSetting.Name = "tabSetting";
             this.tabSetting.Padding = new System.Windows.Forms.Padding(3);
@@ -400,7 +402,7 @@
             this.SettingAppPanel.Controls.Add(this.SettingAppPanel__BtnOk);
             this.SettingAppPanel.Controls.Add(this.ListCaptutreModes);
             this.SettingAppPanel.Controls.Add(this.SettinAppPanel__FileDirView);
-            this.SettingAppPanel.Location = new System.Drawing.Point(33, 362);
+            this.SettingAppPanel.Location = new System.Drawing.Point(41, 342);
             this.SettingAppPanel.Name = "SettingAppPanel";
             this.SettingAppPanel.Size = new System.Drawing.Size(498, 124);
             this.SettingAppPanel.TabIndex = 20;
@@ -422,6 +424,7 @@
             // SettingAppPanel__BtnOk
             // 
             this.SettingAppPanel__BtnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SettingAppPanel__BtnOk.BackColor = System.Drawing.Color.Transparent;
             this.SettingAppPanel__BtnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.SettingAppPanel__BtnOk.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.SettingAppPanel__BtnOk.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -431,7 +434,7 @@
             this.SettingAppPanel__BtnOk.Size = new System.Drawing.Size(91, 30);
             this.SettingAppPanel__BtnOk.TabIndex = 4;
             this.SettingAppPanel__BtnOk.Text = "OK";
-            this.SettingAppPanel__BtnOk.UseVisualStyleBackColor = true;
+            this.SettingAppPanel__BtnOk.UseVisualStyleBackColor = false;
             this.SettingAppPanel__BtnOk.Click += new System.EventHandler(this.btnFileDirOk_Click);
             // 
             // ListCaptutreModes
@@ -453,18 +456,9 @@
             this.SettinAppPanel__FileDirView.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.SettinAppPanel__FileDirView.Location = new System.Drawing.Point(20, 63);
             this.SettinAppPanel__FileDirView.Name = "SettinAppPanel__FileDirView";
+            this.SettinAppPanel__FileDirView.ReadOnly = true;
             this.SettinAppPanel__FileDirView.Size = new System.Drawing.Size(372, 26);
             this.SettinAppPanel__FileDirView.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox1.Location = new System.Drawing.Point(33, 130);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(470, 143);
-            this.groupBox1.TabIndex = 19;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Настройки камеры";
             // 
             // MainForm
             // 
@@ -528,7 +522,6 @@
         private System.Windows.Forms.Panel SettingAppPanel;
         private System.Windows.Forms.Button SettingAppPanel__BtnOk;
         private System.Windows.Forms.TextBox SettinAppPanel__FileDirView;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox ListCaptureDevices;
         private System.Windows.Forms.ComboBox ListCaptutreModes;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;

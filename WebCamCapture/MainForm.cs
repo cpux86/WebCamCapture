@@ -51,8 +51,8 @@ namespace WebCamCapture
                 wcc.UpdateListNameDevices();
                 ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
             }
-           // wcc.UpdateListNameDevices();
-
+            // wcc.UpdateListNameDevices();
+            SettinAppPanel__FileDirView.Text = Properties.Settings.Default.FileDir;
         }
         
         string Path;
@@ -63,7 +63,8 @@ namespace WebCamCapture
         /// <param name="e"></param>
         private void BtnScreenCapture_Click(object sender, EventArgs e)
         {
-            string RootDir = @".\image\";
+            //string RootDir = @".\image\";
+            string RootDir = Properties.Settings.Default.FileDir;
             string FileName = String.Format("{0}_{1}_{2}{3}","заказ", DateTime.Now.ToString().Replace(":", "-"), Guid.NewGuid(),".jpg");
             //Path = String.Format("{0}{1}_{2}_{3}", Path, DateTime.Now.ToString().Replace(":", "-"), DateTime.Now.Ticks,".jpg");
             if (ScreenView.Image != null)
@@ -73,7 +74,7 @@ namespace WebCamCapture
             ScreenView.Image = (Bitmap)CamView.Image.Clone();
             try
             {
-                Path = RootDir;
+                Path = RootDir+ @"\";
                 if (!Directory.Exists(Path))
                 {
                     Directory.CreateDirectory(Path);
@@ -137,9 +138,8 @@ namespace WebCamCapture
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            //OrderForm orderForm = new OrderForm();
-            //orderForm.ShowDialog();
-            //MessageBox.Show(orderForm.nomberOrder.Text);
+            //MessageBox.Show(Properties.Settings.Default.FileDir);
+            var i = photoGalleraya.Items;
         }
         public void PreviewPhotos()
         {
@@ -222,10 +222,28 @@ namespace WebCamCapture
 
         private void btnFileDirOk_Click(object sender, EventArgs e)
         {
+            folderBrowserDialog1.SelectedPath = Properties.Settings.Default.FileDir;
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
+
                 SettinAppPanel__FileDirView.Text = folderBrowserDialog1.SelectedPath;
+                Properties.Settings.Default.FileDir = folderBrowserDialog1.SelectedPath;
+                //Properties.Settings.Default.Save();
             }
+        }
+        ListViewItem item;
+        private void photoGalleraya_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
+        {
+            item = new ListViewItem(new string[] { "", DateTime.Now.ToString(), "fdfdf" });
+            item.ImageIndex = 0;
+
+            e.Item = item;
+            
+        }
+
+        private void photoGalleraya_CacheVirtualItems(object sender, CacheVirtualItemsEventArgs e)
+        {
+            
         }
     }
 

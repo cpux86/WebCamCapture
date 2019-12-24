@@ -104,7 +104,7 @@ namespace WebCamCapture
 
                 videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
                 //
-                videoSource.VideoResolution = videoSource.VideoCapabilities[this.SelectedVideoMode];
+                videoSource.VideoResolution = videoSource.VideoCapabilities[this.SelectedVideoMode];   
 
 
 
@@ -225,6 +225,7 @@ namespace WebCamCapture
 
                 }
                 camView.Image = (Bitmap)eventArgs.Frame.Clone();
+                camView.Image.RotateFlip(RotateFlipType.Rotate180FlipY);
             }));
         }
 
