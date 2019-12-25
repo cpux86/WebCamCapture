@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.IO;
 using System.Threading;
+using System.Resources;
 
 using System.Windows.Forms;
 using AForge.Video;
@@ -19,40 +20,43 @@ namespace WebCamCapture
 {
     public partial class MainForm : Form
     {
+        private Capture wcc;
+        private ImageBrowser imgBrowser;
+        OrderForm order;
         public MainForm()
         {
             InitializeComponent();
-           
+            order = new OrderForm();
         }
 
-        private Capture wcc;
-        private ImageBrowser imgBrowser;
+        
 
         /// <summary>
         /// включены ли элементы упрвления устройством
         /// </summary>
         public bool EnableDeviceControl { get => btnScreenCapture.Enabled; set {
-                btnScreenCapture.Enabled = ListCaptutreModes.Enabled = value; 
+               // btnScreenCapture.Enabled = ListCaptutreModes.Enabled = value; 
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             wcc = new Capture();
             // инициализация, проверка наличия подключенных камер.
             if (wcc.init(CamView,this))
             {
-                ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
+                //ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
 
-                ListCaptutreModes.Items.AddRange(wcc.ListVideoModes.ToArray());
-                ListCaptutreModes.SelectedIndex = wcc.SelectedVideoMode;
+                //ListCaptutreModes.Items.AddRange(wcc.ListVideoModes.ToArray());
+               // ListCaptutreModes.SelectedIndex = wcc.SelectedVideoMode;
 
                 btnScreenCapture.Enabled = true;
                 wcc.UpdateListNameDevices();
-                ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
+                //ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
             }
             // wcc.UpdateListNameDevices();
-            SettinAppPanel__FileDirView.Text = Properties.Settings.Default.FileDir;
+            //SettinAppPanel__FileDirView.Text = Properties.Settings.Default.FileDir;
         }
         
         string Path;
@@ -66,7 +70,6 @@ namespace WebCamCapture
             //string RootDir = @".\image\";
             string RootDir = Properties.Settings.Default.FileDir;
             string FileName = String.Format("{0}_{1}_{2}{3}","заказ", DateTime.Now.ToString().Replace(":", "-"), Guid.NewGuid(),".jpg");
-            //Path = String.Format("{0}{1}_{2}_{3}", Path, DateTime.Now.ToString().Replace(":", "-"), DateTime.Now.Ticks,".jpg");
             if (ScreenView.Image != null)
             {
                 ScreenView.Image.Dispose();
@@ -108,14 +111,14 @@ namespace WebCamCapture
             if (wcc.DevicesCounter > 0)
             {
                 this.EnableDeviceControl = true;
-                ListCaptureDevices.Items.Clear();
-                ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
-                ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
+               // ListCaptureDevices.Items.Clear();
+               // ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
+               // ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
             }
             else
             {
                 this.EnableDeviceControl = false;
-                ListCaptureDevices.Items.Clear();
+               // ListCaptureDevices.Items.Clear();
             }
 
             // если устройства не подключены, отключаем контролы управления устройствами
@@ -131,15 +134,16 @@ namespace WebCamCapture
        
         private void ListCaptureDevices_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            wcc.ChangeModeCapture(ListCaptutreModes.SelectedIndex);
-            wcc.SelectedDeviceIndex = ListCaptureDevices.SelectedIndex;
+           // wcc.ChangeModeCapture(ListCaptutreModes.SelectedIndex);
+           // wcc.SelectedDeviceIndex = ListCaptureDevices.SelectedIndex;
             
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show(Properties.Settings.Default.FileDir);
-            var i = photoGalleraya.Items;
+            //var d = dataSet1BindingSource;
+
+
         }
         public void PreviewPhotos()
         {
@@ -190,8 +194,14 @@ namespace WebCamCapture
 
         private void КамераToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SettingDevice settingDev = new SettingDevice();
-            settingDev.ShowDialog();
+            SettingForm settingDev = new SettingForm();
+            if (settingDev.ShowDialog() == DialogResult.OK)
+            {
+                //MessageBox.Show("Камера "+ settingDev.Dev.ToString()+" Разрешение "+settingDev.Mod); 
+                wcc.Start(settingDev.Dev, settingDev.Mod);
+            }
+            
+            
         }
 
         /// <summary>
@@ -201,12 +211,12 @@ namespace WebCamCapture
         /// <param name="e"></param>
         private void ListCaptutreModes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            wcc.ChangeModeCapture(ListCaptutreModes.SelectedIndex);
+            //wcc.ChangeModeCapture(ListCaptutreModes.SelectedIndex);
         }
-
+        //OrderForm order;
         private void BtnOrderEdit_Click(object sender, EventArgs e)
         {
-            OrderForm order = new OrderForm();
+            //order = new OrderForm();
             if (order.ShowDialog() == DialogResult.OK) 
             {
                 OrderPanel__TextOrder.Text = order.Order;
@@ -226,7 +236,7 @@ namespace WebCamCapture
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
 
-                SettinAppPanel__FileDirView.Text = folderBrowserDialog1.SelectedPath;
+               // SettinAppPanel__FileDirView.Text = folderBrowserDialog1.SelectedPath;
                 Properties.Settings.Default.FileDir = folderBrowserDialog1.SelectedPath;
                 //Properties.Settings.Default.Save();
             }
@@ -234,7 +244,7 @@ namespace WebCamCapture
         ListViewItem item;
         private void photoGalleraya_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
         {
-            item = new ListViewItem(new string[] { "", DateTime.Now.ToString(), "fdfdf" });
+            item = new ListViewItem(new string[] { "", "100/1/19", DateTime.Now.ToString() });
             item.ImageIndex = 0;
 
             e.Item = item;

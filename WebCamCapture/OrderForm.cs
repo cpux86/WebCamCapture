@@ -48,6 +48,7 @@ namespace WebCamCapture
             {
                 e.Handled = true;
             }
+
         }
 
         private void RollerCbox_KeyPress(object sender, KeyPressEventArgs e)
@@ -66,9 +67,12 @@ namespace WebCamCapture
             char number = e.KeyChar;
             if (!Char.IsLetter(number) && number != 8 && !Char.IsWhiteSpace(number) && number != 46)
             {
+                
                 e.Handled = true;
+                
             }
-            //MessageBox.Show(e.KeyChar);
+            // преобразуем каждый введенный символ в врехний регистр.
+            e.KeyChar = Char.ToUpper(e.KeyChar);
         }
 
         private void OperationList_KeyPress(object sender, KeyPressEventArgs e)
@@ -79,6 +83,8 @@ namespace WebCamCapture
             {
                 e.Handled = true;
             }
+            // преобразуем каждый введенный символ в врехний регистр.
+            e.KeyChar = Char.ToUpper(e.KeyChar);
         }
 
         private void Button1_Click(object sender, EventArgs e)

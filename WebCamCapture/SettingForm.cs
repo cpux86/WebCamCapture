@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace WebCamCapture
 {
-    public partial class SettingDevice : Form
+    public partial class SettingForm : Form
     {
         Capture capture;
-        public SettingDevice()
+        public SettingForm()
         {
             InitializeComponent();
             capture = new Capture();
@@ -55,8 +55,12 @@ namespace WebCamCapture
             ListCaptutreModes.Items.AddRange(capture.ListVideoModes.ToArray());
         }
 
-        public int dev;
-        public int mod;
+        private int dev;
+        private int mod;
+
+        public int Dev { get => dev; set => dev = value; }
+        public int Mod { get => mod; set => mod = value; }
+
         /// <summary>
         /// Применить настройки захвата и начать захват видео
         /// </summary>
@@ -70,9 +74,11 @@ namespace WebCamCapture
             dev = capture.GetIndexByName(capture.ListNameDevices, ListCaptureDevices.SelectedItem.ToString());
             mod = capture.GetIndexByName(capture.ListVideoModes, ListCaptutreModes.SelectedItem.ToString());
 
-            Form forms = new MainForm();
-           
-            //capture.Start(dev, mod);
+        }
+
+        private void SettingAppPanel__BtnOk_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

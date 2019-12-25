@@ -125,10 +125,9 @@ namespace WebCamCapture
         /// <param name="mod">разрешение</param>
         internal void Start(int dev, int mod)
         {
-            //throw new NotImplementedException();
-            //this.Stop();
+            this.Stop();
             videoSource.VideoResolution = videoSource.VideoCapabilities[mod];
-            videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+            //videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
             videoSource.Start();
         }
 
@@ -151,7 +150,6 @@ namespace WebCamCapture
             this.listVideoModes = fSize; // инициализируем или обновляем список доступных разрешений 
             return true;
         }
-
 
         /// <summary>
         /// Обновляет список подключенных устройств и счетчик DevicesCounter.Обновленный список устройств доступен через свойство ListNameDevices.
