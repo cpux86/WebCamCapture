@@ -187,17 +187,13 @@ namespace WebCamCapture
             MessageBox.Show("fdf", "gffg",MessageBoxButtons.YesNo);
         }
 
-        private void ПутьСохраненияФайловToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void КамераToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SettingForm settingDev = new SettingForm();
+            settingDev.Mod = wcc.ModeId;
             if (settingDev.ShowDialog() == DialogResult.OK)
             {
-                //MessageBox.Show("Камера "+ settingDev.Dev.ToString()+" Разрешение "+settingDev.Mod); 
+                
                 wcc.Start(settingDev.Dev, settingDev.Mod);
             }
             
@@ -232,14 +228,7 @@ namespace WebCamCapture
 
         private void btnFileDirOk_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = Properties.Settings.Default.FileDir;
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-
-               // SettinAppPanel__FileDirView.Text = folderBrowserDialog1.SelectedPath;
-                Properties.Settings.Default.FileDir = folderBrowserDialog1.SelectedPath;
-                //Properties.Settings.Default.Save();
-            }
+            
         }
         ListViewItem item;
         private void photoGalleraya_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)

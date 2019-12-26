@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btnScreenCapture = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -49,29 +48,17 @@
             this.OrderPanel__TextOpreration = new System.Windows.Forms.Label();
             this.OrderPanel__TextRoller = new System.Windows.Forms.Label();
             this.OrderPanel__TextOrder = new System.Windows.Forms.Label();
-            this.orderBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet1 = new WebCamCapture.DataSet1();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.orderBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.новыйЗаказToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.камераToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.путьСохраненияФайловToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.CamView)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScreenView)).BeginInit();
             this.OrderViewPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -293,31 +280,6 @@
             this.OrderPanel__TextOrder.Size = new System.Drawing.Size(0, 21);
             this.OrderPanel__TextOrder.TabIndex = 28;
             // 
-            // orderBindingSource2
-            // 
-            this.orderBindingSource2.DataMember = "Order";
-            this.orderBindingSource2.DataSource = this.dataSet1BindingSource;
-            // 
-            // dataSet1BindingSource
-            // 
-            this.dataSet1BindingSource.DataSource = this.dataSet1;
-            this.dataSet1BindingSource.Position = 0;
-            // 
-            // dataSet1
-            // 
-            this.dataSet1.DataSetName = "DataSet1";
-            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // orderBindingSource
-            // 
-            this.orderBindingSource.DataMember = "Order";
-            this.orderBindingSource.DataSource = this.dataSet1BindingSource;
-            // 
-            // orderBindingSource1
-            // 
-            this.orderBindingSource1.DataMember = "Order";
-            this.orderBindingSource1.DataSource = this.dataSet1BindingSource;
-            // 
             // файлToolStripMenuItem
             // 
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -342,8 +304,7 @@
             // настройкиToolStripMenuItem1
             // 
             this.настройкиToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.камераToolStripMenuItem,
-            this.путьСохраненияФайловToolStripMenuItem});
+            this.камераToolStripMenuItem});
             this.настройкиToolStripMenuItem1.Name = "настройкиToolStripMenuItem1";
             this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(79, 20);
             this.настройкиToolStripMenuItem1.Text = "Настройки";
@@ -351,16 +312,9 @@
             // камераToolStripMenuItem
             // 
             this.камераToolStripMenuItem.Name = "камераToolStripMenuItem";
-            this.камераToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.камераToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.камераToolStripMenuItem.Text = "Камера";
             this.камераToolStripMenuItem.Click += new System.EventHandler(this.КамераToolStripMenuItem_Click);
-            // 
-            // путьСохраненияФайловToolStripMenuItem
-            // 
-            this.путьСохраненияФайловToolStripMenuItem.Name = "путьСохраненияФайловToolStripMenuItem";
-            this.путьСохраненияФайловToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            this.путьСохраненияФайловToolStripMenuItem.Text = "Путь сохранения файлов";
-            this.путьСохраненияФайловToolStripMenuItem.Click += new System.EventHandler(this.ПутьСохраненияФайловToolStripMenuItem_Click);
             // 
             // оПрограммеToolStripMenuItem
             // 
@@ -403,11 +357,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ScreenView)).EndInit();
             this.OrderViewPanel.ResumeLayout(false);
             this.OrderViewPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -430,23 +379,16 @@
         private System.Windows.Forms.Label OrderPanel__TitleRoller;
         private System.Windows.Forms.Label OrderPanel__TitleOrder;
         private System.Windows.Forms.PictureBox ScreenView;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Panel OrderViewPanel;
         private System.Windows.Forms.Label OrderPanel__TextOrder;
         private System.Windows.Forms.Label OrderPanel__TextUser;
         private System.Windows.Forms.Label OrderPanel__TextOpreration;
         private System.Windows.Forms.Label OrderPanel__TextRoller;
-        private System.Windows.Forms.BindingSource orderBindingSource;
-        private System.Windows.Forms.BindingSource dataSet1BindingSource;
-        private DataSet1 dataSet1;
-        private System.Windows.Forms.BindingSource orderBindingSource1;
-        private System.Windows.Forms.BindingSource orderBindingSource2;
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem новыйЗаказToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem камераToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem путьСохраненияФайловToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
     }

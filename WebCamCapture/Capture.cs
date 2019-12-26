@@ -26,8 +26,8 @@ namespace WebCamCapture
         private List<string> listNameDevices;
         private List<string> listVideoModes;
         private string selectedDeviceName;
-        private int selectedDeviceIndex = 0;
-        private int selectedVideoMode;
+        private int deviceId = 0;
+        private int modeId;
         private string selectedFrameSize;
         Form forms;
 
@@ -50,11 +50,11 @@ namespace WebCamCapture
         /// <summary>
         /// Index выбранного устройстова. 
         /// </summary>
-        public int SelectedDeviceIndex { get => selectedDeviceIndex; set => selectedDeviceIndex = value; }
+        public int DeviceId { get => deviceId; set => deviceId = value; }
         /// <summary>
         /// Выбранный видеорежим (выбранное разрешение)
         /// </summary>
-        public int SelectedVideoMode { get => selectedVideoMode; set => selectedVideoMode = value; }
+        public int ModeId { get => modeId; set => modeId = value; }
         /// <summary>
         /// счетчик подключенных устройств.
         /// </summary>
@@ -76,39 +76,8 @@ namespace WebCamCapture
             if (videoDevices.Count > 0)
             {
                 this.UpdateListNameDevices();
-
-                // подключено ли выбранное устройство, имя которого получено из конфигураций, если да, selectedDeviceIndex будет хранить его системный индекс.
-                if (ListNameDevices.IndexOf(selectedDeviceName) != -1)
-                    selectedDeviceIndex = ListNameDevices.IndexOf(selectedDeviceName);
-
-                List<string> fSize = new List<string>();
-                videoSource = new VideoCaptureDevice(videoDevices[this.SelectedDeviceIndex].MonikerString);
-                // поддерживаемые режимы работы камеры (разрешение)
-                foreach (var s in videoSource.VideoCapabilities)
-                {
-                    // формируем строку типа 640 x 480
-                    fSize.Add(String.Format("{0} x {1}", s.FrameSize.Width, s.FrameSize.Height));
-                }
-                
-               
-                                
-                this.listVideoModes = fSize;
-
-
-                // поддерживает ли выбранное устройство размер када (разрешение), полученое из конфигураций пользователя.
-                if (ListVideoModes.IndexOf(selectedFrameSize) != -1)
-                {
-                    // устанавливаем текущий видеорежим равет режиму из настроек
-                    selectedVideoMode = ListVideoModes.IndexOf(selectedFrameSize);
-                }
-
-                videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
-                //
-                videoSource.VideoResolution = videoSource.VideoCapabilities[this.SelectedVideoMode];   
-
-
-
-                videoSource.Start();
+                this.UpdateListVideoModes(DeviceId);
+                this.Start(selectedDeviceName, selectedFrameSize);
                 return true;
             }
             else
@@ -118,16 +87,22 @@ namespace WebCamCapture
             }
 
         }
+
         /// <summary>
         /// Начинает захват видео 
         /// </summary>
-        /// <param name="dev">устройстово</param>
-        /// <param name="mod">разрешение</param>
-        internal void Start(int dev, int mod)
+        /// <param name="deviceName">Имя устройстова</param>
+        /// <param name="FrameSize">Размер кадра</param>
+        internal void Start(string DeviceName, string FrameSize)
         {
             this.Stop();
+            int dev = GetIndexByName(ListNameDevices, DeviceName);
+            int mod = GetIndexByName(ListVideoModes, FrameSize);
+            DeviceId = dev;
+            ModeId = mod;
+            videoSource = new VideoCaptureDevice(videoDevices[dev].MonikerString);
             videoSource.VideoResolution = videoSource.VideoCapabilities[mod];
-            //videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+            videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
             videoSource.Start();
         }
 
@@ -195,8 +170,8 @@ namespace WebCamCapture
         public void SaveConfig()
         {
             // Получаем имя устройства по его индексу
-            this.selectedDeviceName = this.listNameDevices[selectedDeviceIndex]; // так не годится!!!
-            this.selectedFrameSize = this.ListVideoModes[SelectedVideoMode];
+            this.selectedDeviceName = this.listNameDevices[deviceId]; // так не годится!!!
+            this.selectedFrameSize = this.ListVideoModes[ModeId];
 
             Properties.Settings.Default.SelectedFrameSize = this.selectedFrameSize;
 
@@ -234,6 +209,7 @@ namespace WebCamCapture
         {
             forms.Invoke((MethodInvoker)(() =>
             {
+                videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
                 if (videoSource != null)
                 {
                     videoSource.SignalToStop();
@@ -242,27 +218,5 @@ namespace WebCamCapture
             }));
         }
 
-        /// <summary>
-        /// Смена разрешения захвата
-        /// </summary>
-        public void ChangeModeCapture(int mode)
-        {
-          
-            try
-            {
-                if (this.SelectedVideoMode != mode)
-                {
-                    this.SelectedVideoMode = mode;
-                    this.Stop();
-                    videoSource.VideoResolution = videoSource.VideoCapabilities[this.SelectedVideoMode];
-                    videoSource.Start();
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-
-        }
     }
 }

@@ -21,25 +21,19 @@ namespace WebCamCapture
         
         private void SettingDevice_Load(object sender, EventArgs e)
         {
+            folderBrowserDialog1.SelectedPath = Properties.Settings.Default.FileDir;
+            SettinAppPanel__FileDirView.Text = folderBrowserDialog1.SelectedPath;
             capture.UpdateListNameDevices();
             if (capture.DevicesCounter > 0)
             {
                 ListCaptureDevices.Items.AddRange(capture.ListNameDevices.ToArray());
-                ListCaptureDevices.SelectedIndex = capture.SelectedDeviceIndex;
+                ListCaptureDevices.SelectedIndex = capture.DeviceId;
             }
 
             ListCaptutreModes.Items.Clear();
             capture.UpdateListVideoModes(ListCaptureDevices.SelectedIndex);
             ListCaptutreModes.Items.AddRange(capture.ListVideoModes.ToArray());
-        }
-        /// <summary>
-        /// выбор разрешения захвата видео из выподающего списка ListCaptutreModes
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ListCaptutreModes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // возможно не нужен
+            ListCaptutreModes.SelectedIndex = capture.ModeId;     
         }
 
         /// <summary>
@@ -55,29 +49,35 @@ namespace WebCamCapture
             ListCaptutreModes.Items.AddRange(capture.ListVideoModes.ToArray());
         }
 
-        private int dev;
+        private string dev;
         private int mod;
 
-        public int Dev { get => dev; set => dev = value; }
+        public string Dev { get => dev; set => dev = value; }
         public int Mod { get => mod; set => mod = value; }
 
-        /// <summary>
-        /// Применить настройки захвата и начать захват видео
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
+
         private void BtnOkSettingDev_Click(object sender, EventArgs e)
         {
-            // проверить доступность выбранного устройства и режима захвата
-            // 
-            //capture.ValidDevice(dev, mode);
-            dev = capture.GetIndexByName(capture.ListNameDevices, ListCaptureDevices.SelectedItem.ToString());
-            mod = capture.GetIndexByName(capture.ListVideoModes, ListCaptutreModes.SelectedItem.ToString());
-
+            dev = ListCaptureDevices.SelectedItem.ToString();
+            mod = ListCaptutreModes.SelectedIndex;
         }
 
-        private void SettingAppPanel__BtnOk_Click(object sender, EventArgs e)
+        private void SettingAppPanel__DirOkBtn_Click(object sender, EventArgs e)
         {
+            
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+
+                SettinAppPanel__FileDirView.Text = folderBrowserDialog1.SelectedPath;
+                Properties.Settings.Default.FileDir = folderBrowserDialog1.SelectedPath;
+                //Properties.Settings.Default.Save();
+            }
+        }
+
+        private void ListCaptutreModes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //capture.ModeId = ListCaptutreModes.SelectedIndex;
             
         }
     }
