@@ -46,14 +46,8 @@ namespace WebCamCapture
             // инициализация, проверка наличия подключенных камер.
             if (wcc.init(CamView,this))
             {
-                //ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
-
-                //ListCaptutreModes.Items.AddRange(wcc.ListVideoModes.ToArray());
-               // ListCaptutreModes.SelectedIndex = wcc.SelectedVideoMode;
-
                 btnScreenCapture.Enabled = true;
                 wcc.UpdateListNameDevices();
-                //ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
             }
             // wcc.UpdateListNameDevices();
             //SettinAppPanel__FileDirView.Text = Properties.Settings.Default.FileDir;
@@ -98,46 +92,14 @@ namespace WebCamCapture
         ///
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            wcc.SaveConfig();
-            wcc.Stop();
-            
-        }
-
-
-        // Обновляет список устройств
-        private void ListCaptureDevices_MouseDown(object sender, MouseEventArgs e)
-        {
-            wcc.UpdateListNameDevices();
-            if (wcc.DevicesCounter > 0)
+            if (wcc.DevicesConnectedStatus)
             {
-                this.EnableDeviceControl = true;
-               // ListCaptureDevices.Items.Clear();
-               // ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
-               // ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
+                wcc.SaveConfig();
+                wcc.Stop();
             }
-            else
-            {
-                this.EnableDeviceControl = false;
-               // ListCaptureDevices.Items.Clear();
-            }
-
-            // если устройства не подключены, отключаем контролы управления устройствами
-
-
-
-            //ListCaptureDevices.Items.Clear();
-            //ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
-            //ListCaptureDevices.Items.AddRange(wcc.ListNameDevices.ToArray());
-            //ListCaptureDevices.SelectedIndex = wcc.SelectedDeviceIndex;
-
+     
         }
-       
-        private void ListCaptureDevices_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-           // wcc.ChangeModeCapture(ListCaptutreModes.SelectedIndex);
-           // wcc.SelectedDeviceIndex = ListCaptureDevices.SelectedIndex;
-            
-        }
+
 
         private void Button1_Click(object sender, EventArgs e)
         {
@@ -181,16 +143,14 @@ namespace WebCamCapture
             
         }
 
-
-        private void НастройкиToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("fdf", "gffg",MessageBoxButtons.YesNo);
-        }
-
         private void КамераToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SettingForm settingDev = new SettingForm();
-            settingDev.Mod = wcc.ModeId;
+
+            //settingDev.btnOkSettingDev.Enabled = false;
+            settingDev.ListCaptureDevices.SelectedIndex = wcc.DeviceId;
+            settingDev.ListCaptutreModes.SelectedIndex = wcc.ModeId;
+
             if (settingDev.ShowDialog() == DialogResult.OK)
             {
                 
@@ -225,11 +185,6 @@ namespace WebCamCapture
                  
         }
 
-
-        private void btnFileDirOk_Click(object sender, EventArgs e)
-        {
-            
-        }
         ListViewItem item;
         private void photoGalleraya_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
         {

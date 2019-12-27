@@ -24,16 +24,17 @@ namespace WebCamCapture
             folderBrowserDialog1.SelectedPath = Properties.Settings.Default.FileDir;
             SettinAppPanel__FileDirView.Text = folderBrowserDialog1.SelectedPath;
             capture.UpdateListNameDevices();
-            if (capture.DevicesCounter > 0)
+            if (capture.DevicesConnectedStatus)
             {
                 ListCaptureDevices.Items.AddRange(capture.ListNameDevices.ToArray());
                 ListCaptureDevices.SelectedIndex = capture.DeviceId;
+                ListCaptutreModes.Items.Clear();
+                capture.UpdateListVideoModes(ListCaptureDevices.SelectedIndex);
+                ListCaptutreModes.Items.AddRange(capture.ListVideoModes.ToArray());
+                ListCaptutreModes.SelectedIndex = capture.ModeId;
             }
 
-            ListCaptutreModes.Items.Clear();
-            capture.UpdateListVideoModes(ListCaptureDevices.SelectedIndex);
-            ListCaptutreModes.Items.AddRange(capture.ListVideoModes.ToArray());
-            ListCaptutreModes.SelectedIndex = capture.ModeId;     
+            
         }
 
         /// <summary>
@@ -50,17 +51,17 @@ namespace WebCamCapture
         }
 
         private string dev;
-        private int mod;
+        private string mod;
 
         public string Dev { get => dev; set => dev = value; }
-        public int Mod { get => mod; set => mod = value; }
+        public string Mod { get => mod; set => mod = value; }
 
 
 
         private void BtnOkSettingDev_Click(object sender, EventArgs e)
         {
             dev = ListCaptureDevices.SelectedItem.ToString();
-            mod = ListCaptutreModes.SelectedIndex;
+            mod = ListCaptutreModes.SelectedItem.ToString();
         }
 
         private void SettingAppPanel__DirOkBtn_Click(object sender, EventArgs e)

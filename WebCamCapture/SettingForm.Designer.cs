@@ -236,12 +236,12 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox ListCaptureDevices;
-        private System.Windows.Forms.ComboBox ListCaptutreModes;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox SettinAppPanel__FileDirView;
         private System.Windows.Forms.Button SettingAppPanel__DirOkBtn;
-        private System.Windows.Forms.Button btnOkSettingDev;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        public System.Windows.Forms.Button btnOkSettingDev;
+        public System.Windows.Forms.ComboBox ListCaptureDevices;
+        public System.Windows.Forms.ComboBox ListCaptutreModes;
     }
 }

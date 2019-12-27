@@ -35,7 +35,7 @@ namespace WebCamCapture
         {
             // Имя выбранного устройства из пользовтельских конфигураций, на момент завершения программы.
             selectedDeviceName = Properties.Settings.Default.SelectedDeviceName;
-            // Текстовое предстовление размера кадра, в конфигурациях пользователя
+            // Текстовое предстовление размера кадра, в конфигурациях пользователя (640 x 480)
             selectedFrameSize = Properties.Settings.Default.SelectedFrameSize;
         }
 
@@ -48,17 +48,17 @@ namespace WebCamCapture
         /// </summary>
         public List<string> ListVideoModes { get => listVideoModes; }
         /// <summary>
-        /// Index выбранного устройстова. 
+        /// Идентификатор выбранного устройстова. 
         /// </summary>
         public int DeviceId { get => deviceId; set => deviceId = value; }
         /// <summary>
-        /// Выбранный видеорежим (выбранное разрешение)
+        /// Идентификатор выбранного видеорежима (выбранное разрешение)
         /// </summary>
         public int ModeId { get => modeId; set => modeId = value; }
         /// <summary>
-        /// счетчик подключенных устройств.
+        /// Подклечены ли устройства?
         /// </summary>
-        public int DevicesCounter { get; private set; }
+        public bool DevicesConnectedStatus { get; private set; }
 
 
 
@@ -73,7 +73,7 @@ namespace WebCamCapture
             camView = cv;
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
-            if (videoDevices.Count > 0)
+            if (this.UpdateListNameDevices())
             {
                 this.UpdateListNameDevices();
                 this.UpdateListVideoModes(DeviceId);
@@ -133,28 +133,18 @@ namespace WebCamCapture
         public bool UpdateListNameDevices()
         {
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            this.DevicesCounter = videoDevices.Count;
+            
             // заполняем список именами подклюен
             List<string>  list = new List<string>();
             foreach (FilterInfo device in videoDevices)
             {
                 list.Add(device.Name);
             }
-            // Первый старт. Инициализация listNameDevices списком подключенных устройств. Происходит при старте программы
-            // с подключенным устройстовом, либо устройстово было подключено во время работы программы. Или старый список равен новому 
-            if (this.ListNameDevices == null)
-            {
-                listNameDevices = list;
-                return true;
-            }
-            // Обновление списка. Новый список не равен предидущему.Устройство было отключено или подключено, обновляем список listNameDevices
-            if (!list.SequenceEqual<string>(listNameDevices))
-            {
-                listNameDevices = list;
-               
-                return true;
-            }
-            return false;
+
+            listNameDevices = list;
+                
+            this.DevicesConnectedStatus = videoDevices.Count > 0 ? true : false;
+            return DevicesConnectedStatus;
         }
         /// <summary>
         /// получаем индекс выбранного элемента по его имени, если элемент не обнаружен то возращаем 0.
