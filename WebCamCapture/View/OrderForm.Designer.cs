@@ -1,4 +1,4 @@
-﻿namespace WebCamCapture
+﻿namespace WebCamCapture.View
 {
     partial class OrderForm
     {

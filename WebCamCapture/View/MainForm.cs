@@ -16,7 +16,7 @@ using System.Windows.Forms;
 using AForge.Video;
 using AForge.Video.DirectShow;
 
-namespace WebCamCapture
+namespace WebCamCapture.View
 {
     public partial class MainForm : Form
     {

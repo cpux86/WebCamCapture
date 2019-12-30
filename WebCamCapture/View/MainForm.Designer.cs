@@ -1,4 +1,4 @@
-﻿namespace WebCamCapture
+﻿namespace WebCamCapture.View
 {
     partial class MainForm
     {
@@ -101,7 +101,7 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.btnOrderEdit);
             this.panel1.Controls.Add(this.photoGalleraya);
@@ -127,7 +127,7 @@
             // 
             // photoGalleraya
             // 
-            this.photoGalleraya.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.photoGalleraya.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.photoGalleraya.BackColor = System.Drawing.SystemColors.Window;
             this.photoGalleraya.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -211,8 +211,8 @@
             // 
             // ScreenView
             // 
-            this.ScreenView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.ScreenView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ScreenView.BackColor = System.Drawing.Color.Black;
             this.ScreenView.Location = new System.Drawing.Point(8, 22);
@@ -224,7 +224,7 @@
             // 
             // OrderViewPanel
             // 
-            this.OrderViewPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.OrderViewPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.OrderViewPanel.BackColor = System.Drawing.SystemColors.Control;
             this.OrderViewPanel.Controls.Add(this.OrderPanel__TextUser);

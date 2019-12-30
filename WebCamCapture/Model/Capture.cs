@@ -17,7 +17,7 @@ namespace WebCamCapture
     /// <summary>
     /// Робота с web камерой, сознаие и сохнанение снимков
     /// </summary>
-    public class Capture : MainForm
+    public class Capture
     {
 
         private FilterInfoCollection videoDevices;

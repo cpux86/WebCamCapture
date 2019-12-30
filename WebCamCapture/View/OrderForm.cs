@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebCamCapture
+namespace WebCamCapture.View
 {
-    public partial class OrderForm : Form
+    public partial class OrderForm : Form, IOrderView
     {
         //string order; // заказ
         //string roller; // ролик
