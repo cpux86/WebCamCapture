@@ -16,7 +16,10 @@ namespace WebCamCapture
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new View.MainForm());
+            var view = new View.MainForm();
+            var presenter = new Presenter.MainPresenter(view);
+            Application.Run(view);
+
         }
     }
 }

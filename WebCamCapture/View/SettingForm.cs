@@ -12,28 +12,13 @@ namespace WebCamCapture
 {
     public partial class SettingForm : Form
     {
-        Capture capture;
         public SettingForm()
         {
             InitializeComponent();
-            capture = new Capture();
         }
         
         private void SettingDevice_Load(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = Properties.Settings.Default.FileDir;
-            SettinAppPanel__FileDirView.Text = folderBrowserDialog1.SelectedPath;
-            capture.UpdateListNameDevices();
-            if (capture.DevicesConnectedStatus)
-            {
-                ListCaptureDevices.Items.AddRange(capture.ListNameDevices.ToArray());
-                ListCaptureDevices.SelectedIndex = capture.DeviceId;
-                ListCaptutreModes.Items.Clear();
-                capture.UpdateListVideoModes(ListCaptureDevices.SelectedIndex);
-                ListCaptutreModes.Items.AddRange(capture.ListVideoModes.ToArray());
-                ListCaptutreModes.SelectedIndex = capture.ModeId;
-            }
-
             
         }
 
@@ -44,10 +29,7 @@ namespace WebCamCapture
         /// <param name="e"></param>
         private void ListCaptureDevices_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListCaptutreModes.Items.Clear();
-            capture.UpdateListVideoModes(ListCaptureDevices.SelectedIndex);
-            // заполняем список доступных разрешений 
-            ListCaptutreModes.Items.AddRange(capture.ListVideoModes.ToArray());
+            
         }
 
         private string dev;

@@ -12,12 +12,12 @@ using System.Windows.Forms;
 using AForge.Video;
 using AForge.Video.DirectShow;
 
-namespace WebCamCapture
+namespace WebCamCapture.Model
 {
     /// <summary>
     /// Робота с web камерой, сознаие и сохнанение снимков
     /// </summary>
-    public class Capture
+    public class Capture : ICapture
     {
 
         private FilterInfoCollection videoDevices;
@@ -93,7 +93,7 @@ namespace WebCamCapture
         /// </summary>
         /// <param name="deviceName">Имя устройстова</param>
         /// <param name="FrameSize">Размер кадра</param>
-        internal void Start(string DeviceName, string FrameSize)
+        public void Start(string DeviceName, string FrameSize)
         {
             this.Stop();
             int dev = GetIndexByName(ListNameDevices, DeviceName);
@@ -187,6 +187,7 @@ namespace WebCamCapture
                     camView.Image = null;
 
                 }
+                eventArgs.Frame.RotateFlip(RotateFlipType.Rotate180FlipY);
                 camView.Image = (Bitmap)eventArgs.Frame.Clone();
                 camView.Image.RotateFlip(RotateFlipType.Rotate180FlipY);
             }));
