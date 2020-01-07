@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WebCamCapture
+namespace WebCamCapture.View
 {
     public partial class SettingForm : Form
     {
@@ -42,8 +42,7 @@ namespace WebCamCapture
 
         private void BtnOkSettingDev_Click(object sender, EventArgs e)
         {
-            dev = ListCaptureDevices.SelectedItem.ToString();
-            mod = ListCaptutreModes.SelectedItem.ToString();
+
         }
 
         private void SettingAppPanel__DirOkBtn_Click(object sender, EventArgs e)

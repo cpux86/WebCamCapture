@@ -1,4 +1,4 @@
-﻿namespace WebCamCapture
+﻿namespace WebCamCapture.View
 {
     partial class SettingForm
     {
@@ -33,8 +33,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.ListCaptureDevices = new System.Windows.Forms.ComboBox();
-            this.ListCaptutreModes = new System.Windows.Forms.ComboBox();
+            this.deviceList = new System.Windows.Forms.ComboBox();
+            this.modesList = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.SettinAppPanel__FileDirView = new System.Windows.Forms.TextBox();
             this.SettingAppPanel__DirOkBtn = new System.Windows.Forms.Button();
@@ -79,8 +79,8 @@
             // 
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.ListCaptureDevices);
-            this.groupBox2.Controls.Add(this.ListCaptutreModes);
+            this.groupBox2.Controls.Add(this.deviceList);
+            this.groupBox2.Controls.Add(this.modesList);
             this.groupBox2.Location = new System.Drawing.Point(7, 69);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(317, 75);
@@ -114,33 +114,33 @@
             this.label1.Text = "Источник";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ListCaptureDevices
+            // deviceList
             // 
-            this.ListCaptureDevices.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.deviceList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.ListCaptureDevices.DisplayMember = "5";
-            this.ListCaptureDevices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ListCaptureDevices.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ListCaptureDevices.FormattingEnabled = true;
-            this.ListCaptureDevices.Location = new System.Drawing.Point(6, 35);
-            this.ListCaptureDevices.Name = "ListCaptureDevices";
-            this.ListCaptureDevices.Size = new System.Drawing.Size(155, 23);
-            this.ListCaptureDevices.TabIndex = 15;
+            this.deviceList.DisplayMember = "5";
+            this.deviceList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.deviceList.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deviceList.FormattingEnabled = true;
+            this.deviceList.Location = new System.Drawing.Point(6, 35);
+            this.deviceList.Name = "deviceList";
+            this.deviceList.Size = new System.Drawing.Size(155, 23);
+            this.deviceList.TabIndex = 15;
             // 
-            // ListCaptutreModes
+            // modesList
             // 
-            this.ListCaptutreModes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.modesList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.ListCaptutreModes.BackColor = System.Drawing.SystemColors.Window;
-            this.ListCaptutreModes.DisplayMember = "5";
-            this.ListCaptutreModes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ListCaptutreModes.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ListCaptutreModes.FormattingEnabled = true;
-            this.ListCaptutreModes.Location = new System.Drawing.Point(168, 35);
-            this.ListCaptutreModes.Name = "ListCaptutreModes";
-            this.ListCaptutreModes.Size = new System.Drawing.Size(130, 23);
-            this.ListCaptutreModes.TabIndex = 14;
-            this.ListCaptutreModes.SelectedIndexChanged += new System.EventHandler(this.ListCaptutreModes_SelectedIndexChanged);
+            this.modesList.BackColor = System.Drawing.SystemColors.Window;
+            this.modesList.DisplayMember = "5";
+            this.modesList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.modesList.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modesList.FormattingEnabled = true;
+            this.modesList.Location = new System.Drawing.Point(168, 35);
+            this.modesList.Name = "modesList";
+            this.modesList.Size = new System.Drawing.Size(130, 23);
+            this.modesList.TabIndex = 14;
+            this.modesList.SelectedIndexChanged += new System.EventHandler(this.ListCaptutreModes_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -241,7 +241,7 @@
         private System.Windows.Forms.Button SettingAppPanel__DirOkBtn;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         public System.Windows.Forms.Button btnOkSettingDev;
-        public System.Windows.Forms.ComboBox ListCaptureDevices;
-        public System.Windows.Forms.ComboBox ListCaptutreModes;
+        public System.Windows.Forms.ComboBox deviceList;
+        public System.Windows.Forms.ComboBox modesList;
     }
 }

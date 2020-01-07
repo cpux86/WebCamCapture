@@ -23,39 +23,43 @@ namespace WebCamCapture.View
         public MainForm()
         {
             InitializeComponent();
+            makeSnapshotBtn.Click += (sender, args) => invoke(MakeSnapshot);
+            showSettingBtn.Click += (sender, arges) => invoke(ShowSettingForm);
         }
-
-        Image IMainView.ScreenView { get => ScreenView.Image; set => ScreenView.Image = value; }
 
         public string OrderNumber { set => OrderPanel__TextOrder.Text = value; }
         public string RollerNumber { set => OrderPanel__TextRoller.Text = value; }
         public string ActionNumber { set => OrderPanel__TextOpreration.Text = value; }
         public string OperatorFullName { set => OrderPanel__OperatorFullName.Text = value; }
 
-        public event EventHandler ScreenCapture;
-        
-        public Form GetContext { get => this; } 
+        public event Action MakeSnapshot;
+        public event Action ShowSettingForm;
 
-        private void btnScreenCapture_Click(object sender, EventArgs e)
+        public Form GetContext { get => this; }
+
+        public Image ShowSnapshot
         {
-            btnScreenCapture.Click += BtnScreenCapture_Click;
+            set => Invoke((MethodInvoker)(() =>
+            {
+                snapshotView.Image = value;
+            }));
         }
 
-        private void BtnScreenCapture_Click(object sender, EventArgs e)
+        public void ShowNewFrame(Image frame)
         {
-            throw new NotImplementedException();
+            videoView.Image = frame;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ScreenCapture.Invoke(sender, e);
-        }
 
-        public void ViewFrame()
+
+        private void invoke(Action action)
         {
-            
+            if (action != null)
+            {
+                action();
+            }
         }
     }
 
-    
+
 }

@@ -10,7 +10,6 @@ namespace WebCamCapture.View
 {
     interface IMainView
     {
-        Image ScreenView { get; set; }
         /// <summary>
         /// Номер заказа
         /// </summary>
@@ -27,14 +26,25 @@ namespace WebCamCapture.View
         /// Исполнитель Ф.И.О
         /// </summary>
         string OperatorFullName { set; }
+
         /// <summary>
-        /// Возникает при клике по кнопке создания Скриншота
+        /// Возникает при щелчке по кнопке создания снимка
         /// </summary>
-        event EventHandler ScreenCapture;
+        event Action MakeSnapshot;
+
+        /// <summary>
+        /// Возникает при клике на кнопку Настройки
+        /// </summary>
+        event Action ShowSettingForm;
+
         Form GetContext { get; }
         /// <summary>
-        /// Отобразить кадр
+        /// Отобразить новый кадр
         /// </summary>
-        void ViewFrame();
+        void ShowNewFrame(Image frame);
+        /// <summary>
+        /// Показать захваченный снимок
+        /// </summary>
+        Image ShowSnapshot { set; }
     }
 }

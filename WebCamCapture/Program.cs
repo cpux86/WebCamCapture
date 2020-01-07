@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LightInject;
 
 namespace WebCamCapture
 {
@@ -17,9 +18,11 @@ namespace WebCamCapture
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var view = new View.MainForm();
-            var presenter = new Presenter.MainPresenter(view);
+            var pleer = new Model.Pleer();
+            var presenter = new Presenter.MainPresenter(view, pleer);
             Application.Run(view);
-
+           
         }
+
     }
 }

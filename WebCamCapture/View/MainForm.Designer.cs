@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.btnScreenCapture = new System.Windows.Forms.Button();
+            this.makeSnapshotBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.CamView = new System.Windows.Forms.PictureBox();
+            this.videoView = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnOrderEdit = new System.Windows.Forms.Button();
             this.photoGalleraya = new System.Windows.Forms.ListView();
@@ -42,7 +42,7 @@
             this.OrderPanel__TitleOpreration = new System.Windows.Forms.Label();
             this.OrderPanel__TitleRoller = new System.Windows.Forms.Label();
             this.OrderPanel__TitleOrder = new System.Windows.Forms.Label();
-            this.ScreenView = new System.Windows.Forms.PictureBox();
+            this.snapshotView = new System.Windows.Forms.PictureBox();
             this.OrderViewPanel = new System.Windows.Forms.Panel();
             this.OrderPanel__OperatorFullName = new System.Windows.Forms.Label();
             this.OrderPanel__TextOpreration = new System.Windows.Forms.Label();
@@ -52,30 +52,28 @@
             this.новыйЗаказToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.камераToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showSettingBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            ((System.ComponentModel.ISupportInitialize)(this.CamView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.videoView)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ScreenView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.snapshotView)).BeginInit();
             this.OrderViewPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnScreenCapture
+            // makeSnapshotBtn
             // 
-            this.btnScreenCapture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnScreenCapture.Enabled = false;
-            this.btnScreenCapture.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnScreenCapture.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnScreenCapture.ForeColor = System.Drawing.Color.Black;
-            this.btnScreenCapture.Location = new System.Drawing.Point(7, 17);
-            this.btnScreenCapture.Name = "btnScreenCapture";
-            this.btnScreenCapture.Size = new System.Drawing.Size(141, 30);
-            this.btnScreenCapture.TabIndex = 3;
-            this.btnScreenCapture.Text = "СКРИНШОТ";
-            this.btnScreenCapture.UseVisualStyleBackColor = true;
-            this.btnScreenCapture.Click += new System.EventHandler(this.btnScreenCapture_Click);
+            this.makeSnapshotBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.makeSnapshotBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.makeSnapshotBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.makeSnapshotBtn.ForeColor = System.Drawing.Color.Black;
+            this.makeSnapshotBtn.Location = new System.Drawing.Point(7, 17);
+            this.makeSnapshotBtn.Name = "makeSnapshotBtn";
+            this.makeSnapshotBtn.Size = new System.Drawing.Size(141, 30);
+            this.makeSnapshotBtn.TabIndex = 3;
+            this.makeSnapshotBtn.Text = "Снимок";
+            this.makeSnapshotBtn.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -86,18 +84,17 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "TEST";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // CamView
+            // videoView
             // 
-            this.CamView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CamView.BackColor = System.Drawing.Color.Black;
-            this.CamView.Location = new System.Drawing.Point(590, 22);
-            this.CamView.Name = "CamView";
-            this.CamView.Size = new System.Drawing.Size(350, 246);
-            this.CamView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.CamView.TabIndex = 1;
-            this.CamView.TabStop = false;
+            this.videoView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.videoView.BackColor = System.Drawing.Color.Black;
+            this.videoView.Location = new System.Drawing.Point(590, 22);
+            this.videoView.Name = "videoView";
+            this.videoView.Size = new System.Drawing.Size(350, 246);
+            this.videoView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.videoView.TabIndex = 1;
+            this.videoView.TabStop = false;
             // 
             // panel1
             // 
@@ -105,7 +102,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.btnOrderEdit);
             this.panel1.Controls.Add(this.photoGalleraya);
-            this.panel1.Controls.Add(this.btnScreenCapture);
+            this.panel1.Controls.Add(this.makeSnapshotBtn);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Location = new System.Drawing.Point(590, 263);
             this.panel1.Name = "panel1";
@@ -205,18 +202,18 @@
             this.OrderPanel__TitleOrder.TabIndex = 24;
             this.OrderPanel__TitleOrder.Text = "ЗАКАЗ №:";
             // 
-            // ScreenView
+            // snapshotView
             // 
-            this.ScreenView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.snapshotView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ScreenView.BackColor = System.Drawing.Color.Black;
-            this.ScreenView.Location = new System.Drawing.Point(8, 22);
-            this.ScreenView.Name = "ScreenView";
-            this.ScreenView.Size = new System.Drawing.Size(576, 442);
-            this.ScreenView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ScreenView.TabIndex = 9;
-            this.ScreenView.TabStop = false;
+            this.snapshotView.BackColor = System.Drawing.Color.Black;
+            this.snapshotView.Location = new System.Drawing.Point(8, 22);
+            this.snapshotView.Name = "snapshotView";
+            this.snapshotView.Size = new System.Drawing.Size(576, 442);
+            this.snapshotView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.snapshotView.TabIndex = 9;
+            this.snapshotView.TabStop = false;
             // 
             // OrderViewPanel
             // 
@@ -300,16 +297,16 @@
             // настройкиToolStripMenuItem1
             // 
             this.настройкиToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.камераToolStripMenuItem});
+            this.showSettingBtn});
             this.настройкиToolStripMenuItem1.Name = "настройкиToolStripMenuItem1";
             this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(79, 20);
             this.настройкиToolStripMenuItem1.Text = "Настройки";
             // 
-            // камераToolStripMenuItem
+            // showSettingBtn
             // 
-            this.камераToolStripMenuItem.Name = "камераToolStripMenuItem";
-            this.камераToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
-            this.камераToolStripMenuItem.Text = "Камера";
+            this.showSettingBtn.Name = "showSettingBtn";
+            this.showSettingBtn.Size = new System.Drawing.Size(180, 22);
+            this.showSettingBtn.Text = "Камера";
             // 
             // оПрограммеToolStripMenuItem
             // 
@@ -335,19 +332,19 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 627);
-            this.Controls.Add(this.ScreenView);
+            this.Controls.Add(this.snapshotView);
+            this.Controls.Add(this.videoView);
             this.Controls.Add(this.OrderViewPanel);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.CamView);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebCamCapture";
-            ((System.ComponentModel.ISupportInitialize)(this.CamView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.videoView)).EndInit();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ScreenView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.snapshotView)).EndInit();
             this.OrderViewPanel.ResumeLayout(false);
             this.OrderViewPanel.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -358,9 +355,9 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btnScreenCapture;
+        private System.Windows.Forms.Button makeSnapshotBtn;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.PictureBox CamView;
+        private System.Windows.Forms.PictureBox videoView;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ListView photoGalleraya;
         private System.Windows.Forms.ColumnHeader columnHeader1;
@@ -371,7 +368,7 @@
         private System.Windows.Forms.Label OrderPanel__TitleOpreration;
         private System.Windows.Forms.Label OrderPanel__TitleRoller;
         private System.Windows.Forms.Label OrderPanel__TitleOrder;
-        private System.Windows.Forms.PictureBox ScreenView;
+        private System.Windows.Forms.PictureBox snapshotView;
         private System.Windows.Forms.Panel OrderViewPanel;
         private System.Windows.Forms.Label OrderPanel__TextOrder;
         private System.Windows.Forms.Label OrderPanel__OperatorFullName;
@@ -381,7 +378,7 @@
         private System.Windows.Forms.ToolStripMenuItem новыйЗаказToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem камераToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showSettingBtn;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
     }
