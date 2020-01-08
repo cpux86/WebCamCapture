@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WebCamCapture.Model;
 
 namespace WebCamCapture.View
 {
-    interface IMainView
+    interface IMainView : IView
     {
         /// <summary>
         /// Номер заказа

@@ -10,7 +10,7 @@ using WebCamCapture.View;
 
 namespace WebCamCapture.Presenter
 {
-    class MainPresenter
+    class MainPresenter : BasePresenter
     {
         private readonly IMainView _view;
         private readonly IPleer _pleer;
@@ -25,10 +25,16 @@ namespace WebCamCapture.Presenter
             view.MakeSnapshot += View_MakeSnapshot;
             _view.ShowSettingForm += View_ShowSettingForm;
             _pleer.NewFrame += _Pleer_NewFrame;
-
+            _pleer.ChangeDeviceId += Pleer_ChangeDeviceId;
             view.GetContext.FormClosing += GetContext_FormClosing;
             
         }
+
+        private void Pleer_ChangeDeviceId(int x)
+        {
+            //MessageBox.Show(String.Format("Устройство {0} изменилось!", x.ToString()));
+        }
+
         private void GetContext_FormClosing(object sender, FormClosingEventArgs e)
         {
             _view.GetContext.Invoke((MethodInvoker)(() => {
@@ -45,7 +51,7 @@ namespace WebCamCapture.Presenter
         {
             _pleer.NewFrame -= Snapshot;
             // подписываемся на захват одного кадра
-            _pleer.NewFrame += Snapshot; 
+            _pleer.NewFrame += Snapshot;
         }
         /// <summary>
         /// Обработчик кадра полученного из модели
@@ -68,13 +74,16 @@ namespace WebCamCapture.Presenter
             _view.ShowSnapshot = snapshot;
             _pleer.NewFrame -= Snapshot;           
         }
+        
         /// <summary>
         /// Отобразить форму Настройки
         /// </summary>
         private void View_ShowSettingForm()
         {
-            var f = new SettingForm();
-            f.ShowDialog();
+
+            //f.ShowDialog();
+            //_view.Show();
+
         }
     }
 }

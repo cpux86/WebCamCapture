@@ -25,6 +25,7 @@ namespace WebCamCapture.View
             InitializeComponent();
             makeSnapshotBtn.Click += (sender, args) => invoke(MakeSnapshot);
             showSettingBtn.Click += (sender, arges) => invoke(ShowSettingForm);
+            
         }
 
         public string OrderNumber { set => OrderPanel__TextOrder.Text = value; }

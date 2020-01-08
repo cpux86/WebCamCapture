@@ -46,6 +46,8 @@ namespace WebCamCapture.Model
         /// Новый кадр
         /// </summary>
         event Action<Image> NewFrame;
+        event Action<int> ChangeDeviceId;
+        event Action ChangeModId;
 
 
     }

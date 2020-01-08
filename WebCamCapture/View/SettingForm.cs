@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace WebCamCapture.View
 {
-    public partial class SettingForm : Form
+    public partial class SettingForm : Form, ISetting
     {
         public SettingForm()
         {
@@ -35,6 +35,8 @@ namespace WebCamCapture.View
         private string dev;
         private string mod;
 
+        public event Action SettingOk;
+
         public string Dev { get => dev; set => dev = value; }
         public string Mod { get => mod; set => mod = value; }
 
@@ -42,7 +44,8 @@ namespace WebCamCapture.View
 
         private void BtnOkSettingDev_Click(object sender, EventArgs e)
         {
-
+            SettingOk();
+            this.Close();
         }
 
         private void SettingAppPanel__DirOkBtn_Click(object sender, EventArgs e)

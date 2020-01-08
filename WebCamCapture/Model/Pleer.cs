@@ -31,10 +31,13 @@ namespace WebCamCapture.Model
         private Image _frame;
 
         public event Action<Image> NewFrame;
+        public event Action<int> ChangeDeviceId;
+        public event Action ChangeModId;
 
         public Pleer()
         {
             init();
+            
         }
 
         /// <summary>
@@ -102,6 +105,7 @@ namespace WebCamCapture.Model
             videoSource.VideoResolution = videoSource.VideoCapabilities[mod];
             videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
             videoSource.Start();
+            
         }
 
         /// <summary>
@@ -132,6 +136,7 @@ namespace WebCamCapture.Model
         /// <returns>Возращает TRUE если список был изменен</returns>
         public bool UpdateListNameDevices()
         {
+            
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
             // заполняем список именами подклюен
@@ -181,6 +186,7 @@ namespace WebCamCapture.Model
             eventArgs.Frame.RotateFlip(RotateFlipType.Rotate180FlipY);
             _frame = (Bitmap)eventArgs.Frame.Clone();
             NewFrame(_frame);
+           
         }
 
         /// <summary>
@@ -195,6 +201,7 @@ namespace WebCamCapture.Model
                 videoSource.SignalToStop();
                 videoSource.WaitForStop();
                 videoSource.Stop();
+                ChangeDeviceId(1);
             }
 
         }
