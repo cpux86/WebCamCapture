@@ -11,7 +11,6 @@ namespace WebCamCapture
     static class Program
     {
         static Model.Pleer pleer;
-        static SettingForm setting;
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>

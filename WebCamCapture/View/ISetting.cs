@@ -9,5 +9,9 @@ namespace WebCamCapture.View
     interface ISetting
     {
         event Action SettingOk;
+        int DeviceIndex { get; set; }
+        int ModeIndex { get; set; }
+        string[] DeviceList { set; }
+        string[] ModesList { set; }
     }
 }

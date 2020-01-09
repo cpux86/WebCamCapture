@@ -15,12 +15,9 @@ namespace WebCamCapture.View
         public SettingForm()
         {
             InitializeComponent();
+            btnOkSettingDev.Click += BtnOkSettingDev_Click;
         }
-        
-        private void SettingDevice_Load(object sender, EventArgs e)
-        {
-            
-        }
+
 
         /// <summary>
         /// выбор устройства из выподающего списка ListCaptureDevices
@@ -32,20 +29,16 @@ namespace WebCamCapture.View
             
         }
 
-        private string dev;
-        private string mod;
-
         public event Action SettingOk;
 
-        public string Dev { get => dev; set => dev = value; }
-        public string Mod { get => mod; set => mod = value; }
-
-
+        public int DeviceIndex { get => deviceList.SelectedIndex; set => deviceList.SelectedIndex = value; }
+        public int ModeIndex { get => modesList.SelectedIndex; set => modesList.SelectedIndex = value; }
+        public string[] DeviceList { set => deviceList.Items.AddRange(value); }
+        public string[] ModesList { set => modesList.Items.AddRange(value); }
 
         private void BtnOkSettingDev_Click(object sender, EventArgs e)
         {
             SettingOk();
-            this.Close();
         }
 
         private void SettingAppPanel__DirOkBtn_Click(object sender, EventArgs e)

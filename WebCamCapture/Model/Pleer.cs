@@ -23,10 +23,10 @@ namespace WebCamCapture.Model
 
         FilterInfoCollection videoDevices;
         VideoCaptureDevice videoSource;
-        List<string> deviceList;
-        List<string> listVideoModes;
-        int deviceId = 0;
-        int modeId;
+        List<string> _deviceList;
+        List<string> _listModes;
+        int _deviceIndex = 0;
+        int _modeId;
         bool isDeviceReady;
         private Image _frame;
 
@@ -43,19 +43,19 @@ namespace WebCamCapture.Model
         /// <summary>
         /// Список  устройств
         /// </summary>
-        public Array DeviceList { get => deviceList.ToArray(); }
+        public List<string> DeviceList { get => _deviceList; }
         /// <summary>
         /// Список поддерживаемых режимов (разрешение видео) выбранного устройства.
         /// </summary>
-        public Array ListVideoModes { get => listVideoModes.ToArray(); }
+        public List<string> ListVideoModes { get => _listModes; }
         /// <summary>
         /// Идентификатор выбранного устройстова. 
         /// </summary>
-        public int DeviceId { get => deviceId; set => deviceId = value; }
+        public int DeviceIndex { get => _deviceIndex; set => _deviceIndex = value; }
         /// <summary>
         /// Идентификатор выбранного видеорежима (выбранное разрешение)
         /// </summary>
-        public int ModeId { get => modeId; set => modeId = value; }
+        public int ModeIndex { get => _modeId; set => _modeId = value; }
         /// <summary>
         /// Устройство готово?
         /// </summary>
@@ -83,7 +83,7 @@ namespace WebCamCapture.Model
             if (this.UpdateListNameDevices())
             {
                 this.UpdateListNameDevices();
-                this.UpdateListVideoModes(DeviceId);
+                this.UpdateListVideoModes(DeviceIndex);
                 this.Start(DeviceName, FrameSize);
                 return true;
             }
@@ -97,10 +97,10 @@ namespace WebCamCapture.Model
         /// <param name="FrameSize">Размер кадра</param>
         public void Start(string DeviceName, string FrameSize)
         {
-            int dev = GetIndexByName(deviceList, DeviceName);
-            int mod = GetIndexByName(listVideoModes, FrameSize);
-            DeviceId = dev;
-            ModeId = mod;
+            int dev = GetIndexByName(_deviceList, DeviceName);
+            int mod = GetIndexByName(_listModes, FrameSize);
+            DeviceIndex = dev;
+            ModeIndex = mod;
             videoSource = new VideoCaptureDevice(videoDevices[dev].MonikerString);
             videoSource.VideoResolution = videoSource.VideoCapabilities[mod];
             videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
@@ -126,7 +126,7 @@ namespace WebCamCapture.Model
                
             }
 
-            this.listVideoModes = fSize; // инициализируем или обновляем список доступных разрешений 
+            this._listModes = fSize; // инициализируем или обновляем список доступных разрешений 
             return true;
         }
 
@@ -146,7 +146,7 @@ namespace WebCamCapture.Model
                 list.Add(device.Name);
             }
 
-            deviceList = list;
+            _deviceList = list;
 
             this.isDeviceReady = videoDevices.Count > 0 ? true : false;
             return isDeviceReady;

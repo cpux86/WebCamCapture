@@ -12,19 +12,28 @@ namespace WebCamCapture.Presenter
     {
         private SettingForm setting;
         private Pleer pleer;
-
+       
         public SettingPresenter(SettingForm setting, Pleer pleer)
         {
             this.setting = setting;
             this.pleer = pleer;
             this.setting.SettingOk += Setting_SettingOk;
-            
+
+            this.setting.DeviceList = pleer.DeviceList.ToArray();
+            this.setting.ModesList = pleer.ListVideoModes.ToArray();
+
+            this.setting.DeviceIndex = pleer.DeviceIndex;
+            this.setting.ModeIndex = pleer.ModeIndex;
+
         }
 
 
         private void Setting_SettingOk()
         {
-            System.Windows.Forms.MessageBox.Show("OK");
+            if (this.setting.ModeIndex != this.pleer.ModeIndex) System.Windows.Forms.MessageBox.Show("Test");
+            this.setting.Close();
+            
+            
         }
     }
 }

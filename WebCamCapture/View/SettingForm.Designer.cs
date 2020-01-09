@@ -191,7 +191,6 @@
             this.btnOkSettingDev.TabIndex = 16;
             this.btnOkSettingDev.Text = "OK";
             this.btnOkSettingDev.UseVisualStyleBackColor = true;
-            this.btnOkSettingDev.Click += new System.EventHandler(this.BtnOkSettingDev_Click);
             // 
             // tabPage2
             // 
@@ -216,7 +215,6 @@
             this.Name = "SettingForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Настройки камеры";
-            this.Load += new System.EventHandler(this.SettingDevice_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
