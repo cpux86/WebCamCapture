@@ -20,10 +20,15 @@ namespace WebCamCapture.Presenter
             this.setting.SettingOk += Setting_SettingOk;
 
             this.setting.DeviceList = pleer.DeviceList.ToArray();
-            this.setting.ModesList = pleer.ListVideoModes.ToArray();
+            
+            
+            if (this.pleer.IsRunning)
+            {
+                this.setting.ModesList = pleer.ListVideoModes.ToArray();
 
-            this.setting.DeviceIndex = pleer.DeviceIndex;
-            this.setting.ModeIndex = pleer.ModeIndex;
+                this.setting.DeviceIndex = pleer.DeviceIndex;
+                this.setting.ModeIndex = pleer.ModeIndex;
+            }
 
         }
 

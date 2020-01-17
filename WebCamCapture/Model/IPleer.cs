@@ -39,6 +39,12 @@ namespace WebCamCapture.Model
         /// </summary>
         //string SelectedFrameSize { get; set; }
 
+        /// <summary>
+        /// Состояние захвата видео 
+        /// </summary>
+        bool IsRunning { get; }
+
+
 
 
 
@@ -48,7 +54,6 @@ namespace WebCamCapture.Model
         event Action<Image> NewFrame;
         event Action<int> ChangeDeviceId;
         event Action ChangeModId;
-
-
+        
     }
 }

@@ -23,9 +23,9 @@ namespace WebCamCapture.Presenter
             view.OperatorFullName = "Каськов Владимир Васильевич";
 
             view.MakeSnapshot += View_MakeSnapshot;
-            _view.ShowSettingForm += View_ShowSettingForm;
+           // _view.ShowSettingForm += View_ShowSettingForm;
             _pleer.NewFrame += _Pleer_NewFrame;
-            _pleer.ChangeDeviceId += Pleer_ChangeDeviceId;
+            _pleer.ChangeDeviceId += Pleer_ChangeDeviceId; 
             view.GetContext.FormClosing += GetContext_FormClosing;
             
         }
@@ -72,18 +72,8 @@ namespace WebCamCapture.Presenter
         public void Snapshot(Image snapshot)
         {
             _view.ShowSnapshot = snapshot;
-            _pleer.NewFrame -= Snapshot;           
+            _pleer.NewFrame -= Snapshot;       
         }
         
-        /// <summary>
-        /// Отобразить форму Настройки
-        /// </summary>
-        private void View_ShowSettingForm()
-        {
-
-            //f.ShowDialog();
-            //_view.Show();
-
-        }
     }
 }

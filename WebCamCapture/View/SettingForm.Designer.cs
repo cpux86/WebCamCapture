@@ -140,7 +140,6 @@
             this.modesList.Name = "modesList";
             this.modesList.Size = new System.Drawing.Size(130, 23);
             this.modesList.TabIndex = 14;
-            this.modesList.SelectedIndexChanged += new System.EventHandler(this.ListCaptutreModes_SelectedIndexChanged);
             // 
             // groupBox1
             // 

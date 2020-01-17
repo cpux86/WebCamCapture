@@ -13,5 +13,10 @@ namespace WebCamCapture.View
         int ModeIndex { get; set; }
         string[] DeviceList { set; }
         string[] ModesList { set; }
+        /// <summary>
+        /// Путь к папке со снимкаи
+        /// </summary>
+        string SnapshotFolder { get; set; }
+        string SnapshotFolderTextBox { set; }
     }
 }

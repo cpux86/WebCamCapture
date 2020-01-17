@@ -19,22 +19,14 @@ namespace WebCamCapture.View
         }
 
 
-        /// <summary>
-        /// выбор устройства из выподающего списка ListCaptureDevices
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ListCaptureDevices_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         public event Action SettingOk;
 
         public int DeviceIndex { get => deviceList.SelectedIndex; set => deviceList.SelectedIndex = value; }
         public int ModeIndex { get => modesList.SelectedIndex; set => modesList.SelectedIndex = value; }
         public string[] DeviceList { set => deviceList.Items.AddRange(value); }
         public string[] ModesList { set => modesList.Items.AddRange(value); }
+        public string SnapshotFolder { get => folderBrowserDialog1.SelectedPath; set => folderBrowserDialog1.SelectedPath = value; }
+        public string SnapshotFolderTextBox { set => SettinAppPanel__FileDirView.Text = value; }
 
         private void BtnOkSettingDev_Click(object sender, EventArgs e)
         {
@@ -46,17 +38,11 @@ namespace WebCamCapture.View
             
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-
                 SettinAppPanel__FileDirView.Text = folderBrowserDialog1.SelectedPath;
                 Properties.Settings.Default.FileDir = folderBrowserDialog1.SelectedPath;
+
                 //Properties.Settings.Default.Save();
             }
-        }
-
-        private void ListCaptutreModes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //capture.ModeId = ListCaptutreModes.SelectedIndex;
-            
         }
     }
 }

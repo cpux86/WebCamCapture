@@ -285,13 +285,13 @@
             // новыйЗаказToolStripMenuItem
             // 
             this.новыйЗаказToolStripMenuItem.Name = "новыйЗаказToolStripMenuItem";
-            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.новыйЗаказToolStripMenuItem.Text = "Новый заказ";
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             // 
             // настройкиToolStripMenuItem1
@@ -305,7 +305,7 @@
             // showSettingBtn
             // 
             this.showSettingBtn.Name = "showSettingBtn";
-            this.showSettingBtn.Size = new System.Drawing.Size(180, 22);
+            this.showSettingBtn.Size = new System.Drawing.Size(115, 22);
             this.showSettingBtn.Text = "Камера";
             // 
             // оПрограммеToolStripMenuItem

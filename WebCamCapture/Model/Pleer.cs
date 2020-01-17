@@ -71,6 +71,12 @@ namespace WebCamCapture.Model
         /// </summary>
         string FrameSize { get => Properties.Settings.Default.SelectedFrameSize; set => Properties.Settings.Default.SelectedFrameSize = value; }
 
+        /// <summary>
+        /// Состояние захвата видео 
+        /// </summary>
+        public bool IsRunning { get => this.videoSource != null ? this.videoSource.IsRunning : false; }
+
+
 
         /// <summary>
         /// 
@@ -105,7 +111,6 @@ namespace WebCamCapture.Model
             videoSource.VideoResolution = videoSource.VideoCapabilities[mod];
             videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
             videoSource.Start();
-            
         }
 
         /// <summary>
@@ -194,10 +199,11 @@ namespace WebCamCapture.Model
         /// </summary>
         public void Stop()
         {
-            videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
-            if (videoSource != null)
-            {
 
+            
+            if (this.IsRunning)
+            {
+                videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
                 videoSource.SignalToStop();
                 videoSource.WaitForStop();
                 videoSource.Stop();
