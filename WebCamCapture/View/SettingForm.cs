@@ -40,8 +40,6 @@ namespace WebCamCapture.View
             {
                 SettinAppPanel__FileDirView.Text = folderBrowserDialog1.SelectedPath;
                 Properties.Settings.Default.FileDir = folderBrowserDialog1.SelectedPath;
-
-                //Properties.Settings.Default.Save();
             }
         }
     }

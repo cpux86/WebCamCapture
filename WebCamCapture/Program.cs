@@ -11,6 +11,7 @@ namespace WebCamCapture
     static class Program
     {
         static Model.Pleer pleer;
+        static Presenter.SettingPresenter presenter;
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -21,20 +22,17 @@ namespace WebCamCapture
             Application.SetCompatibleTextRenderingDefault(false);
             var view = new View.MainForm();
             pleer = new Model.Pleer();
-            
             view.ShowSettingForm += View_ShowSettingForm;
-            
+
             new Presenter.MainPresenter(view, pleer);
+            presenter = new Presenter.SettingPresenter();
             Application.Run(view);
            
         }
 
         private static void View_ShowSettingForm()
         {
-            var setting = new SettingForm();
-            setting.Show();
-            new Presenter.SettingPresenter(setting, pleer);
+            presenter.Show(new SettingForm(), pleer);
         }
-
     }
 }

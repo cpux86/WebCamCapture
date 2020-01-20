@@ -10,7 +10,7 @@ using WebCamCapture.View;
 
 namespace WebCamCapture.Presenter
 {
-    class MainPresenter : BasePresenter
+    class MainPresenter
     {
         private readonly IMainView _view;
         private readonly IPleer _pleer;

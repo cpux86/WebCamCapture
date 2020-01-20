@@ -59,7 +59,7 @@ namespace WebCamCapture.Model
         /// <summary>
         /// Устройство готово?
         /// </summary>
-        public bool IsDeviceReady { get; }
+        //public bool IsDeviceReady { get; }
 
 
         /// <summary>
@@ -103,6 +103,10 @@ namespace WebCamCapture.Model
         /// <param name="FrameSize">Размер кадра</param>
         public void Start(string DeviceName, string FrameSize)
         {
+            if (IsRunning)
+            {
+                this.Stop();
+            }
             int dev = GetIndexByName(_deviceList, DeviceName);
             int mod = GetIndexByName(_listModes, FrameSize);
             DeviceIndex = dev;
