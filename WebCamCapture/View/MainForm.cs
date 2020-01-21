@@ -25,11 +25,9 @@ namespace WebCamCapture.View
             InitializeComponent();
             makeSnapshotBtn.Click += (sender, args) => invoke(MakeSnapshot);
             showSettingBtn.Click += (sender, arges) => invoke(ShowSettingForm);
+            orderEditBtn.Click += (sender, arges) => invoke(OrderEditBtn);
         }
 
-
-       
-          
 
         public string OrderNumber { set => OrderPanel__TextOrder.Text = value; }
         public string RollerNumber { set => OrderPanel__TextRoller.Text = value; }
@@ -38,6 +36,7 @@ namespace WebCamCapture.View
 
         public event Action MakeSnapshot;
         public event Action ShowSettingForm;
+        public event Action OrderEditBtn;
 
         public Form GetContext { get => this; }
 

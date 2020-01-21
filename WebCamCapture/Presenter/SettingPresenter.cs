@@ -11,21 +11,21 @@ namespace WebCamCapture.Presenter
 {
     class SettingPresenter
     {
-        private SettingForm setting;
-        private Pleer pleer;
+        private ISettingView setting;
+        private IPleer pleer;
         
         public SettingPresenter()
         {
             
         }
 
-        public void Show(SettingForm setting, Pleer pleer)
+        public void Show(ISettingView setting, IPleer pleer)
         {
             this.setting = setting;
             this.pleer = pleer;
 
             this.setting.DeviceList = pleer.DeviceList.ToArray();
-            setting.SettingOk += Setting_SettingOk;
+            this.setting.SnapshotFolder = Properties.Settings.Default.FileDir;
 
             if (this.pleer.IsRunning)
             {
@@ -34,28 +34,20 @@ namespace WebCamCapture.Presenter
                 this.setting.DeviceIndex = pleer.DeviceIndex;
                 this.setting.ModeIndex = pleer.ModeIndex;
             }
+            if (this.setting.ShowDialog() == DialogResult.OK)
+            {
+                // если выбран другой режим
+                if (this.setting.ModeIndex != this.pleer.ModeIndex)
+                {
+                    this.pleer.Start(this.pleer.ListVideoModes[this.setting.DeviceIndex], this.pleer.ListVideoModes[this.setting.ModeIndex]);
+                   
 
-            this.setting.ShowDialog();
-
-        }
-
-
-        private void Setting_SettingOk()
-        {
-            // если выбран другой режим
-            if (this.setting.ModeIndex != this.pleer.ModeIndex) {
-                //System.Windows.Forms.MessageBox.Show("Test");
-                this.pleer.Start(this.pleer.ListVideoModes[this.setting.DeviceIndex],this.pleer.ListVideoModes[this.setting.ModeIndex]);
-                
+                }
+                // сохраняем путь к снимкам 
+                Properties.Settings.Default.FileDir = this.setting.SnapshotFolder;
+                Properties.Settings.Default.SelectedDeviceName = pleer.DeviceList[this.setting.DeviceIndex];
+                Properties.Settings.Default.SelectedFrameSize = pleer.ListVideoModes[this.pleer.ModeIndex];
             }
-            this.setting.Close();
-
-
         }
-
-        /// <summary>
-        ///
-        /// </summary>
-
     }
 }

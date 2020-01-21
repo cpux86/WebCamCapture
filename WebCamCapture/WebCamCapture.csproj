@@ -83,14 +83,18 @@
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="ImageBrowser.cs" />
+    <Compile Include="Model\IOrderModel.cs" />
     <Compile Include="Model\IPleer.cs" />
+    <Compile Include="Model\OrderModel.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Presenter\BasePresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
+    <Compile Include="Presenter\OrderPresenter.cs" />
     <Compile Include="Presenter\SettingPresenter.cs" />
     <Compile Include="View\IMainView.cs" />
+    <Compile Include="View\IOrderForm.cs" />
     <Compile Include="View\IOrderView.cs" />
-    <Compile Include="View\ISetting.cs" />
+    <Compile Include="View\ISettingView.cs" />
     <Compile Include="View\IView.cs" />
     <Compile Include="View\OrderForm.cs">
       <SubType>Form</SubType>

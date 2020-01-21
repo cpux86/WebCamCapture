@@ -18,9 +18,9 @@ namespace WebCamCapture.View
         //string action; // операция
         //string user; // исполнитель
        
-        public string Order { get => orderCbox.Text; set => orderCbox.Text = value; }
-        public string Roller { get => rollerCbox.Text; set => rollerCbox.Text = value; }
-        public string Action { get => operationList.Text; set => operationList.Text = value; }
+        public string Order { set => orderCbox.Items.AddRange(value.ToArray()); }
+        public string Roller { set => rollerCbox.Items.AddRange(value.ToArray()); }
+        public string Action { set => operationList.Text = value; }
 
         [Required]
         [StringLength(50, MinimumLength = 3)]

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WebCamCapture.View
 {
-    interface ISetting
+    interface ISettingView
     {
-        event Action SettingOk;
         int DeviceIndex { get; set; }
         int ModeIndex { get; set; }
         string[] DeviceList { set; }
@@ -18,5 +18,7 @@ namespace WebCamCapture.View
         /// </summary>
         string SnapshotFolder { get; set; }
         string SnapshotFolderTextBox { set; }
+        DialogResult ShowDialog();
+        void Close();
     }
 }

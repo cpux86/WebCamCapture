@@ -39,7 +39,9 @@ namespace WebCamCapture.Presenter
         {
             _view.GetContext.Invoke((MethodInvoker)(() => {
                 _pleer.Stop();
-            }));       
+            }));
+            //
+            Properties.Settings.Default.Save();
         }
 
         /// <summary>

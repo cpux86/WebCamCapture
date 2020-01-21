@@ -183,6 +183,7 @@
             // 
             this.btnOkSettingDev.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnOkSettingDev.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOkSettingDev.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnOkSettingDev.Location = new System.Drawing.Point(13, 150);
             this.btnOkSettingDev.Name = "btnOkSettingDev";

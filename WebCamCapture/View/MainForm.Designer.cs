@@ -33,7 +33,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.videoView = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnOrderEdit = new System.Windows.Forms.Button();
+            this.orderEditBtn = new System.Windows.Forms.Button();
             this.photoGalleraya = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -100,7 +100,7 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.btnOrderEdit);
+            this.panel1.Controls.Add(this.orderEditBtn);
             this.panel1.Controls.Add(this.photoGalleraya);
             this.panel1.Controls.Add(this.makeSnapshotBtn);
             this.panel1.Controls.Add(this.button1);
@@ -109,17 +109,17 @@
             this.panel1.Size = new System.Drawing.Size(350, 365);
             this.panel1.TabIndex = 10;
             // 
-            // btnOrderEdit
+            // orderEditBtn
             // 
-            this.btnOrderEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOrderEdit.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnOrderEdit.ForeColor = System.Drawing.Color.Black;
-            this.btnOrderEdit.Location = new System.Drawing.Point(203, 17);
-            this.btnOrderEdit.Name = "btnOrderEdit";
-            this.btnOrderEdit.Size = new System.Drawing.Size(141, 30);
-            this.btnOrderEdit.TabIndex = 19;
-            this.btnOrderEdit.Text = "ЗАКАЗ / ПРАВКА";
-            this.btnOrderEdit.UseVisualStyleBackColor = true;
+            this.orderEditBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.orderEditBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.orderEditBtn.ForeColor = System.Drawing.Color.Black;
+            this.orderEditBtn.Location = new System.Drawing.Point(203, 17);
+            this.orderEditBtn.Name = "orderEditBtn";
+            this.orderEditBtn.Size = new System.Drawing.Size(141, 30);
+            this.orderEditBtn.TabIndex = 19;
+            this.orderEditBtn.Text = "ЗАКАЗ / ПРАВКА";
+            this.orderEditBtn.UseVisualStyleBackColor = true;
             // 
             // photoGalleraya
             // 
@@ -363,7 +363,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.Button btnOrderEdit;
+        private System.Windows.Forms.Button orderEditBtn;
         private System.Windows.Forms.Label OrderPanel__TitleUser;
         private System.Windows.Forms.Label OrderPanel__TitleOpreration;
         private System.Windows.Forms.Label OrderPanel__TitleRoller;

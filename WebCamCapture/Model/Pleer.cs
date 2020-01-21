@@ -103,10 +103,9 @@ namespace WebCamCapture.Model
         /// <param name="FrameSize">Размер кадра</param>
         public void Start(string DeviceName, string FrameSize)
         {
-            if (IsRunning)
-            {
-                this.Stop();
-            }
+
+            this.Stop();
+
             int dev = GetIndexByName(_deviceList, DeviceName);
             int mod = GetIndexByName(_listModes, FrameSize);
             DeviceIndex = dev;
@@ -210,8 +209,7 @@ namespace WebCamCapture.Model
                 videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
                 videoSource.SignalToStop();
                 videoSource.WaitForStop();
-                videoSource.Stop();
-                ChangeDeviceId(1);
+                //videoSource.Stop();
             }
 
         }

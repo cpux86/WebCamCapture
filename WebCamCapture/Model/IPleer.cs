@@ -43,6 +43,7 @@ namespace WebCamCapture.Model
         /// Состояние захвата видео 
         /// </summary>
         bool IsRunning { get; }
+        void Start(string DeviceName, string NameMode);
 
 
 
