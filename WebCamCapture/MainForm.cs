@@ -54,6 +54,7 @@ namespace WebCamCapture
         }
         
         string Path;
+        string Date;
         /// <summary>
         /// Кнопка захвата
         /// </summary>
@@ -63,7 +64,10 @@ namespace WebCamCapture
         {
             //string RootDir = @".\image\";
             string RootDir = Properties.Settings.Default.FileDir;
-            string FileName = String.Format("{0}_{1}_{2}{3}","заказ", DateTime.Now.ToString().Replace(":", "-"), Guid.NewGuid(),".jpg");
+            string OrderFolder = OrderPanel__TextOrder.Text.Replace("/", "-");
+            Date = DateTime.Now.ToString();
+            string FileName = String.Format("{0}_{1}_{2}_{3}_{4}_{5}{6}", OrderFolder, Date.Replace(":", "-"), OrderPanel__TextRoller.Text,
+                OrderPanel__TextOpreration.Text, OrderPanel__TextUser.Text, Guid.NewGuid(),".jpg");
             if (ScreenView.Image != null)
             {
                 ScreenView.Image.Dispose();
@@ -71,7 +75,7 @@ namespace WebCamCapture
             ScreenView.Image = (Bitmap)CamView.Image.Clone();
             try
             {
-                Path = RootDir+ @"\";
+                Path = RootDir+ @"\"+ OrderFolder+@"\";
                 if (!Directory.Exists(Path))
                 {
                     Directory.CreateDirectory(Path);
@@ -117,7 +121,7 @@ namespace WebCamCapture
             imageList.Images.Add(m);
            // imageList.Dispose();
             //imageList.Images.Add(Image.FromFile(Path).GetThumbnailImage(100,100,null,IntPtr.Zero));
-
+            
 
 
             Bitmap emptyImage = new Bitmap(100, 100);
@@ -127,12 +131,13 @@ namespace WebCamCapture
             }
 
             photoGalleraya.SmallImageList = imageList;
-            string[] order = { "100/28", "19.12.2019 11:38:26" };
+            string[] order = { OrderPanel__TextOrder.Text, Date };
 
             ListViewItem item = new ListViewItem(new string[] { "", order[0], order[1] });
             item.ImageIndex = 0;
-
+            
             photoGalleraya.Items.Add(item);
+            photoGalleraya.Sorting = SortOrder.Ascending;
             m.Dispose();
             m = null;
         }
@@ -146,10 +151,9 @@ namespace WebCamCapture
         private void КамераToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SettingForm settingDev = new SettingForm();
-
             //settingDev.btnOkSettingDev.Enabled = false;
-            settingDev.ListCaptureDevices.SelectedIndex = wcc.DeviceId;
-            settingDev.ListCaptutreModes.SelectedIndex = wcc.ModeId;
+            //settingDev.ListCaptureDevices.SelectedIndex = wcc.DeviceId;
+            //settingDev.ListCaptutreModes.SelectedIndex = wcc.ModeId;
 
             if (settingDev.ShowDialog() == DialogResult.OK)
             {
