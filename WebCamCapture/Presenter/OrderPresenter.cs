@@ -10,13 +10,14 @@ namespace WebCamCapture.Presenter
 {
     class OrderPresenter
     {
-        private IOrderForm orderForm;
-        private IOrderModel orderModel;
+        private readonly IOrderView orderForm;
+        private readonly OrderModel orderModel;
 
-        public OrderPresenter(IOrderForm orderForm, IOrderModel orderModel)
+        public OrderPresenter(IOrderView orderView, OrderModel orderModel)
         {
-            this.orderForm = orderForm;
+            this.orderForm = orderView;
             this.orderModel = orderModel;
+            
             
         }
     }

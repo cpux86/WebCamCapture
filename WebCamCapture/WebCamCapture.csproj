@@ -74,25 +74,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSet1.cs">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="DataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="ImageBrowser.cs" />
-    <Compile Include="Model\IOrderModel.cs" />
     <Compile Include="Model\IPleer.cs" />
-    <Compile Include="Model\OrderModel.cs" />
+    <Compile Include="Model\Orders.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Presenter\BasePresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Presenter\OrderPresenter.cs" />
     <Compile Include="Presenter\SettingPresenter.cs" />
     <Compile Include="View\IMainView.cs" />
-    <Compile Include="View\IOrderForm.cs" />
     <Compile Include="View\IOrderView.cs" />
     <Compile Include="View\ISettingView.cs" />
     <Compile Include="View\IView.cs" />
@@ -137,17 +127,6 @@
       <DependentUpon>SettingForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram2.cd" />
-    <None Include="DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="DataSet1.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

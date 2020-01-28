@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.userNameList = new System.Windows.Forms.ComboBox();
+            this.userNameCbox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.operationList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,24 +45,24 @@
             // 
             // userNameList
             // 
-            this.userNameList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.userNameCbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.userNameList.AutoCompleteCustomSource.AddRange(new string[] {
+            this.userNameCbox.AutoCompleteCustomSource.AddRange(new string[] {
             "Каськов В.В",
             "Кузнецов В.Ю",
             "Брянцев Н.А"});
-            this.userNameList.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.userNameList.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.userNameList.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.userNameList.FormattingEnabled = true;
-            this.userNameList.Location = new System.Drawing.Point(182, 132);
-            this.userNameList.MaximumSize = new System.Drawing.Size(600, 0);
-            this.userNameList.MinimumSize = new System.Drawing.Size(151, 0);
-            this.userNameList.Name = "userNameList";
-            this.userNameList.Size = new System.Drawing.Size(295, 29);
-            this.userNameList.TabIndex = 22;
-            this.userNameList.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UserNameList_KeyPress);
+            this.userNameCbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.userNameCbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.userNameCbox.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.userNameCbox.FormattingEnabled = true;
+            this.userNameCbox.Location = new System.Drawing.Point(182, 132);
+            this.userNameCbox.MaximumSize = new System.Drawing.Size(600, 0);
+            this.userNameCbox.MinimumSize = new System.Drawing.Size(151, 0);
+            this.userNameCbox.Name = "userNameList";
+            this.userNameCbox.Size = new System.Drawing.Size(295, 29);
+            this.userNameCbox.TabIndex = 22;
+            this.userNameCbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UserNameList_KeyPress);
             // 
             // label2
             // 
@@ -191,7 +191,7 @@
             this.Controls.Add(this.rollerCbox);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.userNameList);
+            this.Controls.Add(this.userNameCbox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.operationList);
             this.Controls.Add(this.label1);
@@ -212,7 +212,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox userNameList;
+        private System.Windows.Forms.ComboBox userNameCbox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox operationList;
         private System.Windows.Forms.Label label1;

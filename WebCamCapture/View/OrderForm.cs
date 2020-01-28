@@ -13,18 +13,19 @@ namespace WebCamCapture.View
 {
     public partial class OrderForm : Form, IOrderView
     {
-        //string order; // заказ
-        //string roller; // ролик
-        //string action; // операция
-        //string user; // исполнитель
-       
-        public string Order { set => orderCbox.Items.AddRange(value.ToArray()); }
-        public string Roller { set => rollerCbox.Items.AddRange(value.ToArray()); }
-        public string Action { set => operationList.Text = value; }
+        public string[] OrderList { set => userNameCbox.Items.AddRange(value); }
+        public string[] RollerList { set => rollerCbox.Items.AddRange(value); }
+        public string[] OperationList { set => operationList.Items.AddRange(value); }
+        public string[] UserList { set => userNameCbox.Items.AddRange(value); }
 
+        public string Order { get => orderCbox.SelectedText; }
+        public string Roller { get => rollerCbox.SelectedText; }
+        public string Action { get => operationList.SelectedText; }
         [Required]
         [StringLength(50, MinimumLength = 3)]
-        public string User { get => userNameList.Text; set => userNameList.Text = value; }
+        public string User { get => userNameCbox.Text; set => userNameCbox.Text = value; }
+
+        
 
         public OrderForm()
         {

@@ -8,10 +8,15 @@ namespace WebCamCapture.View
 {
     public interface IOrderView
     {
-        string Order { get; set; }
-        string Roller { get; set; }
-        string Action { get; set; }
-        string User { get; set; }
+        string[] OrderList { set; }
+        string[] RollerList { set; }
+        string[] OperationList { set; }
+        string[] UserList { set; }
+
+        string Order { get; }
+        string Roller { get; }
+        string Action { get; }
+        string User { get; }
 
     }
 }
