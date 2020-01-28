@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using LightInject;
 using WebCamCapture.View;
 
 namespace WebCamCapture
@@ -13,7 +12,7 @@ namespace WebCamCapture
         static Model.Pleer pleer;
         static Presenter.SettingPresenter settingPresenter;
         static Presenter.OrderPresenter orderPresenter;
-        static Model.OrderModel orderModel;
+        static Model.Orders order;
         static View.OrderForm orderForm;
         /// <summary>
         /// Главная точка входа для приложения.
@@ -31,8 +30,8 @@ namespace WebCamCapture
             settingPresenter = new Presenter.SettingPresenter();
 
             orderForm = new OrderForm();
-            orderModel = new Model.OrderModel();
-            orderPresenter = new Presenter.OrderPresenter(orderForm, orderModel);
+            order = new Model.Orders();
+            orderPresenter = new Presenter.OrderPresenter(orderForm, order);
 
             Application.Run(view);
            

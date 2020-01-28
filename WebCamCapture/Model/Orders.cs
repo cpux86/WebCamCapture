@@ -6,16 +6,32 @@ using System.Threading.Tasks;
 
 namespace WebCamCapture.Model
 {
-    class Orders
+    class Orders : Order, IOrders
     {
-        string order;
-        string roller;
-        string operation;
-        string user;
+        List<IOrder> orders;
+        public Orders()
+        {
+            orders = OrdersRequest();
+        }
 
-        public string Number { get => order; set => order = value; }
-        public string Roller { get => roller; set => roller = value; }
-        public string Operation { get => operation; set => operation = value; }
-        public string User { get => user; set => user = value; }
+        public void Add(IOrder order)
+        {
+            orders.Add(order);
+        }
+
+        public Order GetOrder(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Orders GetOrders()
+        {
+            throw new NotImplementedException();
+        }
+        // получить из базы все заказы
+        List<IOrder> OrdersRequest()
+        {
+            return new List<IOrder>(); // заглушка
+        }
     }
 }
