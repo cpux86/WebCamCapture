@@ -12,7 +12,7 @@ namespace WebCamCapture
         static Model.Pleer pleer;
         static Presenter.SettingPresenter settingPresenter;
         static Presenter.OrderPresenter orderPresenter;
-        static Model.Orders order;
+        static Model.Orders orders;
         static View.OrderForm orderForm;
         /// <summary>
         /// Главная точка входа для приложения.
@@ -26,12 +26,15 @@ namespace WebCamCapture
             pleer = new Model.Pleer();
             view.ShowSettingForm += View_ShowSettingForm;
             view.OrderEditBtn += View_OrderEditBtn;
-            new Presenter.MainPresenter(view, pleer);
+            orders = new Model.Orders();
+            orderForm = new OrderForm();
+            orderPresenter = new Presenter.OrderPresenter(orderForm, orders);
+            new Presenter.MainPresenter(view, pleer, orders);
             settingPresenter = new Presenter.SettingPresenter();
 
-            orderForm = new OrderForm();
-            order = new Model.Orders();
-            orderPresenter = new Presenter.OrderPresenter(orderForm, order);
+            
+            
+           
 
             Application.Run(view);
            
@@ -39,8 +42,7 @@ namespace WebCamCapture
 
         private static void View_OrderEditBtn()
         {
-            var x = new OrderForm();
-            x.ShowDialog();
+            orderForm.ShowDialog();
             
         }
 

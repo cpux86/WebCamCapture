@@ -200,7 +200,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(337, 196);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Управления";
+            this.tabPage2.Text = "Управление";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // SettingForm

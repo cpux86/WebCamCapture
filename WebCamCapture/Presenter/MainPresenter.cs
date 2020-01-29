@@ -14,13 +14,16 @@ namespace WebCamCapture.Presenter
     {
         private readonly IMainView _view;
         private readonly IPleer _pleer;
+        private readonly IOrder _order;
 
-        public MainPresenter(IMainView view, IPleer pleer)
+        public MainPresenter(IMainView view, IPleer pleer, IOrder order)
         {
             this._view = view;
             _pleer = pleer;
-            view.OrderNumber = "100/52";
-            view.OperatorFullName = "Каськов Владимир Васильевич";
+            _view.OrderNumber = order.Number;
+            _view.Roller = order.Roller;
+            _view.Operation = order.Operation;
+            _view.User = order.User;
 
             view.MakeSnapshot += View_MakeSnapshot;
            // _view.ShowSettingForm += View_ShowSettingForm;

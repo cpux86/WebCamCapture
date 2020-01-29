@@ -18,14 +18,13 @@ namespace WebCamCapture.Presenter
         {
             this.orderForm = orderView;
             this.orders = orders;
-        }
-        public void AddOrder()
-        {
-            order.Number = "100/10/5";
-            order.Roller = "850";
-            order.Operation = "Тест";
-            order.User = "Каськов В.В";
-            orders.Add(order);
+            orders.Number = "100/10/5";
+            orders.Roller = "850";
+            orders.Operation = "Тест";
+            orders.User = "Каськов В.В";
+            List<string> str = new List<string>();
+            str.Add("100/10/5");
+            orderView.OrderList = str.ToArray();
         }
     }
 }

@@ -18,15 +18,15 @@ namespace WebCamCapture.View
         /// <summary>
         /// Номер ролика
         /// </summary>
-        string RollerNumber { set; }
+        string Roller { set; }
         /// <summary>
         /// Номер операции
         /// </summary>
-        string ActionNumber { set; }
+        string Operation { set; }
         /// <summary>
         /// Исполнитель Ф.И.О
         /// </summary>
-        string OperatorFullName { set; }
+        string User { set; }
 
         /// <summary>
         /// Возникает при щелчке по кнопке создания снимка

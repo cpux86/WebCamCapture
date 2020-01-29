@@ -30,9 +30,9 @@ namespace WebCamCapture.View
 
 
         public string OrderNumber { set => OrderPanel__TextOrder.Text = value; }
-        public string RollerNumber { set => OrderPanel__TextRoller.Text = value; }
-        public string ActionNumber { set => OrderPanel__TextOpreration.Text = value; }
-        public string OperatorFullName { set => OrderPanel__OperatorFullName.Text = value; }
+        public string Roller { set => OrderPanel__TextRoller.Text = value; }
+        public string Operation { set => OrderPanel__TextOpreration.Text = value; }
+        public string User { set => OrderPanel__OperatorFullName.Text = value; }
 
         public event Action MakeSnapshot;
         public event Action ShowSettingForm;
