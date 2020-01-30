@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.userNameCbox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.operationList = new System.Windows.Forms.ComboBox();
+            this.operationCbox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.rollerNumber = new System.Windows.Forms.Label();
             this.orderText = new System.Windows.Forms.Label();
@@ -39,11 +39,11 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.rollerCbox = new System.Windows.Forms.ComboBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.orderCbox = new System.Windows.Forms.ComboBox();
+            this.orderTbox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
-            // userNameList
+            // userNameCbox
             // 
             this.userNameCbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -59,7 +59,7 @@
             this.userNameCbox.Location = new System.Drawing.Point(182, 132);
             this.userNameCbox.MaximumSize = new System.Drawing.Size(600, 0);
             this.userNameCbox.MinimumSize = new System.Drawing.Size(151, 0);
-            this.userNameCbox.Name = "userNameList";
+            this.userNameCbox.Name = "userNameCbox";
             this.userNameCbox.Size = new System.Drawing.Size(295, 29);
             this.userNameCbox.TabIndex = 22;
             this.userNameCbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UserNameList_KeyPress);
@@ -74,20 +74,20 @@
             this.label2.TabIndex = 25;
             this.label2.Text = "ИСПОЛНИТЕЛЬ:";
             // 
-            // operationList
+            // operationCbox
             // 
-            this.operationList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.operationCbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.operationList.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.operationList.FormattingEnabled = true;
-            this.operationList.Location = new System.Drawing.Point(182, 96);
-            this.operationList.MaximumSize = new System.Drawing.Size(600, 0);
-            this.operationList.MinimumSize = new System.Drawing.Size(150, 0);
-            this.operationList.Name = "operationList";
-            this.operationList.Size = new System.Drawing.Size(294, 29);
-            this.operationList.TabIndex = 21;
-            this.operationList.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OperationList_KeyPress);
+            this.operationCbox.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.operationCbox.FormattingEnabled = true;
+            this.operationCbox.Location = new System.Drawing.Point(182, 96);
+            this.operationCbox.MaximumSize = new System.Drawing.Size(600, 0);
+            this.operationCbox.MinimumSize = new System.Drawing.Size(150, 0);
+            this.operationCbox.Name = "operationCbox";
+            this.operationCbox.Size = new System.Drawing.Size(294, 29);
+            this.operationCbox.TabIndex = 21;
+            this.operationCbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OperationList_KeyPress);
             // 
             // label1
             // 
@@ -123,7 +123,6 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(183, 177);
             this.button1.Name = "button1";
@@ -166,34 +165,31 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // orderCbox
+            // orderTbox
             // 
-            this.orderCbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.orderTbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderCbox.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.orderCbox.FormattingEnabled = true;
-            this.orderCbox.ItemHeight = 21;
-            this.orderCbox.Location = new System.Drawing.Point(183, 25);
-            this.orderCbox.MaximumSize = new System.Drawing.Size(300, 0);
-            this.orderCbox.MinimumSize = new System.Drawing.Size(150, 0);
-            this.orderCbox.Name = "orderCbox";
-            this.orderCbox.Size = new System.Drawing.Size(294, 29);
-            this.orderCbox.TabIndex = 29;
-            this.orderCbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OrderCbox_KeyPress);
+            this.orderTbox.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.orderTbox.Location = new System.Drawing.Point(182, 25);
+            this.orderTbox.MaximumSize = new System.Drawing.Size(300, 29);
+            this.orderTbox.MinimumSize = new System.Drawing.Size(150, 29);
+            this.orderTbox.Name = "orderTbox";
+            this.orderTbox.Size = new System.Drawing.Size(293, 29);
+            this.orderTbox.TabIndex = 29;
+            this.orderTbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OrderTbox_KeyPress);
             // 
             // OrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(519, 242);
-            this.Controls.Add(this.orderCbox);
+            this.Controls.Add(this.orderTbox);
             this.Controls.Add(this.rollerCbox);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.userNameCbox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.operationList);
+            this.Controls.Add(this.operationCbox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rollerNumber);
             this.Controls.Add(this.orderText);
@@ -214,7 +210,7 @@
 
         private System.Windows.Forms.ComboBox userNameCbox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox operationList;
+        private System.Windows.Forms.ComboBox operationCbox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label rollerNumber;
         private System.Windows.Forms.Label orderText;
@@ -222,6 +218,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ComboBox rollerCbox;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.ComboBox orderCbox;
+        private System.Windows.Forms.TextBox orderTbox;
     }
 }

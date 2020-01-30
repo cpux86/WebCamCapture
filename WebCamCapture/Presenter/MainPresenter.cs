@@ -20,6 +20,7 @@ namespace WebCamCapture.Presenter
         {
             this._view = view;
             _pleer = pleer;
+            _order = order;
             _view.OrderNumber = order.Number;
             _view.Roller = order.Roller;
             _view.Operation = order.Operation;
@@ -28,14 +29,15 @@ namespace WebCamCapture.Presenter
             view.MakeSnapshot += View_MakeSnapshot;
            // _view.ShowSettingForm += View_ShowSettingForm;
             _pleer.NewFrame += _Pleer_NewFrame;
-            _pleer.ChangeDeviceId += Pleer_ChangeDeviceId; 
             view.GetContext.FormClosing += GetContext_FormClosing;
+            order.UpdateOrder += _order_UpdateOrder;
             
         }
-
-        private void Pleer_ChangeDeviceId(int x)
+        // произошло обнолвене заказа
+        private void _order_UpdateOrder()
         {
-            //MessageBox.Show(String.Format("Устройство {0} изменилось!", x.ToString()));
+            _view.OrderNumber = _order.Number;
+            _view.Roller = _order.Roller;
         }
 
         private void GetContext_FormClosing(object sender, FormClosingEventArgs e)

@@ -17,5 +17,13 @@ namespace WebCamCapture.Model
         public string Roller { get => roller; set => roller = value; }
         public string Operation { get => operation; set => operation = value; }
         public string User { get => user; set => user = value; }
+
+        
+        public event Action UpdateOrder;
+
+        public void SignalUpdate()
+        {
+            UpdateOrder();
+        }
     }
 }

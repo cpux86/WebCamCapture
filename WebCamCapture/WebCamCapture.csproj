@@ -76,10 +76,8 @@
   <ItemGroup>
     <Compile Include="ImageBrowser.cs" />
     <Compile Include="Model\IOrder.cs" />
-    <Compile Include="Model\IOrders.cs" />
     <Compile Include="Model\IPleer.cs" />
     <Compile Include="Model\Order.cs" />
-    <Compile Include="Model\Orders.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Presenter\BasePresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />

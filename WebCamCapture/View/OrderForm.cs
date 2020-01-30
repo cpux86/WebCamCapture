@@ -13,35 +13,34 @@ namespace WebCamCapture.View
 {
     public partial class OrderForm : Form, IOrderView
     {
-        public string[] OrderList { set => userNameCbox.Items.AddRange(value); }
         public string[] RollerList { set => rollerCbox.Items.AddRange(value); }
-        public string[] OperationList { set => operationList.Items.AddRange(value); }
-        public string[] UserList { set => userNameCbox.Items.AddRange(value); }
+        public string[] OperationsList { set => operationCbox.Items.AddRange(value); }
+        public string[] UsersList { set => userNameCbox.Items.AddRange(value); }
 
-        public string Order { get => orderCbox.SelectedText; }
-        public string Roller { get => rollerCbox.SelectedText; }
-        public string Action { get => operationList.SelectedText; }
+        public string Order { get => orderTbox.Text; set => orderTbox.Text = value; }
+        public string SelectedRoller { get => rollerCbox.Text; }
+        public string SelectedOperation { get => operationCbox.SelectedText; }
         [Required]
         [StringLength(50, MinimumLength = 3)]
-        public string User { get => userNameCbox.Text; set => userNameCbox.Text = value; }
+        public string SelectedUser { get => userNameCbox.Text; set => userNameCbox.Text = value; }
 
-        
+        public event Action BtnOkOrderClick;
 
         public OrderForm()
         {
             InitializeComponent();
-            orderCbox.Validated += OrderTbox_Validated;
+            orderTbox.Validated += OrderTbox_Validated;
         }
 
         private void OrderTbox_Validated(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(orderCbox.Text))
+            if (String.IsNullOrEmpty(orderTbox.Text))
             {
-                errorProvider1.SetError(orderCbox, "Поля обязательно к заполнению!");
+                errorProvider1.SetError(orderTbox, "Поля обязательно к заполнению!");
             }
         }
 
-        private void OrderCbox_KeyPress(object sender, KeyPressEventArgs e)
+        private void OrderTbox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // фильтруем ввод, только "0-9" и "/"
             char number = e.KeyChar;
@@ -91,14 +90,16 @@ namespace WebCamCapture.View
         private void Button1_Click(object sender, EventArgs e)
         {
             ValidationContext context = new ValidationContext(this);
-            var results = new List<ValidationResult>();;
+            var results = new List<ValidationResult>();
             if (!Validator.TryValidateObject(this, context, results, true))
             {
                 foreach (var error in results)
                 {
-                    MessageBox.Show(error.ErrorMessage);
+                   // MessageBox.Show(error.ErrorMessage);
                 }
             }
+
+            BtnOkOrderClick();
         }
     }
 }
