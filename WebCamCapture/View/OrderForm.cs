@@ -19,7 +19,7 @@ namespace WebCamCapture.View
 
         public string Order { get => orderTbox.Text; set => orderTbox.Text = value; }
         public string SelectedRoller { get => rollerCbox.Text; }
-        public string SelectedOperation { get => operationCbox.SelectedText; }
+        public string SelectedOperation { get => operationCbox.Text; }
         [Required]
         [StringLength(50, MinimumLength = 3)]
         public string SelectedUser { get => userNameCbox.Text; set => userNameCbox.Text = value; }
@@ -30,6 +30,7 @@ namespace WebCamCapture.View
         {
             InitializeComponent();
             orderTbox.Validated += OrderTbox_Validated;
+            this.KeyPreview = true;
         }
 
         private void OrderTbox_Validated(object sender, EventArgs e)
@@ -55,7 +56,7 @@ namespace WebCamCapture.View
         {
             // фильтруем ввод, только "0-9
             char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8)
+            if (!Char.IsDigit(number) && number != 8 && !Char.IsLetter(number) && !Char.IsWhiteSpace(number) && number != 46)
             {
                 e.Handled = true;
             }
@@ -72,19 +73,19 @@ namespace WebCamCapture.View
                 
             }
             // преобразуем каждый введенный символ в врехний регистр.
-            e.KeyChar = Char.ToUpper(e.KeyChar);
+            //e.KeyChar = Char.ToUpper(e.KeyChar);
         }
 
         private void OperationList_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Буквы, пробел, BS, и точка.
+            // Цифры, буквы, пробел, BS, и точка.
             char number = e.KeyChar;
-            if (!Char.IsLetter(number) && number != 8 && !Char.IsWhiteSpace(number) && number != 46)
+            if (!Char.IsDigit(number) && !Char.IsLetter(number) && number != 8 && !Char.IsWhiteSpace(number) && number != 46)
             {
                 e.Handled = true;
             }
             // преобразуем каждый введенный символ в врехний регистр.
-            e.KeyChar = Char.ToUpper(e.KeyChar);
+            //e.KeyChar = Char.ToUpper(e.KeyChar);
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -100,6 +101,16 @@ namespace WebCamCapture.View
             }
 
             BtnOkOrderClick();
+        }
+
+        private void OrderForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //Control p;
+                //p = ((Button)sender).Parent;
+                //p.SelectNextControl(ActiveControl, true, true, true, true);
+            }
         }
     }
 }

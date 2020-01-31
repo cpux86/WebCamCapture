@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebCamCapture.Model
 {
-    class Order : IOrder
+    class OrderModel : IOrderModel
     {
         string order;
         string roller;
@@ -18,7 +18,9 @@ namespace WebCamCapture.Model
         public string Operation { get => operation; set => operation = value; }
         public string User { get => user; set => user = value; }
 
-        
+        /// <summary>
+        /// Сигнал, данные в модели заказа были изменены
+        /// </summary>
         public event Action UpdateOrder;
 
         public void SignalUpdate()

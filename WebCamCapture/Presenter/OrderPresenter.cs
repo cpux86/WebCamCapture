@@ -11,25 +11,29 @@ namespace WebCamCapture.Presenter
     class OrderPresenter
     {
         private readonly IOrderView orderForm;
-        private readonly IOrder order;
+        private readonly IOrderModel orderModel;
 
-        public OrderPresenter(IOrderView orderView, IOrder order)
+        public OrderPresenter(IOrderView orderView, IOrderModel order)
         {
             this.orderForm = orderView;
-            this.order = order;
-            orderForm.RollerList = new string[] { "800M", "850R","900W" };
-            order.Operation = "Тест № 1";
-            order.User = "Каськов В.В";
-            orderForm.Order = order.Number;
+            this.orderModel = order;
+            this.orderForm.RollerList = new string[] { "800M", "850R","900W" };
+            this.orderForm.OperationsList = new string[] {"Тест № 1","Тест № 2","Тест № 3" };
+            this.orderForm.UsersList = new string[] {"Иванов И.И","Петров П.П","Сидоров С.С" };
             orderForm.BtnOkOrderClick += OrderView_BtnOkOrderClick;
         }
-
+        /// <summary>
+        /// Обработчик щелчка по кнопке Ok формы заказа
+        /// </summary>
         private void OrderView_BtnOkOrderClick()
         {
-            order.Number = orderForm.Order;
-            order.Roller = orderForm.SelectedRoller;
-
-            order.SignalUpdate();
+            // Заполняем модель данными о заказе из формы ввода
+            orderModel.Number = orderForm.Order;
+            orderModel.Roller = orderForm.SelectedRoller;
+            orderModel.Operation = orderForm.SelectedOperation;
+            orderModel.User = orderForm.SelectedUser;
+            // уведомляем модель, что данные в ней были изменены
+            orderModel.SignalUpdate();
         }
     }
 }

@@ -118,7 +118,7 @@
             this.orderEditBtn.Name = "orderEditBtn";
             this.orderEditBtn.Size = new System.Drawing.Size(141, 30);
             this.orderEditBtn.TabIndex = 19;
-            this.orderEditBtn.Text = "ЗАКАЗ / ПРАВКА";
+            this.orderEditBtn.Text = "Заказ / Правка";
             this.orderEditBtn.UseVisualStyleBackColor = true;
             // 
             // photoGalleraya
@@ -163,44 +163,44 @@
             this.OrderPanel__TitleUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.OrderPanel__TitleUser.AutoSize = true;
             this.OrderPanel__TitleUser.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OrderPanel__TitleUser.Location = new System.Drawing.Point(3, 111);
+            this.OrderPanel__TitleUser.Location = new System.Drawing.Point(13, 111);
             this.OrderPanel__TitleUser.Name = "OrderPanel__TitleUser";
-            this.OrderPanel__TitleUser.Size = new System.Drawing.Size(152, 21);
+            this.OrderPanel__TitleUser.Size = new System.Drawing.Size(119, 21);
             this.OrderPanel__TitleUser.TabIndex = 27;
-            this.OrderPanel__TitleUser.Text = "ИСПОЛНИТЕЛЬ:";
+            this.OrderPanel__TitleUser.Text = "Исполнитель:";
             // 
             // OrderPanel__TitleOpreration
             // 
             this.OrderPanel__TitleOpreration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.OrderPanel__TitleOpreration.AutoSize = true;
             this.OrderPanel__TitleOpreration.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OrderPanel__TitleOpreration.Location = new System.Drawing.Point(19, 78);
+            this.OrderPanel__TitleOpreration.Location = new System.Drawing.Point(39, 78);
             this.OrderPanel__TitleOpreration.Name = "OrderPanel__TitleOpreration";
-            this.OrderPanel__TitleOpreration.Size = new System.Drawing.Size(136, 21);
+            this.OrderPanel__TitleOpreration.Size = new System.Drawing.Size(93, 21);
             this.OrderPanel__TitleOpreration.TabIndex = 26;
-            this.OrderPanel__TitleOpreration.Text = "ОПЕРАЦИЯ №:";
+            this.OrderPanel__TitleOpreration.Text = "Операция:";
             // 
             // OrderPanel__TitleRoller
             // 
             this.OrderPanel__TitleRoller.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.OrderPanel__TitleRoller.AutoSize = true;
             this.OrderPanel__TitleRoller.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OrderPanel__TitleRoller.Location = new System.Drawing.Point(55, 45);
+            this.OrderPanel__TitleRoller.Location = new System.Drawing.Point(69, 45);
             this.OrderPanel__TitleRoller.Name = "OrderPanel__TitleRoller";
-            this.OrderPanel__TitleRoller.Size = new System.Drawing.Size(100, 21);
+            this.OrderPanel__TitleRoller.Size = new System.Drawing.Size(63, 21);
             this.OrderPanel__TitleRoller.TabIndex = 25;
-            this.OrderPanel__TitleRoller.Text = "РОЛИК №:";
+            this.OrderPanel__TitleRoller.Text = "Ролик:";
             // 
             // OrderPanel__TitleOrder
             // 
             this.OrderPanel__TitleOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.OrderPanel__TitleOrder.AutoSize = true;
             this.OrderPanel__TitleOrder.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OrderPanel__TitleOrder.Location = new System.Drawing.Point(59, 12);
+            this.OrderPanel__TitleOrder.Location = new System.Drawing.Point(52, 12);
             this.OrderPanel__TitleOrder.Name = "OrderPanel__TitleOrder";
-            this.OrderPanel__TitleOrder.Size = new System.Drawing.Size(96, 21);
+            this.OrderPanel__TitleOrder.Size = new System.Drawing.Size(80, 21);
             this.OrderPanel__TitleOrder.TabIndex = 24;
-            this.OrderPanel__TitleOrder.Text = "ЗАКАЗ №:";
+            this.OrderPanel__TitleOrder.Text = "Заказ №:";
             // 
             // snapshotView
             // 
@@ -228,7 +228,7 @@
             this.OrderViewPanel.Controls.Add(this.OrderPanel__TitleRoller);
             this.OrderViewPanel.Controls.Add(this.OrderPanel__TitleOpreration);
             this.OrderViewPanel.Controls.Add(this.OrderPanel__TitleOrder);
-            this.OrderViewPanel.Location = new System.Drawing.Point(12, 480);
+            this.OrderViewPanel.Location = new System.Drawing.Point(12, 474);
             this.OrderViewPanel.Name = "OrderViewPanel";
             this.OrderViewPanel.Size = new System.Drawing.Size(564, 145);
             this.OrderViewPanel.TabIndex = 28;
@@ -238,7 +238,7 @@
             this.OrderPanel__OperatorFullName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.OrderPanel__OperatorFullName.AutoSize = true;
             this.OrderPanel__OperatorFullName.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OrderPanel__OperatorFullName.Location = new System.Drawing.Point(161, 111);
+            this.OrderPanel__OperatorFullName.Location = new System.Drawing.Point(135, 111);
             this.OrderPanel__OperatorFullName.Name = "OrderPanel__OperatorFullName";
             this.OrderPanel__OperatorFullName.Size = new System.Drawing.Size(0, 21);
             this.OrderPanel__OperatorFullName.TabIndex = 31;
@@ -248,7 +248,7 @@
             this.OrderPanel__TextOpreration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.OrderPanel__TextOpreration.AutoSize = true;
             this.OrderPanel__TextOpreration.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OrderPanel__TextOpreration.Location = new System.Drawing.Point(161, 78);
+            this.OrderPanel__TextOpreration.Location = new System.Drawing.Point(135, 78);
             this.OrderPanel__TextOpreration.Name = "OrderPanel__TextOpreration";
             this.OrderPanel__TextOpreration.Size = new System.Drawing.Size(0, 21);
             this.OrderPanel__TextOpreration.TabIndex = 30;
@@ -258,7 +258,7 @@
             this.OrderPanel__TextRoller.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.OrderPanel__TextRoller.AutoSize = true;
             this.OrderPanel__TextRoller.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OrderPanel__TextRoller.Location = new System.Drawing.Point(161, 45);
+            this.OrderPanel__TextRoller.Location = new System.Drawing.Point(135, 45);
             this.OrderPanel__TextRoller.Name = "OrderPanel__TextRoller";
             this.OrderPanel__TextRoller.Size = new System.Drawing.Size(0, 21);
             this.OrderPanel__TextRoller.TabIndex = 29;
@@ -268,7 +268,7 @@
             this.OrderPanel__TextOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.OrderPanel__TextOrder.AutoSize = true;
             this.OrderPanel__TextOrder.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OrderPanel__TextOrder.Location = new System.Drawing.Point(161, 12);
+            this.OrderPanel__TextOrder.Location = new System.Drawing.Point(135, 12);
             this.OrderPanel__TextOrder.Name = "OrderPanel__TextOrder";
             this.OrderPanel__TextOrder.Size = new System.Drawing.Size(0, 21);
             this.OrderPanel__TextOrder.TabIndex = 28;

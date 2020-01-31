@@ -16,7 +16,9 @@ namespace WebCamCapture.View
         string SelectedRoller { get; }
         string SelectedOperation { get; }
         string SelectedUser { get; }
-
+        /// <summary>
+        /// Щелчок по кнопке Ok формы заказа
+        /// </summary>
         event Action BtnOkOrderClick;
 
     }

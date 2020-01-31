@@ -14,9 +14,9 @@ namespace WebCamCapture.Presenter
     {
         private readonly IMainView _view;
         private readonly IPleer _pleer;
-        private readonly IOrder _order;
+        private readonly IOrderModel _order;
 
-        public MainPresenter(IMainView view, IPleer pleer, IOrder order)
+        public MainPresenter(IMainView view, IPleer pleer, IOrderModel order)
         {
             this._view = view;
             _pleer = pleer;
@@ -38,6 +38,8 @@ namespace WebCamCapture.Presenter
         {
             _view.OrderNumber = _order.Number;
             _view.Roller = _order.Roller;
+            _view.Operation = _order.Operation;
+            _view.User = _order.User;
         }
 
         private void GetContext_FormClosing(object sender, FormClosingEventArgs e)

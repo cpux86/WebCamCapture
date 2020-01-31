@@ -26,6 +26,7 @@ namespace WebCamCapture.View
             makeSnapshotBtn.Click += (sender, args) => invoke(MakeSnapshot);
             showSettingBtn.Click += (sender, arges) => invoke(ShowSettingForm);
             orderEditBtn.Click += (sender, arges) => invoke(OrderEditBtn);
+            this.KeyPreview = true;
         }
 
 

@@ -13,11 +13,7 @@ namespace WebCamCapture.Presenter
     {
         private ISettingView setting;
         private IPleer pleer;
-        
-        public SettingPresenter()
-        {
-            
-        }
+       
 
         public void Show(ISettingView setting, IPleer pleer)
         {
