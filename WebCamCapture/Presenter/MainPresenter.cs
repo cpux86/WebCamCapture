@@ -13,10 +13,10 @@ namespace WebCamCapture.Presenter
     class MainPresenter
     {
         private readonly IMainView _view;
-        private readonly IPleer _pleer;
+        private readonly IPlayer _pleer;
         private readonly IOrderModel _order;
 
-        public MainPresenter(IMainView view, IPleer pleer, IOrderModel order)
+        public MainPresenter(IMainView view, IPlayer pleer, IOrderModel order)
         {
             this._view = view;
             _pleer = pleer;

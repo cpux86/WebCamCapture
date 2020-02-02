@@ -1,6 +1,6 @@
 ﻿namespace WebCamCapture.View
 {
-    partial class SettingForm
+    partial class PlayerSettingForm
     {
         /// <summary>
         /// Required designer variable.

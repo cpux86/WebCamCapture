@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WebCamCapture.View
 {
-    public partial class SettingForm : Form, ISettingView
+    public partial class PlayerSettingForm : Form, ISettingView
     {
-        public SettingForm()
+        public PlayerSettingForm()
         {
             InitializeComponent();
         }

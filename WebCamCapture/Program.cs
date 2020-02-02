@@ -9,10 +9,10 @@ namespace WebCamCapture
 {
     static class Program
     {
-        static Model.Pleer pleer;
-        static Presenter.SettingPresenter settingPresenter;
+        static Model.PlayerModel pleerModel;
+        static Presenter.PlayerSettingPresenter settingPresenter;
         static Presenter.OrderPresenter orderPresenter;
-        static Model.OrderModel order;
+        static Model.OrderModel orderModel;
         static View.OrderForm orderForm;
         /// <summary>
         /// Главная точка входа для приложения.
@@ -22,34 +22,38 @@ namespace WebCamCapture
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var view = new View.MainForm();
-            pleer = new Model.Pleer();
-            view.ShowSettingForm += View_ShowSettingForm;
-            view.OrderEditBtn += View_OrderEditBtn;
-            order = new Model.OrderModel();
+            var mainForm = new View.MainForm();
+            pleerModel = new Model.PlayerModel();
+            mainForm.ShowSettingForm += MainForm_ShowSettingForm;
+            mainForm.OrderEditBtn += MainForm_OrderEditBtn;
+            orderModel = new Model.OrderModel();
+
+
             orderForm = new OrderForm();
-            orderPresenter = new Presenter.OrderPresenter(orderForm, order);
-            new Presenter.MainPresenter(view, pleer, order);
-            settingPresenter = new Presenter.SettingPresenter();
+            orderPresenter = new Presenter.OrderPresenter(orderForm, orderModel);
+
+
+            new Presenter.MainPresenter(mainForm, pleerModel, orderModel);
+            settingPresenter = new Presenter.PlayerSettingPresenter();
 
             
             
            
 
-            Application.Run(view);
+            Application.Run(mainForm);
            
         }
 
-        private static void View_OrderEditBtn()
+        private static void MainForm_OrderEditBtn()
         {
             orderForm.ShowDialog();
             
         }
 
         // отобразить форму настроек
-        private static void View_ShowSettingForm()
+        private static void MainForm_ShowSettingForm()
         {
-            settingPresenter.Show(new SettingForm(), pleer);
+            settingPresenter.Show(new PlayerSettingForm(), pleerModel);
         }
     }
 }

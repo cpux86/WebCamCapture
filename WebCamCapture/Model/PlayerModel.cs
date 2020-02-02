@@ -18,7 +18,7 @@ namespace WebCamCapture.Model
     /// <summary>
     /// Робота с web камерой, сознаие и сохнанение снимков
     /// </summary>
-    public class Pleer : IPleer
+    public class PlayerModel : IPlayer
     {
 
         FilterInfoCollection videoDevices;
@@ -34,7 +34,7 @@ namespace WebCamCapture.Model
         public event Action<int> ChangeDeviceId;
         public event Action ChangeModId;
 
-        public Pleer()
+        public PlayerModel()
         {
             init();
             
@@ -167,7 +167,8 @@ namespace WebCamCapture.Model
         /// <returns></returns>
         public int GetIndexByName(List<string> list, string name)
         {
-            return list.IndexOf(name) != -1 ? list.IndexOf(name) : 0;
+            //return list.IndexOf(name) != -1 ? list.IndexOf(name) : 0;
+            return 1;
         }
 
         // сохранение конфигураций

@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace WebCamCapture.Model
 {
-    interface IPleer
+    interface IPlayer
     {
         //List<string> ListNameDevices { get; }
         //List<string> ListVideoModes { get; }
