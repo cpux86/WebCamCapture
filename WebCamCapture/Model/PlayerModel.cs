@@ -36,7 +36,7 @@ namespace WebCamCapture.Model
 
         public PlayerModel()
         {
-            init();
+            //init();
             
         }
 
@@ -82,7 +82,7 @@ namespace WebCamCapture.Model
         /// 
         /// </summary>
         /// <returns></returns>
-        public bool init()
+        public void init(int deviceId, int modeId)
         {
             //videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
@@ -93,27 +93,28 @@ namespace WebCamCapture.Model
             //    //this.Start(DeviceName, FrameSize);
             //    return true;
             //}
-            return false;
+            //return false;
+            videoSource = new VideoCaptureDevice(videoDevices[deviceId].MonikerString);
+            videoSource.VideoResolution = videoSource.VideoCapabilities[modeId];
+            videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
         }
 
         /// <summary>
         /// Начинает захват видео 
         /// </summary>
-        /// <param name="deviceName">Имя устройстова</param>
-        /// <param name="FrameSize">Размер кадра</param>
-        public void Start(string DeviceName, string FrameSize)
+        /// <param name="device">Идентификатор устройстова</param>
+        /// <param name="mode">Размер кадра</param>
+        public void Start()
         {
 
-            this.Stop();
+            //this.Stop();
 
-            int dev = GetIndexByName(_deviceList, DeviceName);
-            int mod = GetIndexByName(_listModes, FrameSize);
-            DeviceIndex = dev;
-            ModeIndex = mod;
-            videoSource = new VideoCaptureDevice(videoDevices[dev].MonikerString);
-            videoSource.VideoResolution = videoSource.VideoCapabilities[mod];
-            videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
-            //videoSource.Start();
+            //int dev = GetIndexByName(_deviceList, DeviceName);
+            //int mod = GetIndexByName(_listModes, FrameSize);
+            //DeviceIndex = dev;
+            //ModeIndex = mod;
+            
+            videoSource.Start();
         }
 
         /// <summary>
@@ -133,9 +134,7 @@ namespace WebCamCapture.Model
                 fSize.Add(String.Format("{0} x {1}", s.FrameSize.Width, s.FrameSize.Height));
                
             }
-
-            this._listModes = fSize; // инициализируем или обновляем список доступных разрешений 
-            return _listModes;
+            return fSize;
         }
 
         /// <summary>

@@ -9,9 +9,6 @@ namespace WebCamCapture.Model
 {
     interface IPlayer
     {
-        //List<string> ListNameDevices { get; }
-        //List<string> ListVideoModes { get; }
-        //void Start(string DeviceName, string FrameSize);
         void Stop();
 
         /// <summary>
@@ -30,20 +27,13 @@ namespace WebCamCapture.Model
         /// Идентификатор выбранного видеорежима (выбранное разрешение)
         /// </summary>
         int ModeIndex { get; set; }
-        /// <summary>
-        /// Имя выбранного устройства
-        /// </summary>
-        //string SelectedDeviceName { get; set; }
-        /// <summary>
-        /// Выбранный размер кадра
-        /// </summary>
-        //string SelectedFrameSize { get; set; }
 
         /// <summary>
         /// Состояние захвата видео 
         /// </summary>
         bool IsRunning { get; }
-        void Start(string DeviceName, string NameMode);
+        void init(int deviceId, int modeId);
+        void Start();
 
         List<string> GetDeviceNameList();
         List<string> GetListVideoModes(int deviceId);
