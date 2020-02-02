@@ -14,6 +14,15 @@ namespace WebCamCapture.View
         string[] DeviceList { set; }
         string[] ModesList { set; }
         /// <summary>
+        /// выбранно новое устройство
+        /// </summary>
+        event Action DeviceIdChange;
+        /// <summary>
+        /// Выбран другой режим
+        /// </summary>
+        event Action ModeIdChange;
+        
+        /// <summary>
         /// Путь к папке со снимкаи
         /// </summary>
         string SnapshotFolder { get; set; }

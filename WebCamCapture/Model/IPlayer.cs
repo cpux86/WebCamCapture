@@ -45,6 +45,8 @@ namespace WebCamCapture.Model
         bool IsRunning { get; }
         void Start(string DeviceName, string NameMode);
 
+        List<string> GetDeviceNameList();
+        List<string> GetListVideoModes(int deviceId);
 
 
 

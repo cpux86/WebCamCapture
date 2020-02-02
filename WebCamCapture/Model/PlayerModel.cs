@@ -84,15 +84,15 @@ namespace WebCamCapture.Model
         /// <returns></returns>
         public bool init()
         {
-            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            //videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
-            if (this.UpdateListNameDevices())
-            {
-                this.UpdateListNameDevices();
-                this.UpdateListVideoModes(DeviceIndex);
-                this.Start(DeviceName, FrameSize);
-                return true;
-            }
+            //if (this.GetDeviceNameList())
+            //{
+            //    this.GetDeviceNameList();
+            //    this.UpdateListVideoModes(DeviceIndex);
+            //    //this.Start(DeviceName, FrameSize);
+            //    return true;
+            //}
             return false;
         }
 
@@ -113,19 +113,19 @@ namespace WebCamCapture.Model
             videoSource = new VideoCaptureDevice(videoDevices[dev].MonikerString);
             videoSource.VideoResolution = videoSource.VideoCapabilities[mod];
             videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
-            videoSource.Start();
+            //videoSource.Start();
         }
 
         /// <summary>
-        /// обновляет список доступных разрешений, список доступен через свойство ListVideoModes
+        ///  Возращает список поддерживаемых рижимов 
         /// </summary>
         /// <param name="deviceId">id выбранного устройства</param>
         /// <returns></returns>
-        public bool UpdateListVideoModes(int deviceId)
+        public List<string> GetListVideoModes(int deviceId)
         {
             List<string> fSize = new List<string>();
             videoSource = new VideoCaptureDevice(videoDevices[deviceId].MonikerString);
-            if (videoSource.VideoCapabilities.Length == 0) return false;  // если в устройстве не передостовляет список доступных разрешений!
+            //if (videoSource.VideoCapabilities.Length == 0) return false;  // если в устройстве не передостовляет список доступных разрешений!
             // поддерживаемые режимы работы камеры (разрешение)
             foreach (var s in videoSource.VideoCapabilities)
             {
@@ -135,14 +135,14 @@ namespace WebCamCapture.Model
             }
 
             this._listModes = fSize; // инициализируем или обновляем список доступных разрешений 
-            return true;
+            return _listModes;
         }
 
         /// <summary>
-        /// Обновляет список подключенных устройств и счетчик DevicesCounter.Обновленный список устройств доступен через свойство ListNameDevices.
+        /// Получает список имен подключенных устройств
         /// </summary>
         /// <returns>Возращает TRUE если список был изменен</returns>
-        public bool UpdateListNameDevices()
+        public List<string> GetDeviceNameList()
         {
             
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
@@ -156,8 +156,8 @@ namespace WebCamCapture.Model
 
             _deviceList = list;
 
-            this.isDeviceReady = videoDevices.Count > 0 ? true : false;
-            return isDeviceReady;
+            //this.isDeviceReady = videoDevices.Count > 0 ? true : false;
+            return _deviceList;
         }
         /// <summary>
         /// получаем индекс выбранного элемента по его имени, если элемент не обнаружен то возращаем 0.
@@ -167,8 +167,8 @@ namespace WebCamCapture.Model
         /// <returns></returns>
         public int GetIndexByName(List<string> list, string name)
         {
-            //return list.IndexOf(name) != -1 ? list.IndexOf(name) : 0;
-            return 1;
+            return list.IndexOf(name) != -1 ? list.IndexOf(name) : 0;
+            //return 1;
         }
 
         // сохранение конфигураций

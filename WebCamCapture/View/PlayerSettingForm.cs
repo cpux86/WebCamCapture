@@ -19,8 +19,20 @@ namespace WebCamCapture.View
 
         public int DeviceIndex { get => deviceList.SelectedIndex; set => deviceList.SelectedIndex = value; }
         public int ModeIndex { get => modesList.SelectedIndex; set => modesList.SelectedIndex = value; }
-        public string[] DeviceList { set => deviceList.Items.AddRange(value); }
-        public string[] ModesList { set => modesList.Items.AddRange(value); }
+        public event Action DeviceIdChange;
+        public event Action ModeIdChange;
+        public string[] DeviceList { 
+            set {
+                deviceList.Items.Clear();
+                deviceList.Items.AddRange(value);
+            }       
+        }
+        public string[] ModesList { 
+            set {
+                modesList.Items.Clear();
+                modesList.Items.AddRange(value);
+            } 
+        }
         public string SnapshotFolder
         {
             get => folderBrowserDialog1.SelectedPath;
@@ -40,6 +52,16 @@ namespace WebCamCapture.View
                 SettinAppPanel__FileDirView.Text = folderBrowserDialog1.SelectedPath;
                 Properties.Settings.Default.FileDir = folderBrowserDialog1.SelectedPath;
             }
+        }
+
+        private void deviceList_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            DeviceIdChange();
+        }
+
+        private void modesList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ModeIdChange();
         }
     }
 }

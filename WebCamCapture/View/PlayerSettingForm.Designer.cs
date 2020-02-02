@@ -126,6 +126,7 @@
             this.deviceList.Name = "deviceList";
             this.deviceList.Size = new System.Drawing.Size(155, 23);
             this.deviceList.TabIndex = 15;
+            this.deviceList.SelectionChangeCommitted += new System.EventHandler(this.deviceList_SelectionChangeCommitted);
             // 
             // modesList
             // 
@@ -140,6 +141,7 @@
             this.modesList.Name = "modesList";
             this.modesList.Size = new System.Drawing.Size(130, 23);
             this.modesList.TabIndex = 14;
+            this.modesList.SelectedIndexChanged += new System.EventHandler(this.modesList_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -203,7 +205,7 @@
             this.tabPage2.Text = "Управление";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // SettingForm
+            // PlayerSettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -212,7 +214,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "SettingForm";
+            this.Name = "PlayerSettingForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Настройки камеры";
             this.tabControl1.ResumeLayout(false);
