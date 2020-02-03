@@ -34,12 +34,6 @@ namespace WebCamCapture.Model
         public event Action<int> ChangeDeviceId;
         public event Action ChangeModId;
 
-        public PlayerModel()
-        {
-            //init();
-            
-        }
-
         /// <summary>
         /// Список  устройств
         /// </summary>
@@ -65,11 +59,11 @@ namespace WebCamCapture.Model
         /// <summary>
         /// Имя выбранного устройства
         /// </summary>
-        string DeviceName { get => Properties.Settings.Default.SelectedDeviceName; set => Properties.Settings.Default.SelectedDeviceName = value; }
+        public string DeviceName { get => Properties.Settings.Default.SelectedDeviceName; set => Properties.Settings.Default.SelectedDeviceName = value; }
         /// <summary>
         /// Выбранный размер кадра
         /// </summary>
-        string FrameSize { get => Properties.Settings.Default.SelectedFrameSize; set => Properties.Settings.Default.SelectedFrameSize = value; }
+        public string FrameSize { get => Properties.Settings.Default.SelectedFrameSize; set => Properties.Settings.Default.SelectedFrameSize = value; }
 
         /// <summary>
         /// Состояние захвата видео 
@@ -84,17 +78,7 @@ namespace WebCamCapture.Model
         /// <returns></returns>
         public void init(int deviceId, int modeId)
         {
-            //videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-
-            //if (this.GetDeviceNameList())
-            //{
-            //    this.GetDeviceNameList();
-            //    this.UpdateListVideoModes(DeviceIndex);
-            //    //this.Start(DeviceName, FrameSize);
-            //    return true;
-            //}
-            //return false;
-            videoSource = new VideoCaptureDevice(videoDevices[deviceId].MonikerString);
+            //videoSource = new VideoCaptureDevice(videoDevices[deviceId].MonikerString);
             videoSource.VideoResolution = videoSource.VideoCapabilities[modeId];
             videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
         }
@@ -106,14 +90,6 @@ namespace WebCamCapture.Model
         /// <param name="mode">Размер кадра</param>
         public void Start()
         {
-
-            //this.Stop();
-
-            //int dev = GetIndexByName(_deviceList, DeviceName);
-            //int mod = GetIndexByName(_listModes, FrameSize);
-            //DeviceIndex = dev;
-            //ModeIndex = mod;
-            
             videoSource.Start();
         }
 
@@ -193,7 +169,7 @@ namespace WebCamCapture.Model
             }
             eventArgs.Frame.RotateFlip(RotateFlipType.Rotate180FlipY);
             _frame = (Bitmap)eventArgs.Frame.Clone();
-            NewFrame(_frame);
+            if (this.IsRunning) NewFrame(_frame);
            
         }
 
@@ -206,10 +182,13 @@ namespace WebCamCapture.Model
             
             if (this.IsRunning)
             {
-                videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
-                videoSource.SignalToStop();
-                videoSource.WaitForStop();
-                //videoSource.Stop();
+                //videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
+                //videoSource.SignalToStop();
+                //videoSource.WaitForStop();
+                videoSource.Stop();
+                //videoSource = null;
+               // var x = videoSource.IsRunning;
+      
             }
 
         }

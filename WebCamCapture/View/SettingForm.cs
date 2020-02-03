@@ -10,17 +10,27 @@ using System.Windows.Forms;
 
 namespace WebCamCapture.View
 {
-    public partial class PlayerSettingForm : Form, ISettingView
+    public partial class SettingForm : Form, ISettingView
     {
-        public PlayerSettingForm()
+        public SettingForm()
         {
             InitializeComponent();
         }
 
         public int DeviceIndex { get => deviceList.SelectedIndex; set => deviceList.SelectedIndex = value; }
         public int ModeIndex { get => modesList.SelectedIndex; set => modesList.SelectedIndex = value; }
+        /// <summary>
+        ///  выбранно устройство в настройках
+        /// </summary>
         public event Action DeviceIdChange;
+        /// <summary>
+        ///  выбран режим в настройках
+        /// </summary>
         public event Action ModeIdChange;
+        /// <summary>
+        /// Клик по кнопке OK на форме настроек
+        /// </summary>
+        public event Action BtnOkClick;
         public string[] DeviceList { 
             set {
                 deviceList.Items.Clear();
@@ -62,6 +72,11 @@ namespace WebCamCapture.View
         private void modesList_SelectedIndexChanged(object sender, EventArgs e)
         {
             ModeIdChange();
+        }
+        //обработчик клика по кнопке ОК в форме настроек
+        private void BtnOkSettingDev_Click(object sender, EventArgs e)
+        {
+            BtnOkClick();
         }
     }
 }

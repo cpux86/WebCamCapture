@@ -44,6 +44,7 @@ namespace WebCamCapture.Presenter
 
         private void GetContext_FormClosing(object sender, FormClosingEventArgs e)
         {
+            
             _view.GetContext.Invoke((MethodInvoker)(() => {
                 _pleer.Stop();
             }));

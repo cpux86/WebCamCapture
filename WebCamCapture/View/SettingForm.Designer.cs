@@ -1,6 +1,6 @@
 ﻿namespace WebCamCapture.View
 {
-    partial class PlayerSettingForm
+    partial class SettingForm
     {
         /// <summary>
         /// Required designer variable.
@@ -193,6 +193,7 @@
             this.btnOkSettingDev.TabIndex = 16;
             this.btnOkSettingDev.Text = "OK";
             this.btnOkSettingDev.UseVisualStyleBackColor = true;
+            this.btnOkSettingDev.Click += new System.EventHandler(this.BtnOkSettingDev_Click);
             // 
             // tabPage2
             // 
@@ -205,7 +206,7 @@
             this.tabPage2.Text = "Управление";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // PlayerSettingForm
+            // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -214,7 +215,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "PlayerSettingForm";
+            this.Name = "SettingForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Настройки камеры";
             this.tabControl1.ResumeLayout(false);

@@ -14,13 +14,17 @@ namespace WebCamCapture.View
         string[] DeviceList { set; }
         string[] ModesList { set; }
         /// <summary>
-        /// выбранно новое устройство
+        /// выбранно устройство в настройках
         /// </summary>
         event Action DeviceIdChange;
         /// <summary>
-        /// Выбран другой режим
+        /// Выбран режим в настройках
         /// </summary>
         event Action ModeIdChange;
+        /// <summary>
+        /// Клик по кнопке OK на форме настроек
+        /// </summary>
+        event Action BtnOkClick;
         
         /// <summary>
         /// Путь к папке со снимкаи

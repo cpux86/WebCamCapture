@@ -11,6 +11,8 @@ namespace WebCamCapture.Model
     {
         void Stop();
 
+        string DeviceName { get; set; }
+        string FrameSize { get; set; }
         /// <summary>
         /// Список доступных устройств
         /// </summary>

@@ -10,11 +10,11 @@ namespace WebCamCapture
     static class Program
     {
         static Model.PlayerModel pleerModel;
-        static Presenter.PlayerSettingPresenter playerSettingPresenter;
+        static Presenter.SettingPresenter playerSettingPresenter;
         static Presenter.OrderPresenter orderPresenter;
         static Model.OrderModel orderModel;
         static View.OrderForm orderForm;
-        static View.PlayerSettingForm playerSettingForm;
+        static View.SettingForm playerSettingForm;
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -33,9 +33,9 @@ namespace WebCamCapture
             orderForm = new OrderForm();
             orderPresenter = new Presenter.OrderPresenter(orderForm, orderModel);
 
-            playerSettingForm = new PlayerSettingForm();
+            playerSettingForm = new SettingForm();
             new Presenter.MainPresenter(mainForm, pleerModel, orderModel);
-            playerSettingPresenter = new Presenter.PlayerSettingPresenter(playerSettingForm, pleerModel);
+            playerSettingPresenter = new Presenter.SettingPresenter(playerSettingForm, pleerModel);
 
             
             
@@ -44,11 +44,10 @@ namespace WebCamCapture
             Application.Run(mainForm);
            
         }
-
+        // отобразить форму заказа
         private static void MainForm_OrderEditBtn()
         {
-            orderForm.ShowDialog();
-            
+            orderForm.ShowDialog();       
         }
 
         // отобразить форму настроек
