@@ -121,24 +121,31 @@ namespace WebCamCapture.Presenter
 
 
         /// <summary>
-        /// Вызывается при каждом паказе формы настройки
+        /// Отобразить форму настройки
         /// </summary>
-        internal bool Reload()
+        internal void Show()
         {
-            // обновляем список устройств
-            _deviceNameList = player.GetDeviceNameList();          
+            //settingForm.DeviceList = _deviceNameList.ToArray();
+            List<string> _newDevList = player.GetDeviceNameList();
+            // изменилься ли список подключенных устройств
+            if (!_deviceNameList.SequenceEqual<string>(_newDevList))
+            {
+                _deviceNameList = _newDevList;
+                // обновляем список устройств представлении "настройки"
+                this.settingForm.DeviceList = _deviceNameList.ToArray();
+            }
+                      
             if (_deviceNameList.Count > 0)
             {
                 // если обнавленный список не пуст
                 settingForm.DeviceList = _deviceNameList.ToArray();
                 settingForm.DeviceIndex = _deviceId;
-                return true;
             }
             // если обновленный список пуст
             settingForm.DeviceList = _deviceNameList.ToArray();
             // сбрасывае идентификатор
             _deviceId = -1;
-            return false;
+            this.settingForm.ShowDialog();
         }
         
     }

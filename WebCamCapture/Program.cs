@@ -53,10 +53,9 @@ namespace WebCamCapture
         // отобразить форму настроек
         private static void MainForm_ShowSettingForm()
         {
-            // перезагрузка данные из модели для формы
-            playerSettingPresenter.Reload();
             // отображаем форму настроек 
-            playerSettingForm.ShowDialog();
+            playerSettingPresenter.Show();
+            
         }
     }
 }
