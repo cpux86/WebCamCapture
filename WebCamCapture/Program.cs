@@ -37,8 +37,6 @@ namespace WebCamCapture
             new Presenter.MainPresenter(mainForm, pleerModel, orderModel);
             playerSettingPresenter = new Presenter.SettingPresenter(playerSettingForm, pleerModel);
 
-            
-            
            
 
             Application.Run(mainForm);

@@ -37,7 +37,7 @@ namespace WebCamCapture.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1920 x 1080")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string SelectedFrameSize {
             get {
                 return ((string)(this["SelectedFrameSize"]));

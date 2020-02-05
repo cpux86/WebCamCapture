@@ -22,6 +22,8 @@ namespace WebCamCapture.Presenter
         private int _modeId = -1;
         private bool _isReady = false;
 
+        public bool IsReady { get => _isReady; set => _isReady = value; }
+
         public SettingPresenter(ISettingView setting, IPlayer player)
         {
             this.settingForm = setting;
@@ -56,8 +58,12 @@ namespace WebCamCapture.Presenter
                 this.settingForm.ModesList = _modesList.ToArray();
                 this.settingForm.DeviceIndex = _deviceId;
                 this.settingForm.ModeIndex = _modeId;
-                this.player.init(_deviceId,_modeId);
-                //this.player.Start();
+                //this.player.init(_deviceId,_modeId);
+                this.player.DeviceIndex = _deviceId;
+                this.player.ModeIndex = _modeId;
+                // выставляем флаг в готовность
+                this.IsReady = true;
+                this.player.Start();
             }
             else
             {
@@ -93,14 +99,15 @@ namespace WebCamCapture.Presenter
             {
                 // устройство и режим выбранны, передаем параметры захвата в модель
                 // устанавливаем флаг isReady (готово) в true
-                _isReady = true;
+                IsReady = true;
                 // все готово, можно начинать захват
                 //MessageBox.Show(_deviceId+" "+_modeId);
-                this.player.init(_deviceId, _modeId);
-                this.player.Start();
+                this.player.DeviceIndex = _deviceId;
+                this.player.ModeIndex = _modeId;
+                //this.player.Start();
             }
             else {
-                _isReady = false;
+                IsReady = false;
             }
             
         }
@@ -126,13 +133,17 @@ namespace WebCamCapture.Presenter
         internal void Show()
         {
             //settingForm.DeviceList = _deviceNameList.ToArray();
-            List<string> _newDevList = player.GetDeviceNameList();
+            //List<string> _newDevList = player.GetDeviceNameList();
+            List<string> _newDevList;
+            _newDevList = _deviceNameList;
             // изменилься ли список подключенных устройств
             if (!_deviceNameList.SequenceEqual<string>(_newDevList))
             {
                 _deviceNameList = _newDevList;
                 // обновляем список устройств представлении "настройки"
                 this.settingForm.DeviceList = _deviceNameList.ToArray();
+                // 
+                this.settingForm.DeviceIndex = this._deviceId;
             }
                       
             if (_deviceNameList.Count > 0)
@@ -141,10 +152,14 @@ namespace WebCamCapture.Presenter
                 settingForm.DeviceList = _deviceNameList.ToArray();
                 settingForm.DeviceIndex = _deviceId;
             }
-            // если обновленный список пуст
-            settingForm.DeviceList = _deviceNameList.ToArray();
-            // сбрасывае идентификатор
-            _deviceId = -1;
+            else
+            {
+                // если обновленный список пуст
+                settingForm.DeviceList = _deviceNameList.ToArray();
+                // сбрасывае идентификатор
+                _deviceId = -1;
+            }
+  
             this.settingForm.ShowDialog();
         }
         

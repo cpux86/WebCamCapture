@@ -27,11 +27,11 @@ namespace WebCamCapture.Presenter
             _view.User = order.User;
 
             view.MakeSnapshot += View_MakeSnapshot;
-           // _view.ShowSettingForm += View_ShowSettingForm;
+            // _view.ShowSettingForm += View_ShowSettingForm;
             _pleer.NewFrame += _Pleer_NewFrame;
             view.GetContext.FormClosing += GetContext_FormClosing;
             order.UpdateOrder += _order_UpdateOrder;
-            
+
         }
         // произошло обнолвене заказа
         private void _order_UpdateOrder()
@@ -44,11 +44,8 @@ namespace WebCamCapture.Presenter
 
         private void GetContext_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
-            _view.GetContext.Invoke((MethodInvoker)(() => {
-                _pleer.Stop();
-            }));
-            //
+            //_pleer.Stop();
+            _pleer.Shutdown();
             Properties.Settings.Default.Save();
         }
 
@@ -63,27 +60,39 @@ namespace WebCamCapture.Presenter
             // подписываемся на захват одного кадра
             _pleer.NewFrame += Snapshot;
         }
+        Image _frame;
         /// <summary>
         /// Обработчик кадра полученного из модели
         /// </summary>
         /// <param name="frame"></param>
         public void _Pleer_NewFrame(Image frame)
         {
-            _view.GetContext.Invoke((MethodInvoker)(() => {
-                _view.ShowNewFrame(frame);
-            }));
-                     
+            if (_frame != null)
+            {
+                _frame.Dispose();
+                _frame = null;
+            }
+            _frame = (Bitmap)frame.Clone();
+            _view.ShowNewFrame(_frame);
+
         }
-       
+        Image _snapshot;
         /// <summary>
         /// Обработчик захваченного кадра (снимка)
         /// </summary>
         /// <param name="frame"></param>
         public void Snapshot(Image snapshot)
         {
-            _view.ShowSnapshot = snapshot;
-            _pleer.NewFrame -= Snapshot;       
+            if (_snapshot != null)
+            {
+                _snapshot.Dispose();
+                _snapshot = null;
+            }
+            
+            _snapshot = (Bitmap)snapshot.Clone();
+            _view.ShowSnapshot = _snapshot;
+            _pleer.NewFrame -= Snapshot;
         }
-        
+
     }
 }

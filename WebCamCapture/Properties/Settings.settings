@@ -6,7 +6,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="SelectedFrameSize" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1920 x 1080</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="FileDir" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

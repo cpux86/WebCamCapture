@@ -27,7 +27,7 @@ namespace WebCamCapture.Model
         List<string> _listModes;
         int _deviceIndex = 0;
         int _modeId;
-        bool isDeviceReady;
+        private bool _isReady = false;
         private Image _frame;
 
         public event Action<Image> NewFrame;
@@ -53,7 +53,7 @@ namespace WebCamCapture.Model
         /// <summary>
         /// Устройство готово?
         /// </summary>
-        //public bool IsDeviceReady { get; }
+        //public bool IsReady { get => _isReady; set => _isReady = value; }
 
 
         /// <summary>
@@ -70,17 +70,42 @@ namespace WebCamCapture.Model
         /// </summary>
         public bool IsRunning { get => this.videoSource != null ? this.videoSource.IsRunning : false; }
 
+        public PlayerModel()
+        {
+           
+        }
 
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public void init(int deviceId, int modeId)
+        //public void init(int deviceId, int modeId)
+        //{
+        //    //videoSource = new VideoCaptureDevice(videoDevices[deviceId].MonikerString);
+        //    videoSource.VideoResolution = videoSource.VideoCapabilities[modeId];
+        //    videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+        //}
+
+        /// <summary>
+        /// Получает список имен подключенных устройств
+        /// </summary>
+        /// <returns>Возращает TRUE если список был изменен</returns>
+        public List<string> GetDeviceNameList()
         {
-            //videoSource = new VideoCaptureDevice(videoDevices[deviceId].MonikerString);
-            videoSource.VideoResolution = videoSource.VideoCapabilities[modeId];
-            videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+
+            // заполняем список именами подклюен
+            List<string> list = new List<string>();
+            foreach (FilterInfo device in videoDevices)
+            {
+                list.Add(device.Name);
+            }
+
+            _deviceList = list;
+
+            //this.isDeviceReady = videoDevices.Count > 0 ? true : false;
+            return _deviceList;
         }
 
         /// <summary>
@@ -90,6 +115,9 @@ namespace WebCamCapture.Model
         /// <param name="mode">Размер кадра</param>
         public void Start()
         {
+            videoSource.Stop();
+            videoSource.VideoResolution = videoSource.VideoCapabilities[ModeIndex];
+            videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
             videoSource.Start();
         }
 
@@ -113,27 +141,7 @@ namespace WebCamCapture.Model
             return fSize;
         }
 
-        /// <summary>
-        /// Получает список имен подключенных устройств
-        /// </summary>
-        /// <returns>Возращает TRUE если список был изменен</returns>
-        public List<string> GetDeviceNameList()
-        {
-            
-            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
-            // заполняем список именами подклюен
-            List<string> list = new List<string>();
-            foreach (FilterInfo device in videoDevices)
-            {
-                list.Add(device.Name);
-            }
-
-            _deviceList = list;
-
-            //this.isDeviceReady = videoDevices.Count > 0 ? true : false;
-            return _deviceList;
-        }
         /// <summary>
         /// получаем индекс выбранного элемента по его имени, если элемент не обнаружен то возращаем 0.
         /// </summary>
@@ -143,13 +151,13 @@ namespace WebCamCapture.Model
         public int GetIndexByName(List<string> list, string name)
         {
             return list.IndexOf(name) != -1 ? list.IndexOf(name) : 0;
-            //return 1;
         }
 
         // сохранение конфигураций
         public void SaveConfig()
         {
-            Properties.Settings.Default.Save();
+            //Properties.Settings.Default.Save();
+            MessageBox.Show(DeviceName + " " + FrameSize);
         }
 
 
@@ -160,37 +168,29 @@ namespace WebCamCapture.Model
         /// <param name="eventArgs"></param>
         private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-
-            if (_frame != null)
-            {
-                _frame.Dispose();
-                _frame = null;
-
-            }
-            eventArgs.Frame.RotateFlip(RotateFlipType.Rotate180FlipY);
-            _frame = (Bitmap)eventArgs.Frame.Clone();
-            if (this.IsRunning) NewFrame(_frame);
-           
+            NewFrame(eventArgs.Frame);
         }
 
         /// <summary>
         /// Завершение работы программы захвата
         /// </summary>
         public void Stop()
-        {
-
-            
+        {      
             if (this.IsRunning)
             {
-                //videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
-                //videoSource.SignalToStop();
-                //videoSource.WaitForStop();
+                videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
+                videoSource.SignalToStop();
+                videoSource.WaitForStop();
                 videoSource.Stop();
-                //videoSource = null;
-               // var x = videoSource.IsRunning;
-      
+                videoSource = null;
             }
 
+        }
+        // вызывается при завершении программы
+        public void Shutdown()
+        {
+            this.Stop();
+            this.SaveConfig();
         }
     }
 }

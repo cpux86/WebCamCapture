@@ -34,7 +34,8 @@ namespace WebCamCapture.Model
         /// Состояние захвата видео 
         /// </summary>
         bool IsRunning { get; }
-        void init(int deviceId, int modeId);
+        //bool IsReady { get; set; }
+
         void Start();
 
         List<string> GetDeviceNameList();
@@ -49,6 +50,7 @@ namespace WebCamCapture.Model
         event Action<Image> NewFrame;
         event Action<int> ChangeDeviceId;
         event Action ChangeModId;
-        
+
+        void Shutdown();
     }
 }
