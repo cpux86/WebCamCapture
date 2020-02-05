@@ -181,8 +181,7 @@ namespace WebCamCapture.Model
                 videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
                 videoSource.SignalToStop();
                 videoSource.WaitForStop();
-                videoSource.Stop();
-                videoSource = null;
+                //videoSource.vi
             }
 
         }

@@ -104,7 +104,7 @@ namespace WebCamCapture.Presenter
                 //MessageBox.Show(_deviceId+" "+_modeId);
                 this.player.DeviceIndex = _deviceId;
                 this.player.ModeIndex = _modeId;
-                //this.player.Start();
+                this.player.Start();
             }
             else {
                 IsReady = false;

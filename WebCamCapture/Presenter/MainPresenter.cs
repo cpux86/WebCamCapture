@@ -71,8 +71,10 @@ namespace WebCamCapture.Presenter
             {
                 _frame.Dispose();
                 _frame = null;
+
             }
             _frame = (Bitmap)frame.Clone();
+            //_frame1 = new Bitmap((Bitmap)frame,new Size(320,240));
             _view.ShowNewFrame(_frame);
 
         }
@@ -88,7 +90,7 @@ namespace WebCamCapture.Presenter
                 _snapshot.Dispose();
                 _snapshot = null;
             }
-            
+
             _snapshot = (Bitmap)snapshot.Clone();
             _view.ShowSnapshot = _snapshot;
             _pleer.NewFrame -= Snapshot;
