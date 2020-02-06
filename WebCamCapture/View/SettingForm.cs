@@ -19,6 +19,7 @@ namespace WebCamCapture.View
 
         public int DeviceIndex { get => deviceList.SelectedIndex; set => deviceList.SelectedIndex = value; }
         public int ModeIndex { get => modesList.SelectedIndex; set => modesList.SelectedIndex = value; }
+        public int ScaleValue { get => trackScale.Value; set => trackScale.Value = value; }
         /// <summary>
         ///  выбранно устройство в настройках
         /// </summary>
@@ -31,6 +32,8 @@ namespace WebCamCapture.View
         /// Клик по кнопке OK на форме настроек
         /// </summary>
         public event Action BtnOkClick;
+        // события "Масштаб"
+        public event Action ScaleChange;
         public string[] DeviceList { 
             set {
                 deviceList.Items.Clear();
@@ -77,6 +80,54 @@ namespace WebCamCapture.View
         private void BtnOkSettingDev_Click(object sender, EventArgs e)
         {
             BtnOkClick();
+        }
+        // обработчик перемещения ползунка "Маштаб"
+        private void TrackScale_Scroll(object sender, EventArgs e)
+        {
+            int _trackScale = trackScale.Value;
+            if (_trackScale != this.ScaleValue)
+            {
+                this.ScaleValue = _trackScale;
+
+                numScale.Value = _trackScale;
+                ScaleChange();
+            }
+
+
+            numScale.Value = trackScale.Value;
+            this.ScaleValue = trackScale.Value;
+            ScaleChange();
+        }
+        // обработчик изменеия цифравого заначения "Маштаб"
+        private void NumScale_ValueChanged(object sender, EventArgs e)
+        {
+            int _numScale = (int)numScale.Value;
+            if (_numScale != this.ScaleValue)
+            {
+                //MessageBox.Show("Test");
+                // 
+                this.ScaleValue = (int)numScale.Value;
+                // выравниваем значение ползунка Масштаб и его цифравое значение
+                trackScale.Value = _numScale;
+                ScaleChange();
+            }
+            
+        }
+        // обработчик Маштаб режим Auto
+        private void ChScaleAuto_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chScaleAuto.Checked)
+            {
+                // запрещаем скроллить и вводить занчения
+                numScale.Enabled = false;
+                trackScale.Enabled = false;
+            }
+            else
+            {
+                numScale.Enabled = true;
+                trackScale.Enabled = true;
+            }
+
         }
     }
 }

@@ -31,10 +31,12 @@ namespace WebCamCapture.Presenter
             this.settingForm.DeviceIdChange += SettingForm_DeviceIdChange;
             this.settingForm.ModeIdChange += SettingForm_ModeIdChange;
             this.settingForm.BtnOkClick += SettingForm_BtnOkClick;
+            this.settingForm.ScaleChange += SettingForm_ScaleChange;
             // имя устройства из сохраненак
             string _dev = this.player.DeviceName;
             // размер кадра из сохраненак
             string _mod = this.player.FrameSize;
+            this.settingForm.SnapshotFolder = Properties.Settings.Default.FileDir;
             // инициализация списка подключенных устройств
             _deviceNameList = player.GetDeviceNameList();
             // подключены ли устройства
@@ -144,14 +146,12 @@ namespace WebCamCapture.Presenter
                 // 
                 this.settingForm.DeviceIndex = this._deviceId;
             }
-                      
+            // main          
             if (_deviceNameList.Count > 0)
             {
                 // если обнавленный список не пуст
                 settingForm.DeviceList = _deviceNameList.ToArray();
                 settingForm.DeviceIndex = _deviceId;
-                //settingForm.ModesList = _modesList.ToArray();
-                //settingForm.ModeIndex = _modeId;
                 
             }
             else
@@ -164,6 +164,11 @@ namespace WebCamCapture.Presenter
   
             this.settingForm.ShowDialog();
         }
-        
+
+
+        private void SettingForm_ScaleChange()
+        {
+            MessageBox.Show(this.settingForm.ScaleValue.ToString()); 
+        }
     }
 }

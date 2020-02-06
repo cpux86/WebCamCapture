@@ -40,11 +40,22 @@
             this.SettingAppPanel__DirOkBtn = new System.Windows.Forms.Button();
             this.btnOkSettingDev = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.chScaleAuto = new System.Windows.Forms.CheckBox();
+            this.numScale = new System.Windows.Forms.NumericUpDown();
+            this.trackScale = new System.Windows.Forms.TrackBar();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numScale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackScale)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -197,6 +208,13 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.trackBar2);
+            this.tabPage2.Controls.Add(this.chScaleAuto);
+            this.tabPage2.Controls.Add(this.numScale);
+            this.tabPage2.Controls.Add(this.trackScale);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
@@ -205,6 +223,95 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Управление";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // trackBar2
+            // 
+            this.trackBar2.Location = new System.Drawing.Point(81, 101);
+            this.trackBar2.Maximum = 500;
+            this.trackBar2.Minimum = 100;
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Size = new System.Drawing.Size(121, 45);
+            this.trackBar2.TabIndex = 6;
+            this.trackBar2.TickFrequency = 50;
+            this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBar2.Value = 100;
+            // 
+            // chScaleAuto
+            // 
+            this.chScaleAuto.AutoSize = true;
+            this.chScaleAuto.Checked = true;
+            this.chScaleAuto.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chScaleAuto.Location = new System.Drawing.Point(277, 31);
+            this.chScaleAuto.Name = "chScaleAuto";
+            this.chScaleAuto.Size = new System.Drawing.Size(15, 14);
+            this.chScaleAuto.TabIndex = 5;
+            this.chScaleAuto.UseVisualStyleBackColor = true;
+            this.chScaleAuto.CheckedChanged += new System.EventHandler(this.ChScaleAuto_CheckedChanged);
+            // 
+            // numScale
+            // 
+            this.numScale.Enabled = false;
+            this.numScale.Location = new System.Drawing.Point(219, 28);
+            this.numScale.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.numScale.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numScale.Name = "numScale";
+            this.numScale.Size = new System.Drawing.Size(43, 22);
+            this.numScale.TabIndex = 4;
+            this.numScale.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numScale.ValueChanged += new System.EventHandler(this.NumScale_ValueChanged);
+            // 
+            // trackScale
+            // 
+            this.trackScale.Enabled = false;
+            this.trackScale.Location = new System.Drawing.Point(81, 28);
+            this.trackScale.Maximum = 500;
+            this.trackScale.Minimum = 100;
+            this.trackScale.Name = "trackScale";
+            this.trackScale.Size = new System.Drawing.Size(121, 45);
+            this.trackScale.TabIndex = 3;
+            this.trackScale.TickFrequency = 50;
+            this.trackScale.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackScale.Value = 100;
+            this.trackScale.Scroll += new System.EventHandler(this.TrackScale_Scroll);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 114);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(64, 15);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Выдержка";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(32, 77);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 15);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Фокус";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(22, 26);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 15);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Маштаб";
             // 
             // SettingForm
             // 
@@ -224,6 +331,11 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numScale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackScale)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -243,5 +355,12 @@
         public System.Windows.Forms.Button btnOkSettingDev;
         public System.Windows.Forms.ComboBox deviceList;
         public System.Windows.Forms.ComboBox modesList;
+        private System.Windows.Forms.TrackBar trackScale;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown numScale;
+        protected System.Windows.Forms.CheckBox chScaleAuto;
+        private System.Windows.Forms.TrackBar trackBar2;
     }
 }

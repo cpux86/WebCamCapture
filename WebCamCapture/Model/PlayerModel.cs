@@ -70,23 +70,6 @@ namespace WebCamCapture.Model
         /// </summary>
         public bool IsRunning { get => this.videoSource != null ? this.videoSource.IsRunning : false; }
 
-        public PlayerModel()
-        {
-
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        //public void init(int deviceId, int modeId)
-        //{
-        //    //videoSource = new VideoCaptureDevice(videoDevices[deviceId].MonikerString);
-        //    videoSource.VideoResolution = videoSource.VideoCapabilities[modeId];
-        //    videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
-        //}
-
         /// <summary>
         /// Получает список имен подключенных устройств
         /// </summary>
@@ -103,8 +86,6 @@ namespace WebCamCapture.Model
             }
 
             _deviceList = list;
-
-            //this.isDeviceReady = videoDevices.Count > 0 ? true : false;
             return _deviceList;
         }
 
@@ -119,6 +100,7 @@ namespace WebCamCapture.Model
             {
                 videoSource.Stop();
                 videoSource.VideoResolution = videoSource.VideoCapabilities[ModeIndex];
+                //videoSource.SetCameraProperty(CameraControlProperty.Zoom, 100, CameraControlFlags.Manual); //
                 videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
                 videoSource.Start();
             }
@@ -127,9 +109,6 @@ namespace WebCamCapture.Model
 
                 MessageBox.Show("Error");
             }
-
-
-
         }
 
         /// <summary>

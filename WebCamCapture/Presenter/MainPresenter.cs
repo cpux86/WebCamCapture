@@ -92,6 +92,8 @@ namespace WebCamCapture.Presenter
 
             _snapshot = (Bitmap)snapshot.Clone();
             _view.ShowSnapshot = _snapshot;
+            Image x = (Bitmap)_snapshot.Clone();
+            x.Save("1.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
             _pleer.NewFrame -= Snapshot;
         }
 

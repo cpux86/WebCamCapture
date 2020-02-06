@@ -25,12 +25,14 @@ namespace WebCamCapture.View
         /// Клик по кнопке OK на форме настроек
         /// </summary>
         event Action BtnOkClick;
-        
+        // события "Масштаб"
+        event Action ScaleChange;
         /// <summary>
         /// Путь к папке со снимкаи
         /// </summary>
         string SnapshotFolder { get; set; }
         string SnapshotFolderTextBox { set; }
+        int ScaleValue { get; set; }
         DialogResult ShowDialog();
         void Close();
     }
