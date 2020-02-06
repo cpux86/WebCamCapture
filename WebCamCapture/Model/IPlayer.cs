@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using AForge.Video;
+using AForge.Video.DirectShow;
 
 namespace WebCamCapture.Model
 {
@@ -41,6 +43,9 @@ namespace WebCamCapture.Model
         List<string> GetDeviceNameList();
         List<string> GetListVideoModes(int deviceId);
 
+        void SetZoom(int x);
+        void SetFocus(int f);
+
 
 
 
@@ -52,5 +57,9 @@ namespace WebCamCapture.Model
         event Action ChangeModId;
 
         void Shutdown();
+
+        #region Настройки камеры
+        void GetZoom(out int _zoom, out CameraControlFlags _flags);
+        #endregion
     }
 }

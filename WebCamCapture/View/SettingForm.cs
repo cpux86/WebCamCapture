@@ -19,7 +19,22 @@ namespace WebCamCapture.View
 
         public int DeviceIndex { get => deviceList.SelectedIndex; set => deviceList.SelectedIndex = value; }
         public int ModeIndex { get => modesList.SelectedIndex; set => modesList.SelectedIndex = value; }
-        public int ScaleValue { get => trackScale.Value; set => trackScale.Value = value; }
+        public int ScaleValue { 
+            get => trackScale.Value; 
+            set { 
+                trackScale.Value = value;
+                numScale.Value = value;
+            } 
+        }
+        public int FocusValue
+        {
+            get => trackFocus.Value;
+            set
+            {
+                trackFocus.Value = value;
+                numFocus.Value = value;
+            }
+        }
         /// <summary>
         ///  выбранно устройство в настройках
         /// </summary>
@@ -34,6 +49,9 @@ namespace WebCamCapture.View
         public event Action BtnOkClick;
         // события "Масштаб"
         public event Action ScaleChange;
+        // событие "Фокус"
+        public event Action FocusChange;
+
         public string[] DeviceList { 
             set {
                 deviceList.Items.Clear();
@@ -81,7 +99,7 @@ namespace WebCamCapture.View
         {
             BtnOkClick();
         }
-        // обработчик перемещения ползунка "Маштаб"
+        // обработчик ползунка "Маштаб"
         private void TrackScale_Scroll(object sender, EventArgs e)
         {
             int _trackScale = trackScale.Value;
@@ -98,7 +116,7 @@ namespace WebCamCapture.View
             this.ScaleValue = trackScale.Value;
             ScaleChange();
         }
-        // обработчик изменеия цифравого заначения "Маштаб"
+        // обработчик изменеия цифравого заначения "Масштаб"
         private void NumScale_ValueChanged(object sender, EventArgs e)
         {
             int _numScale = (int)numScale.Value;
@@ -113,7 +131,7 @@ namespace WebCamCapture.View
             }
             
         }
-        // обработчик Маштаб режим Auto
+        // обработчик Масштаб режим Auto
         private void ChScaleAuto_CheckedChanged(object sender, EventArgs e)
         {
             if (chScaleAuto.Checked)
@@ -128,6 +146,20 @@ namespace WebCamCapture.View
                 trackScale.Enabled = true;
             }
 
+        }
+        // обработчик ползунка "Фокус"
+        private void trackFocus_Scroll(object sender, EventArgs e)
+        {
+            int _trackFocus = (int)numFocus.Value;
+            if (_trackFocus != this.FocusValue)
+            {
+                //MessageBox.Show("Test");
+                // 
+                this.FocusValue = (int)numFocus.Value;
+                // выравниваем значение ползунка Масштаб и его цифравое значение
+                trackFocus.Value = _trackFocus;
+                FocusChange();
+            }
         }
     }
 }

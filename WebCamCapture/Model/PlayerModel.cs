@@ -89,6 +89,8 @@ namespace WebCamCapture.Model
             return _deviceList;
         }
 
+        //CameraControlFlags controlFlags;
+        //int _z;
         /// <summary>
         /// Начинает захват видео 
         /// </summary>
@@ -101,6 +103,8 @@ namespace WebCamCapture.Model
                 videoSource.Stop();
                 videoSource.VideoResolution = videoSource.VideoCapabilities[ModeIndex];
                 //videoSource.SetCameraProperty(CameraControlProperty.Zoom, 100, CameraControlFlags.Manual); //
+                //videoSource.SetCameraProperty(CameraControlProperty.)
+                //videoSource.GetCameraProperty(CameraControlProperty.Zoom, out _z, out controlFlags);
                 videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
                 videoSource.Start();
             }
@@ -179,5 +183,26 @@ namespace WebCamCapture.Model
             this.Stop();
             this.SaveConfig();
         }
+
+        public void SetZoom(int x)
+        {
+            videoSource.SetCameraProperty(CameraControlProperty.Zoom, x, CameraControlFlags.Manual);
+        }
+        public void SetFocus(int f)
+        {
+            videoSource.SetCameraProperty(CameraControlProperty.Focus, f, CameraControlFlags.Manual);
+        }
+
+        #region Настройки камеры
+
+        public void GetZoom( out int _zoom, out CameraControlFlags _flags)
+        {
+            videoSource.GetCameraProperty(CameraControlProperty.Zoom, out _zoom, out _flags);
+        }
+
+
+
+
+        #endregion
     }
 }

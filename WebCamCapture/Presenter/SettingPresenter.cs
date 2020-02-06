@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebCamCapture.Model;
 using WebCamCapture.View;
+using AForge.Video;
+using AForge.Video.DirectShow;
 
 namespace WebCamCapture.Presenter
 {
@@ -32,6 +34,7 @@ namespace WebCamCapture.Presenter
             this.settingForm.ModeIdChange += SettingForm_ModeIdChange;
             this.settingForm.BtnOkClick += SettingForm_BtnOkClick;
             this.settingForm.ScaleChange += SettingForm_ScaleChange;
+            this.settingForm.FocusChange += SettingForm_FocusChange;
             // имя устройства из сохраненак
             string _dev = this.player.DeviceName;
             // размер кадра из сохраненак
@@ -76,6 +79,8 @@ namespace WebCamCapture.Presenter
                 //this.settingForm.ShowDialog();
             }           
         }
+
+
 
         /// <summary>
         /// получаем индекс выбранного элемента по его имени, если элемент не обнаружен то возращаем 0.
@@ -152,7 +157,18 @@ namespace WebCamCapture.Presenter
                 // если обнавленный список не пуст
                 settingForm.DeviceList = _deviceNameList.ToArray();
                 settingForm.DeviceIndex = _deviceId;
-                
+                //
+                #region Настройки камеры
+
+                #region Настройки Масштаба
+                CameraControlFlags flags;
+                int _zoom;
+                this.player.GetZoom(out _zoom, out flags);
+                this.settingForm.ScaleValue = _zoom;
+                #endregion
+
+
+                #endregion
             }
             else
             {
@@ -165,10 +181,17 @@ namespace WebCamCapture.Presenter
             this.settingForm.ShowDialog();
         }
 
-
+        // обрботчик изменения Масштаб
         private void SettingForm_ScaleChange()
         {
-            MessageBox.Show(this.settingForm.ScaleValue.ToString()); 
+            //MessageBox.Show(this.settingForm.ScaleValue.ToString()); 
+            this.player.SetZoom(this.settingForm.ScaleValue);
         }
+        // обрботчик изменения "Фокус"
+        private void SettingForm_FocusChange()
+        {
+            this.player.SetFocus(this.settingForm.FocusValue);
+        }
+
     }
 }

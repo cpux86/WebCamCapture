@@ -92,7 +92,7 @@
             this.videoView.Location = new System.Drawing.Point(590, 22);
             this.videoView.Name = "videoView";
             this.videoView.Size = new System.Drawing.Size(350, 246);
-            this.videoView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.videoView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.videoView.TabIndex = 1;
             this.videoView.TabStop = false;
             // 
@@ -211,7 +211,7 @@
             this.snapshotView.Location = new System.Drawing.Point(8, 22);
             this.snapshotView.Name = "snapshotView";
             this.snapshotView.Size = new System.Drawing.Size(576, 442);
-            this.snapshotView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.snapshotView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.snapshotView.TabIndex = 9;
             this.snapshotView.TabStop = false;
             // 
@@ -285,13 +285,13 @@
             // новыйЗаказToolStripMenuItem
             // 
             this.новыйЗаказToolStripMenuItem.Name = "новыйЗаказToolStripMenuItem";
-            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.новыйЗаказToolStripMenuItem.Text = "Новый заказ";
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             // 
             // настройкиToolStripMenuItem1

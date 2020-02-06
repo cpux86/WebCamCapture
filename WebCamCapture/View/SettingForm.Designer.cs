@@ -40,22 +40,33 @@
             this.SettingAppPanel__DirOkBtn = new System.Windows.Forms.Button();
             this.btnOkSettingDev = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
-            this.chScaleAuto = new System.Windows.Forms.CheckBox();
-            this.numScale = new System.Windows.Forms.NumericUpDown();
-            this.trackScale = new System.Windows.Forms.TrackBar();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.trackExposure = new System.Windows.Forms.TrackBar();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.trackFocus = new System.Windows.Forms.TrackBar();
+            this.numFocus = new System.Windows.Forms.NumericUpDown();
+            this.chFocusAuto = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.trackScale = new System.Windows.Forms.TrackBar();
+            this.numScale = new System.Windows.Forms.NumericUpDown();
+            this.chScaleAuto = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numScale)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackExposure)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackFocus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numFocus)).BeginInit();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackScale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numScale)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -69,7 +80,7 @@
             this.tabControl1.Location = new System.Drawing.Point(1, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(345, 224);
+            this.tabControl1.Size = new System.Drawing.Size(360, 235);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -81,7 +92,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(337, 196);
+            this.tabPage1.Size = new System.Drawing.Size(349, 207);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Источник";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -200,7 +211,7 @@
             this.btnOkSettingDev.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnOkSettingDev.Location = new System.Drawing.Point(13, 150);
             this.btnOkSettingDev.Name = "btnOkSettingDev";
-            this.btnOkSettingDev.Size = new System.Drawing.Size(75, 30);
+            this.btnOkSettingDev.Size = new System.Drawing.Size(75, 37);
             this.btnOkSettingDev.TabIndex = 16;
             this.btnOkSettingDev.Text = "OK";
             this.btnOkSettingDev.UseVisualStyleBackColor = true;
@@ -208,50 +219,166 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.trackBar2);
-            this.tabPage2.Controls.Add(this.chScaleAuto);
-            this.tabPage2.Controls.Add(this.numScale);
-            this.tabPage2.Controls.Add(this.trackScale);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.label3);
+            this.tabPage2.Controls.Add(this.groupBox5);
+            this.tabPage2.Controls.Add(this.groupBox4);
+            this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(337, 196);
+            this.tabPage2.Size = new System.Drawing.Size(352, 207);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Управление";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // trackBar2
+            // groupBox5
             // 
-            this.trackBar2.Location = new System.Drawing.Point(81, 101);
-            this.trackBar2.Maximum = 500;
-            this.trackBar2.Minimum = 100;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(121, 45);
-            this.trackBar2.TabIndex = 6;
-            this.trackBar2.TickFrequency = 50;
-            this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.trackBar2.Value = 100;
+            this.groupBox5.Controls.Add(this.trackExposure);
+            this.groupBox5.Controls.Add(this.numericUpDown2);
+            this.groupBox5.Controls.Add(this.checkBox2);
+            this.groupBox5.Location = new System.Drawing.Point(27, 137);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(294, 56);
+            this.groupBox5.TabIndex = 12;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Выдержка";
             // 
-            // chScaleAuto
+            // trackExposure
             // 
-            this.chScaleAuto.AutoSize = true;
-            this.chScaleAuto.Checked = true;
-            this.chScaleAuto.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chScaleAuto.Location = new System.Drawing.Point(277, 31);
-            this.chScaleAuto.Name = "chScaleAuto";
-            this.chScaleAuto.Size = new System.Drawing.Size(15, 14);
-            this.chScaleAuto.TabIndex = 5;
-            this.chScaleAuto.UseVisualStyleBackColor = true;
-            this.chScaleAuto.CheckedChanged += new System.EventHandler(this.ChScaleAuto_CheckedChanged);
+            this.trackExposure.AutoSize = false;
+            this.trackExposure.BackColor = System.Drawing.Color.White;
+            this.trackExposure.Enabled = false;
+            this.trackExposure.Location = new System.Drawing.Point(6, 17);
+            this.trackExposure.Maximum = 500;
+            this.trackExposure.Minimum = 100;
+            this.trackExposure.Name = "trackExposure";
+            this.trackExposure.Size = new System.Drawing.Size(212, 33);
+            this.trackExposure.TabIndex = 3;
+            this.trackExposure.TickFrequency = 50;
+            this.trackExposure.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackExposure.Value = 100;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Enabled = false;
+            this.numericUpDown2.Location = new System.Drawing.Point(224, 21);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(43, 22);
+            this.numericUpDown2.TabIndex = 4;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.Location = new System.Drawing.Point(273, 24);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(15, 14);
+            this.checkBox2.TabIndex = 5;
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.trackFocus);
+            this.groupBox4.Controls.Add(this.numFocus);
+            this.groupBox4.Controls.Add(this.chFocusAuto);
+            this.groupBox4.Location = new System.Drawing.Point(27, 75);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(294, 56);
+            this.groupBox4.TabIndex = 11;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Фокус";
+            // 
+            // trackFocus
+            // 
+            this.trackFocus.AutoSize = false;
+            this.trackFocus.BackColor = System.Drawing.Color.White;
+            this.trackFocus.Location = new System.Drawing.Point(6, 17);
+            this.trackFocus.Maximum = 5;
+            this.trackFocus.Minimum = -5;
+            this.trackFocus.Name = "trackFocus";
+            this.trackFocus.Size = new System.Drawing.Size(212, 33);
+            this.trackFocus.TabIndex = 3;
+            this.trackFocus.TickFrequency = 50;
+            this.trackFocus.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackFocus.Scroll += new System.EventHandler(this.trackFocus_Scroll);
+            // 
+            // numFocus
+            // 
+            this.numFocus.Enabled = false;
+            this.numFocus.Location = new System.Drawing.Point(224, 21);
+            this.numFocus.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numFocus.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            -2147483648});
+            this.numFocus.Name = "numFocus";
+            this.numFocus.Size = new System.Drawing.Size(43, 22);
+            this.numFocus.TabIndex = 4;
+            // 
+            // chFocusAuto
+            // 
+            this.chFocusAuto.AutoSize = true;
+            this.chFocusAuto.Checked = true;
+            this.chFocusAuto.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chFocusAuto.Location = new System.Drawing.Point(273, 24);
+            this.chFocusAuto.Name = "chFocusAuto";
+            this.chFocusAuto.Size = new System.Drawing.Size(15, 14);
+            this.chFocusAuto.TabIndex = 5;
+            this.chFocusAuto.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.trackScale);
+            this.groupBox3.Controls.Add(this.numScale);
+            this.groupBox3.Controls.Add(this.chScaleAuto);
+            this.groupBox3.Location = new System.Drawing.Point(27, 13);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(294, 56);
+            this.groupBox3.TabIndex = 10;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Масштаб";
+            // 
+            // trackScale
+            // 
+            this.trackScale.AutoSize = false;
+            this.trackScale.BackColor = System.Drawing.Color.White;
+            this.trackScale.Enabled = false;
+            this.trackScale.Location = new System.Drawing.Point(6, 17);
+            this.trackScale.Maximum = 500;
+            this.trackScale.Minimum = 100;
+            this.trackScale.Name = "trackScale";
+            this.trackScale.Size = new System.Drawing.Size(212, 33);
+            this.trackScale.TabIndex = 3;
+            this.trackScale.TickFrequency = 50;
+            this.trackScale.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackScale.Value = 100;
+            this.trackScale.Scroll += new System.EventHandler(this.TrackScale_Scroll);
             // 
             // numScale
             // 
             this.numScale.Enabled = false;
-            this.numScale.Location = new System.Drawing.Point(219, 28);
+            this.numScale.Location = new System.Drawing.Point(224, 21);
             this.numScale.Maximum = new decimal(new int[] {
             500,
             0,
@@ -272,52 +399,23 @@
             0});
             this.numScale.ValueChanged += new System.EventHandler(this.NumScale_ValueChanged);
             // 
-            // trackScale
+            // chScaleAuto
             // 
-            this.trackScale.Enabled = false;
-            this.trackScale.Location = new System.Drawing.Point(81, 28);
-            this.trackScale.Maximum = 500;
-            this.trackScale.Minimum = 100;
-            this.trackScale.Name = "trackScale";
-            this.trackScale.Size = new System.Drawing.Size(121, 45);
-            this.trackScale.TabIndex = 3;
-            this.trackScale.TickFrequency = 50;
-            this.trackScale.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.trackScale.Value = 100;
-            this.trackScale.Scroll += new System.EventHandler(this.TrackScale_Scroll);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 114);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 15);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Выдержка";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(32, 77);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 15);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Фокус";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 26);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 15);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Маштаб";
+            this.chScaleAuto.AutoSize = true;
+            this.chScaleAuto.Checked = true;
+            this.chScaleAuto.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chScaleAuto.Location = new System.Drawing.Point(273, 24);
+            this.chScaleAuto.Name = "chScaleAuto";
+            this.chScaleAuto.Size = new System.Drawing.Size(15, 14);
+            this.chScaleAuto.TabIndex = 5;
+            this.chScaleAuto.UseVisualStyleBackColor = true;
+            this.chScaleAuto.CheckedChanged += new System.EventHandler(this.ChScaleAuto_CheckedChanged);
             // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 225);
+            this.ClientSize = new System.Drawing.Size(359, 236);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
@@ -332,10 +430,18 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numScale)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackExposure)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackFocus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numFocus)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackScale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numScale)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -355,12 +461,17 @@
         public System.Windows.Forms.Button btnOkSettingDev;
         public System.Windows.Forms.ComboBox deviceList;
         public System.Windows.Forms.ComboBox modesList;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.TrackBar trackExposure;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        protected System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TrackBar trackFocus;
+        private System.Windows.Forms.NumericUpDown numFocus;
+        protected System.Windows.Forms.CheckBox chFocusAuto;
+        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TrackBar trackScale;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numScale;
         protected System.Windows.Forms.CheckBox chScaleAuto;
-        private System.Windows.Forms.TrackBar trackBar2;
     }
 }
