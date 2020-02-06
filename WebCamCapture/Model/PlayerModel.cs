@@ -72,7 +72,7 @@ namespace WebCamCapture.Model
 
         public PlayerModel()
         {
-           
+
         }
 
 
@@ -115,10 +115,21 @@ namespace WebCamCapture.Model
         /// <param name="mode">Размер кадра</param>
         public void Start()
         {
-            videoSource.Stop();
-            videoSource.VideoResolution = videoSource.VideoCapabilities[ModeIndex];
-            videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
-            videoSource.Start();
+            try
+            {
+                videoSource.Stop();
+                videoSource.VideoResolution = videoSource.VideoCapabilities[ModeIndex];
+                videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+                videoSource.Start();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error");
+            }
+
+
+
         }
 
         /// <summary>
@@ -136,7 +147,7 @@ namespace WebCamCapture.Model
             {
                 // формируем строку типа 640 x 480
                 fSize.Add(String.Format("{0} x {1}", s.FrameSize.Width, s.FrameSize.Height));
-               
+
             }
             return fSize;
         }
@@ -156,8 +167,7 @@ namespace WebCamCapture.Model
         // сохранение конфигураций
         public void SaveConfig()
         {
-            //Properties.Settings.Default.Save();
-            MessageBox.Show(DeviceName + " " + FrameSize);
+            Properties.Settings.Default.Save();
         }
 
 
@@ -175,13 +185,12 @@ namespace WebCamCapture.Model
         /// Завершение работы программы захвата
         /// </summary>
         public void Stop()
-        {      
+        {
             if (this.IsRunning)
             {
                 videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
                 videoSource.SignalToStop();
                 videoSource.WaitForStop();
-                //videoSource.vi
             }
 
         }

@@ -48,11 +48,14 @@ namespace WebCamCapture.Presenter
                     _modesList = player.GetListVideoModes(_deviceId);
                     // поддерживает ли устройстово _deviceId режим (mod) из сохраненок, если нет то _modesList.IndexOf(_mod) вернет -1. 
                     _modeId = _modesList.IndexOf(_mod);
+
+                    // устройство из настроек подключено
+                    this.settingForm.ModesList = _modesList.ToArray();
                 }              
 
             }
             // если параметры для захвата установлены
-            if (_deviceId != -1 || _modeId != -1)
+            if (_deviceId != -1 && _modeId != -1)
             {
                 this.settingForm.DeviceList = _deviceNameList.ToArray();
                 this.settingForm.ModesList = _modesList.ToArray();
@@ -68,17 +71,8 @@ namespace WebCamCapture.Presenter
             else
             {
                 // не все готово, требуются настройки
-                this.settingForm.ShowDialog();
-            }
-
-
-            //    }
-            //    // сохраняем путь к снимкам 
-            //    Properties.Settings.Default.FileDir = this.setting.SnapshotFolder;
-            //    Properties.Settings.Default.SelectedDeviceName = player.DeviceList[this.setting.DeviceIndex];
-            //    Properties.Settings.Default.SelectedFrameSize = player.ListVideoModes[this.player.ModeIndex];
-            //}
-            
+                //this.settingForm.ShowDialog();
+            }           
         }
 
         /// <summary>
@@ -105,6 +99,11 @@ namespace WebCamCapture.Presenter
                 this.player.DeviceIndex = _deviceId;
                 this.player.ModeIndex = _modeId;
                 this.player.Start();
+
+
+                // Имя устройства и режим
+                this.player.DeviceName = _deviceNameList[_deviceId];
+                this.player.FrameSize = _modesList[_modeId];
             }
             else {
                 IsReady = false;
@@ -140,7 +139,7 @@ namespace WebCamCapture.Presenter
             if (!_deviceNameList.SequenceEqual<string>(_newDevList))
             {
                 _deviceNameList = _newDevList;
-                // обновляем список устройств представлении "настройки"
+                // обновляем список устройств представления "настройки"
                 this.settingForm.DeviceList = _deviceNameList.ToArray();
                 // 
                 this.settingForm.DeviceIndex = this._deviceId;
@@ -151,6 +150,9 @@ namespace WebCamCapture.Presenter
                 // если обнавленный список не пуст
                 settingForm.DeviceList = _deviceNameList.ToArray();
                 settingForm.DeviceIndex = _deviceId;
+                //settingForm.ModesList = _modesList.ToArray();
+                //settingForm.ModeIndex = _modeId;
+                
             }
             else
             {

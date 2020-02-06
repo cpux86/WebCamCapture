@@ -44,9 +44,8 @@ namespace WebCamCapture.Presenter
 
         private void GetContext_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //_pleer.Stop();
+            // Завершаем работу программы
             _pleer.Shutdown();
-            Properties.Settings.Default.Save();
         }
 
         /// <summary>
