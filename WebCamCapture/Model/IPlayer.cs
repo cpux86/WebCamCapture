@@ -60,6 +60,13 @@ namespace WebCamCapture.Model
 
         #region Настройки камеры
         void GetZoom(out int _zoom, out CameraControlFlags _flags);
+        void GetFocus(out int _focus, out CameraControlFlags _flags);
         #endregion
+        
+    }
+
+    interface IDevice {
+        int MinValue { get; set; }
+        int Zoom();
     }
 }

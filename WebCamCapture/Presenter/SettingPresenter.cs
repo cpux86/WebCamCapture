@@ -33,7 +33,7 @@ namespace WebCamCapture.Presenter
             this.settingForm.DeviceIdChange += SettingForm_DeviceIdChange;
             this.settingForm.ModeIdChange += SettingForm_ModeIdChange;
             this.settingForm.BtnOkClick += SettingForm_BtnOkClick;
-            this.settingForm.ScaleChange += SettingForm_ScaleChange;
+            this.settingForm.ZoomChange += SettingForm_ZoomChange;
             this.settingForm.FocusChange += SettingForm_FocusChange;
             // имя устройства из сохраненак
             string _dev = this.player.DeviceName;
@@ -138,8 +138,6 @@ namespace WebCamCapture.Presenter
         /// </summary>
         internal void Show()
         {
-            //settingForm.DeviceList = _deviceNameList.ToArray();
-            //List<string> _newDevList = player.GetDeviceNameList();
             List<string> _newDevList;
             _newDevList = _deviceNameList;
             // изменилься ли список подключенных устройств
@@ -157,18 +155,9 @@ namespace WebCamCapture.Presenter
                 // если обнавленный список не пуст
                 settingForm.DeviceList = _deviceNameList.ToArray();
                 settingForm.DeviceIndex = _deviceId;
-                //
-                #region Настройки камеры
-
-                #region Настройки Масштаба
-                CameraControlFlags flags;
-                int _zoom;
-                this.player.GetZoom(out _zoom, out flags);
-                this.settingForm.ScaleValue = _zoom;
-                #endregion
-
-
-                #endregion
+                // Текущие настройки устройств передаются в представление 
+                SetCurrentSettingDevice();
+                
             }
             else
             {
@@ -181,16 +170,40 @@ namespace WebCamCapture.Presenter
             this.settingForm.ShowDialog();
         }
 
-        // обрботчик изменения Масштаб
-        private void SettingForm_ScaleChange()
+        /// <summary>
+        /// Текущие настройки устройств передаются в представление 
+        /// </summary>
+        private void SetCurrentSettingDevice()
         {
-            //MessageBox.Show(this.settingForm.ScaleValue.ToString()); 
-            this.player.SetZoom(this.settingForm.ScaleValue);
+            #region Настройки камеры
+            CameraControlFlags _flags;
+            #region Настройки Масштаба
+
+            int _zoom;
+            this.player.GetZoom(out _zoom, out _flags);
+            this.settingForm.ZoomValue = _zoom;
+            #endregion
+
+            #region Настройки фокуса
+            int _focus;
+            this.player.GetFocus(out _focus, out _flags);
+            this.settingForm.FocusValue = _focus;
+            #endregion
+
+
+            #endregion
+        }
+
+        // обрботчик изменения Масштаб
+        private void SettingForm_ZoomChange()
+        {
+            if (this.player.IsRunning) { this.player.SetZoom(this.settingForm.ZoomValue); }
         }
         // обрботчик изменения "Фокус"
         private void SettingForm_FocusChange()
         {
-            this.player.SetFocus(this.settingForm.FocusValue);
+            if (this.player.IsRunning) { this.player.SetFocus(this.settingForm.FocusValue); }
+            
         }
 
     }

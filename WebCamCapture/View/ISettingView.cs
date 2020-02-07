@@ -26,7 +26,7 @@ namespace WebCamCapture.View
         /// </summary>
         event Action BtnOkClick;
         // события "Масштаб"
-        event Action ScaleChange;
+        event Action ZoomChange;
         // событие "Фокус"
         event Action FocusChange;
         /// <summary>
@@ -34,7 +34,7 @@ namespace WebCamCapture.View
         /// </summary>
         string SnapshotFolder { get; set; }
         string SnapshotFolderTextBox { set; }
-        int ScaleValue { get; set; }
+        int ZoomValue { get; set; }
         int FocusValue { get; set; }
         DialogResult ShowDialog();
         void Close();

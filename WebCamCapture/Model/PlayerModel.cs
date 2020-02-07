@@ -18,7 +18,7 @@ namespace WebCamCapture.Model
     /// <summary>
     /// Робота с web камерой, сознаие и сохнанение снимков
     /// </summary>
-    public class PlayerModel : IPlayer
+    public class PlayerModel : Devices, IPlayer
     {
 
         FilterInfoCollection videoDevices;
@@ -102,9 +102,6 @@ namespace WebCamCapture.Model
             {
                 videoSource.Stop();
                 videoSource.VideoResolution = videoSource.VideoCapabilities[ModeIndex];
-                //videoSource.SetCameraProperty(CameraControlProperty.Zoom, 100, CameraControlFlags.Manual); //
-                //videoSource.SetCameraProperty(CameraControlProperty.)
-                //videoSource.GetCameraProperty(CameraControlProperty.Zoom, out _z, out controlFlags);
                 videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
                 videoSource.Start();
             }
@@ -183,10 +180,20 @@ namespace WebCamCapture.Model
             this.Stop();
             this.SaveConfig();
         }
+        //int _minValue;
+        IDevice d ;
 
+
+        int _minValue;    
+        int _maxValue;
+        int _stapSize;
+        int _defValuse;
+        CameraControlFlags _controlFlags;
         public void SetZoom(int x)
         {
+            //d.Zoom().
             videoSource.SetCameraProperty(CameraControlProperty.Zoom, x, CameraControlFlags.Manual);
+            videoSource.GetCameraPropertyRange(CameraControlProperty.Exposure, out _minValue, out _maxValue, out _stapSize,out _defValuse, out _controlFlags);
         }
         public void SetFocus(int f)
         {
@@ -200,9 +207,28 @@ namespace WebCamCapture.Model
             videoSource.GetCameraProperty(CameraControlProperty.Zoom, out _zoom, out _flags);
         }
 
+        public void GetFocus(out int _focus, out CameraControlFlags _flags)
+        {
+            videoSource.GetCameraProperty(CameraControlProperty.Focus, out _focus, out _flags);
+            
+        }
+
 
 
 
         #endregion
+    }
+
+    public class Devices : IDevice
+    {
+        int _minValue;
+
+        public int MinValue { get => _minValue; set => _minValue = value; }
+        //int IDevice.MinValue { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        int IDevice.Zoom()
+        {
+            return MinValue;
+        }
     }
 }

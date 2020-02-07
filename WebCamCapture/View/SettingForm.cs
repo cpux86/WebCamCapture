@@ -19,11 +19,11 @@ namespace WebCamCapture.View
 
         public int DeviceIndex { get => deviceList.SelectedIndex; set => deviceList.SelectedIndex = value; }
         public int ModeIndex { get => modesList.SelectedIndex; set => modesList.SelectedIndex = value; }
-        public int ScaleValue { 
-            get => trackScale.Value; 
+        public int ZoomValue { 
+            get => trackZoom.Value; 
             set { 
-                trackScale.Value = value;
-                numScale.Value = value;
+                trackZoom.Value = value;
+                numZoom.Value = value;
             } 
         }
         public int FocusValue
@@ -48,7 +48,7 @@ namespace WebCamCapture.View
         /// </summary>
         public event Action BtnOkClick;
         // события "Масштаб"
-        public event Action ScaleChange;
+        public event Action ZoomChange;
         // событие "Фокус"
         public event Action FocusChange;
 
@@ -100,36 +100,26 @@ namespace WebCamCapture.View
             BtnOkClick();
         }
         // обработчик ползунка "Маштаб"
-        private void TrackScale_Scroll(object sender, EventArgs e)
+        private void TrackZoom_Scroll(object sender, EventArgs e)
         {
-            int _trackScale = trackScale.Value;
-            if (_trackScale != this.ScaleValue)
+            if ((int)numZoom.Value != trackZoom.Value)
             {
-                this.ScaleValue = _trackScale;
-
-                numScale.Value = _trackScale;
-                ScaleChange();
+                // синхронизируем значение
+                this.ZoomValue = trackZoom.Value;
+                // уведомляем об изменении Zoom
+                ZoomChange();
             }
-
-
-            numScale.Value = trackScale.Value;
-            this.ScaleValue = trackScale.Value;
-            ScaleChange();
         }
         // обработчик изменеия цифравого заначения "Масштаб"
         private void NumScale_ValueChanged(object sender, EventArgs e)
         {
-            int _numScale = (int)numScale.Value;
-            if (_numScale != this.ScaleValue)
+            if (trackZoom.Value != (int) numZoom.Value)
             {
-                //MessageBox.Show("Test");
-                // 
-                this.ScaleValue = (int)numScale.Value;
-                // выравниваем значение ползунка Масштаб и его цифравое значение
-                trackScale.Value = _numScale;
-                ScaleChange();
+                // синхронизируем значение
+                this.ZoomValue = (int)numZoom.Value;
+                // уведомляем об изменении Zoom
+                ZoomChange();
             }
-            
         }
         // обработчик Масштаб режим Auto
         private void ChScaleAuto_CheckedChanged(object sender, EventArgs e)
@@ -137,29 +127,63 @@ namespace WebCamCapture.View
             if (chScaleAuto.Checked)
             {
                 // запрещаем скроллить и вводить занчения
-                numScale.Enabled = false;
-                trackScale.Enabled = false;
+                numZoom.Enabled = false;
+                trackZoom.Enabled = false;
             }
             else
             {
-                numScale.Enabled = true;
-                trackScale.Enabled = true;
+                numZoom.Enabled = true;
+                trackZoom.Enabled = true;
             }
 
         }
+        #region Настройки фокуса
+
         // обработчик ползунка "Фокус"
         private void trackFocus_Scroll(object sender, EventArgs e)
         {
-            int _trackFocus = (int)numFocus.Value;
-            if (_trackFocus != this.FocusValue)
+            //int _trackFocus = trackFocus.Value;
+            //int _numFocus = (int)numFocus.Value;
+            // новое значение фокуса отличается
+            if (trackFocus.Value != (int)numFocus.Value)
             {
-                //MessageBox.Show("Test");
-                // 
-                this.FocusValue = (int)numFocus.Value;
-                // выравниваем значение ползунка Масштаб и его цифравое значение
-                trackFocus.Value = _trackFocus;
+                // синхронизируем значение
+                this.FocusValue = trackFocus.Value;
+                // уведмляем о изменении Фокус
                 FocusChange();
             }
         }
+
+        // обработчик ввода числа
+        private void NumFocus_ValueChanged(object sender, EventArgs e)
+        {
+            if ((int)numFocus.Value != trackFocus.Value)
+            {
+                // синхронизируем значение
+                this.FocusValue = (int)numFocus.Value;
+                // уведмляем о изменении Фокус
+                FocusChange();
+            }
+        }
+        // обработчик флага FocusAuto
+        private void ChFocusAuto_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chFocusAuto.Checked)
+            {
+                // запрещаем скроллить и вводить занчения
+                numFocus.Enabled = false;
+                trackFocus.Enabled = false;
+            }
+            else
+            {
+                numFocus.Enabled = true;
+                trackFocus.Enabled = true;
+            }
+        }
+
+
+        #endregion
+
+
     }
 }

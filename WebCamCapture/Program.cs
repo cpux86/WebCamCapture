@@ -37,9 +37,16 @@ namespace WebCamCapture
             new Presenter.MainPresenter(mainForm, pleerModel, orderModel);
             playerSettingPresenter = new Presenter.SettingPresenter(playerSettingForm, pleerModel);
 
-           
 
-            Application.Run(mainForm);
+            try
+            {
+                Application.Run(mainForm);
+            }
+            catch (InvalidOperationException e)
+            {
+                MessageBox.Show(e.Message);               
+            }
+            
            
         }
         // отобразить форму заказа
