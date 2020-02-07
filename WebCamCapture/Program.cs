@@ -36,8 +36,11 @@ namespace WebCamCapture
             playerSettingForm = new SettingForm();
             new Presenter.MainPresenter(mainForm, pleerModel, orderModel);
             playerSettingPresenter = new Presenter.SettingPresenter(playerSettingForm, pleerModel);
-
-
+            // Тест
+            //Model.Device device = new Model.Device();
+            //device.GetDeviceNameList();
+            //var x = device.GetFrameSizeList(0);
+           
             try
             {
                 Application.Run(mainForm);

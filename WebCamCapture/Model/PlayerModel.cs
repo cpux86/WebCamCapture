@@ -18,7 +18,7 @@ namespace WebCamCapture.Model
     /// <summary>
     /// Робота с web камерой, сознаие и сохнанение снимков
     /// </summary>
-    public class PlayerModel : Devices, IPlayer
+    public class PlayerModel : IPlayer
     {
 
         FilterInfoCollection videoDevices;
@@ -181,7 +181,6 @@ namespace WebCamCapture.Model
             this.SaveConfig();
         }
         //int _minValue;
-        IDevice d ;
 
 
         int _minValue;    
@@ -217,18 +216,5 @@ namespace WebCamCapture.Model
 
 
         #endregion
-    }
-
-    public class Devices : IDevice
-    {
-        int _minValue;
-
-        public int MinValue { get => _minValue; set => _minValue = value; }
-        //int IDevice.MinValue { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        int IDevice.Zoom()
-        {
-            return MinValue;
-        }
     }
 }

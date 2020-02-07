@@ -65,8 +65,4 @@ namespace WebCamCapture.Model
         
     }
 
-    interface IDevice {
-        int MinValue { get; set; }
-        int Zoom();
-    }
 }

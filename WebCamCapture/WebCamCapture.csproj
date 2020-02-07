@@ -76,6 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ImageBrowser.cs" />
+    <Compile Include="Model\Device.cs" />
+    <Compile Include="Model\Devices.cs" />
     <Compile Include="Model\IOrderModel.cs" />
     <Compile Include="Model\IPlayer.cs" />
     <Compile Include="Model\OrderModel.cs" />
