@@ -13,8 +13,8 @@ namespace WebCamCapture.Model
         /// <summary>
         /// Возвращает коллекцию устройств
         /// </summary>
-        public FilterInfoCollection DevicesCollection { get => videoDevices; }     
-               
+        public FilterInfoCollection DevicesCollection { get => videoDevices; }
+
         /// <summary>
         /// Взращает список имен подключенных устройств
         /// </summary>
@@ -30,5 +30,16 @@ namespace WebCamCapture.Model
             }
             return _list;
         }
+        //public Devices GetDeviceNameList()
+        //{
+        //    videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+        //    // заполняем список именами подклюен
+        //    //List<string> _list = new List<string>();
+        //    //foreach (FilterInfo device in videoDevices)
+        //    //{
+        //    //    _list.Add(device.Name);
+        //    //}
+        //    return videoDevices;
+        //}
     }
 }

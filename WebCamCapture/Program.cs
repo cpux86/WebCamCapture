@@ -37,10 +37,26 @@ namespace WebCamCapture
             new Presenter.MainPresenter(mainForm, pleerModel, orderModel);
             playerSettingPresenter = new Presenter.SettingPresenter(playerSettingForm, pleerModel);
             // Тест
-            //Model.Device device = new Model.Device();
-            //device.GetDeviceNameList();
-            //var x = device.GetFrameSizeList(0);
+            //var x6 = new Model.Devices()
+            //x6.
            
+
+            //device.GetDeviceNameList().
+           // device.GetFrameSizeList
+            //var x = device.GetFrameSizeList(1);
+            ////device.SetProperty(AForge.Video.DirectShow.CameraControlProperty.Zoom, 200, AForge.Video.DirectShow.CameraControlFlags.Manual);
+            //Model.IPropertyRange y = device.GetZoomRange();
+            //var t = (Model.Device)device;
+            //var z = device.GetFocusRange();
+            //var ex = device.GetExposureRange();
+            //var xx = device.CurrentHorizontalPosition().Value;
+            //Model.IPropertyRange xx1 = device.GetZoomRange();
+            
+            
+
+
+
+
             try
             {
                 Application.Run(mainForm);
