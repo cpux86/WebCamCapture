@@ -37,22 +37,42 @@ namespace WebCamCapture
             new Presenter.MainPresenter(mainForm, pleerModel, orderModel);
             playerSettingPresenter = new Presenter.SettingPresenter(playerSettingForm, pleerModel);
             // Тест
-            //var x6 = new Model.Devices()
-            //x6.
-           
+            Model.Devices devices = new Model.Devices();
+            int count = devices.Counter;
+            List<string> devList = devices.GetDevicesNameList();
+            Model.Device device = devices.GetDevice(1);
+            List<string> modList = device.GetFrameSizeList();
+            Model.ICurrentProperty currentPropertyZoom = device.CurrentZoom();
+
+            //var x = device.GetFrameSizeList();
+            //var v = device.CurrentVerticalPosition();
+            //var currentProperty = device.CurrentZoom();
+
+            //devices
+
+            var a = device.CurrentZoom();
+            var b = device.CurrentFocus();
+            var c = device.CurrentExposure();
+
+            var a1 = device.GetZoomRange();
+            var a2 = device.GetFocusRange();
+            var a3 = device.GetExposureRange();
+
+
+            //Model.Devices device 
+
 
             //device.GetDeviceNameList().
-           // device.GetFrameSizeList
+            // devielse.GetFrameSizeList
             //var x = device.GetFrameSizeList(1);
-            ////device.SetProperty(AForge.Video.DirectShow.CameraControlProperty.Zoom, 200, AForge.Video.DirectShow.CameraControlFlags.Manual);
+            //device.SetProperty(AForge.Video.DirectShow.CameraControlProperty.Zoom, 200, AForge.Video.DirectShow.CameraControlFlags.Manual);
             //Model.IPropertyRange y = device.GetZoomRange();
             //var t = (Model.Device)device;
             //var z = device.GetFocusRange();
             //var ex = device.GetExposureRange();
             //var xx = device.CurrentHorizontalPosition().Value;
-            //Model.IPropertyRange xx1 = device.GetZoomRange();
-            
-            
+
+
 
 
 

@@ -89,28 +89,6 @@ namespace WebCamCapture.Model
             return _deviceList;
         }
 
-        //CameraControlFlags controlFlags;
-        //int _z;
-        /// <summary>
-        /// Начинает захват видео 
-        /// </summary>
-        /// <param name="device">Идентификатор устройстова</param>
-        /// <param name="mode">Размер кадра</param>
-        public void Start()
-        {
-            try
-            {
-                videoSource.Stop();
-                videoSource.VideoResolution = videoSource.VideoCapabilities[ModeIndex];
-                videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
-                videoSource.Start();
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show("Error");
-            }
-        }
 
         /// <summary>
         ///  Возращает список поддерживаемых рижимов 
@@ -132,6 +110,26 @@ namespace WebCamCapture.Model
             return fSize;
         }
 
+        /// <summary>
+        /// Начинает захват видео 
+        /// </summary>
+        /// <param name="device">Идентификатор устройстова</param>
+        /// <param name="mode">Размер кадра</param>
+        public void Start()
+        {
+            try
+            {
+                videoSource.Stop();
+                videoSource.VideoResolution = videoSource.VideoCapabilities[ModeIndex];
+                videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+                videoSource.Start();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error");
+            }
+        }
 
         /// <summary>
         /// получаем индекс выбранного элемента по его имени, если элемент не обнаружен то возращаем 0.

@@ -7,18 +7,37 @@ using System.Threading.Tasks;
 
 namespace WebCamCapture.Model
 {
-    class Device : Devices
+    class Device
     {
-        VideoCaptureDevice videoSource;
+        protected Device()
+        {
+
+        }
+        private static Device instance;
+        public static Device getInstance()
+        {
+            if (instance == null)
+            {
+                instance = new Device();
+            }
+            return instance;
+        }
+        static VideoCaptureDevice videoSource;
+        public static string Moniker { get; set; }
+        public static void Dev()
+        {
+            videoSource = new VideoCaptureDevice(Moniker);
+        }
         /// <summary>
         /// Возращает список поддерживаемых размеров кадров
         /// </summary>
         /// <param name="dev">Идентификатор устройства</param>
         /// <returns></returns>
-        public List<string> GetFrameSizeList(int dev)
+        public List<string> GetFrameSizeList()
         {
+            //videoSource.Vi
             List<string> fSize = new List<string>();
-            videoSource = new VideoCaptureDevice(DevicesCollection[dev].MonikerString);
+            videoSource = new VideoCaptureDevice(Moniker);
             // инициализируем свойства устройства
             //this.PropertyRange();
             // поддерживаемые режимы работы камеры (разрешение)
@@ -35,6 +54,7 @@ namespace WebCamCapture.Model
 
         #region Получаем диапазон значений и значение по умолчанию
         private Model.Property prop;
+
         /// <summary>
         /// Возвращает диапазон Масштабирования
         /// </summary>
@@ -87,7 +107,7 @@ namespace WebCamCapture.Model
         /// Возвращает текущие настройки масштаба
         /// </summary>
         /// <returns></returns>
-        public IProperty CurrentZoom()
+        public ICurrentProperty CurrentZoom()
         {
             return this.GetCurrentPropertys(CameraControlProperty.Zoom);
             
@@ -96,7 +116,7 @@ namespace WebCamCapture.Model
         /// Возвращает текущие настройки фокуса
         /// </summary>
         /// <returns></returns>
-        public IProperty CurrentFocus()
+        public ICurrentProperty CurrentFocus()
         {
             return this.GetCurrentPropertys(CameraControlProperty.Focus);
         }
@@ -104,7 +124,7 @@ namespace WebCamCapture.Model
         /// Возвращает текущие настройки экспозиции
         /// </summary>
         /// <returns></returns>
-        public IProperty CurrentExposure()
+        public ICurrentProperty CurrentExposure()
         {
             return this.GetCurrentPropertys(CameraControlProperty.Exposure);
         }
@@ -112,7 +132,7 @@ namespace WebCamCapture.Model
         /// Текущая позиция по горизонтали
         /// </summary>
         /// <returns></returns>
-        public IProperty CurrentHorizontalPosition()
+        public ICurrentProperty CurrentHorizontalPosition()
         {
             return this.GetCurrentPropertys(CameraControlProperty.Roll);
         }
@@ -120,7 +140,7 @@ namespace WebCamCapture.Model
         /// Текущая позиция по вертикали
         /// </summary>
         /// <returns></returns>
-        public IProperty CurrentVerticalPosition()
+        public ICurrentProperty CurrentVerticalPosition()
         {
             return this.GetCurrentPropertys(CameraControlProperty.Tilt);
         }
@@ -184,7 +204,7 @@ namespace WebCamCapture.Model
 
     }
 
-    public class Property : IProperty, IPropertyRange
+    public class Property : ICurrentProperty, IPropertyRange
     {
         public int MinValue { get; set; }
         public int MaxValue { get; set; }
@@ -209,9 +229,12 @@ namespace WebCamCapture.Model
         CameraControlFlags ControlFlag { get; }
     }
 
-    public interface IProperty
+    public interface ICurrentProperty
     {
         int Value { get; set; }
+        /// <summary>
+        /// Флаг Auto
+        /// </summary>
         CameraControlFlags ControlFlag { get; set; }
     }
 }
