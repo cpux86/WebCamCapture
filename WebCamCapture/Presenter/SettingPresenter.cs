@@ -131,7 +131,7 @@ namespace WebCamCapture.Presenter
             settingForm.ModesList = _modesList.ToArray();
         }
 
-
+        #region Отобразить форму настройки
 
         /// <summary>
         /// Отобразить форму настройки
@@ -157,7 +157,7 @@ namespace WebCamCapture.Presenter
                 settingForm.DeviceIndex = _deviceId;
                 // Текущие настройки устройств передаются в представление 
                 SetCurrentSettingDevice();
-                
+
             }
             else
             {
@@ -166,9 +166,11 @@ namespace WebCamCapture.Presenter
                 // сбрасывае идентификатор
                 _deviceId = -1;
             }
-  
+
             this.settingForm.ShowDialog();
         }
+        #endregion
+
 
         /// <summary>
         /// Текущие настройки устройств передаются в представление 
@@ -176,6 +178,8 @@ namespace WebCamCapture.Presenter
         private void SetCurrentSettingDevice()
         {
             #region Настройки камеры
+
+
             CameraControlFlags _flags;
             #region Настройки Масштаба
 

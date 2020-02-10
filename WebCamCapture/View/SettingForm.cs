@@ -26,6 +26,7 @@ namespace WebCamCapture.View
                 numZoom.Value = value;
             } 
         }
+        //
         public int FocusValue
         {
             get => trackFocus.Value;
@@ -35,6 +36,17 @@ namespace WebCamCapture.View
                 numFocus.Value = value;
             }
         }
+        //
+        public int ExposureValue
+        {
+            get => trackExposure.Value;
+            set
+            {
+                trackExposure.Value = value;
+                numExposure.Value = value;
+            }
+        }
+
         /// <summary>
         ///  выбранно устройство в настройках
         /// </summary>
@@ -51,6 +63,8 @@ namespace WebCamCapture.View
         public event Action ZoomChange;
         // событие "Фокус"
         public event Action FocusChange;
+        // событие "Экспозиции"
+        public event Action ExposureChange;
 
         public string[] DeviceList { 
             set {
@@ -99,6 +113,8 @@ namespace WebCamCapture.View
         {
             BtnOkClick();
         }
+
+
         // обработчик ползунка "Маштаб"
         private void TrackZoom_Scroll(object sender, EventArgs e)
         {
@@ -182,8 +198,18 @@ namespace WebCamCapture.View
         }
 
 
+
         #endregion
 
-
+        private void TrackExposure_Scroll(object sender, EventArgs e)
+        {
+            if ((int)numExposure.Value != trackExposure.Value)
+            {
+                // синхронизируем значение
+                this.ExposureValue = trackExposure.Value;
+                // уведомляем об изменении Zoom
+                FocusChange();
+            }
+        }
     }
 }

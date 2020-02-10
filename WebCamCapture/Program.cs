@@ -55,7 +55,7 @@ namespace WebCamCapture
             Model.ICurrentProperty currentPropertyZoom = device.CurrentZoom();
 
             Model.Player player = new Model.Player();
-            player.Start();
+            //player.Start();
            // player.Stop();
             player.NewFrame += Player_NewFrame;
 
