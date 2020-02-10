@@ -38,6 +38,7 @@ namespace WebCamCapture
             playerSettingForm = new SettingForm();
             new Presenter.MainPresenter(mainForm, pleerModel, orderModel);
             playerSettingPresenter = new Presenter.SettingPresenter(playerSettingForm, pleerModel);
+            
             // Тест
 
 
@@ -45,33 +46,33 @@ namespace WebCamCapture
 
 
 
-            Model.Devices devices = new Model.Devices();
-            int count = devices.Counter;
-            List<string> devList = devices.GetDevicesNameList();
+           // Model.Devices devices = new Model.Devices();
+           // int count = devices.Counter;
+           // List<string> devList = devices.GetDevicesNameList();
 
-            Model.Device device = devices.SelectedDevice(0);
+           // Model.Device device = devices.SelectedDevice(0);
 
-            List<string> modList = device.GetFrameSizeList();
-            Model.ICurrentProperty currentPropertyZoom = device.CurrentZoom();
+           // List<string> modList = device.GetFrameSizeList();
+           // Model.ICurrentProperty currentPropertyZoom = device.CurrentZoom();
 
-            Model.Player player = new Model.Player();
-            //player.Start();
-           // player.Stop();
-            player.NewFrame += Player_NewFrame;
+           // Model.Player player = new Model.Player();
+           // //player.Start();
+           //// player.Stop();
+           // player.NewFrame += Player_NewFrame;
 
-            //var x = device.GetFrameSizeList();
-            //var v = device.CurrentVerticalPosition();
-            //var currentProperty = device.CurrentZoom();
+           // //var x = device.GetFrameSizeList();
+           // //var v = device.CurrentVerticalPosition();
+           // //var currentProperty = device.CurrentZoom();
 
-            //devices
+           // //devices
 
-            var a = device.CurrentZoom();
-            var b = device.CurrentFocus();
-            var c = device.CurrentExposure();
+           // var a = device.CurrentZoom();
+           // var b = device.CurrentFocus();
+           // var c = device.CurrentExposure();
 
-            var a1 = device.GetZoomRange();
-            var a2 = device.GetFocusRange();
-            var a3 = device.GetExposureRange();
+           // var a1 = device.GetZoomRange();
+           // var a2 = device.GetFocusRange();
+           // var a3 = device.GetExposureRange();
 
 
 

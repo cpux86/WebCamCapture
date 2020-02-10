@@ -11,7 +11,42 @@ using AForge.Video.DirectShow;
 
 namespace WebCamCapture.Presenter
 {
-    class SettingPresenter
+    class Propertys
+    {
+        #region "Источник"
+        protected List<string> DeviceNameList { get; set; }
+        protected List<string> ListVideoModes { get; set; }
+        /// <summary>
+        /// Имя устройства из настроек
+        /// </summary>
+        protected string DeviceName { get; set; }
+        /// <summary>
+        /// Имя режима из настроек (размер кадра)
+        /// </summary>
+        protected string ModeName { get; set; }
+        protected string SnapshotDir { get; set; }
+        protected int DeviceId { get; set; }
+        protected int ModeId { get; set; }
+        #endregion
+
+        #region "Управление"
+        protected ICurrentProperty ZoomRange { get; set; }
+        protected ICurrentProperty FocusRange { get; set; }
+        protected ICurrentProperty ExposureRange { get; set; }
+        protected ICurrentProperty HorizontalRange { get; set; }
+        protected ICurrentProperty VerticalRange { get; set; }
+
+
+        protected ICurrentProperty Zoom { get; set; }
+        protected ICurrentProperty Focus { get; set; }
+        protected ICurrentProperty Exposure { get; set; }
+        protected ICurrentProperty HorizontalPosition { get; set; }
+        protected ICurrentProperty VerticalPosition { get; set; }
+        #endregion
+
+    }
+
+    class SettingPresenter : Propertys
     {
         private readonly ISettingView settingForm;
         private readonly IPlayerModel player;
@@ -25,7 +60,7 @@ namespace WebCamCapture.Presenter
         private bool _isReady = false;
 
         public bool IsReady { get => _isReady; set => _isReady = value; }
-
+        
         public SettingPresenter(ISettingView setting, IPlayerModel player)
         {
             this.settingForm = setting;
@@ -36,9 +71,9 @@ namespace WebCamCapture.Presenter
             this.settingForm.ZoomChange += SettingForm_ZoomChange;
             this.settingForm.FocusChange += SettingForm_FocusChange;
             // имя устройства из сохраненак
-            string _dev = this.player.DeviceName;
+            DeviceName = this.player.DeviceName;
             // размер кадра из сохраненак
-            string _mod = this.player.FrameSize;
+            ModeName = this.player.FrameSize;
             this.settingForm.SnapshotFolder = Properties.Settings.Default.FileDir;
             // инициализация списка подключенных устройств
             _deviceNameList = player.GetDeviceNameList();
@@ -46,13 +81,13 @@ namespace WebCamCapture.Presenter
             if (_deviceNameList.Count > 0)
             {
                 // получаем индекс устаройства _dev в списке подключенных устройств
-                _deviceId = _deviceNameList.IndexOf(_dev);
+                _deviceId = _deviceNameList.IndexOf(DeviceName);
                 // если устройство из сохраненок подклчено
                 if (_deviceId != -1) {
                     // инициализируем список поддерживаемых режимом устройстом _deviceId
                     _modesList = player.GetListVideoModes(_deviceId);
                     // поддерживает ли устройстово _deviceId режим (mod) из сохраненок, если нет то _modesList.IndexOf(_mod) вернет -1. 
-                    _modeId = _modesList.IndexOf(_mod);
+                    _modeId = _modesList.IndexOf(ModeName);
 
                     // устройство из настроек подключено
                     this.settingForm.ModesList = _modesList.ToArray();
@@ -92,46 +127,9 @@ namespace WebCamCapture.Presenter
         {
             return list.IndexOf(name) != -1 ? list.IndexOf(name) : 0;
         }
-        // Обработчик клика по кнопке OK в форме настройки
-        private void SettingForm_BtnOkClick()
-        {
-            // выбранно ли устройство и режим в форме настроек
-            if (_modeId != -1 && _deviceId != -1)
-            {
-                // устройство и режим выбранны, передаем параметры захвата в модель
-                // устанавливаем флаг isReady (готово) в true
-                IsReady = true;
-                // все готово, можно начинать захват
-                //MessageBox.Show(_deviceId+" "+_modeId);
-                this.player.DeviceIndex = _deviceId;
-                this.player.ModeIndex = _modeId;
-                this.player.Start();
 
 
-                // Имя устройства и режим
-                this.player.DeviceName = _deviceNameList[_deviceId];
-                this.player.FrameSize = _modesList[_modeId];
-            }
-            else {
-                IsReady = false;
-            }
-            
-        }
-
-        // обработчик события выбора режима
-        private void SettingForm_ModeIdChange()
-        {
-            _modeId = this.settingForm.ModeIndex;
-        }
-        // обработчик события выбора устройства
-        private void SettingForm_DeviceIdChange()
-        {
-            _deviceId = this.settingForm.DeviceIndex;
-            _modesList = player.GetListVideoModes(_deviceId);
-            settingForm.ModesList = _modesList.ToArray();
-        }
-
-        #region Отобразить форму настройки
+        #region ОТОБРАЗИТЬ ФОРМУ НАСТРОЙКИ
 
         /// <summary>
         /// Отобразить форму настройки
@@ -170,6 +168,55 @@ namespace WebCamCapture.Presenter
             this.settingForm.ShowDialog();
         }
         #endregion
+
+        #region ФОРМА ЗАКРЫВАЕТСЯ
+
+        #region Форма закрывается
+        /// <summary>
+        ///  Форма закрывается при клике по кнопке OK в форме настройк. 
+        /// </summary>
+        private void SettingForm_BtnOkClick()
+        {
+            // выбранно ли устройство и режим в форме настроек
+            if (_modeId != -1 && _deviceId != -1)
+            {
+                // устройство и режим выбранны, передаем параметры захвата в модель
+                // устанавливаем флаг isReady (готово) в true
+                IsReady = true;
+                // все готово, можно начинать захват
+                //MessageBox.Show(_deviceId+" "+_modeId);
+                this.player.DeviceIndex = _deviceId;
+                this.player.ModeIndex = _modeId;
+                this.player.Start();
+
+
+                // Имя устройства и режим
+                this.player.DeviceName = _deviceNameList[_deviceId];
+                this.player.FrameSize = _modesList[_modeId];
+            }
+            else
+            {
+                IsReady = false;
+            }
+
+        }
+        #endregion
+
+        #endregion
+
+        // обработчик события выбора режима
+        private void SettingForm_ModeIdChange()
+        {
+            _modeId = this.settingForm.ModeIndex;
+        }
+        // обработчик события выбора устройства
+        private void SettingForm_DeviceIdChange()
+        {
+            _deviceId = this.settingForm.DeviceIndex;
+            _modesList = player.GetListVideoModes(_deviceId);
+            settingForm.ModesList = _modesList.ToArray();
+        }
+
 
 
         /// <summary>

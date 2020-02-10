@@ -152,7 +152,7 @@ namespace WebCamCapture.Model
         /// Возвращает текущие настройки масштаба
         /// </summary>
         /// <returns></returns>
-        public ICurrentProperty CurrentZoom()
+        public ICurrentProperty GetZoom()
         {
             return this.GetCurrentPropertys(CameraControlProperty.Zoom);
             
@@ -161,7 +161,7 @@ namespace WebCamCapture.Model
         /// Возвращает текущие настройки фокуса
         /// </summary>
         /// <returns></returns>
-        public ICurrentProperty CurrentFocus()
+        public ICurrentProperty GetFocus()
         {
             return this.GetCurrentPropertys(CameraControlProperty.Focus);
         }
@@ -169,7 +169,7 @@ namespace WebCamCapture.Model
         /// Возвращает текущие настройки экспозиции
         /// </summary>
         /// <returns></returns>
-        public ICurrentProperty CurrentExposure()
+        public ICurrentProperty GetExposure()
         {
             return this.GetCurrentPropertys(CameraControlProperty.Exposure);
         }
@@ -177,7 +177,7 @@ namespace WebCamCapture.Model
         /// Текущая позиция по горизонтали
         /// </summary>
         /// <returns></returns>
-        public ICurrentProperty CurrentHorizontalPosition()
+        public ICurrentProperty GetHorizontalPosition()
         {
             return this.GetCurrentPropertys(CameraControlProperty.Roll);
         }
@@ -185,18 +185,18 @@ namespace WebCamCapture.Model
         /// Текущая позиция по вертикали
         /// </summary>
         /// <returns></returns>
-        public ICurrentProperty CurrentVerticalPosition()
+        public ICurrentProperty GetVerticalPosition()
         {
             return this.GetCurrentPropertys(CameraControlProperty.Tilt);
         }
 
         // Текущие свойства, универсальный метод
-        private Property GetCurrentPropertys(CameraControlProperty _property)
+        private Property GetCurrentPropertys(CameraControlProperty property)
         {
             int _value;
             CameraControlFlags _controlFlag;
             prop = new Model.Property();
-            videoSource.GetCameraProperty(_property, out _value, out _controlFlag);
+            videoSource.GetCameraProperty(property, out _value, out _controlFlag);
             prop.Value = _value;
             prop.ControlFlag = _controlFlag;
             return prop;
@@ -208,16 +208,16 @@ namespace WebCamCapture.Model
         /// <summary>
         /// Обвертка для SetCameraProperty, Устанавливаем свойства для устройства
         /// </summary>
-        /// <param name="_property"></param>
-        /// <param name="_value"></param>
-        /// <param name="_controlFlags"></param>
-        public void SetProperty(CameraControlProperty _property, int _value, CameraControlFlags _controlFlags)
+        /// <param name="property"></param>
+        /// <param name="value"></param>
+        /// <param name="controlFlags"></param>
+        public void SetProperty(CameraControlProperty property, int value, CameraControlFlags controlFlags)
         {
-            videoSource.SetCameraProperty(_property, _value,  _controlFlags);
+            videoSource.SetCameraProperty(property, value,  controlFlags);
         }
 
         // Диапазон звойств, уневерсальный метод
-        private void PropertyRange(CameraControlProperty _property)
+        private void PropertyRange(CameraControlProperty property)
         {
             int _minValue;
             int _maxValue;
@@ -227,7 +227,7 @@ namespace WebCamCapture.Model
             try
             {
                 videoSource.GetCameraPropertyRange(
-                _property,
+                property,
                 out _minValue,
                 out _maxValue,
                 out _stapSize,
