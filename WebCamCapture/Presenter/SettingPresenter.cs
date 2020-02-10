@@ -14,7 +14,7 @@ namespace WebCamCapture.Presenter
     class SettingPresenter
     {
         private readonly ISettingView settingForm;
-        private readonly IPlayer player;
+        private readonly IPlayerModel player;
         //Список подключенных устройств
         private List<string> _deviceNameList;
         private List<string> _modesList;
@@ -26,7 +26,7 @@ namespace WebCamCapture.Presenter
 
         public bool IsReady { get => _isReady; set => _isReady = value; }
 
-        public SettingPresenter(ISettingView setting, IPlayer player)
+        public SettingPresenter(ISettingView setting, IPlayerModel player)
         {
             this.settingForm = setting;
             this.player = player;

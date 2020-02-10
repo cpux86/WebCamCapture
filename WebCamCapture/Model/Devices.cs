@@ -18,12 +18,13 @@ namespace WebCamCapture.Model
         /// Количество подключенных устройств
         /// </summary>
         public int Counter { get => videoDevices.Count; }
-        /// <summary>
-        /// Возвращает коллекцию устройств
-        /// </summary>
 
-        // Instance
-        public Device GetDevice(int _deviceId )
+        /// <summary>
+        /// Выбрать устройство 
+        /// </summary>
+        /// <param name="_deviceId"></param>
+        /// <returns></returns>
+        public Device SelectedDevice(int _deviceId )
         {           
             if (device != null) return device;
             device = Device.getInstance();

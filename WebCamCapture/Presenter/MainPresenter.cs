@@ -13,10 +13,10 @@ namespace WebCamCapture.Presenter
     class MainPresenter
     {
         private readonly IMainView _view;
-        private readonly IPlayer _pleer;
+        private readonly IPlayerModel _pleer;
         private readonly IOrderModel _order;
 
-        public MainPresenter(IMainView view, IPlayer pleer, IOrderModel order)
+        public MainPresenter(IMainView view, IPlayerModel pleer, IOrderModel order)
         {
             this._view = view;
             _pleer = pleer;
@@ -31,7 +31,7 @@ namespace WebCamCapture.Presenter
             _pleer.NewFrame += _Pleer_NewFrame;
             view.GetContext.FormClosing += GetContext_FormClosing;
             order.UpdateOrder += _order_UpdateOrder;
-
+            
         }
         // произошло обнолвене заказа
         private void _order_UpdateOrder()

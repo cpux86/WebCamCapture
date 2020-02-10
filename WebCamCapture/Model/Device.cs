@@ -1,13 +1,15 @@
-﻿using AForge.Video.DirectShow;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AForge.Video.DirectShow;
+using AForge.Video;
+using System.Drawing;
 
 namespace WebCamCapture.Model
 {
-    class Device
+     class  Device : IPlayer1
     {
         protected Device()
         {
@@ -23,7 +25,13 @@ namespace WebCamCapture.Model
             return instance;
         }
         static VideoCaptureDevice videoSource;
+        public event Action<Image> NewFrame;
         public static string Moniker { get; set; }
+        /// <summary>
+        /// Состояния захвата устройства Run
+        /// </summary>
+        public bool IsRunning { get => videoSource.IsRunning; }
+
         public static void Dev()
         {
             videoSource = new VideoCaptureDevice(Moniker);
@@ -35,7 +43,6 @@ namespace WebCamCapture.Model
         /// <returns></returns>
         public List<string> GetFrameSizeList()
         {
-            //videoSource.Vi
             List<string> fSize = new List<string>();
             videoSource = new VideoCaptureDevice(Moniker);
             // инициализируем свойства устройства
@@ -49,6 +56,44 @@ namespace WebCamCapture.Model
             }
             return fSize;
         }
+
+        #region Управление захватом
+        /// <summary>
+        /// Начинает захват видео 
+        /// </summary>
+        public void Start()
+        {
+            try
+            {
+                //videoSource.Stop();
+                videoSource.VideoResolution = videoSource.VideoCapabilities[0];
+                videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+                videoSource.Start();
+            }
+            catch (Exception)
+            {
+
+                System.Windows.Forms.MessageBox.Show("Test");
+            }
+        }
+
+        private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            NewFrame(eventArgs.Frame);
+        }
+
+        public void Stop()
+        {
+            videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
+            videoSource.SignalToStop();
+            videoSource.WaitForStop();
+        }
+        public void Restart()
+        {
+
+        }
+        #endregion
+
 
         #region Настройки устройства
 
@@ -236,5 +281,12 @@ namespace WebCamCapture.Model
         /// Флаг Auto
         /// </summary>
         CameraControlFlags ControlFlag { get; set; }
+    }
+
+    public interface IPlayer1
+    {
+        //void Start();
+        void Stop();
+        bool IsRunning { get; }
     }
 }

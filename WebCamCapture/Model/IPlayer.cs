@@ -9,7 +9,7 @@ using AForge.Video.DirectShow;
 
 namespace WebCamCapture.Model
 {
-    interface IPlayer
+    interface IPlayerModel
     {
         void Stop();
 

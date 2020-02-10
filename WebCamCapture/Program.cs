@@ -24,6 +24,8 @@ namespace WebCamCapture
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var mainForm = new View.MainForm();
+
+           
             pleerModel = new Model.PlayerModel();
             mainForm.ShowSettingForm += MainForm_ShowSettingForm;
             mainForm.OrderEditBtn += MainForm_OrderEditBtn;
@@ -37,12 +39,25 @@ namespace WebCamCapture
             new Presenter.MainPresenter(mainForm, pleerModel, orderModel);
             playerSettingPresenter = new Presenter.SettingPresenter(playerSettingForm, pleerModel);
             // Тест
+
+
+
+
+
+
             Model.Devices devices = new Model.Devices();
             int count = devices.Counter;
             List<string> devList = devices.GetDevicesNameList();
-            Model.Device device = devices.GetDevice(1);
+
+            Model.Device device = devices.SelectedDevice(0);
+
             List<string> modList = device.GetFrameSizeList();
             Model.ICurrentProperty currentPropertyZoom = device.CurrentZoom();
+
+            Model.Player player = new Model.Player();
+            player.Start();
+           // player.Stop();
+            player.NewFrame += Player_NewFrame;
 
             //var x = device.GetFrameSizeList();
             //var v = device.CurrentVerticalPosition();
@@ -57,6 +72,7 @@ namespace WebCamCapture
             var a1 = device.GetZoomRange();
             var a2 = device.GetFocusRange();
             var a3 = device.GetExposureRange();
+
 
 
             //Model.Devices device 
@@ -88,6 +104,12 @@ namespace WebCamCapture
             
            
         }
+
+        private static void Player_NewFrame(System.Drawing.Image obj)
+        {
+            throw new NotImplementedException();
+        }
+
         // отобразить форму заказа
         private static void MainForm_OrderEditBtn()
         {

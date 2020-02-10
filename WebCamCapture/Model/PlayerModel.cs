@@ -18,7 +18,7 @@ namespace WebCamCapture.Model
     /// <summary>
     /// Робота с web камерой, сознаие и сохнанение снимков
     /// </summary>
-    public class PlayerModel : IPlayer
+    public class PlayerModel : IPlayerModel
     {
 
         FilterInfoCollection videoDevices;
@@ -121,7 +121,8 @@ namespace WebCamCapture.Model
             {
                 videoSource.Stop();
                 videoSource.VideoResolution = videoSource.VideoCapabilities[ModeIndex];
-                videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+                //videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+                videoSource.NewFrame += VideoSource_NewFrame;
                 videoSource.Start();
             }
             catch (Exception)
@@ -129,6 +130,12 @@ namespace WebCamCapture.Model
 
                 MessageBox.Show("Error");
             }
+        }
+
+        private void VideoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            //throw new NotImplementedException();
+            NewFrame(eventArgs.Frame);
         }
 
         /// <summary>
