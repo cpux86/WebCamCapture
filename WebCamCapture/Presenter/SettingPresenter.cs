@@ -14,6 +14,9 @@ namespace WebCamCapture.Presenter
     class Propertys
     {
         #region "Источник"
+        /// <summary>
+        /// список имен подключенных устройств
+        /// </summary>
         protected List<string> DeviceNameList { get; set; }
         protected List<string> ListVideoModes { get; set; }
         /// <summary>
@@ -25,6 +28,9 @@ namespace WebCamCapture.Presenter
         /// </summary>
         protected string ModeName { get; set; }
         protected string SnapshotDir { get; set; }
+        /// <summary>
+        /// Идентификатор выбранного устройства. 
+        /// </summary>
         protected int DeviceId { get; set; }
         protected int ModeId { get; set; }
         #endregion
@@ -75,25 +81,38 @@ namespace WebCamCapture.Presenter
             // размер кадра из сохраненак
             ModeName = this.player.FrameSize;
             this.settingForm.SnapshotFolder = Properties.Settings.Default.FileDir;
-            // инициализация списка подключенных устройств
-            _deviceNameList = player.GetDeviceNameList();
+
+
+            this.Init();
+
+
+
+                 
+        }
+
+        private bool Init()
+        {            // инициализация списка подключенных устройств
+            DeviceNameList = player.GetDeviceNameList();
+
             // подключены ли устройства
-            if (_deviceNameList.Count > 0)
+            if (DeviceNameList.Count > 0)
             {
                 // получаем индекс устаройства _dev в списке подключенных устройств
-                _deviceId = _deviceNameList.IndexOf(DeviceName);
+                DeviceId = DeviceNameList.IndexOf(DeviceName);
                 // если устройство из сохраненок подклчено
-                if (_deviceId != -1) {
-                    // инициализируем список поддерживаемых режимом устройстом _deviceId
-                    _modesList = player.GetListVideoModes(_deviceId);
-                    // поддерживает ли устройстово _deviceId режим (mod) из сохраненок, если нет то _modesList.IndexOf(_mod) вернет -1. 
-                    _modeId = _modesList.IndexOf(ModeName);
+                if (DeviceId == -1) return false;
+                // инициализируем список поддерживаемых режимом устройстом _deviceId
+                ListVideoModes = player.GetListVideoModes(DeviceId);
+                // если устройство не поддерживает режимы, то выходим
+                if (ListVideoModes.Count == 0) return false;
+                // поддерживает ли устройстово _deviceId режим (mod) из сохраненок, если нет то _modesList.IndexOf(_mod) вернет -1. 
+                ModeId = ListVideoModes.IndexOf(ModeName);
 
-                    // устройство из настроек подключено
-                    this.settingForm.ModesList = _modesList.ToArray();
-                }              
+                // устройство из настроек подключено
+                this.settingForm.ModesList = _modesList.ToArray();
 
             }
+            //return false;
             // если параметры для захвата установлены
             if (_deviceId != -1 && _modeId != -1)
             {
@@ -112,9 +131,10 @@ namespace WebCamCapture.Presenter
             {
                 // не все готово, требуются настройки
                 //this.settingForm.ShowDialog();
-            }           
-        }
+            }
 
+            return false;
+        }
 
 
         /// <summary>
