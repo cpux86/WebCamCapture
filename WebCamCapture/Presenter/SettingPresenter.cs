@@ -52,7 +52,7 @@ namespace WebCamCapture.Presenter
         protected ICurrentProperty HorizontalPosition { get; set; }
         protected ICurrentProperty VerticalPosition { get; set; }
         #endregion
-
+        
     }
 
     class SettingPresenter : Propertys
@@ -86,8 +86,7 @@ namespace WebCamCapture.Presenter
 
             this.Init();
 
-
-
+            
                  
         }
 
@@ -153,42 +152,18 @@ namespace WebCamCapture.Presenter
 
 
         #region ОТОБРАЗИТЬ ФОРМУ НАСТРОЙКИ
-        private void DataShow()
-        {
-            // Отображают данные из Presenter в предстовление
-            settingForm.DeviceList = _deviceNameList.ToArray();
-            settingForm.ModesList = _modesList.ToArray();
-            settingForm.DeviceIndex = _deviceId;
-            settingForm.ModeIndex = _modeId;
 
-        }
         /// <summary>
         /// Отобразить форму настройки
         /// </summary>
         internal void Show()
         {
-            _deviceId = DeviceId;
-            _modeId = ModeId;
+
+
             // Обновляем сведения об подключенных устройствах
             _deviceNameList = player.GetDeviceNameList();
+            settingForm.DeviceList = _deviceNameList.ToArray();
 
-       
-            if (DeviceNamesList.Count > 0)
-            {
-                // если обнавленный список не пуст
-                settingForm.DeviceList = DeviceNamesList.ToArray();
-                settingForm.DeviceIndex = DeviceId;
-                // Текущие настройки устройств передаются в представление 
-                //SetCurrentSettingDevice();
-
-            }
-            else
-            {
-                // если обновленный список пуст
-                settingForm.DeviceList = _deviceNameList.ToArray();
-                // сбрасывае идентификатор
-                _deviceId = -1;
-            }
             if (this.settingForm.ShowDialog() == DialogResult.OK)
             {
                 DeviceId = _deviceId;
@@ -223,9 +198,6 @@ namespace WebCamCapture.Presenter
 
         private void CencelRun()
         {
-            _deviceId = DeviceId;
-            _modeId = ModeId;
-            settingForm.ModeIndex = ModeId;
             this.Run();
         }
         private void Run()
