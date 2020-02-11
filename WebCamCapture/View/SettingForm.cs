@@ -55,10 +55,6 @@ namespace WebCamCapture.View
         ///  выбран режим в настройках
         /// </summary>
         public event Action ModeIdChange;
-        /// <summary>
-        /// Клик по кнопке OK на форме настроек
-        /// </summary>
-        public event Action BtnOkClick;
         // события "Масштаб"
         public event Action ZoomChange;
         // событие "Фокус"
@@ -108,12 +104,6 @@ namespace WebCamCapture.View
         {
             ModeIdChange();
         }
-        //обработчик клика по кнопке ОК в форме настроек
-        private void BtnOkSettingDev_Click(object sender, EventArgs e)
-        {
-            BtnOkClick();
-        }
-
 
         // обработчик ползунка "Маштаб"
         private void TrackZoom_Scroll(object sender, EventArgs e)

@@ -24,7 +24,6 @@ namespace WebCamCapture.View
         /// <summary>
         /// Клик по кнопке OK на форме настроек
         /// </summary>
-        event Action BtnOkClick;
         // события "Масштаб"
         event Action ZoomChange;
         // событие "Фокус"

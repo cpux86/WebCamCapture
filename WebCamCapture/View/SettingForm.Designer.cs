@@ -229,7 +229,6 @@
             this.btnOkSettingDev.TabIndex = 16;
             this.btnOkSettingDev.Text = "OK";
             this.btnOkSettingDev.UseVisualStyleBackColor = true;
-            this.btnOkSettingDev.Click += new System.EventHandler(this.BtnOkSettingDev_Click);
             // 
             // tabPage2
             // 
