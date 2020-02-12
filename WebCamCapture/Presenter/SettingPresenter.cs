@@ -83,7 +83,6 @@ namespace WebCamCapture.Presenter
             // размер кадра из сохраненак
             ModeName = this.player.FrameSize;
             this.settingForm.SnapshotFolder = Properties.Settings.Default.FileDir;
-
             this.Init();
 
             
@@ -94,27 +93,16 @@ namespace WebCamCapture.Presenter
         {   
             // инициализация списка подключенных устройств
             DeviceNamesList = player.GetDeviceNameList();
+            // получаем индекс устаройства _dev в списке подключенных устройств
+            DeviceId = DeviceNamesList.IndexOf(DeviceName);
+            ModeNamesList = player.GetListVideoModes(DeviceId);
+            ModeId = ModeNamesList.IndexOf(ModeName);
+            this.settingForm.DeviceList = DeviceNamesList.ToArray();
+            this.settingForm.ModesList = ModeNamesList.ToArray();
+            _deviceId = DeviceId;
+            _modeId = ModeId;
 
-            // подключены ли устройства
-            if (DeviceNamesList.Count > 0)
-            {
-                // получаем индекс устаройства _dev в списке подключенных устройств
-                DeviceId = DeviceNamesList.IndexOf(DeviceName);
-                // если устройство из сохраненок подклчено
-                if (DeviceId == -1) return false;
-                // инициализируем список поддерживаемых режимом устройстом _deviceId
-                ModeNamesList = player.GetListVideoModes(DeviceId);
-                // если устройство не поддерживает режимы, то выходим
-                if (ModeNamesList.Count == 0) return false;
-                // поддерживает ли устройстово _deviceId режим (mod) из сохраненок, если нет то _modesList.IndexOf(_mod) вернет -1. 
-                ModeId = ModeNamesList.IndexOf(ModeName);
 
-                // устройство из настроек подключено
-                this.settingForm.ModesList = ModeNamesList.ToArray();
-
-            }
-            //return false;
-            // если параметры для захвата установлены
             if (DeviceId != -1 && ModeId != -1)
             {
                 this.settingForm.DeviceList = DeviceNamesList.ToArray();
@@ -122,12 +110,13 @@ namespace WebCamCapture.Presenter
                 this.settingForm.DeviceIndex = DeviceId;
                 this.settingForm.ModeIndex = ModeId;
                 //this.player.init(_deviceId,_modeId);
-                this.player.DeviceIndex = _deviceId;
+                this.player.DeviceIndex = DeviceId;
                 this.player.ModeIndex = ModeId;
                 // выставляем флаг в готовность
                 this.IsReady = true;
-                this.player.Start();
-                //Run();
+                //this.player.Start();
+                
+                Run();
             }
             else
             {
@@ -163,11 +152,11 @@ namespace WebCamCapture.Presenter
             // Обновляем сведения об подключенных устройствах
             _deviceNameList = player.GetDeviceNameList();
             settingForm.DeviceList = _deviceNameList.ToArray();
-
+            settingForm.DeviceIndex = DeviceId;
             if (this.settingForm.ShowDialog() == DialogResult.OK)
             {
-                DeviceId = _deviceId;
-                ModeId = _modeId;
+                _deviceId = settingForm.DeviceIndex;
+                _modeId = settingForm.ModeIndex;
                 // тест
                 Run();
             }
@@ -183,8 +172,8 @@ namespace WebCamCapture.Presenter
         private void SettingForm_DeviceIdChange()
         {
             _deviceId = this.settingForm.DeviceIndex;
-            _modesList = player.GetListVideoModes(_deviceId);
-            settingForm.ModesList = _modesList.ToArray();
+            ModeNamesList = player.GetListVideoModes(_deviceId);
+            settingForm.ModesList = ModeNamesList.ToArray();
         }
         // обработчик события выбора режима
         private void SettingForm_ModeIdChange()
@@ -206,8 +195,7 @@ namespace WebCamCapture.Presenter
             if (_modeId > -1 && _deviceId > -1)
             {
                 // устройство и режим выбранны, передаем параметры захвата в модель
-                // устанавливаем флаг isReady (готово) в true
-                IsReady = true;
+
                 // все готово, можно начинать захват
                 //MessageBox.Show(_deviceId+" "+_modeId);
                 this.player.DeviceIndex = _deviceId;

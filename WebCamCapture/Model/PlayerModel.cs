@@ -98,14 +98,18 @@ namespace WebCamCapture.Model
         public List<string> GetListVideoModes(int deviceId)
         {
             List<string> fSize = new List<string>();
-            videoSource = new VideoCaptureDevice(videoDevices[deviceId].MonikerString);
-            //if (videoSource.VideoCapabilities.Length == 0) return false;  // если в устройстве не передостовляет список доступных разрешений!
-            // поддерживаемые режимы работы камеры (разрешение)
-            foreach (var s in videoSource.VideoCapabilities)
+            // защита от не верных параметров
+            if (deviceId >= 0)
             {
-                // формируем строку типа 640 x 480
-                fSize.Add(String.Format("{0} x {1}", s.FrameSize.Width, s.FrameSize.Height));
+                videoSource = new VideoCaptureDevice(videoDevices[deviceId].MonikerString);
+                //if (videoSource.VideoCapabilities.Length == 0) return false;  // если в устройстве не передостовляет список доступных разрешений!
+                // поддерживаемые режимы работы камеры (разрешение)
+                foreach (var s in videoSource.VideoCapabilities)
+                {
+                    // формируем строку типа 640 x 480
+                    fSize.Add(String.Format("{0} x {1}", s.FrameSize.Width, s.FrameSize.Height));
 
+                }
             }
             return fSize;
         }

@@ -51,11 +51,17 @@ namespace WebCamCapture.View
 
         public void ShowNewFrame(Image frame)
         {
-            using (Image f = (Bitmap)frame.Clone())
+            videoView.Invoke((MethodInvoker)(() =>
             {
-                videoView.Image = frame;
-            }
-            
+                if (videoView.Image != null)
+                {
+                    videoView.Image.Dispose();
+                    
+                }
+                videoView.Image = (Bitmap)frame.Clone();
+
+            }));
+
         }
 
 
