@@ -39,13 +39,10 @@ namespace WebCamCapture.View
         event Action ShowSettingForm;
 
         Form GetContext { get; }
-        /// <summary>
-        /// Отобразить новый кадр
-        /// </summary>
-        void ShowNewFrame(Image frame);
-        /// <summary>
-        /// Показать захваченный снимок
-        /// </summary>
-        Image ShowSnapshot { set; }
+
+        void Start();
+        void Stop();
+        Image GetCurrentFrame();
+
     }
 }

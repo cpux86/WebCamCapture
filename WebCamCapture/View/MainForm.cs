@@ -41,28 +41,6 @@ namespace WebCamCapture.View
 
         public Form GetContext { get => this; }
 
-        public Image ShowSnapshot
-        {
-            set => Invoke((MethodInvoker)(() =>
-            {
-                snapshotView.Image = value;
-            }));
-        }
-
-        public void ShowNewFrame(Image frame)
-        {
-            videoView.Invoke((MethodInvoker)(() =>
-            {
-                if (videoView.Image != null)
-                {
-                    videoView.Image.Dispose();
-                    
-                }
-                videoView.Image = (Bitmap)frame.Clone();
-
-            }));
-
-        }
 
 
 
@@ -72,6 +50,32 @@ namespace WebCamCapture.View
             {
                 action();
             }
+        }
+
+        private void VideoPlayer_NewFrame(object sender, ref Bitmap image)
+        {
+            //videoPlayer.
+        }
+
+        public void Start()
+        {
+            videoPlayer.Start();
+        }
+
+        public void Stop()
+        {
+            videoPlayer.SignalToStop();
+            videoPlayer.WaitForStop();
+            videoPlayer.VideoSource = null;
+        }
+
+        /// <summary>
+        /// Возращает копию текущего кадра в плеере
+        /// </summary>
+        /// <returns></returns>
+        public Image GetCurrentFrame()
+        {
+            return videoPlayer.GetCurrentVideoFrame();
         }
     }
 

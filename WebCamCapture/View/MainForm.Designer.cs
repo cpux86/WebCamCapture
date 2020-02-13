@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.makeSnapshotBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.videoView = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.orderEditBtn = new System.Windows.Forms.Button();
             this.photoGalleraya = new System.Windows.Forms.ListView();
@@ -42,7 +41,6 @@
             this.OrderPanel__TitleOpreration = new System.Windows.Forms.Label();
             this.OrderPanel__TitleRoller = new System.Windows.Forms.Label();
             this.OrderPanel__TitleOrder = new System.Windows.Forms.Label();
-            this.snapshotView = new System.Windows.Forms.PictureBox();
             this.OrderViewPanel = new System.Windows.Forms.Panel();
             this.OrderPanel__OperatorFullName = new System.Windows.Forms.Label();
             this.OrderPanel__TextOpreration = new System.Windows.Forms.Label();
@@ -55,11 +53,12 @@
             this.showSettingBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            ((System.ComponentModel.ISupportInitialize)(this.videoView)).BeginInit();
+            this.videoPlayer = new AForge.Controls.VideoSourcePlayer();
+            this.pictureBox1 = new AForge.Controls.PictureBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.snapshotView)).BeginInit();
             this.OrderViewPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // makeSnapshotBtn
@@ -84,17 +83,6 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "TEST";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // videoView
-            // 
-            this.videoView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.videoView.BackColor = System.Drawing.Color.Black;
-            this.videoView.Location = new System.Drawing.Point(590, 22);
-            this.videoView.Name = "videoView";
-            this.videoView.Size = new System.Drawing.Size(350, 246);
-            this.videoView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.videoView.TabIndex = 1;
-            this.videoView.TabStop = false;
             // 
             // panel1
             // 
@@ -202,19 +190,6 @@
             this.OrderPanel__TitleOrder.TabIndex = 24;
             this.OrderPanel__TitleOrder.Text = "Заказ №:";
             // 
-            // snapshotView
-            // 
-            this.snapshotView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.snapshotView.BackColor = System.Drawing.Color.Black;
-            this.snapshotView.Location = new System.Drawing.Point(8, 22);
-            this.snapshotView.Name = "snapshotView";
-            this.snapshotView.Size = new System.Drawing.Size(576, 442);
-            this.snapshotView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.snapshotView.TabIndex = 9;
-            this.snapshotView.TabStop = false;
-            // 
             // OrderViewPanel
             // 
             this.OrderViewPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -285,13 +260,13 @@
             // новыйЗаказToolStripMenuItem
             // 
             this.новыйЗаказToolStripMenuItem.Name = "новыйЗаказToolStripMenuItem";
-            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.новыйЗаказToolStripMenuItem.Text = "Новый заказ";
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             // 
             // настройкиToolStripMenuItem1
@@ -327,13 +302,38 @@
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // videoPlayer
+            // 
+            this.videoPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.videoPlayer.BackColor = System.Drawing.Color.Black;
+            this.videoPlayer.Location = new System.Drawing.Point(590, 22);
+            this.videoPlayer.Name = "videoPlayer";
+            this.videoPlayer.Size = new System.Drawing.Size(350, 235);
+            this.videoPlayer.TabIndex = 29;
+            this.videoPlayer.Text = "videoSourcePlayer1";
+            this.videoPlayer.VideoSource = null;
+            this.videoPlayer.NewFrame += new AForge.Controls.VideoSourcePlayer.NewFrameHandler(this.VideoPlayer_NewFrame);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackColor = System.Drawing.Color.Black;
+            this.pictureBox1.Image = null;
+            this.pictureBox1.Location = new System.Drawing.Point(8, 22);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(576, 442);
+            this.pictureBox1.TabIndex = 30;
+            this.pictureBox1.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 627);
-            this.Controls.Add(this.snapshotView);
-            this.Controls.Add(this.videoView);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.videoPlayer);
             this.Controls.Add(this.OrderViewPanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
@@ -342,13 +342,12 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebCamCapture";
-            ((System.ComponentModel.ISupportInitialize)(this.videoView)).EndInit();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.snapshotView)).EndInit();
             this.OrderViewPanel.ResumeLayout(false);
             this.OrderViewPanel.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -357,7 +356,6 @@
         #endregion
         private System.Windows.Forms.Button makeSnapshotBtn;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.PictureBox videoView;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ListView photoGalleraya;
         private System.Windows.Forms.ColumnHeader columnHeader1;
@@ -368,7 +366,6 @@
         private System.Windows.Forms.Label OrderPanel__TitleOpreration;
         private System.Windows.Forms.Label OrderPanel__TitleRoller;
         private System.Windows.Forms.Label OrderPanel__TitleOrder;
-        private System.Windows.Forms.PictureBox snapshotView;
         private System.Windows.Forms.Panel OrderViewPanel;
         private System.Windows.Forms.Label OrderPanel__TextOrder;
         private System.Windows.Forms.Label OrderPanel__OperatorFullName;
@@ -381,6 +378,8 @@
         private System.Windows.Forms.ToolStripMenuItem showSettingBtn;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private AForge.Controls.VideoSourcePlayer videoPlayer;
+        private AForge.Controls.PictureBox pictureBox1;
     }
 }
 

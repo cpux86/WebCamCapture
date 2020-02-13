@@ -28,9 +28,10 @@ namespace WebCamCapture.Presenter
 
             view.MakeSnapshot += View_MakeSnapshot;
             // _view.ShowSettingForm += View_ShowSettingForm;
-            _pleer.NewFrame += _Pleer_NewFrame;
+            //_pleer.NewFrame += _Pleer_NewFrame;
             view.GetContext.FormClosing += GetContext_FormClosing;
             order.UpdateOrder += _order_UpdateOrder;
+            
             
         }
         // произошло обнолвене заказа
@@ -74,7 +75,7 @@ namespace WebCamCapture.Presenter
             }
             _frame = (Bitmap)frame.Clone();
             //_frame1 = new Bitmap((Bitmap)frame,new Size(320,240));
-            _view.ShowNewFrame(_frame);
+            //_view.ShowNewFrame(_frame);
 
         }
         Image _snapshot;
@@ -91,7 +92,7 @@ namespace WebCamCapture.Presenter
             }
             
             _snapshot = (Bitmap)snapshot.Clone();
-            _view.ShowSnapshot = _snapshot;
+            //_view.ShowSnapshot = _snapshot;
             using (Image x = (Bitmap)snapshot.Clone())
             {
                 x.Save("1.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
