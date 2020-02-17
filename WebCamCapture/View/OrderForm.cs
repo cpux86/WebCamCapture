@@ -11,7 +11,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebCamCapture.View
 {
-    public partial class OrderForm : Form, IOrderView
+    public partial class OrderForm : Form
     {
         public string[] RollerList { set => rollerCbox.Items.AddRange(value); }
         public string[] OperationsList { set => operationCbox.Items.AddRange(value); }

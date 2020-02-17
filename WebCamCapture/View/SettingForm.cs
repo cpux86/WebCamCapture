@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace WebCamCapture.View
 {
-    public partial class SettingForm : Form, ISettingView
+    public partial class SettingForm : Form
     {
         public SettingForm()
         {

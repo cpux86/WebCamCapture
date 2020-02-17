@@ -3,39 +3,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AForge.Video.DirectShow;
-using AForge.Video;
+using Accord.Video.DirectShow;
+
 using System.Drawing;
 
 namespace WebCamCapture.Model
 {
-     class  Device : IPlayer1
+    class Devices
     {
-        protected Device()
-        {
+        private FilterInfoCollection videoDevices;
 
-        }
-        private static Device instance;
-        public static Device getInstance()
+        private Device _device;
+
+        public Device SelectedDevice(int devId)
         {
-            if (instance == null)
+            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            if (_device == null) _device = new Device();
+            
+            if (videoDevices.Count != 0)
             {
-                instance = new Device();
+                _device.videoSource  = new VideoCaptureDevice(videoDevices[devId].MonikerString);
             }
-            return instance;
+            return _device;
         }
-        static VideoCaptureDevice videoSource;
-        public event Action<Image> NewFrame;
-        public static string Moniker { get; set; }
-        /// <summary>
-        /// Состояния захвата устройства Run
-        /// </summary>
-        public bool IsRunning { get => videoSource.IsRunning; }
 
-        public static void Dev()
+        /// <summary>
+        /// Взращает список имен подключенных устройств
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetDevicesNameList()
         {
-            videoSource = new VideoCaptureDevice(Moniker);
+            //videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            // заполняем список именами подклюен
+
+            List<string> list = new List<string>();
+            foreach (FilterInfo device in videoDevices)
+            {
+                list.Add(device.Name);
+            }
+            return list;
         }
+    }
+
+
+    class Device
+    {
+        public VideoCaptureDevice videoSource;
         /// <summary>
         /// Возращает список поддерживаемых размеров кадров
         /// </summary>
@@ -44,56 +57,18 @@ namespace WebCamCapture.Model
         public List<string> GetFrameSizeList()
         {
             List<string> fSize = new List<string>();
-            videoSource = new VideoCaptureDevice(Moniker);
             // инициализируем свойства устройства
             //this.PropertyRange();
             // поддерживаемые режимы работы камеры (разрешение)
             foreach (var s in videoSource.VideoCapabilities)
             {
+
                 // формируем строку типа 640 x 480
-                fSize.Add(String.Format("{0} x {1}", s.FrameSize.Width, s.FrameSize.Height));
+                fSize.Add(String.Format("{0} x {1} {2} FPS ({3} max fps), {4} Bit", s.FrameSize.Width, s.FrameSize.Height, s.AverageFrameRate, s.MaximumFrameRate, s.BitCount));
 
             }
             return fSize;
         }
-
-        #region Управление захватом
-        /// <summary>
-        /// Начинает захват видео 
-        /// </summary>
-        public void Start()
-        {
-            try
-            {
-                //videoSource.Stop();
-                videoSource.VideoResolution = videoSource.VideoCapabilities[0];
-                videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
-                videoSource.Start();
-            }
-            catch (Exception)
-            {
-
-                System.Windows.Forms.MessageBox.Show("Test");
-            }
-        }
-
-        private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
-            NewFrame(eventArgs.Frame);
-        }
-
-        public void Stop()
-        {
-            videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
-            videoSource.SignalToStop();
-            videoSource.WaitForStop();
-        }
-        public void Restart()
-        {
-
-        }
-        #endregion
-
 
         #region Настройки устройства
 
@@ -154,8 +129,10 @@ namespace WebCamCapture.Model
         /// <returns></returns>
         public ICurrentProperty GetZoom()
         {
+            videoSource.DisplayPropertyPage(IntPtr.Zero);
+            //videoSource.DisplayCrossbarPropertyPage(IntPtr.Zero);
             return this.GetCurrentPropertys(CameraControlProperty.Zoom);
-            
+
         }
         /// <summary>
         /// Возвращает текущие настройки фокуса
@@ -213,7 +190,7 @@ namespace WebCamCapture.Model
         /// <param name="controlFlags"></param>
         public void SetProperty(CameraControlProperty property, int value, CameraControlFlags controlFlags)
         {
-            videoSource.SetCameraProperty(property, value,  controlFlags);
+            videoSource.SetCameraProperty(property, value, controlFlags);
         }
 
         // Диапазон звойств, уневерсальный метод
@@ -281,12 +258,5 @@ namespace WebCamCapture.Model
         /// Флаг Auto
         /// </summary>
         CameraControlFlags ControlFlag { get; set; }
-    }
-
-    public interface IPlayer1
-    {
-        //void Start();
-        void Stop();
-        bool IsRunning { get; }
     }
 }

@@ -53,12 +53,12 @@
             this.showSettingBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.videoPlayer = new AForge.Controls.VideoSourcePlayer();
-            this.pictureBox1 = new AForge.Controls.PictureBox();
+            this.videoPlayer = new Accord.Controls.VideoSourcePlayer();
+            this.snapshotView = new Accord.Controls.PictureBox();
             this.panel1.SuspendLayout();
             this.OrderViewPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.snapshotView)).BeginInit();
             this.SuspendLayout();
             // 
             // makeSnapshotBtn
@@ -73,6 +73,7 @@
             this.makeSnapshotBtn.TabIndex = 3;
             this.makeSnapshotBtn.Text = "Снимок";
             this.makeSnapshotBtn.UseVisualStyleBackColor = true;
+            this.makeSnapshotBtn.Click += new System.EventHandler(this.makeSnapshotBtn_Click);
             // 
             // button1
             // 
@@ -83,6 +84,7 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "TEST";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
             // 
@@ -205,7 +207,7 @@
             this.OrderViewPanel.Controls.Add(this.OrderPanel__TitleOrder);
             this.OrderViewPanel.Location = new System.Drawing.Point(12, 474);
             this.OrderViewPanel.Name = "OrderViewPanel";
-            this.OrderViewPanel.Size = new System.Drawing.Size(564, 145);
+            this.OrderViewPanel.Size = new System.Drawing.Size(572, 145);
             this.OrderViewPanel.TabIndex = 28;
             // 
             // OrderPanel__OperatorFullName
@@ -260,13 +262,13 @@
             // новыйЗаказToolStripMenuItem
             // 
             this.новыйЗаказToolStripMenuItem.Name = "новыйЗаказToolStripMenuItem";
-            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.новыйЗаказToolStripMenuItem.Text = "Новый заказ";
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             // 
             // настройкиToolStripMenuItem1
@@ -306,33 +308,33 @@
             // 
             this.videoPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.videoPlayer.BackColor = System.Drawing.Color.Black;
-            this.videoPlayer.Location = new System.Drawing.Point(590, 22);
+            this.videoPlayer.Location = new System.Drawing.Point(590, 27);
             this.videoPlayer.Name = "videoPlayer";
-            this.videoPlayer.Size = new System.Drawing.Size(350, 235);
+            this.videoPlayer.Size = new System.Drawing.Size(350, 230);
             this.videoPlayer.TabIndex = 29;
             this.videoPlayer.Text = "videoSourcePlayer1";
             this.videoPlayer.VideoSource = null;
-            this.videoPlayer.NewFrame += new AForge.Controls.VideoSourcePlayer.NewFrameHandler(this.VideoPlayer_NewFrame);
             // 
-            // pictureBox1
+            // snapshotView
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.snapshotView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackColor = System.Drawing.Color.Black;
-            this.pictureBox1.Image = null;
-            this.pictureBox1.Location = new System.Drawing.Point(8, 22);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(576, 442);
-            this.pictureBox1.TabIndex = 30;
-            this.pictureBox1.TabStop = false;
+            this.snapshotView.BackColor = System.Drawing.Color.Black;
+            this.snapshotView.Image = null;
+            this.snapshotView.Location = new System.Drawing.Point(12, 27);
+            this.snapshotView.Name = "snapshotView";
+            this.snapshotView.Size = new System.Drawing.Size(572, 441);
+            this.snapshotView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.snapshotView.TabIndex = 30;
+            this.snapshotView.TabStop = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 627);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.snapshotView);
             this.Controls.Add(this.videoPlayer);
             this.Controls.Add(this.OrderViewPanel);
             this.Controls.Add(this.panel1);
@@ -347,7 +349,7 @@
             this.OrderViewPanel.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.snapshotView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -378,8 +380,8 @@
         private System.Windows.Forms.ToolStripMenuItem showSettingBtn;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private AForge.Controls.VideoSourcePlayer videoPlayer;
-        private AForge.Controls.PictureBox pictureBox1;
+        private Accord.Controls.VideoSourcePlayer videoPlayer;
+        private Accord.Controls.PictureBox snapshotView;
     }
 }
 

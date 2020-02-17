@@ -13,48 +13,59 @@ using System.Threading;
 using System.Resources;
 
 using System.Windows.Forms;
-using AForge.Video;
-using AForge.Video.DirectShow;
+//using AForge.Video;
+//using AForge.Video.DirectShow;
+using Accord.Video;
 
 namespace WebCamCapture.View
 {
-    internal partial class MainForm : Form, IMainView
+    interface IMain
+    {
+        event EventHandler Load;
+        event FormClosingEventHandler FormClosing;
+    }
+
+    internal interface IPlayer : IMain
+    {
+        IVideoSource VideoSource { set; }
+        Image CurrentFrame { get; }
+        void Start();
+        void Stop();
+
+    }
+
+    internal partial class MainForm : Form, IMain, IPlayer
     {
         public MainForm()
         {
             InitializeComponent();
-            makeSnapshotBtn.Click += (sender, args) => invoke(MakeSnapshot);
-            showSettingBtn.Click += (sender, arges) => invoke(ShowSettingForm);
-            orderEditBtn.Click += (sender, arges) => invoke(OrderEditBtn);
             this.KeyPreview = true;
         }
 
 
+
+        #region Сведения о заказе
         public string OrderNumber { set => OrderPanel__TextOrder.Text = value; }
         public string Roller { set => OrderPanel__TextRoller.Text = value; }
         public string Operation { set => OrderPanel__TextOpreration.Text = value; }
         public string User { set => OrderPanel__OperatorFullName.Text = value; }
 
-        public event Action MakeSnapshot;
-        public event Action ShowSettingForm;
-        public event Action OrderEditBtn;
-
-        public Form GetContext { get => this; }
 
 
+        #endregion
+        
+        public IVideoSource VideoSource { set => videoPlayer.VideoSource = value; }
 
+        public Image CurrentFrame => videoPlayer.GetCurrentVideoFrame();
 
-        private void invoke(Action action)
+        private void makeSnapshotBtn_Click(object sender, EventArgs e)
         {
-            if (action != null)
-            {
-                action();
-            }
+            snapshotView.Image = videoPlayer.GetCurrentVideoFrame();
         }
 
-        private void VideoPlayer_NewFrame(object sender, ref Bitmap image)
+        private void button1_Click(object sender, EventArgs e)
         {
-            //videoPlayer.
+           
         }
 
         public void Start()
@@ -64,22 +75,15 @@ namespace WebCamCapture.View
 
         public void Stop()
         {
-            videoPlayer.SignalToStop();
-            videoPlayer.WaitForStop();
-            videoPlayer.VideoSource = null;
-        }
-
-        /// <summary>
-        /// Возращает копию текущего кадра в плеере
-        /// </summary>
-        /// <returns></returns>
-        public Image GetCurrentFrame()
-        {
-            return videoPlayer.GetCurrentVideoFrame();
+            if (videoPlayer.VideoSource != null)
+            {
+                videoPlayer.SignalToStop();
+                videoPlayer.WaitForStop();
+                videoPlayer.Stop();
+                videoPlayer.VideoSource = null;
+            }           
         }
     }
 
-
-
-
+    
 }
