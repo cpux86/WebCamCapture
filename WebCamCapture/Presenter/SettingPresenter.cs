@@ -73,8 +73,9 @@ namespace WebCamCapture.Presenter
             devices = new Devices();
             this.DevicesNameList = devices.GetDevicesNameList();
             this.settingView.DeviceList = this.DevicesNameList.ToArray();
-            device = devices.SelectedDevice(0);
+            device = devices.SelectedDevice(1);
             var modList = device.GetFrameSizeList();
+            //device.videoSource.VideoResolution = device.videoSource.VideoCapabilities[2];
             PlayerMainView.VideoSource = device.videoSource;
             //PlayerMainView.Start();
         }
@@ -122,8 +123,10 @@ namespace WebCamCapture.Presenter
 
         void Run() {
             if (DeviceId != -1 && ModeId != -1)
-            {
+            {             
                 if (PlayerMainView.IsRunnig) PlayerMainView.Stop();
+                device.videoSource.VideoResolution = device.videoSource.VideoCapabilities[ModeId];
+                PlayerMainView.VideoSource = device.videoSource;
                 PlayerMainView.Start();
             }
         }

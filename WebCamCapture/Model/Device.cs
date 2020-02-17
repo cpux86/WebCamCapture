@@ -63,7 +63,7 @@ namespace WebCamCapture.Model
             {
 
                 // формируем строку типа 640 x 480
-                fSize.Add(String.Format("{0} x {1} {2} FPS ({3} max fps), {4} Bit", s.FrameSize.Width, s.FrameSize.Height, s.AverageFrameRate, s.MaximumFrameRate, s.BitCount));
+                fSize.Add(String.Format("{0} x {1}, {2} fps, {3} Bit", s.FrameSize.Width, s.FrameSize.Height, s.MaximumFrameRate, s.BitCount));
 
             }
             return fSize;

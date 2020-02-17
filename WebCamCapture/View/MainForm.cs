@@ -69,10 +69,23 @@ namespace WebCamCapture.View
 
         private void makeSnapshotBtn_Click(object sender, EventArgs e)
         {
-            // отображаем снимок 
-            snapshotView.Image = videoPlayer.GetCurrentVideoFrame();
-            // передаем текущий кадр подпищикам 
-            MakeSnapshot(videoPlayer.GetCurrentVideoFrame());
+            
+            //Object obj = videoPlayer.GetCurrentVideoFrame();
+            //snapshotView.Image = videoPlayer.GetCurrentVideoFrame();
+            //using (var image = videoPlayer.GetCurrentVideoFrame())
+            //{
+            //    if (image != null)
+            //    {
+            //        snapshotView.Image = (Bitmap)image;
+
+            //        //// отображаем снимок 
+            //        //snapshotView.Image = videoPlayer.GetCurrentVideoFrame();
+            //        //// передаем текущий кадр подпищикам 
+            //        //MakeSnapshot((Bitmap)image);
+            //    }
+
+            //}
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -82,6 +95,7 @@ namespace WebCamCapture.View
         public bool IsRunnig { get => videoPlayer.IsRunning; }
         public void Start()
         {
+            var v = videoPlayer.VideoSource;
             videoPlayer.Start();
         }
 
