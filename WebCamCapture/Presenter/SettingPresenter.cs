@@ -7,11 +7,13 @@ using WebCamCapture.View;
 using WebCamCapture.Model;
 using System.Drawing;
 using System.Windows.Forms;
+using Accord.Video.DirectShow;
 
 namespace WebCamCapture.Presenter
 {
     class SettingPresenter
     {
+
         #region Свойства
         /// <summary>
         /// Список устройств
@@ -46,6 +48,52 @@ namespace WebCamCapture.Presenter
 
         #endregion
 
+
+
+        #region Список имен и режимов
+        private FilterInfoCollection videoDevices;
+        private VideoCaptureDevice videoSource;
+        /// <summary>
+        /// Взращает список имен подключенных устройств
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetDevicesNameList()
+        {
+            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            // заполняем список именами подклюен
+            List<string> list = new List<string>();
+            foreach (FilterInfo device in videoDevices)
+            {
+                list.Add(device.Name);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// Возращает список поддерживаемых размеров кадров
+        /// </summary>
+        /// <param name="dev">Идентификатор устройства</param>
+        /// <returns></returns>
+        public List<string> GetFrameSizeList(int devId)
+        {
+            List<string> fSize = new List<string>();
+            if(devId > videoDevices.Count || devId < 0)
+            // поддерживаемые режимы работы камеры (разрешение)
+            foreach (var s in videoSource.VideoCapabilities)
+            {
+                videoSource = new VideoCaptureDevice(videoDevices[devId].MonikerString);
+                // формируем строку типа 640 x 480
+                fSize.Add(String.Format("{0} x {1}, {2} fps, {3} Bit", s.FrameSize.Width, s.FrameSize.Height, s.MaximumFrameRate, s.BitCount));
+
+            }
+            return fSize;
+        }
+        #endregion
+
+
+
+
+
         readonly IPlayerMainView PlayerMainView;
         readonly ISettingView settingView;
         Device device;
@@ -59,7 +107,12 @@ namespace WebCamCapture.Presenter
             this.PlayerMainView.ShowDeviceManagerPanel += PlayerMainView_ShowDeviceManagerPanel;
             this.PlayerMainView.MakeSnapshot += PlayerMainView_makeSnapshot;
 
+            settingView.DeviceIdChange += SettingView_DeviceIdChange;
+            settingView.ModeIdChange += SettingForm_ModeIdChange;
+            
         }
+
+
 
 
 
@@ -73,18 +126,20 @@ namespace WebCamCapture.Presenter
             devices = new Devices();
             this.DevicesNameList = devices.GetDevicesNameList();
             this.settingView.DeviceList = this.DevicesNameList.ToArray();
-            device = devices.SelectedDevice(1);
-            var modList = device.GetFrameSizeList();
-            //device.videoSource.VideoResolution = device.videoSource.VideoCapabilities[2];
-            PlayerMainView.VideoSource = device.videoSource;
-            //PlayerMainView.Start();
+            if (PlayerMainView.IsRunning)
+            {
+                PlayerMainView.DeviceManagerItem = true;
+            }
+            else
+            {
+                PlayerMainView.DeviceManagerItem = false;
+            }
         }
 
         // Отобразить форму основных настроек (устройства, режима и путь к снимкам) программы 
         private void PlayerMainView_ShowAppSetting()
         {
-            settingView.DeviceIdChange += SettingView_DeviceIdChange;
-            settingView.ModeIdChange += SettingForm_ModeIdChange;
+            
             if (settingView.ShowDialog() == DialogResult.OK)
             {
                 
@@ -105,7 +160,7 @@ namespace WebCamCapture.Presenter
         {
             this.ModeId = this.settingView.ModeIndex;
             this.Run();
-            //throw new NotImplementedException();
+            
         }
 
         // Отобразить панель с настройкаи (фокус, экспозиция, выдержка...) камеры 
@@ -124,18 +179,24 @@ namespace WebCamCapture.Presenter
         void Run() {
             if (DeviceId != -1 && ModeId != -1)
             {             
-                if (PlayerMainView.IsRunnig) PlayerMainView.Stop();
+                if (PlayerMainView.IsRunning) PlayerMainView.Stop();
                 device.videoSource.VideoResolution = device.videoSource.VideoCapabilities[ModeId];
                 PlayerMainView.VideoSource = device.videoSource;
                 PlayerMainView.Start();
+                PlayerMainView.DeviceManagerItem = true;
+                
             }
         }
 
+        private void VideoSource_NewFrame(object sender, Accord.Video.NewFrameEventArgs eventArgs)
+        {
+            
+        }
 
         // Создать снимок
-        private void PlayerMainView_makeSnapshot(Image image)
+        private void PlayerMainView_makeSnapshot()
         {
-
+            device.videoSource.NewFrame += VideoSource_NewFrame;
         }
         #endregion
 

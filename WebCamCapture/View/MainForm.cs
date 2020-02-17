@@ -21,12 +21,13 @@ namespace WebCamCapture.View
 {
     interface IMain
     {
+        bool DeviceManagerItem { set; }
         event EventHandler Load;
         event FormClosingEventHandler FormClosing;
         /// <summary>
         /// События создания снимка
         /// </summary>
-        event Action<Image> MakeSnapshot;
+        event Action MakeSnapshot;
         event Action ShowAppSetting;
         event Action ShowDeviceManagerPanel;
     }
@@ -36,7 +37,7 @@ namespace WebCamCapture.View
         IVideoSource VideoSource { set; }
         void Start();
         void Stop();
-        bool IsRunnig { get; }
+        bool IsRunning { get; }
 
     }
 
@@ -62,37 +63,23 @@ namespace WebCamCapture.View
 
         
         public IVideoSource VideoSource { set => videoPlayer.VideoSource = value; }
+        public bool DeviceManagerItem { set => deviceManagerItem.Enabled = value; }
 
-        public event Action<Image> MakeSnapshot;
+        public event Action MakeSnapshot;
         public event Action ShowAppSetting;
         public event Action ShowDeviceManagerPanel;
 
+
         private void makeSnapshotBtn_Click(object sender, EventArgs e)
         {
-            
-            //Object obj = videoPlayer.GetCurrentVideoFrame();
-            //snapshotView.Image = videoPlayer.GetCurrentVideoFrame();
-            //using (var image = videoPlayer.GetCurrentVideoFrame())
-            //{
-            //    if (image != null)
-            //    {
-            //        snapshotView.Image = (Bitmap)image;
-
-            //        //// отображаем снимок 
-            //        //snapshotView.Image = videoPlayer.GetCurrentVideoFrame();
-            //        //// передаем текущий кадр подпищикам 
-            //        //MakeSnapshot((Bitmap)image);
-            //    }
-
-            //}
-
+            MakeSnapshot();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
         }
 
-        public bool IsRunnig { get => videoPlayer.IsRunning; }
+        public bool IsRunning { get => videoPlayer.IsRunning; }
         public void Start()
         {
             var v = videoPlayer.VideoSource;
@@ -112,8 +99,6 @@ namespace WebCamCapture.View
 
         private void ShowAppSetting_Click(object sender, EventArgs e)
         {
-            //SettingForm settingForm = new SettingForm();
-            //settingForm.ShowDialog();
             ShowAppSetting();
         }
 
