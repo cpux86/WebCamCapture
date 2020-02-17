@@ -5,7 +5,7 @@
     <Setting Name="SelectedDeviceName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="SelectedFrameSize" Type="System.String" Scope="User">
+    <Setting Name="SelectedMode" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="FileDir" Type="System.String" Scope="User">

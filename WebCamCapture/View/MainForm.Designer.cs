@@ -50,11 +50,12 @@
             this.новыйЗаказToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.showSettingBtn = new System.Windows.Forms.ToolStripMenuItem();
+            this.showAppSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.videoPlayer = new Accord.Controls.VideoSourcePlayer();
             this.snapshotView = new Accord.Controls.PictureBox();
+            this.showDeviceManagerPanel = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.OrderViewPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -262,28 +263,30 @@
             // новыйЗаказToolStripMenuItem
             // 
             this.новыйЗаказToolStripMenuItem.Name = "новыйЗаказToolStripMenuItem";
-            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.новыйЗаказToolStripMenuItem.Text = "Новый заказ";
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             // 
             // настройкиToolStripMenuItem1
             // 
             this.настройкиToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showSettingBtn});
+            this.showAppSetting,
+            this.showDeviceManagerPanel});
             this.настройкиToolStripMenuItem1.Name = "настройкиToolStripMenuItem1";
             this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(79, 20);
             this.настройкиToolStripMenuItem1.Text = "Настройки";
             // 
-            // showSettingBtn
+            // showAppSetting
             // 
-            this.showSettingBtn.Name = "showSettingBtn";
-            this.showSettingBtn.Size = new System.Drawing.Size(115, 22);
-            this.showSettingBtn.Text = "Камера";
+            this.showAppSetting.Name = "showAppSetting";
+            this.showAppSetting.Size = new System.Drawing.Size(180, 22);
+            this.showAppSetting.Text = "Общие";
+            this.showAppSetting.Click += new System.EventHandler(this.ShowAppSetting_Click);
             // 
             // оПрограммеToolStripMenuItem
             // 
@@ -328,6 +331,13 @@
             this.snapshotView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.snapshotView.TabIndex = 30;
             this.snapshotView.TabStop = false;
+            // 
+            // showDeviceManagerPanel
+            // 
+            this.showDeviceManagerPanel.Name = "showDeviceManagerPanel";
+            this.showDeviceManagerPanel.Size = new System.Drawing.Size(180, 22);
+            this.showDeviceManagerPanel.Text = "Управление";
+            this.showDeviceManagerPanel.Click += new System.EventHandler(this.ShowDeviceManagerPanel_Click);
             // 
             // MainForm
             // 
@@ -377,11 +387,12 @@
         private System.Windows.Forms.ToolStripMenuItem новыйЗаказToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem showSettingBtn;
+        private System.Windows.Forms.ToolStripMenuItem showAppSetting;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private Accord.Controls.VideoSourcePlayer videoPlayer;
         private Accord.Controls.PictureBox snapshotView;
+        private System.Windows.Forms.ToolStripMenuItem showDeviceManagerPanel;
     }
 }
 

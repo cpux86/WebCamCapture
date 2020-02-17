@@ -94,7 +94,7 @@
             this.tabControl1.Location = new System.Drawing.Point(1, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(355, 352);
+            this.tabControl1.Size = new System.Drawing.Size(438, 262);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -106,7 +106,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(347, 324);
+            this.tabPage1.Size = new System.Drawing.Size(430, 234);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Источник";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -117,9 +117,9 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.deviceList);
             this.groupBox2.Controls.Add(this.modesList);
-            this.groupBox2.Location = new System.Drawing.Point(15, 115);
+            this.groupBox2.Location = new System.Drawing.Point(15, 90);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(317, 75);
+            this.groupBox2.Size = new System.Drawing.Size(405, 75);
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Опции";
@@ -175,7 +175,7 @@
             this.modesList.FormattingEnabled = true;
             this.modesList.Location = new System.Drawing.Point(168, 35);
             this.modesList.Name = "modesList";
-            this.modesList.Size = new System.Drawing.Size(130, 23);
+            this.modesList.Size = new System.Drawing.Size(216, 23);
             this.modesList.TabIndex = 14;
             this.modesList.SelectedIndexChanged += new System.EventHandler(this.modesList_SelectedIndexChanged);
             // 
@@ -183,9 +183,9 @@
             // 
             this.groupBox1.Controls.Add(this.SettinAppPanel__FileDirView);
             this.groupBox1.Controls.Add(this.SettingAppPanel__DirOkBtn);
-            this.groupBox1.Location = new System.Drawing.Point(15, 52);
+            this.groupBox1.Location = new System.Drawing.Point(15, 27);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(317, 57);
+            this.groupBox1.Size = new System.Drawing.Size(405, 57);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Каталог для файлов";
@@ -198,7 +198,7 @@
             this.SettinAppPanel__FileDirView.Location = new System.Drawing.Point(6, 21);
             this.SettinAppPanel__FileDirView.Name = "SettinAppPanel__FileDirView";
             this.SettinAppPanel__FileDirView.ReadOnly = true;
-            this.SettinAppPanel__FileDirView.Size = new System.Drawing.Size(245, 23);
+            this.SettinAppPanel__FileDirView.Size = new System.Drawing.Size(336, 23);
             this.SettinAppPanel__FileDirView.TabIndex = 14;
             // 
             // SettingAppPanel__DirOkBtn
@@ -209,7 +209,7 @@
             this.SettingAppPanel__DirOkBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.SettingAppPanel__DirOkBtn.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.SettingAppPanel__DirOkBtn.ForeColor = System.Drawing.Color.Black;
-            this.SettingAppPanel__DirOkBtn.Location = new System.Drawing.Point(262, 21);
+            this.SettingAppPanel__DirOkBtn.Location = new System.Drawing.Point(348, 20);
             this.SettingAppPanel__DirOkBtn.Name = "SettingAppPanel__DirOkBtn";
             this.SettingAppPanel__DirOkBtn.Size = new System.Drawing.Size(36, 23);
             this.SettingAppPanel__DirOkBtn.TabIndex = 15;
@@ -223,9 +223,9 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOkSettingDev.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOkSettingDev.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnOkSettingDev.Location = new System.Drawing.Point(15, 206);
+            this.btnOkSettingDev.Location = new System.Drawing.Point(15, 182);
             this.btnOkSettingDev.Name = "btnOkSettingDev";
-            this.btnOkSettingDev.Size = new System.Drawing.Size(75, 33);
+            this.btnOkSettingDev.Size = new System.Drawing.Size(75, 31);
             this.btnOkSettingDev.TabIndex = 16;
             this.btnOkSettingDev.Text = "OK";
             this.btnOkSettingDev.UseVisualStyleBackColor = true;
@@ -241,7 +241,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(347, 324);
+            this.tabPage2.Size = new System.Drawing.Size(347, 234);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Управление";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -393,7 +393,6 @@
             this.trackExposure.TickFrequency = 50;
             this.trackExposure.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.trackExposure.Value = 100;
-            this.trackExposure.Scroll += new System.EventHandler(this.TrackExposure_Scroll);
             // 
             // numExposure
             // 
@@ -453,7 +452,6 @@
             this.trackFocus.TabIndex = 3;
             this.trackFocus.TickFrequency = 50;
             this.trackFocus.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.trackFocus.Scroll += new System.EventHandler(this.trackFocus_Scroll);
             // 
             // numFocus
             // 
@@ -467,7 +465,6 @@
             this.numFocus.Name = "numFocus";
             this.numFocus.Size = new System.Drawing.Size(43, 22);
             this.numFocus.TabIndex = 4;
-            this.numFocus.ValueChanged += new System.EventHandler(this.NumFocus_ValueChanged);
             // 
             // chFocusAuto
             // 
@@ -479,7 +476,6 @@
             this.chFocusAuto.Size = new System.Drawing.Size(15, 14);
             this.chFocusAuto.TabIndex = 5;
             this.chFocusAuto.UseVisualStyleBackColor = true;
-            this.chFocusAuto.CheckedChanged += new System.EventHandler(this.ChFocusAuto_CheckedChanged);
             // 
             // groupBox3
             // 
@@ -507,7 +503,6 @@
             this.trackZoom.TickFrequency = 50;
             this.trackZoom.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.trackZoom.Value = 100;
-            this.trackZoom.Scroll += new System.EventHandler(this.TrackZoom_Scroll);
             // 
             // numZoom
             // 
@@ -531,7 +526,6 @@
             0,
             0,
             0});
-            this.numZoom.ValueChanged += new System.EventHandler(this.NumScale_ValueChanged);
             // 
             // chScaleAuto
             // 
@@ -543,13 +537,12 @@
             this.chScaleAuto.Size = new System.Drawing.Size(15, 14);
             this.chScaleAuto.TabIndex = 5;
             this.chScaleAuto.UseVisualStyleBackColor = true;
-            this.chScaleAuto.CheckedChanged += new System.EventHandler(this.ChScaleAuto_CheckedChanged);
             // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(354, 353);
+            this.ClientSize = new System.Drawing.Size(437, 263);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;

@@ -14,7 +14,7 @@ using System.Resources;
 
 using System.Windows.Forms;
 //using AForge.Video;
-//using AForge.Video.DirectShow;
+using Accord.Video.DirectShow;
 using Accord.Video;
 
 namespace WebCamCapture.View
@@ -23,18 +23,24 @@ namespace WebCamCapture.View
     {
         event EventHandler Load;
         event FormClosingEventHandler FormClosing;
+        /// <summary>
+        /// События создания снимка
+        /// </summary>
+        event Action<Image> MakeSnapshot;
+        event Action ShowAppSetting;
+        event Action ShowDeviceManagerPanel;
     }
 
-    internal interface IPlayer : IMain
+    internal interface IPlayerMainView : IMain
     {
         IVideoSource VideoSource { set; }
-        Image CurrentFrame { get; }
         void Start();
         void Stop();
+        bool IsRunnig { get; }
 
     }
 
-    internal partial class MainForm : Form, IMain, IPlayer
+    internal partial class MainForm : Form, IMain, IPlayerMainView
     {
         public MainForm()
         {
@@ -53,21 +59,27 @@ namespace WebCamCapture.View
 
 
         #endregion
+
         
         public IVideoSource VideoSource { set => videoPlayer.VideoSource = value; }
 
-        public Image CurrentFrame => videoPlayer.GetCurrentVideoFrame();
+        public event Action<Image> MakeSnapshot;
+        public event Action ShowAppSetting;
+        public event Action ShowDeviceManagerPanel;
 
         private void makeSnapshotBtn_Click(object sender, EventArgs e)
         {
+            // отображаем снимок 
             snapshotView.Image = videoPlayer.GetCurrentVideoFrame();
+            // передаем текущий кадр подпищикам 
+            MakeSnapshot(videoPlayer.GetCurrentVideoFrame());
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
         }
 
+        public bool IsRunnig { get => videoPlayer.IsRunning; }
         public void Start()
         {
             videoPlayer.Start();
@@ -82,6 +94,18 @@ namespace WebCamCapture.View
                 videoPlayer.Stop();
                 videoPlayer.VideoSource = null;
             }           
+        }
+
+        private void ShowAppSetting_Click(object sender, EventArgs e)
+        {
+            //SettingForm settingForm = new SettingForm();
+            //settingForm.ShowDialog();
+            ShowAppSetting();
+        }
+
+        private void ShowDeviceManagerPanel_Click(object sender, EventArgs e)
+        {
+            ShowDeviceManagerPanel();
         }
     }
 

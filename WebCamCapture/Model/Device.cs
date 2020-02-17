@@ -33,9 +33,8 @@ namespace WebCamCapture.Model
         /// <returns></returns>
         public List<string> GetDevicesNameList()
         {
-            //videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             // заполняем список именами подклюен
-
             List<string> list = new List<string>();
             foreach (FilterInfo device in videoDevices)
             {

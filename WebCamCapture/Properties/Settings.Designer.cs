@@ -38,12 +38,12 @@ namespace WebCamCapture.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SelectedFrameSize {
+        public string SelectedMode {
             get {
-                return ((string)(this["SelectedFrameSize"]));
+                return ((string)(this["SelectedMode"]));
             }
             set {
-                this["SelectedFrameSize"] = value;
+                this["SelectedMode"] = value;
             }
         }
         

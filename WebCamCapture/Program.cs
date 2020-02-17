@@ -18,9 +18,10 @@ namespace WebCamCapture
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var mainForm = new View.MainForm();
+            var settingForm = new View.SettingForm();
             
             Presenter.MainPresenter mainPresenter = new Presenter.MainPresenter(mainForm);
-            Presenter.SettingPresenter settingPresenter = new Presenter.SettingPresenter(mainForm);
+            Presenter.SettingPresenter settingPresenter = new Presenter.SettingPresenter(mainForm, settingForm);
 
             Application.Run(mainForm);
         }
