@@ -82,7 +82,6 @@ namespace WebCamCapture.View
         public bool IsRunning { get => videoPlayer.IsRunning; }
         public void Start()
         {
-            var v = videoPlayer.VideoSource;
             videoPlayer.Start();
         }
 

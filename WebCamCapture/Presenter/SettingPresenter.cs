@@ -59,9 +59,9 @@ namespace WebCamCapture.Presenter
         /// <returns></returns>
         public List<string> GetDevicesNameList()
         {
-            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             // заполняем список именами подклюен
             List<string> list = new List<string>();
+            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             foreach (FilterInfo device in videoDevices)
             {
                 list.Add(device.Name);
@@ -77,14 +77,12 @@ namespace WebCamCapture.Presenter
         public List<string> GetFrameSizeList(int devId)
         {
             List<string> fSize = new List<string>();
-            if(devId > videoDevices.Count || devId < 0)
+            videoSource = new VideoCaptureDevice(videoDevices[devId].MonikerString);
             // поддерживаемые режимы работы камеры (разрешение)
             foreach (var s in videoSource.VideoCapabilities)
-            {
-                videoSource = new VideoCaptureDevice(videoDevices[devId].MonikerString);
+            {             
                 // формируем строку типа 640 x 480
                 fSize.Add(String.Format("{0} x {1}, {2} fps, {3} Bit", s.FrameSize.Width, s.FrameSize.Height, s.MaximumFrameRate, s.BitCount));
-
             }
             return fSize;
         }
@@ -96,7 +94,7 @@ namespace WebCamCapture.Presenter
 
         readonly IPlayerMainView PlayerMainView;
         readonly ISettingView settingView;
-        Device device;
+
         public SettingPresenter(IPlayerMainView playerMainView, ISettingView settingView)
         {
             this.PlayerMainView = playerMainView;
@@ -112,6 +110,11 @@ namespace WebCamCapture.Presenter
             
         }
 
+        private void SettingView_DeviceIdChange()
+        {
+            settingView.ModesList = GetFrameSizeList(settingView.DeviceIndex).ToArray();
+        }
+
 
 
 
@@ -119,12 +122,10 @@ namespace WebCamCapture.Presenter
 
 
         #region Обработчики
-        Devices devices;
         // Главная форма загружена
         private void PlayerMainView_Load(object sender, EventArgs e)
         {
-            devices = new Devices();
-            this.DevicesNameList = devices.GetDevicesNameList();
+            this.DevicesNameList = GetDevicesNameList();
             this.settingView.DeviceList = this.DevicesNameList.ToArray();
             if (PlayerMainView.IsRunning)
             {
@@ -145,15 +146,6 @@ namespace WebCamCapture.Presenter
                 
             }
         }
-        // Выбор устройства
-        private void SettingView_DeviceIdChange()
-        {
-            this.DeviceId = this.settingView.DeviceIndex;
-            device = devices.SelectedDevice(DeviceId);
-            this.ModesList = device.GetFrameSizeList();
-            this.settingView.ModesList = this.ModesList.ToArray();
-            //throw new NotImplementedException();
-        }
 
         // Выбор видеорежим
         private void SettingForm_ModeIdChange()
@@ -168,7 +160,7 @@ namespace WebCamCapture.Presenter
         {
             try
             {
-                device.videoSource.DisplayPropertyPage(IntPtr.Zero);
+                videoSource.DisplayPropertyPage(IntPtr.Zero);
             }
             catch (NotSupportedException e)
             {
@@ -180,8 +172,8 @@ namespace WebCamCapture.Presenter
             if (DeviceId != -1 && ModeId != -1)
             {             
                 if (PlayerMainView.IsRunning) PlayerMainView.Stop();
-                device.videoSource.VideoResolution = device.videoSource.VideoCapabilities[ModeId];
-                PlayerMainView.VideoSource = device.videoSource;
+                videoSource.VideoResolution = videoSource.VideoCapabilities[ModeId];
+                PlayerMainView.VideoSource = videoSource;
                 PlayerMainView.Start();
                 PlayerMainView.DeviceManagerItem = true;
                 
@@ -196,7 +188,7 @@ namespace WebCamCapture.Presenter
         // Создать снимок
         private void PlayerMainView_makeSnapshot()
         {
-            device.videoSource.NewFrame += VideoSource_NewFrame;
+            videoSource.NewFrame += VideoSource_NewFrame;
         }
         #endregion
 
