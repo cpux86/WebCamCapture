@@ -7,7 +7,8 @@ using WebCamCapture.View;
 using WebCamCapture.Model;
 using System.Drawing;
 using System.Windows.Forms;
-using Accord.Video.DirectShow;
+//using Accord.Video.DirectShow;
+using AForge.Video.DirectShow;
 
 namespace WebCamCapture.Presenter
 {
@@ -97,6 +98,7 @@ namespace WebCamCapture.Presenter
 
         public SettingPresenter(IPlayerMainView playerMainView, ISettingView settingView)
         {
+            videoSource = new VideoCaptureDevice(); // защита
             this.PlayerMainView = playerMainView;
             this.settingView = settingView;
 
@@ -104,7 +106,7 @@ namespace WebCamCapture.Presenter
             this.PlayerMainView.ShowAppSetting += PlayerMainView_ShowAppSetting;
             this.PlayerMainView.ShowDeviceManagerPanel += PlayerMainView_ShowDeviceManagerPanel;
             this.PlayerMainView.MakeSnapshot += PlayerMainView_makeSnapshot;
-
+            
             settingView.DeviceIdChange += SettingView_DeviceIdChange;
             settingView.ModeIdChange += SettingForm_ModeIdChange;
             
@@ -135,6 +137,7 @@ namespace WebCamCapture.Presenter
             {
                 PlayerMainView.DeviceManagerItem = false;
             }
+          
         }
 
         // Отобразить форму основных настроек (устройства, режима и путь к снимкам) программы 
@@ -174,22 +177,30 @@ namespace WebCamCapture.Presenter
                 if (PlayerMainView.IsRunning) PlayerMainView.Stop();
                 videoSource.VideoResolution = videoSource.VideoCapabilities[ModeId];
                 PlayerMainView.VideoSource = videoSource;
+                videoSource.NewFrame += VideoSource_NewFrame;
                 PlayerMainView.Start();
                 PlayerMainView.DeviceManagerItem = true;
                 
             }
         }
 
-        private void VideoSource_NewFrame(object sender, Accord.Video.NewFrameEventArgs eventArgs)
-        {
-            
-        }
-
         // Создать снимок
         private void PlayerMainView_makeSnapshot()
         {
-            videoSource.NewFrame += VideoSource_NewFrame;
+            videoSource.NewFrame -= SaveSnapshot;
+            videoSource.NewFrame += SaveSnapshot;
         }
+
+        private void SaveSnapshot(object sender, AForge.Video.NewFrameEventArgs eventArgs)
+        {
+            PlayerMainView.Frame();
+        }
+
+        private void VideoSource_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
+        {
+            videoSource.NewFrame -= SaveSnapshot;
+        }
+
         #endregion
 
     }

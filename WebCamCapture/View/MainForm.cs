@@ -1,4 +1,4 @@
-п»ї
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +13,8 @@ using System.Threading;
 using System.Resources;
 
 using System.Windows.Forms;
-//using AForge.Video;
-using Accord.Video.DirectShow;
-using Accord.Video;
+using AForge.Video;
+using AForge.Video.DirectShow;
 
 namespace WebCamCapture.View
 {
@@ -25,7 +24,7 @@ namespace WebCamCapture.View
         event EventHandler Load;
         event FormClosingEventHandler FormClosing;
         /// <summary>
-        /// РЎРѕР±С‹С‚РёСЏ СЃРѕР·РґР°РЅРёСЏ СЃРЅРёРјРєР°
+        /// События создания снимка
         /// </summary>
         event Action MakeSnapshot;
         event Action ShowAppSetting;
@@ -38,6 +37,7 @@ namespace WebCamCapture.View
         void Start();
         void Stop();
         bool IsRunning { get; }
+        void Frame();
 
     }
 
@@ -51,7 +51,7 @@ namespace WebCamCapture.View
 
 
 
-        #region РЎРІРµРґРµРЅРёСЏ Рѕ Р·Р°РєР°Р·Рµ
+        #region Сведения о заказе
         public string OrderNumber { set => OrderPanel__TextOrder.Text = value; }
         public string Roller { set => OrderPanel__TextRoller.Text = value; }
         public string Operation { set => OrderPanel__TextOpreration.Text = value; }
@@ -61,7 +61,7 @@ namespace WebCamCapture.View
 
         #endregion
 
-        
+
         public IVideoSource VideoSource { set => videoPlayer.VideoSource = value; }
         public bool DeviceManagerItem { set => deviceManagerItem.Enabled = value; }
 
@@ -93,7 +93,7 @@ namespace WebCamCapture.View
                 videoPlayer.WaitForStop();
                 videoPlayer.Stop();
                 videoPlayer.VideoSource = null;
-            }           
+            }
         }
 
         private void ShowAppSetting_Click(object sender, EventArgs e)
@@ -105,7 +105,18 @@ namespace WebCamCapture.View
         {
             ShowDeviceManagerPanel();
         }
+        Image image;
+        public void Frame()
+        {
+            if (image !=null)
+            {
+                snapshotView.Image.Dispose();    
+                image.Dispose();
+            }
+            image = videoPlayer.GetCurrentVideoFrame();
+            snapshotView.Image = image;
+        }
     }
 
-    
+
 }

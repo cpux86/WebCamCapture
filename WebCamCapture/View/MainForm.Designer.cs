@@ -54,7 +54,7 @@
             this.deviceManagerItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.videoPlayer = new Accord.Controls.VideoSourcePlayer();
+            this.videoPlayer = new AForge.Controls.VideoSourcePlayer();
             this.snapshotView = new Accord.Controls.PictureBox();
             this.panel1.SuspendLayout();
             this.OrderViewPanel.SuspendLayout();
@@ -284,15 +284,15 @@
             // showAppSetting
             // 
             this.showAppSetting.Name = "showAppSetting";
-            this.showAppSetting.Size = new System.Drawing.Size(180, 22);
+            this.showAppSetting.Size = new System.Drawing.Size(140, 22);
             this.showAppSetting.Text = "Общие";
             this.showAppSetting.Click += new System.EventHandler(this.ShowAppSetting_Click);
             // 
-            // showDeviceManagerPanel
+            // deviceManagerItem
             // 
             this.deviceManagerItem.Enabled = false;
-            this.deviceManagerItem.Name = "showDeviceManagerPanel";
-            this.deviceManagerItem.Size = new System.Drawing.Size(180, 22);
+            this.deviceManagerItem.Name = "deviceManagerItem";
+            this.deviceManagerItem.Size = new System.Drawing.Size(140, 22);
             this.deviceManagerItem.Text = "Управление";
             this.deviceManagerItem.Click += new System.EventHandler(this.ShowDeviceManagerPanel_Click);
             // 
@@ -391,7 +391,7 @@
         private System.Windows.Forms.ToolStripMenuItem showAppSetting;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private Accord.Controls.VideoSourcePlayer videoPlayer;
+        private AForge.Controls.VideoSourcePlayer videoPlayer;
         private Accord.Controls.PictureBox snapshotView;
         private System.Windows.Forms.ToolStripMenuItem deviceManagerItem;
     }
