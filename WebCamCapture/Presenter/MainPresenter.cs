@@ -19,6 +19,7 @@ namespace WebCamCapture.Presenter
             this.mainForm = mainForm;
             mainForm.Load += MainForm_Load;
             mainForm.FormClosing += MainForm_FormClosing;
+
         }
 
         private void MainForm_Load(object sender, EventArgs e)

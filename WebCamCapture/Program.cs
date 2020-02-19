@@ -22,6 +22,7 @@ namespace WebCamCapture
             
             Presenter.MainPresenter mainPresenter = new Presenter.MainPresenter(mainForm);
             Presenter.SettingPresenter settingPresenter = new Presenter.SettingPresenter(mainForm, settingForm);
+            Presenter.OrderPresenter orderPresenter = new Presenter.OrderPresenter(mainForm);
 
             Application.Run(mainForm);
         }

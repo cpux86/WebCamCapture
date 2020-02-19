@@ -11,7 +11,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebCamCapture.View
 {
-    public partial class OrderForm : Form
+    internal interface IOrderForm
+    {
+        string[] RollerList { set; }
+        string[] OperationsList { set; }
+        string[] UsersList { set; }
+
+        string Order { get; }
+        string SelectedRoller { get; }
+        string SelectedOperation { get; }
+        string SelectedUser { get; }
+        DialogResult ShowDialog();
+
+        event Action BtnOkOrderClick;
+    }
+
+    public partial class OrderForm : Form, IOrderForm
     {
         public string[] RollerList { set => rollerCbox.Items.AddRange(value); }
         public string[] OperationsList { set => operationCbox.Items.AddRange(value); }
@@ -84,8 +99,7 @@ namespace WebCamCapture.View
             {
                 e.Handled = true;
             }
-            // преобразуем каждый введенный символ в врехний регистр.
-            //e.KeyChar = Char.ToUpper(e.KeyChar);
+
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -113,4 +127,6 @@ namespace WebCamCapture.View
             }
         }
     }
+
+
 }

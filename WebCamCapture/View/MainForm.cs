@@ -24,14 +24,14 @@ namespace WebCamCapture.View
         event EventHandler Load;
         event FormClosingEventHandler FormClosing;
         /// <summary>
-        /// ������� �������� ������
+        /// Создать снимок
         /// </summary>
         event Action MakeSnapshot;
         event Action ShowAppSetting;
         event Action ShowDeviceManagerPanel;
-    }
 
-    internal interface IPlayerMainView : IMain
+    }
+    interface IPlayerMainView : IMain
     {
         IVideoSource VideoSource { set; }
         void Start();
@@ -41,22 +41,33 @@ namespace WebCamCapture.View
         void SnapshotView(Image image);
 
     }
-
-    internal partial class MainForm : Form, IMain, IPlayerMainView
+    interface IOrderMainForm
+    {
+        string OrderNumber { set; }
+        string Roller { set; }
+        string Operation { set; }
+        string User { set; }
+        /// <summary>
+        /// Отображение формы заказа
+        /// </summary>
+        event Action ShowOrderForm;
+    }
+    internal partial class MainForm : Form, IMain, IPlayerMainView, IOrderMainForm
     {
         public MainForm()
         {
             InitializeComponent();
             this.KeyPreview = true;
+            
         }
 
 
 
-        #region �������� � ������
-        public string OrderNumber { set => OrderPanel__TextOrder.Text = value; }
-        public string Roller { set => OrderPanel__TextRoller.Text = value; }
-        public string Operation { set => OrderPanel__TextOpreration.Text = value; }
-        public string User { set => OrderPanel__OperatorFullName.Text = value; }
+        #region Сведения о заказе
+        public string OrderNumber { set => TextOrderMainForm.Text = value; }
+        public string Roller { set => TextRollerMainForm.Text = value; }
+        public string Operation { set => TextOprerationMainForm.Text = value; }
+        public string User { set => OperatorFullNameMainForm.Text = value; }
 
 
 
@@ -69,7 +80,7 @@ namespace WebCamCapture.View
         public event Action MakeSnapshot;
         public event Action ShowAppSetting;
         public event Action ShowDeviceManagerPanel;
-
+        public event Action ShowOrderForm;
 
         private void makeSnapshotBtn_Click(object sender, EventArgs e)
         {
@@ -116,14 +127,16 @@ namespace WebCamCapture.View
                 if (snapshotView.Image != null)
                 {
                     snapshotView.Image.Dispose();
-                    //snapshotView.Image = null;
                 }
                 snapshotView.Image = img;
-
             }));
-            
+        }
+        // Отобразить форму заказа
+        private void OrderEditBtn_Click(object sender, EventArgs e)
+        {
+            ShowOrderForm();
         }
     }
 
-
+   
 }

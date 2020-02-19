@@ -42,10 +42,10 @@
             this.OrderPanel__TitleRoller = new System.Windows.Forms.Label();
             this.OrderPanel__TitleOrder = new System.Windows.Forms.Label();
             this.OrderViewPanel = new System.Windows.Forms.Panel();
-            this.OrderPanel__OperatorFullName = new System.Windows.Forms.Label();
-            this.OrderPanel__TextOpreration = new System.Windows.Forms.Label();
-            this.OrderPanel__TextRoller = new System.Windows.Forms.Label();
-            this.OrderPanel__TextOrder = new System.Windows.Forms.Label();
+            this.OperatorFullNameMainForm = new System.Windows.Forms.Label();
+            this.TextOprerationMainForm = new System.Windows.Forms.Label();
+            this.TextRollerMainForm = new System.Windows.Forms.Label();
+            this.TextOrderMainForm = new System.Windows.Forms.Label();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.новыйЗаказToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -111,6 +111,7 @@
             this.orderEditBtn.TabIndex = 19;
             this.orderEditBtn.Text = "Заказ / Правка";
             this.orderEditBtn.UseVisualStyleBackColor = true;
+            this.orderEditBtn.Click += new System.EventHandler(this.OrderEditBtn_Click);
             // 
             // photoGalleraya
             // 
@@ -198,10 +199,10 @@
             this.OrderViewPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.OrderViewPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.OrderViewPanel.Controls.Add(this.OrderPanel__OperatorFullName);
-            this.OrderViewPanel.Controls.Add(this.OrderPanel__TextOpreration);
-            this.OrderViewPanel.Controls.Add(this.OrderPanel__TextRoller);
-            this.OrderViewPanel.Controls.Add(this.OrderPanel__TextOrder);
+            this.OrderViewPanel.Controls.Add(this.OperatorFullNameMainForm);
+            this.OrderViewPanel.Controls.Add(this.TextOprerationMainForm);
+            this.OrderViewPanel.Controls.Add(this.TextRollerMainForm);
+            this.OrderViewPanel.Controls.Add(this.TextOrderMainForm);
             this.OrderViewPanel.Controls.Add(this.OrderPanel__TitleUser);
             this.OrderViewPanel.Controls.Add(this.OrderPanel__TitleRoller);
             this.OrderViewPanel.Controls.Add(this.OrderPanel__TitleOpreration);
@@ -211,45 +212,45 @@
             this.OrderViewPanel.Size = new System.Drawing.Size(572, 145);
             this.OrderViewPanel.TabIndex = 28;
             // 
-            // OrderPanel__OperatorFullName
+            // OperatorFullNameMainForm
             // 
-            this.OrderPanel__OperatorFullName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.OrderPanel__OperatorFullName.AutoSize = true;
-            this.OrderPanel__OperatorFullName.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OrderPanel__OperatorFullName.Location = new System.Drawing.Point(135, 111);
-            this.OrderPanel__OperatorFullName.Name = "OrderPanel__OperatorFullName";
-            this.OrderPanel__OperatorFullName.Size = new System.Drawing.Size(0, 21);
-            this.OrderPanel__OperatorFullName.TabIndex = 31;
+            this.OperatorFullNameMainForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.OperatorFullNameMainForm.AutoSize = true;
+            this.OperatorFullNameMainForm.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OperatorFullNameMainForm.Location = new System.Drawing.Point(135, 111);
+            this.OperatorFullNameMainForm.Name = "OperatorFullNameMainForm";
+            this.OperatorFullNameMainForm.Size = new System.Drawing.Size(0, 21);
+            this.OperatorFullNameMainForm.TabIndex = 31;
             // 
-            // OrderPanel__TextOpreration
+            // TextOprerationMainForm
             // 
-            this.OrderPanel__TextOpreration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.OrderPanel__TextOpreration.AutoSize = true;
-            this.OrderPanel__TextOpreration.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OrderPanel__TextOpreration.Location = new System.Drawing.Point(135, 78);
-            this.OrderPanel__TextOpreration.Name = "OrderPanel__TextOpreration";
-            this.OrderPanel__TextOpreration.Size = new System.Drawing.Size(0, 21);
-            this.OrderPanel__TextOpreration.TabIndex = 30;
+            this.TextOprerationMainForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TextOprerationMainForm.AutoSize = true;
+            this.TextOprerationMainForm.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TextOprerationMainForm.Location = new System.Drawing.Point(135, 78);
+            this.TextOprerationMainForm.Name = "TextOprerationMainForm";
+            this.TextOprerationMainForm.Size = new System.Drawing.Size(0, 21);
+            this.TextOprerationMainForm.TabIndex = 30;
             // 
-            // OrderPanel__TextRoller
+            // TextRollerMainForm
             // 
-            this.OrderPanel__TextRoller.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.OrderPanel__TextRoller.AutoSize = true;
-            this.OrderPanel__TextRoller.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OrderPanel__TextRoller.Location = new System.Drawing.Point(135, 45);
-            this.OrderPanel__TextRoller.Name = "OrderPanel__TextRoller";
-            this.OrderPanel__TextRoller.Size = new System.Drawing.Size(0, 21);
-            this.OrderPanel__TextRoller.TabIndex = 29;
+            this.TextRollerMainForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TextRollerMainForm.AutoSize = true;
+            this.TextRollerMainForm.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TextRollerMainForm.Location = new System.Drawing.Point(135, 45);
+            this.TextRollerMainForm.Name = "TextRollerMainForm";
+            this.TextRollerMainForm.Size = new System.Drawing.Size(0, 21);
+            this.TextRollerMainForm.TabIndex = 29;
             // 
-            // OrderPanel__TextOrder
+            // TextOrderMainForm
             // 
-            this.OrderPanel__TextOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.OrderPanel__TextOrder.AutoSize = true;
-            this.OrderPanel__TextOrder.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OrderPanel__TextOrder.Location = new System.Drawing.Point(135, 12);
-            this.OrderPanel__TextOrder.Name = "OrderPanel__TextOrder";
-            this.OrderPanel__TextOrder.Size = new System.Drawing.Size(0, 21);
-            this.OrderPanel__TextOrder.TabIndex = 28;
+            this.TextOrderMainForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TextOrderMainForm.AutoSize = true;
+            this.TextOrderMainForm.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TextOrderMainForm.Location = new System.Drawing.Point(135, 12);
+            this.TextOrderMainForm.Name = "TextOrderMainForm";
+            this.TextOrderMainForm.Size = new System.Drawing.Size(0, 21);
+            this.TextOrderMainForm.TabIndex = 28;
             // 
             // файлToolStripMenuItem
             // 
@@ -263,13 +264,13 @@
             // новыйЗаказToolStripMenuItem
             // 
             this.новыйЗаказToolStripMenuItem.Name = "новыйЗаказToolStripMenuItem";
-            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.новыйЗаказToolStripMenuItem.Text = "Новый заказ";
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             // 
             // настройкиToolStripMenuItem1
@@ -284,7 +285,7 @@
             // showAppSetting
             // 
             this.showAppSetting.Name = "showAppSetting";
-            this.showAppSetting.Size = new System.Drawing.Size(140, 22);
+            this.showAppSetting.Size = new System.Drawing.Size(141, 22);
             this.showAppSetting.Text = "Общие";
             this.showAppSetting.Click += new System.EventHandler(this.ShowAppSetting_Click);
             // 
@@ -292,7 +293,7 @@
             // 
             this.deviceManagerItem.Enabled = false;
             this.deviceManagerItem.Name = "deviceManagerItem";
-            this.deviceManagerItem.Size = new System.Drawing.Size(140, 22);
+            this.deviceManagerItem.Size = new System.Drawing.Size(141, 22);
             this.deviceManagerItem.Text = "Управление";
             this.deviceManagerItem.Click += new System.EventHandler(this.ShowDeviceManagerPanel_Click);
             // 
@@ -380,10 +381,10 @@
         private System.Windows.Forms.Label OrderPanel__TitleRoller;
         private System.Windows.Forms.Label OrderPanel__TitleOrder;
         private System.Windows.Forms.Panel OrderViewPanel;
-        private System.Windows.Forms.Label OrderPanel__TextOrder;
-        private System.Windows.Forms.Label OrderPanel__OperatorFullName;
-        private System.Windows.Forms.Label OrderPanel__TextOpreration;
-        private System.Windows.Forms.Label OrderPanel__TextRoller;
+        private System.Windows.Forms.Label TextOrderMainForm;
+        private System.Windows.Forms.Label OperatorFullNameMainForm;
+        private System.Windows.Forms.Label TextOprerationMainForm;
+        private System.Windows.Forms.Label TextRollerMainForm;
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem новыйЗаказToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
