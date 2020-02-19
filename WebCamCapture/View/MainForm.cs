@@ -1,4 +1,4 @@
-
+п»ї
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,7 +24,7 @@ namespace WebCamCapture.View
         event EventHandler Load;
         event FormClosingEventHandler FormClosing;
         /// <summary>
-        /// События создания снимка
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         /// </summary>
         event Action MakeSnapshot;
         event Action ShowAppSetting;
@@ -37,7 +37,8 @@ namespace WebCamCapture.View
         void Start();
         void Stop();
         bool IsRunning { get; }
-        void Frame();
+        //void SnapshotView();
+        void SnapshotView(Image image);
 
     }
 
@@ -51,7 +52,7 @@ namespace WebCamCapture.View
 
 
 
-        #region Сведения о заказе
+        #region пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         public string OrderNumber { set => OrderPanel__TextOrder.Text = value; }
         public string Roller { set => OrderPanel__TextRoller.Text = value; }
         public string Operation { set => OrderPanel__TextOpreration.Text = value; }
@@ -87,13 +88,16 @@ namespace WebCamCapture.View
 
         public void Stop()
         {
-            if (videoPlayer.VideoSource != null)
-            {
-                videoPlayer.SignalToStop();
-                videoPlayer.WaitForStop();
-                videoPlayer.Stop();
-                videoPlayer.VideoSource = null;
-            }
+            Invoke((MethodInvoker)(() => {
+                if (videoPlayer.VideoSource != null)
+                {
+                    videoPlayer.SignalToStop();
+                    videoPlayer.WaitForStop();
+                    videoPlayer.Stop();
+                    videoPlayer.VideoSource = null;
+                }
+            }));
+          
         }
 
         private void ShowAppSetting_Click(object sender, EventArgs e)
@@ -105,16 +109,19 @@ namespace WebCamCapture.View
         {
             ShowDeviceManagerPanel();
         }
-        Image image;
-        public void Frame()
+
+        public void SnapshotView(Image img)
         {
-            if (image !=null)
-            {
-                snapshotView.Image.Dispose();    
-                image.Dispose();
-            }
-            image = videoPlayer.GetCurrentVideoFrame();
-            snapshotView.Image = image;
+            Invoke((MethodInvoker)(() => {
+                if (snapshotView.Image != null)
+                {
+                    snapshotView.Image.Dispose();
+                    //snapshotView.Image = null;
+                }
+                snapshotView.Image = img;
+
+            }));
+            
         }
     }
 
