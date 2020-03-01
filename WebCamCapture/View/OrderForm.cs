@@ -31,6 +31,7 @@ namespace WebCamCapture.View
         public string[] RollerList { set => rollerCbox.Items.AddRange(value); }
         public string[] OperationsList { set => operationCbox.Items.AddRange(value); }
         public string[] UsersList { set => userNameCbox.Items.AddRange(value); }
+        
 
         public string Order { get => orderTbox.Text; set => orderTbox.Text = value; }
         public string SelectedRoller { get => rollerCbox.Text; }
@@ -64,7 +65,6 @@ namespace WebCamCapture.View
             {
                 e.Handled = true;
             }
-
         }
 
         private void RollerCbox_KeyPress(object sender, KeyPressEventArgs e)
@@ -114,7 +114,7 @@ namespace WebCamCapture.View
                 }
             }
 
-            BtnOkOrderClick();
+            //BtnOkOrderClick();
         }
 
         private void OrderForm_KeyUp(object sender, KeyEventArgs e)

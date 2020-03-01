@@ -41,7 +41,7 @@ namespace WebCamCapture.View
         void SnapshotView(Image image);
 
     }
-    interface IOrderMainForm
+    interface IOrderMainForm : IMain
     {
         string OrderNumber { set; }
         string Roller { set; }
