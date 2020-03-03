@@ -17,33 +17,58 @@ namespace WebCamCapture.Presenter
         // Состояние
         public string[] RollerList { get; set; }
         public string[] OperationsList { get; set; }
-        public string[] UsersList { get; set; }
+        protected List<string> UsersList { get; set; }
+    }
 
+    internal class AttributesManager : OrderAttributes
+    {
+        public AttributesManager()
+        {
+            UsersList = new List<string>();
+        }
+        // возвращает индекс пользователя в списке, если его нет, то добавляем 
+        public int User(string name)
+        {
+            int id = this.UsersList.IndexOf(name);
+            if (id == -1)
+            {
+                // если переданного параметра (neme) нет в списке, то добавляем его 
+                this.UsersList.Add(name);
+                id = this.UsersList.Count - 1;
+            }
+            return id;
+        }
+        // сохранить занчение атрибутов в файле (Сериализация)
+        public void SaveToFile()
+        {
+
+        }
     }
 
     class OrderPresenter
     {
-        private string SelectedRoller => throw new NotImplementedException();
-        private string SelectedOperation => throw new NotImplementedException();
-        private string SelectedUser => throw new NotImplementedException();
+        //private string SelectedRoller => throw new NotImplementedException();
+        //private string SelectedOperation => throw new NotImplementedException();
+        //private string SelectedUser => throw new NotImplementedException();
 
         private string fileBin = "MyFile.bin";
 
         readonly private IOrderMainForm mainForm;
+        AttributesManager manager;
         OrderAttributes order;
         public OrderPresenter(IOrderMainForm mainForm)
         {
             this.mainForm = mainForm;
             this.mainForm.ShowOrderForm += ShowOrderForm;
-            //order = new OrderAttributes()
+            manager = new AttributesManager();
             try
             {
-                this.LoadAttributes();
+                //this.LoadAttributes();
             }
             catch (Exception)
             {
 
-                order = new OrderAttributes();
+                manager = new AttributesManager();
             }
             mainForm.FormClosing += MainForm_FormClosing;
             
@@ -60,7 +85,7 @@ namespace WebCamCapture.Presenter
         {
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(fileBin, FileMode.Open, FileAccess.Read, FileShare.Read);
-            order = (OrderAttributes)formatter.Deserialize(stream);
+            manager = (AttributesManager)formatter.Deserialize(stream);
             stream.Close();
         }
         //
@@ -68,7 +93,7 @@ namespace WebCamCapture.Presenter
         {
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(fileBin, FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter.Serialize(stream, order);
+            formatter.Serialize(stream, manager);
             stream.Close();
         }
         #endregion
@@ -78,14 +103,15 @@ namespace WebCamCapture.Presenter
             IOrderForm orderForm = new OrderForm();
             #region Установить данные для формы
             //order.UsersList = new string[] { "Владимир","Мария"};
-            orderForm.UsersList = order.UsersList;
+            //orderForm.UsersList = order.UsersList;
             #endregion
 
             this.mainForm.User = "Каськов В.В";
             if (orderForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 #region Получить данные из формы
-
+                var i = manager.User(orderForm.SelectedUser);
+                var t = 0;
                 #endregion
             }
         }
