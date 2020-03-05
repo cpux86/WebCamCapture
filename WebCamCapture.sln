@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCamCapture", "WebCamCapture\WebCamCapture.csproj", "{878EDF34-C2BF-407A-A61B-B56A8D7D023D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCamCaptureTests", "WebCamCaptureTests\WebCamCaptureTests.csproj", "{B5A34865-9B1C-4B01-B312-418FC130D5ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,14 @@ Global
 		{878EDF34-C2BF-407A-A61B-B56A8D7D023D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{878EDF34-C2BF-407A-A61B-B56A8D7D023D}.Release|x64.ActiveCfg = Release|x64
 		{878EDF34-C2BF-407A-A61B-B56A8D7D023D}.Release|x64.Build.0 = Release|x64
+		{B5A34865-9B1C-4B01-B312-418FC130D5ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5A34865-9B1C-4B01-B312-418FC130D5ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5A34865-9B1C-4B01-B312-418FC130D5ED}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B5A34865-9B1C-4B01-B312-418FC130D5ED}.Debug|x64.Build.0 = Debug|Any CPU
+		{B5A34865-9B1C-4B01-B312-418FC130D5ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5A34865-9B1C-4B01-B312-418FC130D5ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5A34865-9B1C-4B01-B312-418FC130D5ED}.Release|x64.ActiveCfg = Release|Any CPU
+		{B5A34865-9B1C-4B01-B312-418FC130D5ED}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

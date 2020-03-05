@@ -11,6 +11,37 @@ using System.IO;
 
 namespace WebCamCapture.Presenter
 {
+    public class Attribute
+    {
+        private List<string> attributesList;
+        public Attribute()
+        {
+            attributesList = new List<string>();
+        }
+        // возвращает индекс пользователя в списке, если его нет, то добавляем 
+        public int Add(string name)
+        {
+            int id = this.attributesList.IndexOf(name);
+            if (id == -1)
+            {
+                // если переданного параметра (neme) нет в списке, то добавляем его 
+                this.attributesList.Add(name);
+                id = this.attributesList.Count - 1;
+            }
+            return id;
+        }
+        public List<string> List()
+        {
+            return attributesList;
+        }
+    }
+    [Serializable]
+    public class Attributes
+    {
+        public List<string> UserList { get; set; }
+        public List<string> RollerList { get; set; }
+    }
+
     [Serializable]
     class OrderAttributes
     {
