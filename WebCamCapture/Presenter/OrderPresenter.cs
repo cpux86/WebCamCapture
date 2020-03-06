@@ -11,6 +11,15 @@ using System.IO;
 
 namespace WebCamCapture.Presenter
 {
+    // класс подлежащий сериализации
+    [Serializable]
+    public class Attributes
+    {
+        public List<string> RollerList { get; set; }
+        public List<string> OperationsList { get; set; }
+        public List<string> UserList { get; set; }        
+    }
+
     public class Attribute
     {
         private List<string> attributesList;
@@ -18,61 +27,111 @@ namespace WebCamCapture.Presenter
         {
             attributesList = new List<string>();
         }
-        // возвращает индекс пользователя в списке, если его нет, то добавляем 
-        public int Add(string name)
+
+        /// <summary>
+        /// Добовляет в список, заначение value, если value есть в списке, то возвращает ее id.
+        /// </summary>
+        /// <param name="value">Добовляемая строка</param>
+        /// <returns>id стороки в списке</returns>
+        public int Add(string value)
         {
-            int id = this.attributesList.IndexOf(name);
+            int id = this.attributesList.IndexOf(value);
             if (id == -1)
             {
                 // если переданного параметра (neme) нет в списке, то добавляем его 
-                this.attributesList.Add(name);
+                this.attributesList.Add(value);
                 id = this.attributesList.Count - 1;
             }
             return id;
+        }
+        /// <summary>
+        /// Удаляет из списка строку value
+        /// </summary>
+        /// <param name="value">удаляемая строка</param>
+        /// <returns>результат удаления</returns>
+        public bool Remove(string value)
+        {
+            return this.attributesList.Remove(value);
         }
         public List<string> List()
         {
             return attributesList;
         }
     }
-    [Serializable]
-    public class Attributes
-    {
-        public List<string> UserList { get; set; }
-        public List<string> RollerList { get; set; }
-    }
 
-    [Serializable]
-    class OrderAttributes
-    {
-        // Состояние
-        public string[] RollerList { get; set; }
-        public string[] OperationsList { get; set; }
-        protected List<string> UsersList { get; set; }
-    }
 
-    internal class AttributesManager : OrderAttributes
+    public class AttributesManager
     {
+        private string fileBin = "MyFile.bin";
+
+        readonly Attribute operations;
+        readonly Attribute roller;
+        readonly Attribute user;
+        private Attributes attributes;
         public AttributesManager()
         {
-            UsersList = new List<string>();
+            operations = new Attribute();
+            roller = new Attribute();
+            user = new Attribute();
+
+            attributes = new Attributes();
         }
-        // возвращает индекс пользователя в списке, если его нет, то добавляем 
-        public int User(string name)
+        #region Добавить, удалить атрибуты
+
+        /// <summary>
+        /// Добавить пользователя в список
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public int AddUser(string value)
         {
-            int id = this.UsersList.IndexOf(name);
-            if (id == -1)
-            {
-                // если переданного параметра (neme) нет в списке, то добавляем его 
-                this.UsersList.Add(name);
-                id = this.UsersList.Count - 1;
-            }
-            return id;
+            return user.Add(value);
         }
+        /// <summary>
+        /// Удалить пользователя
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public bool RemoveUser(string value)
+        {
+            return user.Remove(value);
+        }
+        /// <summary>
+        /// Добавить имя операции в список
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public int AddOperations(string value)
+        {
+            return operations.Add(value);
+        }
+
+        #endregion
+
+
         // сохранить занчение атрибутов в файле (Сериализация)
         public void SaveToFile()
         {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(fileBin, FileMode.Create, FileAccess.Write, FileShare.None);
+            formatter.Serialize(stream, attributes);
+            stream.Close();
+        }
+        /// <summary>
+        /// Загрузить сохраненные атрибуты
+        /// </summary>
+        public Attributes LoadSavedAttributes()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(fileBin, FileMode.Open, FileAccess.Read, FileShare.Read);
+            attributes = (Attributes)formatter.Deserialize(stream);
+            stream.Close();
+            return attributes;
+        }
 
+        public Attributes List()
+        {
+            return attributes;
         }
     }
 
@@ -86,7 +145,6 @@ namespace WebCamCapture.Presenter
 
         readonly private IOrderMainForm mainForm;
         AttributesManager manager;
-        OrderAttributes order;
         public OrderPresenter(IOrderMainForm mainForm)
         {
             this.mainForm = mainForm;
@@ -141,8 +199,7 @@ namespace WebCamCapture.Presenter
             if (orderForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 #region Получить данные из формы
-                var i = manager.User(orderForm.SelectedUser);
-                var t = 0;
+
                 #endregion
             }
         }
