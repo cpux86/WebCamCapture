@@ -59,7 +59,6 @@ namespace WebCamCapture.Presenter
         }
     }
 
-
     public class AttributesManager
     {
         private string fileBin = "MyFile.bin";
@@ -78,6 +77,27 @@ namespace WebCamCapture.Presenter
         }
         #region Добавить, удалить атрибуты
 
+
+        /// <summary>
+        /// Добавить имя ролика в список, если ролик уже имеется в списке, то просто возращаем его индекс
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Индекс строки value в списке</returns>
+        public int AddRoller(string value)
+        {
+            attributes.RollerList = roller.List();
+            return user.Add(value);
+        }
+        /// <summary>
+        /// Добавить имя операции в список
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public int AddOperations(string value)
+        {
+            attributes.OperationsList = operations.List();
+            return operations.Add(value);
+        }
         /// <summary>
         /// Добавить пользователя в список
         /// </summary>
@@ -85,8 +105,11 @@ namespace WebCamCapture.Presenter
         /// <returns></returns>
         public int AddUser(string value)
         {
+            attributes.UserList = user.List();
             return user.Add(value);
+
         }
+
         /// <summary>
         /// Удалить пользователя
         /// </summary>
@@ -96,16 +119,21 @@ namespace WebCamCapture.Presenter
         {
             return user.Remove(value);
         }
-        /// <summary>
-        /// Добавить имя операции в список
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public int AddOperations(string value)
+
+        
+
+
+
+
+        public string[] UserList()
         {
-            return operations.Add(value);
+            return attributes.UserList.ToArray();
         }
 
+        public string[] OperationsList()
+        {
+            return attributes.OperationsList.ToArray();
+        }
         #endregion
 
 
@@ -129,18 +157,11 @@ namespace WebCamCapture.Presenter
             return attributes;
         }
 
-        public Attributes List()
-        {
-            return attributes;
-        }
+
     }
 
     class OrderPresenter
     {
-        //private string SelectedRoller => throw new NotImplementedException();
-        //private string SelectedOperation => throw new NotImplementedException();
-        //private string SelectedUser => throw new NotImplementedException();
-
         private string fileBin = "MyFile.bin";
 
         readonly private IOrderMainForm mainForm;

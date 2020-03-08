@@ -16,8 +16,12 @@ namespace WebCamCapture.Presenter.Tests
         {
             AttributesManager manager = new AttributesManager();
             manager.AddUser("Владимир");
-            manager.AddUser("Мария");
-            var res = manager.List();
+            manager.AddUser("Мария2222222222222222222");
+            var i = manager.AddUser("1111111111111111111111");
+
+            var res = manager.UserList();
+
+            manager.RemoveUser("Владимир");
             manager.SaveToFile();
         }
     }
