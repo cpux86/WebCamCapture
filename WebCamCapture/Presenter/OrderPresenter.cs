@@ -15,11 +15,10 @@ namespace WebCamCapture.Presenter
     [Serializable]
     public class Attributes
     {
-        public List<string> RollerList { get; set; }
-        public List<string> OperationsList { get; set; }
-        public List<string> UserList { get; set; }        
+        public List<Attribute> List { get; set; }
     }
 
+    [Serializable]
     public class Attribute
     {
         private List<string> attributesList;
@@ -58,7 +57,6 @@ namespace WebCamCapture.Presenter
             return attributesList;
         }
     }
-
     public class AttributesManager
     {
         private string fileBin = "MyFile.bin";
@@ -66,7 +64,8 @@ namespace WebCamCapture.Presenter
         readonly Attribute operations;
         readonly Attribute roller;
         readonly Attribute user;
-        private Attributes attributes;
+        public Attributes attributes;
+       
         public AttributesManager()
         {
             operations = new Attribute();
@@ -74,6 +73,11 @@ namespace WebCamCapture.Presenter
             user = new Attribute();
 
             attributes = new Attributes();
+
+            attributes.List = new List<Attribute>();
+            attributes.List.Add(operations);
+            attributes.List.Add(roller);
+            attributes.List.Add(user);
         }
         #region Добавить, удалить атрибуты
 
@@ -83,57 +87,29 @@ namespace WebCamCapture.Presenter
         /// </summary>
         /// <param name="value"></param>
         /// <returns>Индекс строки value в списке</returns>
-        public int AddRoller(string value)
+        public Attribute Roller()
         {
-            attributes.RollerList = roller.List();
-            return user.Add(value);
+            return roller;
         }
         /// <summary>
         /// Добавить имя операции в список
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public int AddOperations(string value)
-        {
-            attributes.OperationsList = operations.List();
-            return operations.Add(value);
-        }
+
         /// <summary>
         /// Добавить пользователя в список
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public int AddUser(string value)
+        public Attribute User()
         {
-            attributes.UserList = user.List();
-            return user.Add(value);
-
+            return user;
         }
 
-        /// <summary>
-        /// Удалить пользователя
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public bool RemoveUser(string value)
-        {
-            return user.Remove(value);
-        }
 
         
 
-
-
-
-        public string[] UserList()
-        {
-            return attributes.UserList.ToArray();
-        }
-
-        public string[] OperationsList()
-        {
-            return attributes.OperationsList.ToArray();
-        }
         #endregion
 
 

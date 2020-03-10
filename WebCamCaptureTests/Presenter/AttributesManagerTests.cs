@@ -15,13 +15,11 @@ namespace WebCamCapture.Presenter.Tests
         public void SaveToFileTest()
         {
             AttributesManager manager = new AttributesManager();
-            manager.AddUser("Владимир");
-            manager.AddUser("Мария2222222222222222222");
-            var i = manager.AddUser("1111111111111111111111");
-
-            var res = manager.UserList();
-
-            manager.RemoveUser("Владимир");
+            var i = manager.Roller().Add("600");
+            var i1 = manager.Roller().Add("70444444444444444444444440");
+            manager.Roller().Remove("600");
+            var z = manager.attributes;
+            var list = manager.Roller().List();
             manager.SaveToFile();
         }
     }
