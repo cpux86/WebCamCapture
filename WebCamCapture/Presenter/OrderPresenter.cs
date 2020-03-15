@@ -52,69 +52,69 @@ namespace WebCamCapture.Presenter
         {
             return this.attributesList.Remove(value);
         }
-        public List<string> List()
+        /// <summary>
+        /// Возвращает список в виде массива
+        /// </summary>
+        /// <returns></returns>
+        public string[] List()
         {
-            return attributesList;
+            return attributesList.ToArray();
         }
+
     }
+    [Serializable]
     public class AttributesManager
     {
         private string fileBin = "MyFile.bin";
 
-        readonly Attribute operations;
         readonly Attribute roller;
+        readonly Attribute process;
         readonly Attribute user;
-        public Attributes attributes;
+        private Attributes attributes;
        
         public AttributesManager()
         {
-            operations = new Attribute();
+            process = new Attribute();
             roller = new Attribute();
             user = new Attribute();
 
-            attributes = new Attributes();
+            //attributes = new Attributes();
+            this.LoadSavedAttributes();
 
-            attributes.List = new List<Attribute>();
-            attributes.List.Add(operations);
+            //attributes.List = new List<Attribute>();
+            
+            attributes.List.Add(process);
             attributes.List.Add(roller);
             attributes.List.Add(user);
         }
         #region Добавить, удалить атрибуты
 
+        public Attribute Process()
+        {
+            return process;
+        }
 
-        /// <summary>
-        /// Добавить имя ролика в список, если ролик уже имеется в списке, то просто возращаем его индекс
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns>Индекс строки value в списке</returns>
+
         public Attribute Roller()
         {
             return roller;
         }
-        /// <summary>
-        /// Добавить имя операции в список
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
 
-        /// <summary>
-        /// Добавить пользователя в список
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public Attribute User()
         {
             return user;
         }
 
 
-        
+
 
         #endregion
 
 
-        // сохранить занчение атрибутов в файле (Сериализация)
-        public void SaveToFile()
+        /// <summary>
+        /// сохранить занчение атрибутов в файле (Сериализация)
+        /// </summary>
+        public void Save()
         {
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(fileBin, FileMode.Create, FileAccess.Write, FileShare.None);
@@ -124,13 +124,12 @@ namespace WebCamCapture.Presenter
         /// <summary>
         /// Загрузить сохраненные атрибуты
         /// </summary>
-        public Attributes LoadSavedAttributes()
+        public void LoadSavedAttributes()
         {
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(fileBin, FileMode.Open, FileAccess.Read, FileShare.Read);
-            attributes = (Attributes)formatter.Deserialize(stream);
+            this.attributes = (Attributes)formatter.Deserialize(stream);
             stream.Close();
-            return attributes;
         }
 
 

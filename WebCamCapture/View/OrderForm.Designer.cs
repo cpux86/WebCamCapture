@@ -32,7 +32,7 @@
             this.userNameCbox = new System.Windows.Forms.ComboBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.label2 = new System.Windows.Forms.Label();
-            this.operationCbox = new System.Windows.Forms.ComboBox();
+            this.processCbox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.rollerNumber = new System.Windows.Forms.Label();
             this.orderText = new System.Windows.Forms.Label();
@@ -82,32 +82,32 @@
             this.label2.TabIndex = 25;
             this.label2.Text = "Исполнитель:";
             // 
-            // operationCbox
+            // processCbox
             // 
-            this.operationCbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.processCbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.operationCbox.ContextMenuStrip = this.contextMenuStrip1;
-            this.operationCbox.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.operationCbox.FormattingEnabled = true;
-            this.operationCbox.Location = new System.Drawing.Point(166, 97);
-            this.operationCbox.MaximumSize = new System.Drawing.Size(600, 0);
-            this.operationCbox.MaxLength = 100;
-            this.operationCbox.MinimumSize = new System.Drawing.Size(150, 0);
-            this.operationCbox.Name = "operationCbox";
-            this.operationCbox.Size = new System.Drawing.Size(294, 29);
-            this.operationCbox.TabIndex = 21;
-            this.operationCbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OperationList_KeyPress);
+            this.processCbox.ContextMenuStrip = this.contextMenuStrip1;
+            this.processCbox.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.processCbox.FormattingEnabled = true;
+            this.processCbox.Location = new System.Drawing.Point(166, 97);
+            this.processCbox.MaximumSize = new System.Drawing.Size(600, 0);
+            this.processCbox.MaxLength = 100;
+            this.processCbox.MinimumSize = new System.Drawing.Size(150, 0);
+            this.processCbox.Name = "processCbox";
+            this.processCbox.Size = new System.Drawing.Size(294, 29);
+            this.processCbox.TabIndex = 21;
+            this.processCbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OperationList_KeyPress);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(53, 100);
+            this.label1.Location = new System.Drawing.Point(83, 100);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 20);
+            this.label1.Size = new System.Drawing.Size(77, 20);
             this.label1.TabIndex = 23;
-            this.label1.Text = "№ Операции:";
+            this.label1.Text = "Процесс:";
             // 
             // rollerNumber
             // 
@@ -204,7 +204,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.userNameCbox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.operationCbox);
+            this.Controls.Add(this.processCbox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rollerNumber);
             this.Controls.Add(this.orderText);
@@ -226,7 +226,7 @@
 
         private System.Windows.Forms.ComboBox userNameCbox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox operationCbox;
+        private System.Windows.Forms.ComboBox processCbox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label rollerNumber;
         private System.Windows.Forms.Label orderText;

@@ -16,11 +16,20 @@ namespace WebCamCapture.Presenter.Tests
         {
             AttributesManager manager = new AttributesManager();
             var i = manager.Roller().Add("600");
-            var i1 = manager.Roller().Add("70444444444444444444444440");
-            manager.Roller().Remove("600");
-            var z = manager.attributes;
+            var i1 = manager.Roller().Add("70444444444444444444444440--------------");
             var list = manager.Roller().List();
-            manager.SaveToFile();
+            manager.Save();
+
+            //var test = manager.LoadSavedAttributes();
+            var t = manager.Roller().List();
+        }
+
+        [TestMethod]
+        public void Load()
+        {
+            AttributesManager manager = new AttributesManager();
+            manager.LoadSavedAttributes();
+
         }
     }
 }
