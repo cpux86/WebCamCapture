@@ -35,7 +35,7 @@ namespace WebCamCapture.Presenter
         public int Add(string value)
         {
             int id = this.attributesList.IndexOf(value);
-            if (id == -1)
+            if (id == -1 && value != "")
             {
                 // если переданного параметра (neme) нет в списке, то добавляем его 
                 this.attributesList.Add(value);
@@ -65,7 +65,7 @@ namespace WebCamCapture.Presenter
     [Serializable]
     public class AttributesManager
     {
-        private string fileBin = "MyFile.bin";
+        private string fileBin = "User.dat";
 
         readonly Attribute roller;
         readonly Attribute process;
@@ -78,14 +78,16 @@ namespace WebCamCapture.Presenter
             roller = new Attribute();
             user = new Attribute();
 
-            //attributes = new Attributes();
-            this.LoadSavedAttributes();
+            attributes = new Attributes();
+            
 
-            //attributes.List = new List<Attribute>();
+            attributes.List = new List<Attribute>();
             
             attributes.List.Add(process);
             attributes.List.Add(roller);
             attributes.List.Add(user);
+
+            this.Init();
         }
         #region Добавить, удалить атрибуты
 
@@ -105,11 +107,7 @@ namespace WebCamCapture.Presenter
             return user;
         }
 
-
-
-
         #endregion
-
 
         /// <summary>
         /// сохранить занчение атрибутов в файле (Сериализация)
@@ -118,26 +116,35 @@ namespace WebCamCapture.Presenter
         {
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(fileBin, FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter.Serialize(stream, attributes);
+            formatter.Serialize(stream, this);
             stream.Close();
         }
+        AttributesManager manager;
         /// <summary>
         /// Загрузить сохраненные атрибуты
         /// </summary>
-        public void LoadSavedAttributes()
+        public AttributesManager Init()
         {
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(fileBin, FileMode.Open, FileAccess.Read, FileShare.Read);
-            this.attributes = (Attributes)formatter.Deserialize(stream);
-            stream.Close();
-        }
+            
+            try
+            {
+                IFormatter formatter = new BinaryFormatter();
+                Stream stream = new FileStream(fileBin, FileMode.Open, FileAccess.Read, FileShare.Read);
+                manager = (AttributesManager)formatter.Deserialize(stream);
+                stream.Close();
+            }
+            catch (Exception)
+            {
 
+                return this;
+            }
+            return manager;
+        }
 
     }
 
     class OrderPresenter
     {
-        private string fileBin = "MyFile.bin";
 
         readonly private IOrderMainForm mainForm;
         AttributesManager manager;
@@ -145,57 +152,43 @@ namespace WebCamCapture.Presenter
         {
             this.mainForm = mainForm;
             this.mainForm.ShowOrderForm += ShowOrderForm;
-            manager = new AttributesManager();
-            try
-            {
-                //this.LoadAttributes();
-            }
-            catch (Exception)
-            {
+            manager = new AttributesManager().Init();
 
-                manager = new AttributesManager();
-            }
             mainForm.FormClosing += MainForm_FormClosing;
             
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.SaveAttributes();
+            manager.Save();
         }
 
         #region Упрвление атрибутами Order
-        // 
-        private void LoadAttributes()
-        {
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(fileBin, FileMode.Open, FileAccess.Read, FileShare.Read);
-            manager = (AttributesManager)formatter.Deserialize(stream);
-            stream.Close();
-        }
-        //
-        private void SaveAttributes()
-        {
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(fileBin, FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter.Serialize(stream, manager);
-            stream.Close();
-        }
+        
+
         #endregion
 
         private void ShowOrderForm()
         {
             IOrderForm orderForm = new OrderForm();
             #region Установить данные для формы
-            //order.UsersList = new string[] { "Владимир","Мария"};
-            //orderForm.UsersList = order.UsersList;
+            orderForm.RollerList = manager.Roller().List();
+            orderForm.ProcessList = manager.Process().List();
+            orderForm.UsersList = manager.User().List();
             #endregion
 
-            this.mainForm.User = "Каськов В.В";
+            //this.mainForm.User = "Каськов В.В";
             if (orderForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 #region Получить данные из формы
+                manager.Roller().Add(orderForm.SelectedRoller);
+                manager.Process().Add(orderForm.SelectedProcess);
+                manager.User().Add(orderForm.SelectedUser);
+                
 
+                mainForm.Roller = orderForm.SelectedRoller;
+                mainForm.Process = orderForm.SelectedProcess;
+                mainForm.User = orderForm.SelectedUser;
                 #endregion
             }
         }

@@ -14,12 +14,12 @@ namespace WebCamCapture.View
     internal interface IOrderForm
     {
         string[] RollerList { set; }
-        string[] OperationsList { set; }
+        string[] ProcessList { set; }
         string[] UsersList { set; }
 
         string Order { get; }
         string SelectedRoller { get; }
-        string SelectedOperation { get; }
+        string SelectedProcess { get; }
         string SelectedUser { get; }
         DialogResult ShowDialog();
 
@@ -29,13 +29,13 @@ namespace WebCamCapture.View
     public partial class OrderForm : Form, IOrderForm
     {
         public string[] RollerList { set => rollerCbox.Items.AddRange(value); }
-        public string[] OperationsList { set => processCbox.Items.AddRange(value); }
+        public string[] ProcessList { set => processCbox.Items.AddRange(value); }
         public string[] UsersList { set => userNameCbox.Items.AddRange(value); }
         
 
         public string Order { get => orderTbox.Text; set => orderTbox.Text = value; }
         public string SelectedRoller { get => rollerCbox.Text; }
-        public string SelectedOperation { get => processCbox.Text; }
+        public string SelectedProcess { get => processCbox.Text; }
         [Required]
         [StringLength(50, MinimumLength = 3)]
         public string SelectedUser { get => userNameCbox.Text; set => userNameCbox.Text = value; }

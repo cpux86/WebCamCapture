@@ -45,7 +45,7 @@ namespace WebCamCapture.View
     {
         string OrderNumber { set; }
         string Roller { set; }
-        string Operation { set; }
+        string Process { set; }
         string User { set; }
         /// <summary>
         /// Отображение формы заказа
@@ -66,7 +66,7 @@ namespace WebCamCapture.View
         #region Сведения о заказе
         public string OrderNumber { set => TextOrderMainForm.Text = value; }
         public string Roller { set => TextRollerMainForm.Text = value; }
-        public string Operation { set => TextOprerationMainForm.Text = value; }
+        public string Process { set => TextOprerationMainForm.Text = value; }
         public string User { set => OperatorFullNameMainForm.Text = value; }
 
 

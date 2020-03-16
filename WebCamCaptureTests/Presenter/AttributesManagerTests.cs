@@ -12,24 +12,28 @@ namespace WebCamCapture.Presenter.Tests
     public class AttributesManagerTests
     {
         [TestMethod()]
-        public void SaveToFileTest()
+        public void Save()
         {
-            AttributesManager manager = new AttributesManager();
-            var i = manager.Roller().Add("600");
-            var i1 = manager.Roller().Add("70444444444444444444444440--------------");
-            var list = manager.Roller().List();
-            manager.Save();
+            AttributesManager manager = new AttributesManager().Init();
+            manager.User().Add("Владимир");
+            manager.User().Add("Мария");
+            manager.User().Add("Максим");
 
-            //var test = manager.LoadSavedAttributes();
-            var t = manager.Roller().List();
+            manager.Process().Remove("Майка");
+            manager.Process().Add("Мойка");
+            manager.Process().Add("Сушка");
+
+            manager.Save();
         }
 
         [TestMethod]
         public void Load()
         {
-            AttributesManager manager = new AttributesManager();
-            manager.LoadSavedAttributes();
-
+            AttributesManager manager = new AttributesManager().Init();
+            string[] users = manager.User().List();
+            string[] process = manager.Process().List();
+            manager.User().Add("Владимир");
+            manager.Save();
         }
     }
 }
