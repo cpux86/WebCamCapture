@@ -21,6 +21,22 @@ namespace WebCamCapture.View
         string SelectedRoller { get; }
         string SelectedProcess { get; }
         string SelectedUser { get; }
+        #region Автозаполние списков в форме заказа
+        /// <summary>
+        /// Данные для атозаполнения списка роликов
+        /// </summary>
+        string[] RollerListAutoComplete { set; }
+        /// <summary>
+        /// Данные для атозаполнения списка процессов
+        /// </summary>
+        string[] ProcessListAutoComplete { set; }      
+        /// <summary>
+        /// Данные для атозаполнения списка пользователей
+        /// </summary>
+        string[] UserListAutoComplete { set; }
+        #endregion
+
+
         DialogResult ShowDialog();
 
         event Action BtnOkOrderClick;
@@ -31,7 +47,17 @@ namespace WebCamCapture.View
         public string[] RollerList { set => rollerCbox.Items.AddRange(value); }
         public string[] ProcessList { set => processCbox.Items.AddRange(value); }
         public string[] UsersList { set => userNameCbox.Items.AddRange(value); }
+
+        #region Автозаполнение списков в форме заказа
+        // Данные для атозаполнения списка роликов
+        public string[] RollerListAutoComplete { set => rollerCbox.AutoCompleteCustomSource.AddRange(value); }
+        // Данные для атозаполнения списка процессов
+        public string[] ProcessListAutoComplete { set => processCbox.AutoCompleteCustomSource.AddRange(value); }
+        // Данные для атозаполнения списка пользователей
+        public string[] UserListAutoComplete { set => userNameCbox.AutoCompleteCustomSource.AddRange(value); }
         
+        #endregion
+
 
         public string Order { get => orderTbox.Text; set => orderTbox.Text = value; }
         public string SelectedRoller { get => rollerCbox.Text; }

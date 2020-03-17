@@ -49,10 +49,6 @@
             this.userNameCbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.userNameCbox.AutoCompleteCustomSource.AddRange(new string[] {
-            "Каськов В.В",
-            "Кузнецов В.Ю",
-            "Брянцев Н.А"});
             this.userNameCbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.userNameCbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.userNameCbox.ContextMenuStrip = this.contextMenuStrip1;
@@ -87,6 +83,8 @@
             this.processCbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.processCbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.processCbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.processCbox.ContextMenuStrip = this.contextMenuStrip1;
             this.processCbox.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.processCbox.FormattingEnabled = true;
@@ -148,6 +146,8 @@
             this.rollerCbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.rollerCbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.rollerCbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.rollerCbox.ContextMenuStrip = this.contextMenuStrip1;
             this.rollerCbox.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rollerCbox.FormattingEnabled = true;
