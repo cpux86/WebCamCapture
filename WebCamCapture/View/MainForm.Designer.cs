@@ -166,11 +166,11 @@
             this.OrderPanel__TitleOpreration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.OrderPanel__TitleOpreration.AutoSize = true;
             this.OrderPanel__TitleOpreration.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OrderPanel__TitleOpreration.Location = new System.Drawing.Point(39, 78);
+            this.OrderPanel__TitleOpreration.Location = new System.Drawing.Point(49, 78);
             this.OrderPanel__TitleOpreration.Name = "OrderPanel__TitleOpreration";
-            this.OrderPanel__TitleOpreration.Size = new System.Drawing.Size(93, 21);
+            this.OrderPanel__TitleOpreration.Size = new System.Drawing.Size(83, 21);
             this.OrderPanel__TitleOpreration.TabIndex = 26;
-            this.OrderPanel__TitleOpreration.Text = "Операция:";
+            this.OrderPanel__TitleOpreration.Text = "Процесс:";
             // 
             // OrderPanel__TitleRoller
             // 
@@ -188,11 +188,11 @@
             this.OrderPanel__TitleOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.OrderPanel__TitleOrder.AutoSize = true;
             this.OrderPanel__TitleOrder.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OrderPanel__TitleOrder.Location = new System.Drawing.Point(52, 12);
+            this.OrderPanel__TitleOrder.Location = new System.Drawing.Point(75, 12);
             this.OrderPanel__TitleOrder.Name = "OrderPanel__TitleOrder";
-            this.OrderPanel__TitleOrder.Size = new System.Drawing.Size(80, 21);
+            this.OrderPanel__TitleOrder.Size = new System.Drawing.Size(57, 21);
             this.OrderPanel__TitleOrder.TabIndex = 24;
-            this.OrderPanel__TitleOrder.Text = "Заказ №:";
+            this.OrderPanel__TitleOrder.Text = "Заказ:";
             // 
             // OrderViewPanel
             // 
@@ -264,13 +264,13 @@
             // новыйЗаказToolStripMenuItem
             // 
             this.новыйЗаказToolStripMenuItem.Name = "новыйЗаказToolStripMenuItem";
-            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.новыйЗаказToolStripMenuItem.Text = "Новый заказ";
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             // 
             // настройкиToolStripMenuItem1
@@ -285,7 +285,7 @@
             // showAppSetting
             // 
             this.showAppSetting.Name = "showAppSetting";
-            this.showAppSetting.Size = new System.Drawing.Size(141, 22);
+            this.showAppSetting.Size = new System.Drawing.Size(140, 22);
             this.showAppSetting.Text = "Общие";
             this.showAppSetting.Click += new System.EventHandler(this.ShowAppSetting_Click);
             // 
@@ -293,7 +293,7 @@
             // 
             this.deviceManagerItem.Enabled = false;
             this.deviceManagerItem.Name = "deviceManagerItem";
-            this.deviceManagerItem.Size = new System.Drawing.Size(141, 22);
+            this.deviceManagerItem.Size = new System.Drawing.Size(140, 22);
             this.deviceManagerItem.Text = "Управление";
             this.deviceManagerItem.Click += new System.EventHandler(this.ShowDeviceManagerPanel_Click);
             // 

@@ -37,8 +37,8 @@ namespace WebCamCapture.View
         void Start();
         void Stop();
         bool IsRunning { get; }
-        //void SnapshotView();
         void SnapshotView(Image image);
+        
 
     }
     interface IOrderMainForm : IMain
@@ -92,6 +92,7 @@ namespace WebCamCapture.View
         }
 
         public bool IsRunning { get => videoPlayer.IsRunning; }
+
         public void Start()
         {
             videoPlayer.Start();

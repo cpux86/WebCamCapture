@@ -10,6 +10,10 @@ using WebCamCapture.Model;
 namespace WebCamCapture.Presenter
 {
  
+    class Order
+    {
+
+    }
 
     class OrderPresenter
     {

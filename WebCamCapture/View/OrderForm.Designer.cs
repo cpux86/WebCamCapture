@@ -83,7 +83,6 @@
             this.processCbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.processCbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.processCbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.processCbox.ContextMenuStrip = this.contextMenuStrip1;
             this.processCbox.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -111,21 +110,21 @@
             // 
             this.rollerNumber.AutoSize = true;
             this.rollerNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rollerNumber.Location = new System.Drawing.Point(73, 65);
+            this.rollerNumber.Location = new System.Drawing.Point(101, 65);
             this.rollerNumber.Name = "rollerNumber";
-            this.rollerNumber.Size = new System.Drawing.Size(87, 20);
+            this.rollerNumber.Size = new System.Drawing.Size(59, 20);
             this.rollerNumber.TabIndex = 21;
-            this.rollerNumber.Text = "№ Ролика:";
+            this.rollerNumber.Text = "Ролик:";
             // 
             // orderText
             // 
             this.orderText.AutoSize = true;
             this.orderText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.orderText.Location = new System.Drawing.Point(74, 30);
+            this.orderText.Location = new System.Drawing.Point(102, 30);
             this.orderText.Name = "orderText";
-            this.orderText.Size = new System.Drawing.Size(86, 20);
+            this.orderText.Size = new System.Drawing.Size(58, 20);
             this.orderText.TabIndex = 20;
-            this.orderText.Text = "№ Заказа:";
+            this.orderText.Text = "Заказ:";
             // 
             // button1
             // 
