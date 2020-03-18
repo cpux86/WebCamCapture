@@ -12,17 +12,45 @@ namespace WebCamCapture.Presenter
  
     class Order
     {
+        private int rollerIndex;
+        private int processIndex;
+        private int userIndex;
 
+        private string roller;
+        private string process;
+        private string user;
+
+
+        public int RollerIndex { get => rollerIndex; set => rollerIndex = value; }
+        public int ProcessIndex { get => processIndex; set => processIndex = value; }
+        public int UserIndex { get => userIndex; set => userIndex = value; }
+
+        public string Roller { get => roller; set => roller = value; }
+        public string Process { get => process; set => process = value; }
+        public string User { get => user; set => user = value; }
+
+        /// <summary>
+        /// Отобразить текущий заказ в главной форме 
+        /// </summary>
+        /// <param name="order"></param>
+        public void Show(IOrderMainForm order)
+        {
+            order.Roller = this.Roller;
+            order.Process = this.Process;
+            order.User = this.User;           
+        }
     }
 
-    class OrderPresenter
+    class OrderPresenter : Order
     {
 
         private readonly IOrderMainForm mainForm;
         private readonly ManagerAttributes manager;
+        //private Order order;
         public OrderPresenter(IOrderMainForm mainForm)
         {
             this.mainForm = mainForm;
+            //this.order = new Order();
             this.mainForm.ShowOrderForm += ShowOrderForm;
             manager = new ManagerAttributes().Init();
 
@@ -43,6 +71,10 @@ namespace WebCamCapture.Presenter
             orderForm.RollerList = manager.Roller().List();
             orderForm.ProcessList = manager.Process().List();
             orderForm.UsersList = manager.User().List();
+            //orderForm.RollerIndex = 0;
+            // отобразить текущий заказ
+
+            
             // автозаполнение
             orderForm.RollerListAutoComplete = manager.Roller().List();
             orderForm.ProcessListAutoComplete = manager.Process().List();
@@ -53,14 +85,18 @@ namespace WebCamCapture.Presenter
             if (orderForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 #region Получить данные из формы
-                manager.Roller().Add(orderForm.SelectedRoller);
-                manager.Process().Add(orderForm.SelectedProcess);
-                manager.User().Add(orderForm.SelectedUser);
-                
+                this.Roller = orderForm.Roller;
+                this.Process = orderForm.Process;
+                this.User = orderForm.User;
+                var i = manager.Roller().Add(this.Roller);
+                manager.Process().Add(this.Process);
+                manager.User().Add(this.User);
+                //
+                this.Show(mainForm);
 
-                mainForm.Roller = orderForm.SelectedRoller;
-                mainForm.Process = orderForm.SelectedProcess;
-                mainForm.User = orderForm.SelectedUser;
+                //mainForm.Roller = orderForm.Roller;
+                //mainForm.Process = orderForm.Process;
+                //mainForm.User = orderForm.User;
                 #endregion
             }
         }
