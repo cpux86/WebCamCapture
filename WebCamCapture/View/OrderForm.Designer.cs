@@ -39,7 +39,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.rollerCbox = new System.Windows.Forms.ComboBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.orderTbox = new System.Windows.Forms.TextBox();
+            this.orderCbox = new System.Windows.Forms.ComboBox();
             this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -164,20 +164,22 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // orderTbox
+            // orderCbox
             // 
-            this.orderTbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.orderCbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderTbox.ContextMenuStrip = this.contextMenuStrip1;
-            this.orderTbox.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.orderTbox.Location = new System.Drawing.Point(166, 26);
-            this.orderTbox.MaximumSize = new System.Drawing.Size(300, 29);
-            this.orderTbox.MaxLength = 30;
-            this.orderTbox.MinimumSize = new System.Drawing.Size(150, 29);
-            this.orderTbox.Name = "orderTbox";
-            this.orderTbox.Size = new System.Drawing.Size(293, 29);
-            this.orderTbox.TabIndex = 19;
-            this.orderTbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OrderTbox_KeyPress);
+            this.orderCbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.orderCbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.orderCbox.ContextMenuStrip = this.contextMenuStrip1;
+            this.orderCbox.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.orderCbox.Location = new System.Drawing.Point(166, 26);
+            this.orderCbox.MaximumSize = new System.Drawing.Size(300, 0);
+            this.orderCbox.MaxLength = 30;
+            this.orderCbox.MinimumSize = new System.Drawing.Size(150, 0);
+            this.orderCbox.Name = "orderCbox";
+            this.orderCbox.Size = new System.Drawing.Size(293, 29);
+            this.orderCbox.TabIndex = 19;
+            this.orderCbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OrderTbox_KeyPress);
             // 
             // btnCancel
             // 
@@ -197,7 +199,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(519, 242);
-            this.Controls.Add(this.orderTbox);
+            this.Controls.Add(this.orderCbox);
             this.Controls.Add(this.rollerCbox);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.button1);
@@ -232,7 +234,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox rollerCbox;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.TextBox orderTbox;
+        private System.Windows.Forms.ComboBox orderCbox;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button btnCancel;
     }

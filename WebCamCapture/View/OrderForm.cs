@@ -13,6 +13,7 @@ namespace WebCamCapture.View
 {
     internal interface IOrderForm
     {
+        string[] OrderList { set; }
         string[] RollerList { set; }
         string[] ProcessList { set; }
         string[] UsersList { set; }
@@ -22,9 +23,16 @@ namespace WebCamCapture.View
         string Process { get; }
         string User { get; }
 
+        int OrderIndex { get; set; }
         int RollerIndex { get; set; }
+        int ProcessIndex { get; set; }
+        int UserIndex { get; set; }
 
         #region Автозаполние списков в форме заказа
+        /// <summary>
+        /// Данные для атозаполнения списка заказов
+        /// </summary>
+        string[] OrderListAutoComplete { set; }
         /// <summary>
         /// Данные для атозаполнения списка роликов
         /// </summary>
@@ -47,44 +55,51 @@ namespace WebCamCapture.View
 
     public partial class OrderForm : Form, IOrderForm
     {
+        public string[] OrderList { set => orderCbox.Items.AddRange(value); }
         public string[] RollerList { set => rollerCbox.Items.AddRange(value); }
         public string[] ProcessList { set => processCbox.Items.AddRange(value); }
         public string[] UsersList { set => userNameCbox.Items.AddRange(value); }
 
+        public int OrderIndex { get => orderCbox.SelectedIndex; set => orderCbox.SelectedIndex = value; }
         public int RollerIndex { get => rollerCbox.SelectedIndex; set => rollerCbox.SelectedIndex = value; }
+        public int ProcessIndex { get => processCbox.SelectedIndex; set => processCbox.SelectedIndex = value; }
+        public int UserIndex { get => userNameCbox.SelectedIndex; set => userNameCbox.SelectedIndex = value; }
 
         #region Автозаполнение списков в форме заказа
+        // Данные для атозаполнения списка заказов
+        public string[] OrderListAutoComplete { set => orderCbox.AutoCompleteCustomSource.AddRange(value); }
         // Данные для атозаполнения списка роликов
         public string[] RollerListAutoComplete { set => rollerCbox.AutoCompleteCustomSource.AddRange(value); }
         // Данные для атозаполнения списка процессов
         public string[] ProcessListAutoComplete { set => processCbox.AutoCompleteCustomSource.AddRange(value); }
         // Данные для атозаполнения списка пользователей
         public string[] UserListAutoComplete { set => userNameCbox.AutoCompleteCustomSource.AddRange(value); }
-        
+
         #endregion
 
 
-        public string Order { get => orderTbox.Text; set => orderTbox.Text = value; }
+        public string Order { get => orderCbox.Text; }
         public string Roller { get => rollerCbox.Text; }
         public string Process { get => processCbox.Text; }
         [Required]
         [StringLength(50, MinimumLength = 3)]
         public string User { get => userNameCbox.Text; set => userNameCbox.Text = value; }
+       
 
         public event Action BtnOkOrderClick;
 
         public OrderForm()
         {
             InitializeComponent();
-            orderTbox.Validated += OrderTbox_Validated;
+            orderCbox.Validated += OrderTbox_Validated;
             this.KeyPreview = true;
         }
 
         private void OrderTbox_Validated(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(orderTbox.Text))
+            if (String.IsNullOrEmpty(orderCbox.Text))
             {
-                errorProvider1.SetError(orderTbox, "Поля обязательно к заполнению!");
+                errorProvider1.SetError(orderCbox, "Поля обязательно к заполнению!");
             }
         }
 

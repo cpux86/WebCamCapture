@@ -12,22 +12,10 @@ namespace WebCamCapture.Presenter
  
     class Order
     {
-        private int rollerIndex;
-        private int processIndex;
-        private int userIndex;
-
-        private string roller;
-        private string process;
-        private string user;
-
-
-        public int RollerIndex { get => rollerIndex; set => rollerIndex = value; }
-        public int ProcessIndex { get => processIndex; set => processIndex = value; }
-        public int UserIndex { get => userIndex; set => userIndex = value; }
-
-        public string Roller { get => roller; set => roller = value; }
-        public string Process { get => process; set => process = value; }
-        public string User { get => user; set => user = value; }
+        public string OrderNumber { get; set; }
+        public string Roller { get; set; }
+        public string Process { get; set; }
+        public string User { get; set; }
 
         /// <summary>
         /// Отобразить текущий заказ в главной форме 
@@ -35,6 +23,7 @@ namespace WebCamCapture.Presenter
         /// <param name="order"></param>
         public void Show(IOrderMainForm order)
         {
+            order.OrderNumber = this.OrderNumber;
             order.Roller = this.Roller;
             order.Process = this.Process;
             order.User = this.User;           
@@ -46,11 +35,13 @@ namespace WebCamCapture.Presenter
 
         private readonly IOrderMainForm mainForm;
         private readonly ManagerAttributes manager;
-        //private Order order;
+        private int order = -1;
+        private int roller = -1;
+        private int process = -1;
+        private int user = -1;
         public OrderPresenter(IOrderMainForm mainForm)
         {
             this.mainForm = mainForm;
-            //this.order = new Order();
             this.mainForm.ShowOrderForm += ShowOrderForm;
             manager = new ManagerAttributes().Init();
 
@@ -68,29 +59,42 @@ namespace WebCamCapture.Presenter
         {
             IOrderForm orderForm = new OrderForm();
             #region Установить данные для формы
+            orderForm.OrderList = manager.Order().List();
             orderForm.RollerList = manager.Roller().List();
             orderForm.ProcessList = manager.Process().List();
             orderForm.UsersList = manager.User().List();
-            //orderForm.RollerIndex = 0;
             // отобразить текущий заказ
 
-            
+
             // автозаполнение
+            orderForm.OrderListAutoComplete = manager.Order().List();
             orderForm.RollerListAutoComplete = manager.Roller().List();
             orderForm.ProcessListAutoComplete = manager.Process().List();
             orderForm.UserListAutoComplete = manager.User().List();
+
+            //
+            orderForm.OrderIndex = this.order;
+            orderForm.RollerIndex = this.roller;
+            orderForm.ProcessIndex = this.process;
+            orderForm.UserIndex = this.user;
+            
 
             #endregion
 
             if (orderForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 #region Получить данные из формы
+
+                this.OrderNumber = orderForm.Order;
                 this.Roller = orderForm.Roller;
                 this.Process = orderForm.Process;
                 this.User = orderForm.User;
-                var i = manager.Roller().Add(this.Roller);
-                manager.Process().Add(this.Process);
-                manager.User().Add(this.User);
+
+                this.order = manager.Order().Add(this.OrderNumber);
+                this.roller = manager.Roller().Add(this.Roller);
+                this.process = manager.Process().Add(this.Process);
+                this.user = manager.User().Add(this.User);
+
                 //
                 this.Show(mainForm);
 

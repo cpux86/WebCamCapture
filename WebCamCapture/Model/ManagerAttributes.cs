@@ -25,6 +25,18 @@ namespace WebCamCapture.Model
             attributesList = new List<string>();
         }
 
+        public void AutoClean(int maxValue)
+        {
+            int listLenght = this.attributesList.Count;
+            if (listLenght > maxValue)
+            {
+                int i = maxValue;
+                int c = listLenght - maxValue;
+                this.attributesList.RemoveRange(i, c);
+            }
+            
+        }
+
         /// <summary>
         /// Добовляет в список, заначение value, если value есть в списке, то возвращает ее id.
         /// </summary>
@@ -35,9 +47,10 @@ namespace WebCamCapture.Model
             int id = this.attributesList.IndexOf(value);
             if (id == -1 && value != "")
             {
-                // если переданного параметра (neme) нет в списке, то добавляем его 
-                this.attributesList.Add(value);
-                id = this.attributesList.Count - 1;
+                // помещаем новый элемент в начало списка
+                this.attributesList.Insert(0,value);
+                // возращаем индекс нового элемента
+                return 0;
             }
             return id;
         }
@@ -63,45 +76,68 @@ namespace WebCamCapture.Model
     [Serializable]
     public class ManagerAttributes
     {
+        #region Настройки размера списка
+        /// <summary>
+        /// Максимальный размер списка заказов
+        /// </summary>
+        static int ordersMaxList = 10;
+        static int rollerMaxList = 30;
+        static int processMaxList = 20;
+        static int usersMaxList = 25;
+
+        #endregion
+
+
         private string fileBin = "User.dat";
 
+        readonly Attribute order;
         readonly Attribute roller;
         readonly Attribute process;
         readonly Attribute user;
+       
+
         private Attributes attributes;
 
         public ManagerAttributes()
         {
-            process = new Attribute();
+            order = new Attribute();
             roller = new Attribute();
+            process = new Attribute();
             user = new Attribute();
 
             attributes = new Attributes();
 
 
             attributes.List = new List<Attribute>();
-
-            attributes.List.Add(process);
+            attributes.List.Add(order);
             attributes.List.Add(roller);
+            attributes.List.Add(process);
             attributes.List.Add(user);
-
+            
             this.Init();
+            
         }
         #region Добавить, удалить атрибуты
+        public Attribute Order()
+        {
+            order.AutoClean(ordersMaxList);
+            return order;
+        }
+        public Attribute Roller()
+        {
+            roller.AutoClean(rollerMaxList);
+            return roller;
+        }
 
         public Attribute Process()
         {
+            process.AutoClean(processMaxList);
             return process;
-        }
-
-
-        public Attribute Roller()
-        {
-            return roller;
         }
 
         public Attribute User()
         {
+            user.AutoClean(usersMaxList);
             return user;
         }
 
