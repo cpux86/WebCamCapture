@@ -18,7 +18,7 @@ namespace WebCamCapture.View
         string[] ProcessList { set; }
         string[] UsersList { set; }
 
-        string Order { get; }
+        string OrderNumber { get; }
         string Roller { get; }
         string Process { get; }
         string User { get; }
@@ -78,7 +78,7 @@ namespace WebCamCapture.View
         #endregion
 
 
-        public string Order { get => orderCbox.Text; }
+        public string OrderNumber { get => orderCbox.Text; }
         public string Roller { get => rollerCbox.Text; }
         public string Process { get => processCbox.Text; }
         [Required]

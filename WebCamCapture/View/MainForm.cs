@@ -89,6 +89,8 @@ namespace WebCamCapture.View
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
+
         }
 
         public bool IsRunning { get => videoPlayer.IsRunning; }

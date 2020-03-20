@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Device.cs" />
+    <Compile Include="Model\FileManager.cs" />
     <Compile Include="Model\ManagerAttributes.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Presenter\OrderPresenter.cs" />
