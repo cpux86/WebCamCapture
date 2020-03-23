@@ -194,7 +194,12 @@ namespace WebCamCapture.Presenter
         private void SaveSnapshot(object sender, AForge.Video.NewFrameEventArgs eventArgs)
         {
             PlayerMainView.SnapshotView((Bitmap)eventArgs.Frame.Clone());
-            
+            WebCamCapture.Model.FileManager fileManager = new Model.FileManager();
+            var name = fileManager.CreateFileName();
+            Image image = (Bitmap)eventArgs.Frame.Clone();
+            image.Save(name, System.Drawing.Imaging.ImageFormat.Jpeg);
+            image.Dispose();
+
         }
 
         private void VideoSource_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)

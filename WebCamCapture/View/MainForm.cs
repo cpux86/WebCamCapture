@@ -89,7 +89,8 @@ namespace WebCamCapture.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            WebCamCapture.Model.FileManager fileManager = new Model.FileManager();
+            fileManager.Monitor();
 
         }
 

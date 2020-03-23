@@ -105,9 +105,9 @@ namespace WebCamCapture.View
 
         private void OrderTbox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // фильтруем ввод, только "0-9" и "/"
+            // фильтруем ввод, только "0-9", BS, "/", "( )" и пробел
             char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 47 && number != 8)
+            if (!Char.IsDigit(number) && number != 47 && number != 8 && number != 40 && number != 41 && !Char.IsWhiteSpace(number))
             {
                 e.Handled = true;
             }
