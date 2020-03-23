@@ -18,7 +18,7 @@ using AForge.Video.DirectShow;
 
 namespace WebCamCapture.View
 {
-    interface IMain
+    public interface IMain
     {
         bool DeviceManagerItem { set; }
         event EventHandler Load;
@@ -41,7 +41,7 @@ namespace WebCamCapture.View
         
 
     }
-    interface IOrderMainForm : IMain
+    public interface IOrderMainForm : IMain
     {
         string OrderNumber { set; }
         string Roller { set; }

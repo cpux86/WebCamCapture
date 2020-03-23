@@ -194,11 +194,12 @@ namespace WebCamCapture.Presenter
         private void SaveSnapshot(object sender, AForge.Video.NewFrameEventArgs eventArgs)
         {
             PlayerMainView.SnapshotView((Bitmap)eventArgs.Frame.Clone());
+            
         }
 
         private void VideoSource_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
         {
-            //videoSource.NewFrame -= SaveSnapshot;
+            videoSource.NewFrame -= SaveSnapshot;
         }
 
         #endregion

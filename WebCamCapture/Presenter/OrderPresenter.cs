@@ -10,7 +10,7 @@ using WebCamCapture.Model;
 namespace WebCamCapture.Presenter
 {
  
-    static class Order
+    public static class Order
     {
         /// <summary>
         /// Текущий номер заказа

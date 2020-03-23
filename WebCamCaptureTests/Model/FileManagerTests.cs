@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebCamCapture.Presenter;
+
 
 namespace WebCamCapture.Model.Tests
 {
@@ -14,7 +16,12 @@ namespace WebCamCapture.Model.Tests
         [TestMethod()]
         public void CreateFileNameTest()
         {
-            new FileManager().
+            Order.OrderNumber = "10/10111";
+            FileManager fileManager = new FileManager();
+            
+            fileManager.CreateFileName();
+            var x = fileManager.FileName;
+
         }
     }
 }
