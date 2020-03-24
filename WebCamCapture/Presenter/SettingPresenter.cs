@@ -110,17 +110,23 @@ namespace WebCamCapture.Presenter
             settingView.DeviceIdChange += SettingView_DeviceIdChange;
             settingView.ModeIdChange += SettingForm_ModeIdChange;
             
+            
         }
 
+        // Выбор устройства
         private void SettingView_DeviceIdChange()
         {
-            settingView.ModesList = GetFrameSizeList(settingView.DeviceIndex).ToArray();
+            this.DeviceId = settingView.DeviceIndex;
+            settingView.ModesList = GetFrameSizeList(this.DeviceId).ToArray();
         }
 
+        // Выбор видеорежим
+        private void SettingForm_ModeIdChange()
+        {
+            this.ModeId = this.settingView.ModeIndex;
+            this.Run();
 
-
-
-
+        }
 
 
         #region Обработчики
@@ -137,26 +143,33 @@ namespace WebCamCapture.Presenter
             {
                 PlayerMainView.DeviceManagerItem = false;
             }
-          
+            // тест
+            var dev = this.DevicesNameList;
+            this.DeviceId = dev.IndexOf(this.SelectedDevice);
+            this.ModeId = dev.IndexOf(this.SelectedMode);
+
+
+           // Run(); /////////////////
+
         }
 
         // Отобразить форму основных настроек (устройства, режима и путь к снимкам) программы 
         private void PlayerMainView_ShowAppSetting()
         {
-            
+            //
+            this.DeviceId = 1;
+            this.ModeId = 1;
+
+            this.settingView.DeviceIndex = this.DeviceId;
+            this.settingView.ModeIndex = this.ModeId;
+            // Щелчек по кнопке "Ок" формы "Настройки камеры"
             if (settingView.ShowDialog() == DialogResult.OK)
             {
                 
             }
         }
 
-        // Выбор видеорежим
-        private void SettingForm_ModeIdChange()
-        {
-            this.ModeId = this.settingView.ModeIndex;
-            this.Run();
-            
-        }
+
 
         // Отобразить панель с настройкаи (фокус, экспозиция, выдержка...) камеры 
         private void PlayerMainView_ShowDeviceManagerPanel()

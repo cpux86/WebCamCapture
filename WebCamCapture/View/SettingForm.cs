@@ -19,6 +19,10 @@ namespace WebCamCapture.View
         string[] ModesList { set; }
         int DeviceIndex { get; set; }
         int ModeIndex { get; set; }
+        /// <summary>
+        /// Каталог для сохранения снимков
+        /// </summary>
+        string SnapshotFolder { get; set; }
     }
 
     public partial class SettingForm : Form, ISettingView
@@ -53,23 +57,30 @@ namespace WebCamCapture.View
                 modesList.Items.AddRange(value);
             } 
         }
+        /// <summary>
+        /// Каталог для сохранения снимков
+        /// </summary>
         public string SnapshotFolder
         {
             get => folderBrowserDialog1.SelectedPath;
             set
             {
                 folderBrowserDialog1.SelectedPath = value;
-                SettinAppPanel__FileDirView.Text = value;
+                FileDirView.Text = value;
             }
         }
-        public string SnapshotFolderTextBox { set => SettinAppPanel__FileDirView.Text = value; }
+        public string SnapshotFolderTextBox { set => FileDirView.Text = value; }
 
-
-        private void SettingAppPanel__DirOkBtn_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Обработчик щелчка по кнопке обзора для выбора каталога для хранения снимков
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DirOkBtn_Click(object sender, EventArgs e)
         {         
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                SettinAppPanel__FileDirView.Text = folderBrowserDialog1.SelectedPath;
+                FileDirView.Text = folderBrowserDialog1.SelectedPath;
                 Properties.Settings.Default.FileDir = folderBrowserDialog1.SelectedPath;
             }
         }

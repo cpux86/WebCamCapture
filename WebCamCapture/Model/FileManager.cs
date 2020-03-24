@@ -24,7 +24,6 @@ namespace WebCamCapture.Model
             watcher.Deleted += Watcher_Created;
             watcher.EnableRaisingEvents = true;
             watcher.IncludeSubdirectories = true;
-
         }
 
         public void Watcher_Created(object sender, FileSystemEventArgs e)
@@ -37,8 +36,14 @@ namespace WebCamCapture.Model
         {
             string dateTime = DateTime.Now.ToString("dd.MM.yyyy_HH.mm.ss.ffff");
 
-            // [номер заказа][дата, время][ролик][процесс][исполнитель]
-            fileName = String.Format("{0}_{1}_{2}_{3}_{4}.jpg", Order.OrderNumber, dateTime, Order.Roller, Order.Process, Order.User);
+            // [номер заказа][дата, время+мсек][ролик][процесс][исполнитель]
+            fileName = String.Format(
+                "{0}_{1}_{2}_{3}_{4}.jpg", 
+                Order.OrderNumber, 
+                dateTime, 
+                Order.Roller,
+                Order.Process,
+                Order.User);
             this.Validation();
             return fileName;
         }

@@ -113,6 +113,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Config.cs" />
     <Compile Include="Model\Device.cs" />
     <Compile Include="Model\FileManager.cs" />
     <Compile Include="Model\ManagerAttributes.cs" />

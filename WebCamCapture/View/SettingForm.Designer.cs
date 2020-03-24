@@ -35,7 +35,7 @@
             this.deviceList = new System.Windows.Forms.ComboBox();
             this.modesList = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.SettinAppPanel__FileDirView = new System.Windows.Forms.TextBox();
+            this.FileDirView = new System.Windows.Forms.TextBox();
             this.SettingAppPanel__DirOkBtn = new System.Windows.Forms.Button();
             this.btnOkSettingDev = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
@@ -113,7 +113,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.SettinAppPanel__FileDirView);
+            this.groupBox1.Controls.Add(this.FileDirView);
             this.groupBox1.Controls.Add(this.SettingAppPanel__DirOkBtn);
             this.groupBox1.Location = new System.Drawing.Point(18, 38);
             this.groupBox1.Name = "groupBox1";
@@ -124,15 +124,15 @@
             // 
             // SettinAppPanel__FileDirView
             // 
-            this.SettinAppPanel__FileDirView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.FileDirView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.SettinAppPanel__FileDirView.BackColor = System.Drawing.Color.White;
-            this.SettinAppPanel__FileDirView.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SettinAppPanel__FileDirView.Location = new System.Drawing.Point(6, 21);
-            this.SettinAppPanel__FileDirView.Name = "SettinAppPanel__FileDirView";
-            this.SettinAppPanel__FileDirView.ReadOnly = true;
-            this.SettinAppPanel__FileDirView.Size = new System.Drawing.Size(289, 23);
-            this.SettinAppPanel__FileDirView.TabIndex = 14;
+            this.FileDirView.BackColor = System.Drawing.Color.White;
+            this.FileDirView.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FileDirView.Location = new System.Drawing.Point(6, 21);
+            this.FileDirView.Name = "SettinAppPanel__FileDirView";
+            this.FileDirView.ReadOnly = true;
+            this.FileDirView.Size = new System.Drawing.Size(289, 23);
+            this.FileDirView.TabIndex = 14;
             // 
             // SettingAppPanel__DirOkBtn
             // 
@@ -148,7 +148,7 @@
             this.SettingAppPanel__DirOkBtn.TabIndex = 15;
             this.SettingAppPanel__DirOkBtn.Text = "...";
             this.SettingAppPanel__DirOkBtn.UseVisualStyleBackColor = false;
-            this.SettingAppPanel__DirOkBtn.Click += new System.EventHandler(this.SettingAppPanel__DirOkBtn_Click);
+            this.SettingAppPanel__DirOkBtn.Click += new System.EventHandler(this.DirOkBtn_Click);
             // 
             // btnOkSettingDev
             // 
@@ -193,7 +193,7 @@
         public System.Windows.Forms.ComboBox deviceList;
         public System.Windows.Forms.ComboBox modesList;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox SettinAppPanel__FileDirView;
+        private System.Windows.Forms.TextBox FileDirView;
         private System.Windows.Forms.Button SettingAppPanel__DirOkBtn;
         public System.Windows.Forms.Button btnOkSettingDev;
     }
