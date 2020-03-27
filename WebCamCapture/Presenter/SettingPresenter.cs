@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Windows.Forms;
 //using Accord.Video.DirectShow;
 using AForge.Video.DirectShow;
+using System.Windows.Forms.VisualStyles;
 
 namespace WebCamCapture.Presenter
 {
@@ -78,6 +79,7 @@ namespace WebCamCapture.Presenter
         public List<string> GetFrameSizeList(int devId)
         {
             List<string> fSize = new List<string>();
+            if (devId == -1) return fSize; 
             videoSource = new VideoCaptureDevice(videoDevices[devId].MonikerString);
             // поддерживаемые режимы работы камеры (разрешение)
             foreach (var s in videoSource.VideoCapabilities)
@@ -109,15 +111,19 @@ namespace WebCamCapture.Presenter
             
             settingView.DeviceIdChange += SettingView_DeviceIdChange;
             settingView.ModeIdChange += SettingForm_ModeIdChange;
-            
+
+            this.Init();
             
         }
 
         // Выбор устройства
         private void SettingView_DeviceIdChange()
         {
+            // сбрасываем значение режима
+            this.ModeId = -1;
             this.DeviceId = settingView.DeviceIndex;
-            settingView.ModesList = GetFrameSizeList(this.DeviceId).ToArray();
+            this.ModesList = GetFrameSizeList(this.DeviceId);
+            settingView.ModesList = ModesList.ToArray();
         }
 
         // Выбор видеорежим
@@ -127,14 +133,35 @@ namespace WebCamCapture.Presenter
             this.Run();
 
         }
+        // Первоначатьная инициализация
+        private void Init()
+        {
 
+            // получаем список подключенных устройств
+            this.DevicesNameList = this.GetDevicesNameList();
+            // получаем идентификатор устройства из настроек
+            this.DeviceId = DevicesNameList.IndexOf(this.SelectedDevice);
+            // получаем список поддерживаемых режимов устройством
+            this.ModesList = this.GetFrameSizeList(this.DeviceId);
+            // получаем идентификатор режима из настроек
+            this.ModeId = ModesList.IndexOf(this.SelectedMode);
+
+            //this.DeviceId = 2;
+            //this.ModeId = 1;
+
+            this.settingView.DeviceList = this.DevicesNameList.ToArray();
+            this.settingView.ModesList = this.ModesList.ToArray();
+
+            this.settingView.DeviceIndex = this.DeviceId;
+            this.settingView.ModeIndex = this.ModeId;
+
+        }
 
         #region Обработчики
         // Главная форма загружена
         private void PlayerMainView_Load(object sender, EventArgs e)
         {
-            this.DevicesNameList = GetDevicesNameList();
-            this.settingView.DeviceList = this.DevicesNameList.ToArray();
+
             if (PlayerMainView.IsRunning)
             {
                 PlayerMainView.DeviceManagerItem = true;
@@ -143,29 +170,21 @@ namespace WebCamCapture.Presenter
             {
                 PlayerMainView.DeviceManagerItem = false;
             }
-            // тест
-            var dev = this.DevicesNameList;
-            this.DeviceId = dev.IndexOf(this.SelectedDevice);
-            this.ModeId = dev.IndexOf(this.SelectedMode);
 
 
-           // Run(); /////////////////
+            //Run(); /////////////////
 
         }
 
-        // Отобразить форму основных настроек (устройства, режима и путь к снимкам) программы 
+        // Форма основных настроек загружена (устройства, режима и путь к снимкам) программы 
         private void PlayerMainView_ShowAppSetting()
         {
-            //
-            this.DeviceId = 1;
-            this.ModeId = 1;
 
-            this.settingView.DeviceIndex = this.DeviceId;
-            this.settingView.ModeIndex = this.ModeId;
             // Щелчек по кнопке "Ок" формы "Настройки камеры"
             if (settingView.ShowDialog() == DialogResult.OK)
             {
-                
+                this.SelectedDevice = this.DevicesNameList[this.DeviceId];
+                this.SelectedMode = this.ModesList[this.ModeId];
             }
         }
 
