@@ -48,6 +48,15 @@ namespace WebCamCapture.Presenter
             set => Properties.Settings.Default.SelectedMode = value;
         }
 
+        /// <summary>
+        /// путь к снимкам из настроек
+        /// </summary>
+        string SnapshotDir
+        {
+            get => Properties.Settings.Default.FileDir;
+            set => Properties.Settings.Default.FileDir = value;
+        }
+
         #endregion
 
 
@@ -119,8 +128,6 @@ namespace WebCamCapture.Presenter
         // Выбор устройства
         private void SettingView_DeviceIdChange()
         {
-            // сбрасываем значение режима
-            this.ModeId = -1;
             this.DeviceId = settingView.DeviceIndex;
             this.ModesList = GetFrameSizeList(this.DeviceId);
             settingView.ModesList = ModesList.ToArray();
@@ -139,15 +146,15 @@ namespace WebCamCapture.Presenter
 
             // получаем список подключенных устройств
             this.DevicesNameList = this.GetDevicesNameList();
+
             // получаем идентификатор устройства из настроек
             this.DeviceId = DevicesNameList.IndexOf(this.SelectedDevice);
             // получаем список поддерживаемых режимов устройством
             this.ModesList = this.GetFrameSizeList(this.DeviceId);
             // получаем идентификатор режима из настроек
             this.ModeId = ModesList.IndexOf(this.SelectedMode);
-
-            //this.DeviceId = 2;
-            //this.ModeId = 1;
+            // получаем путь к снимкам
+            this.settingView.SnapshotFolder = this.SnapshotDir;
 
             this.settingView.DeviceList = this.DevicesNameList.ToArray();
             this.settingView.ModesList = this.ModesList.ToArray();
@@ -171,9 +178,6 @@ namespace WebCamCapture.Presenter
                 PlayerMainView.DeviceManagerItem = false;
             }
 
-
-            //Run(); /////////////////
-
         }
 
         // Форма основных настроек загружена (устройства, режима и путь к снимкам) программы 
@@ -181,7 +185,7 @@ namespace WebCamCapture.Presenter
         {
 
             // Щелчек по кнопке "Ок" формы "Настройки камеры"
-            if (settingView.ShowDialog() == DialogResult.OK)
+            if (settingView.ShowDialog() == DialogResult.OK && ModesList.Count > 0 && this.ModeId != -1)
             {
                 this.SelectedDevice = this.DevicesNameList[this.DeviceId];
                 this.SelectedMode = this.ModesList[this.ModeId];
