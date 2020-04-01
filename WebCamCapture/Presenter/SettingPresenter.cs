@@ -109,7 +109,7 @@ namespace WebCamCapture.Presenter
 
         public SettingPresenter(IPlayerMainView playerMainView, ISettingView settingView)
         {
-            videoSource = new VideoCaptureDevice(); // защита
+            videoSource = new VideoCaptureDevice(); 
             this.PlayerMainView = playerMainView;
             this.settingView = settingView;
 
@@ -231,6 +231,7 @@ namespace WebCamCapture.Presenter
         {
             PlayerMainView.SnapshotView((Bitmap)eventArgs.Frame.Clone());
             WebCamCapture.Model.FileManager fileManager = new Model.FileManager();
+
             var name = fileManager.CreateFileName();
             Image image = (Bitmap)eventArgs.Frame.Clone();
             image.Save(name, System.Drawing.Imaging.ImageFormat.Jpeg);

@@ -14,6 +14,9 @@ namespace WebCamCapture.Model
         // путь к отслеживаемому каталогу
         private string path = @"d:\C#\WebCamCapture\WebCamCapture\bin\Debug\";
 
+        /// <summary>
+        /// Отслеживает содержимого каталога
+        /// </summary>
         public void Monitor()
         {
             FileSystemWatcher watcher = new FileSystemWatcher();
@@ -25,15 +28,19 @@ namespace WebCamCapture.Model
             watcher.EnableRaisingEvents = true;
             watcher.IncludeSubdirectories = true;
         }
-
+        // Обработчик события изменения содержимого каталога
         public void Watcher_Created(object sender, FileSystemEventArgs e)
         {
             System.Windows.Forms.MessageBox.Show(e.FullPath);
         }
 
-        private string fileName;
+        /// <summary>
+        /// Создает уникальное имя для данного снимка, с текущими параметрами заказа
+        /// </summary>
+        /// <returns>уникальная строка для снимка</returns>
         public string CreateFileName()
         {
+            string fileName;
             string dateTime = DateTime.Now.ToString("dd.MM.yyyy_HH.mm.ss.ffff");
 
             // [номер заказа][дата, время+мсек][ролик][процесс][исполнитель]
@@ -44,20 +51,23 @@ namespace WebCamCapture.Model
                 Order.Roller,
                 Order.Process,
                 Order.User);
-            this.Validation();
-            return fileName;
+            return Validation(fileName);
         }
-
-        private void Validation()
+        /// <summary>
+        /// Заменяет в переданной строке все не допустимые символы на "-"
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        private string Validation(string s)
         {
             // Массив не допустимых символов
             string[] symbols = new string[] { "/", ":", "+" };
 
             foreach (string symbol in symbols)
             {
-                fileName = fileName.Replace(symbol, "_");
+                s = s.Replace(symbol, "-");
             }
-
+            return s;
         }
 
         public void Save()
