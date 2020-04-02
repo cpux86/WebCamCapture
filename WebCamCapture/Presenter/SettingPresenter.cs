@@ -120,8 +120,14 @@ namespace WebCamCapture.Presenter
             
             settingView.DeviceIdChange += SettingView_DeviceIdChange;
             settingView.ModeIdChange += SettingForm_ModeIdChange;
+            settingView.SnapshotDirChange += SettingView_SnapshotDirChange;
 
             this.Init();
+            
+        }
+
+        private void SettingView_SnapshotDirChange(string obj)
+        {
             
         }
 

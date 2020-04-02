@@ -14,6 +14,7 @@ namespace WebCamCapture.View
     {
         event Action DeviceIdChange;
         event Action ModeIdChange;
+        event Action<string> SnapshotDirChange;
         DialogResult ShowDialog();
         string[] DeviceList { set; }
         string[] ModesList { set; }
@@ -43,7 +44,7 @@ namespace WebCamCapture.View
         ///  выбран режим в настройках
         /// </summary>
         public event Action ModeIdChange;
-
+        public event Action<string> SnapshotDirChange;
 
         public string[] DeviceList { 
             set {
@@ -82,6 +83,7 @@ namespace WebCamCapture.View
             {
                 FileDirView.Text = folderBrowserDialog1.SelectedPath;
                 Properties.Settings.Default.FileDir = folderBrowserDialog1.SelectedPath;
+                this.SnapshotDirChange(folderBrowserDialog1.SelectedPath);
             }
         }
         // Выбор устройства
