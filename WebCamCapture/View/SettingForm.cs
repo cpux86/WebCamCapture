@@ -14,6 +14,9 @@ namespace WebCamCapture.View
     {
         event Action DeviceIdChange;
         event Action ModeIdChange;
+        /// <summary>
+        /// Выбор каталога сохраниния снимков
+        /// </summary>
         event Action<string> SnapshotDirChange;
         DialogResult ShowDialog();
         string[] DeviceList { set; }
@@ -82,7 +85,6 @@ namespace WebCamCapture.View
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 FileDirView.Text = folderBrowserDialog1.SelectedPath;
-                Properties.Settings.Default.FileDir = folderBrowserDialog1.SelectedPath;
                 this.SnapshotDirChange(folderBrowserDialog1.SelectedPath);
             }
         }

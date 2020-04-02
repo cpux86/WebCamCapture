@@ -25,6 +25,10 @@ namespace WebCamCapture.Presenter
         /// Список режимов
         /// </summary>
         List<string> ModesList { get; set; }
+
+
+
+
         /// <summary>
         /// Идентификатор устройства
         /// </summary>
@@ -60,56 +64,18 @@ namespace WebCamCapture.Presenter
         #endregion
 
 
-
-        #region Список имен и режимов
-        private FilterInfoCollection videoDevices;
-        private VideoCaptureDevice videoSource;
-        /// <summary>
-        /// Взращает список имен подключенных устройств
-        /// </summary>
-        /// <returns></returns>
-        public List<string> GetDevicesNameList()
-        {
-            // заполняем список именами подклюен
-            List<string> list = new List<string>();
-            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            foreach (FilterInfo device in videoDevices)
-            {
-                list.Add(device.Name);
-            }
-            return list;
-        }
-
-        /// <summary>
-        /// Возращает список поддерживаемых размеров кадров
-        /// </summary>
-        /// <param name="dev">Идентификатор устройства</param>
-        /// <returns></returns>
-        public List<string> GetFrameSizeList(int devId)
-        {
-            List<string> fSize = new List<string>();
-            if (devId == -1) return fSize; 
-            videoSource = new VideoCaptureDevice(videoDevices[devId].MonikerString);
-            // поддерживаемые режимы работы камеры (разрешение)
-            foreach (var s in videoSource.VideoCapabilities)
-            {             
-                // формируем строку типа 640 x 480
-                fSize.Add(String.Format("{0} x {1}, {2} fps, {3} Bit", s.FrameSize.Width, s.FrameSize.Height, s.MaximumFrameRate, s.BitCount));
-            }
-            return fSize;
-        }
-        #endregion
-
-
-
-
-
         readonly IPlayerMainView PlayerMainView;
         readonly ISettingView settingView;
+        private VideoCaptureDevice VideoSource { get => devices.VideoSource; }
+        readonly IDevices devices;
+        readonly IDevice device;
 
-        public SettingPresenter(IPlayerMainView playerMainView, ISettingView settingView)
+        public SettingPresenter(IPlayerMainView playerMainView, ISettingView settingView, IDevices devices)
         {
-            videoSource = new VideoCaptureDevice(); 
+            this.devices = devices;
+            this.device = devices;
+
+
             this.PlayerMainView = playerMainView;
             this.settingView = settingView;
 
@@ -125,17 +91,17 @@ namespace WebCamCapture.Presenter
             this.Init();
             
         }
-
-        private void SettingView_SnapshotDirChange(string obj)
+        // Обработчик выбора каталога сохранения снимков
+        private void SettingView_SnapshotDirChange(string path)
         {
-            
+            this.SnapshotDir = path;
         }
 
         // Выбор устройства
         private void SettingView_DeviceIdChange()
         {
             this.DeviceId = settingView.DeviceIndex;
-            this.ModesList = GetFrameSizeList(this.DeviceId);
+            this.ModesList = device.GetFrameSizeList(this.DeviceId);
             settingView.ModesList = ModesList.ToArray();
         }
 
@@ -151,12 +117,12 @@ namespace WebCamCapture.Presenter
         {
 
             // получаем список подключенных устройств
-            this.DevicesNameList = this.GetDevicesNameList();
+            this.DevicesNameList = devices.GetDevicesNameList();
 
             // получаем идентификатор устройства из настроек
             this.DeviceId = DevicesNameList.IndexOf(this.SelectedDevice);
             // получаем список поддерживаемых режимов устройством
-            this.ModesList = this.GetFrameSizeList(this.DeviceId);
+            this.ModesList = devices.GetFrameSizeList(this.DeviceId);
             // получаем идентификатор режима из настроек
             this.ModeId = ModesList.IndexOf(this.SelectedMode);
             // получаем путь к снимкам
@@ -205,7 +171,7 @@ namespace WebCamCapture.Presenter
         {
             try
             {
-                videoSource.DisplayPropertyPage(IntPtr.Zero);
+                VideoSource.DisplayPropertyPage(IntPtr.Zero);
             }
             catch (NotSupportedException e)
             {
@@ -217,9 +183,9 @@ namespace WebCamCapture.Presenter
             if (DeviceId != -1 && ModeId != -1)
             {             
                 if (PlayerMainView.IsRunning) PlayerMainView.Stop();
-                videoSource.VideoResolution = videoSource.VideoCapabilities[ModeId];
-                PlayerMainView.VideoSource = videoSource;
-                videoSource.NewFrame += VideoSource_NewFrame;
+                VideoSource.VideoResolution = VideoSource.VideoCapabilities[ModeId];
+                PlayerMainView.VideoSource = VideoSource;
+                VideoSource.NewFrame += VideoSource_NewFrame;
                 PlayerMainView.Start();
                 PlayerMainView.DeviceManagerItem = true;
                 
@@ -229,8 +195,9 @@ namespace WebCamCapture.Presenter
         // Создать снимок
         private void PlayerMainView_makeSnapshot()
         {
-            videoSource.NewFrame -= SaveSnapshot;
-            videoSource.NewFrame += SaveSnapshot;
+            VideoSource.NewFrame -= SaveSnapshot;
+            VideoSource.NewFrame += SaveSnapshot;
+
         }
 
         private void SaveSnapshot(object sender, AForge.Video.NewFrameEventArgs eventArgs)
@@ -247,7 +214,7 @@ namespace WebCamCapture.Presenter
 
         private void VideoSource_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
         {
-            videoSource.NewFrame -= SaveSnapshot;
+            VideoSource.NewFrame -= SaveSnapshot;
         }
 
         #endregion

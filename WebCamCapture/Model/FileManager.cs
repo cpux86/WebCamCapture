@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Drawing;
 
 using WebCamCapture.Presenter;
+using AForge.Video;
 
 namespace WebCamCapture.Model
 {
@@ -75,6 +77,15 @@ namespace WebCamCapture.Model
 
         }
 
-
+        public void CreateSnapshot()
+        {
+            //VideoSource.NewFrame -= SaveSnapshot;
+            //VideoSource.NewFrame += SaveSnapshot;
+        }
+        // test
+        private void SaveSnapshot(object sender, NewFrameEventArgs eventArgs)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
