@@ -11,10 +11,20 @@ using AForge.Video;
 
 namespace WebCamCapture.Model
 {
+    public class Snapshot
+    {
+        public string Name { get; set; }
+        public Image Image { get; set; }
+    }
     public class FileManager
     {
         // путь к отслеживаемому каталогу
         private string path = @"d:\C#\WebCamCapture\WebCamCapture\bin\Debug\";
+        Snapshot snapshot;
+        public FileManager()
+        {
+            snapshot = new Snapshot();
+        }
 
         /// <summary>
         /// Отслеживает содержимого каталога
@@ -72,20 +82,27 @@ namespace WebCamCapture.Model
             return s;
         }
 
-        public void Save()
+        private void Save(Image img)
         {
-
+            snapshot.Name = this.CreateFileName();
+            img.Save(snapshot.Name, System.Drawing.Imaging.ImageFormat.Jpeg);
         }
-
+        // флаг о необходимости сохранить снимок
+        bool isSave = true;
         public void CreateSnapshot()
         {
-            //VideoSource.NewFrame -= SaveSnapshot;
-            //VideoSource.NewFrame += SaveSnapshot;
+            this.isSave = true;
+            
         }
-        // test
-        private void SaveSnapshot(object sender, NewFrameEventArgs eventArgs)
+
+
+        public void NewFrame(Image img)
         {
-            throw new NotImplementedException();
+            if (isSave)
+            {
+                this.Save(img);
+                isSave = false;
+            }           
         }
     }
 }

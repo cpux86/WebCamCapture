@@ -185,18 +185,27 @@ namespace WebCamCapture.Presenter
                 if (PlayerMainView.IsRunning) PlayerMainView.Stop();
                 VideoSource.VideoResolution = VideoSource.VideoCapabilities[ModeId];
                 PlayerMainView.VideoSource = VideoSource;
+                device.Run();
+
                 VideoSource.NewFrame += VideoSource_NewFrame;
+
                 PlayerMainView.Start();
                 PlayerMainView.DeviceManagerItem = true;
                 
             }
         }
 
+
+
+
+
+
         // Создать снимок
         private void PlayerMainView_makeSnapshot()
         {
             VideoSource.NewFrame -= SaveSnapshot;
             VideoSource.NewFrame += SaveSnapshot;
+            
 
         }
 

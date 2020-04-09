@@ -13,6 +13,7 @@ namespace WebCamCapture.Model
     {
         VideoCaptureDevice VideoSource { get; }
         List<string> GetFrameSizeList(int devId);
+        void Run();
     }
     interface IDevices : IDevice
     {
@@ -28,7 +29,6 @@ namespace WebCamCapture.Model
 
         public VideoCaptureDevice VideoSource => videoSource;
 
-        //private VideoCaptureDevice videoSource;
         /// <summary>
         /// Взращает список имен подключенных устройств
         /// </summary>
@@ -64,6 +64,19 @@ namespace WebCamCapture.Model
             return fSize;
         }
         #endregion
+
+        FileManager fileManager;
+        // запускаем устройство на выполниние 
+        public void Run()
+        {
+            videoSource.NewFrame += VideoSource_NewFrame;
+            fileManager = new FileManager();
+        }
+        // обработчик получения кадра с устройства
+        private void VideoSource_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
+        {
+            fileManager.NewFrame(eventArgs.Frame);
+        }
     }
 
 }
