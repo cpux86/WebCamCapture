@@ -87,13 +87,20 @@ namespace WebCamCapture.Model
             snapshot.Name = this.CreateFileName();
             img.Save(snapshot.Name, System.Drawing.Imaging.ImageFormat.Jpeg);
         }
+
+        #region API
         // флаг о необходимости сохранить снимок
-        bool isSave = true;
+        static bool isSave = false;
+        /// <summary>
+        /// Создать снимок
+        /// </summary>
         public void CreateSnapshot()
         {
-            this.isSave = true;
-            
+            isSave = true;
+
         }
+        #endregion
+
 
 
         public void NewFrame(Image img)

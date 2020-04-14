@@ -20,8 +20,9 @@ namespace WebCamCapture
             var mainForm = new View.MainForm();
             var settingForm = new View.SettingForm();
             var devices = new Model.Devices();
+            var fileManager = new Model.FileManager();
             
-            Presenter.MainPresenter mainPresenter = new Presenter.MainPresenter(mainForm);
+            Presenter.MainPresenter mainPresenter = new Presenter.MainPresenter(mainForm, fileManager);
             Presenter.SettingPresenter settingPresenter = new Presenter.SettingPresenter(mainForm, settingForm, devices);
             Presenter.OrderPresenter orderPresenter = new Presenter.OrderPresenter(mainForm);
 

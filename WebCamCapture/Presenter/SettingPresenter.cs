@@ -82,14 +82,17 @@ namespace WebCamCapture.Presenter
             this.PlayerMainView.Load += PlayerMainView_Load;
             this.PlayerMainView.ShowAppSetting += PlayerMainView_ShowAppSetting;
             this.PlayerMainView.ShowDeviceManagerPanel += PlayerMainView_ShowDeviceManagerPanel;
-            this.PlayerMainView.MakeSnapshot += PlayerMainView_makeSnapshot;
+           
             
             settingView.DeviceIdChange += SettingView_DeviceIdChange;
             settingView.ModeIdChange += SettingForm_ModeIdChange;
             settingView.SnapshotDirChange += SettingView_SnapshotDirChange;
 
             this.Init();
-            
+
+            //
+            this.PlayerMainView.MakeSnapshot += PlayerMainView_makeSnapshot;
+
         }
         // Обработчик выбора каталога сохранения снимков
         private void SettingView_SnapshotDirChange(string path)
@@ -200,12 +203,16 @@ namespace WebCamCapture.Presenter
 
 
 
+
+        #endregion
+
+
         // Создать снимок
         private void PlayerMainView_makeSnapshot()
         {
-            VideoSource.NewFrame -= SaveSnapshot;
-            VideoSource.NewFrame += SaveSnapshot;
-            
+           // VideoSource.NewFrame -= SaveSnapshot;
+           // VideoSource.NewFrame += SaveSnapshot;
+
 
         }
 
@@ -226,7 +233,6 @@ namespace WebCamCapture.Presenter
             VideoSource.NewFrame -= SaveSnapshot;
         }
 
-        #endregion
 
     }
 }
