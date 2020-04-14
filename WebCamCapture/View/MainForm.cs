@@ -31,7 +31,7 @@ namespace WebCamCapture.View
         event Action ShowDeviceManagerPanel;
 
     }
-    interface IPlayerMainView : IMain
+    interface IVideoPlayerView : IMain
     {
         IVideoSource VideoSource { set; }
         void Start();
@@ -52,7 +52,7 @@ namespace WebCamCapture.View
         /// </summary>
         event Action ShowOrderForm;
     }
-    internal partial class MainForm : Form, IMain, IPlayerMainView, IOrderMainForm
+    internal partial class MainForm : Form, IMain, IVideoPlayerView, IOrderMainForm
     {
         public MainForm()
         {
@@ -89,7 +89,7 @@ namespace WebCamCapture.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            WebCamCapture.Model.FileManager fileManager = new Model.FileManager();
+            WebCamCapture.Model.Snapshot fileManager = new Model.Snapshot();
             fileManager.Monitor();
 
         }

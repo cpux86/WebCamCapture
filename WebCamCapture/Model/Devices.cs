@@ -65,12 +65,12 @@ namespace WebCamCapture.Model
         }
         #endregion
 
-        FileManager fileManager;
+        Snapshot fileManager;
         // запускаем устройство на выполниние 
         public void Run()
         {
             videoSource.NewFrame += VideoSource_NewFrame;
-            fileManager = new FileManager();
+            fileManager = new Snapshot();
         }
         // обработчик получения кадра с устройства
         private void VideoSource_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)

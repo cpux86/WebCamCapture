@@ -11,20 +11,20 @@ using AForge.Video;
 
 namespace WebCamCapture.Model
 {
+    public interface ISnapshot
+    {
+        void CreateSnapshot();
+        event Action<string> NewImage;
+    }
+
     public class Snapshot
     {
         public string Name { get; set; }
         public Image Image { get; set; }
-    }
-    public class FileManager
-    {
+        static public event Action<string> NewImage;
+
         // путь к отслеживаемому каталогу
         private string path = @"d:\C#\WebCamCapture\WebCamCapture\bin\Debug\";
-        Snapshot snapshot;
-        public FileManager()
-        {
-            snapshot = new Snapshot();
-        }
 
         /// <summary>
         /// Отслеживает содержимого каталога
@@ -44,6 +44,7 @@ namespace WebCamCapture.Model
         public void Watcher_Created(object sender, FileSystemEventArgs e)
         {
             System.Windows.Forms.MessageBox.Show(e.FullPath);
+
         }
 
         /// <summary>
@@ -57,9 +58,9 @@ namespace WebCamCapture.Model
 
             // [номер заказа][дата, время+мсек][ролик][процесс][исполнитель]
             fileName = String.Format(
-                "{0}_{1}_{2}_{3}_{4}.jpg", 
-                Order.OrderNumber, 
-                dateTime, 
+                "{0}_{1}_{2}_{3}_{4}.jpg",
+                Order.OrderNumber,
+                dateTime,
                 Order.Roller,
                 Order.Process,
                 Order.User);
@@ -84,13 +85,18 @@ namespace WebCamCapture.Model
 
         private void Save(Image img)
         {
-            snapshot.Name = this.CreateFileName();
-            img.Save(snapshot.Name, System.Drawing.Imaging.ImageFormat.Jpeg);
+            this.Name = this.CreateFileName();
+            img.Save(this.Name, System.Drawing.Imaging.ImageFormat.Jpeg);
+            // тест
+           
         }
 
         #region API
         // флаг о необходимости сохранить снимок
-        static bool isSave = false;
+        static bool isSave;
+
+        
+
         /// <summary>
         /// Создать снимок
         /// </summary>
@@ -99,6 +105,15 @@ namespace WebCamCapture.Model
             isSave = true;
 
         }
+        /// <summary>
+        /// Возвращает снимок по указанному пути
+        /// </summary>
+        /// <param name="path"></param>
+        public void GetSnapshot(string path)
+        {
+
+        }
+
         #endregion
 
 
@@ -109,7 +124,7 @@ namespace WebCamCapture.Model
             {
                 this.Save(img);
                 isSave = false;
-            }           
+            }
         }
     }
 }

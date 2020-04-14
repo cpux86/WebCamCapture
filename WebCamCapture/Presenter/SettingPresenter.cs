@@ -64,13 +64,13 @@ namespace WebCamCapture.Presenter
         #endregion
 
 
-        readonly IPlayerMainView PlayerMainView;
+        readonly IVideoPlayerView PlayerMainView;
         readonly ISettingView settingView;
         private VideoCaptureDevice VideoSource { get => devices.VideoSource; }
         readonly IDevices devices;
         readonly IDevice device;
 
-        public SettingPresenter(IPlayerMainView playerMainView, ISettingView settingView, IDevices devices)
+        public SettingPresenter(IVideoPlayerView playerMainView, ISettingView settingView, IDevices devices)
         {
             this.devices = devices;
             this.device = devices;
@@ -91,7 +91,7 @@ namespace WebCamCapture.Presenter
             this.Init();
 
             //
-            this.PlayerMainView.MakeSnapshot += PlayerMainView_makeSnapshot;
+            //this.PlayerMainView.MakeSnapshot += PlayerMainView_makeSnapshot;
 
         }
         // Обработчик выбора каталога сохранения снимков
@@ -190,8 +190,6 @@ namespace WebCamCapture.Presenter
                 PlayerMainView.VideoSource = VideoSource;
                 device.Run();
 
-                VideoSource.NewFrame += VideoSource_NewFrame;
-
                 PlayerMainView.Start();
                 PlayerMainView.DeviceManagerItem = true;
                 
@@ -207,31 +205,26 @@ namespace WebCamCapture.Presenter
         #endregion
 
 
-        // Создать снимок
-        private void PlayerMainView_makeSnapshot()
-        {
-           // VideoSource.NewFrame -= SaveSnapshot;
-           // VideoSource.NewFrame += SaveSnapshot;
+        //// Создать снимок
+        //private void PlayerMainView_makeSnapshot()
+        //{
+        //    //VideoSource.NewFrame -= SaveSnapshot;
+        //    //VideoSource.NewFrame += SaveSnapshot;
 
 
-        }
+        //}
 
-        private void SaveSnapshot(object sender, AForge.Video.NewFrameEventArgs eventArgs)
-        {
-            PlayerMainView.SnapshotView((Bitmap)eventArgs.Frame.Clone());
-            WebCamCapture.Model.FileManager fileManager = new Model.FileManager();
+        //private void SaveSnapshot(object sender, AForge.Video.NewFrameEventArgs eventArgs)
+        //{
+        //    PlayerMainView.SnapshotView((Bitmap)eventArgs.Frame.Clone());
+        //    WebCamCapture.Model.Snapshot fileManager = new Model.Snapshot();
 
-            var name = fileManager.CreateFileName();
-            Image image = (Bitmap)eventArgs.Frame.Clone();
-            image.Save(name, System.Drawing.Imaging.ImageFormat.Jpeg);
-            image.Dispose();
+        //    var name = fileManager.CreateFileName();
+        //    Image image = (Bitmap)eventArgs.Frame.Clone();
+        //    image.Save(name, System.Drawing.Imaging.ImageFormat.Jpeg);
+        //    image.Dispose();
 
-        }
-
-        private void VideoSource_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
-        {
-            VideoSource.NewFrame -= SaveSnapshot;
-        }
+        //}
 
 
     }
