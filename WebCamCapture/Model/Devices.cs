@@ -13,12 +13,14 @@ namespace WebCamCapture.Model
     {
         VideoCaptureDevice VideoSource { get; }
         List<string> GetFrameSizeList(int devId);
-        void Run();
     }
     interface IDevices : IDevice
     {
         List<string> GetDevicesNameList();
     }
+
+
+
 
     public class Devices : IDevices
     {
@@ -65,18 +67,6 @@ namespace WebCamCapture.Model
         }
         #endregion
 
-        Snapshot fileManager;
-        // запускаем устройство на выполниние 
-        public void Run()
-        {
-            videoSource.NewFrame += VideoSource_NewFrame;
-            fileManager = new Snapshot();
-        }
-        // обработчик получения кадра с устройства
-        private void VideoSource_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
-        {
-            fileManager.NewFrame(eventArgs.Frame);
-        }
     }
 
 }

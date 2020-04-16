@@ -188,7 +188,6 @@ namespace WebCamCapture.Presenter
                 if (PlayerMainView.IsRunning) PlayerMainView.Stop();
                 VideoSource.VideoResolution = VideoSource.VideoCapabilities[ModeId];
                 PlayerMainView.VideoSource = VideoSource;
-                device.Run();
 
                 PlayerMainView.Start();
                 PlayerMainView.DeviceManagerItem = true;

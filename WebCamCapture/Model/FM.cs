@@ -8,6 +8,7 @@ using System.Drawing;
 
 using WebCamCapture.Presenter;
 using AForge.Video;
+using System.Windows.Forms.VisualStyles;
 
 namespace WebCamCapture.Model
 {
@@ -17,11 +18,16 @@ namespace WebCamCapture.Model
         event Action<string> NewImage;
     }
 
-    public class Snapshot
+    public class FM : Devices
     {
         public string Name { get; set; }
         public Image Image { get; set; }
-        static public event Action<string> NewImage;
+        public event Action<string> NewImage;
+
+        public FM()
+        {
+            this.Monitor();
+        }
 
         // путь к отслеживаемому каталогу
         private string path = @"d:\C#\WebCamCapture\WebCamCapture\bin\Debug\";
@@ -36,15 +42,15 @@ namespace WebCamCapture.Model
             watcher.Path = path;
             watcher.Filter = "*.jpg";
             watcher.Created += Watcher_Created;
-            watcher.Deleted += Watcher_Created;
+            //watcher.Deleted += Watcher_Created;
             watcher.EnableRaisingEvents = true;
             watcher.IncludeSubdirectories = true;
         }
         // Обработчик события изменения содержимого каталога
         public void Watcher_Created(object sender, FileSystemEventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show(e.FullPath);
-
+            //System.Windows.Forms.MessageBox.Show(e.FullPath);
+            this.NewImage(e.FullPath);
         }
 
         /// <summary>
@@ -92,8 +98,6 @@ namespace WebCamCapture.Model
         }
 
         #region API
-        // флаг о необходимости сохранить снимок
-        static bool isSave;
 
         
 
@@ -102,29 +106,15 @@ namespace WebCamCapture.Model
         /// </summary>
         public void CreateSnapshot()
         {
-            isSave = true;
-
+            VideoSource.NewFrame += VideoSource_NewFrame;
         }
-        /// <summary>
-        /// Возвращает снимок по указанному пути
-        /// </summary>
-        /// <param name="path"></param>
-        public void GetSnapshot(string path)
-        {
 
+        private void VideoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            this.Save((Bitmap)eventArgs.Frame);
+            VideoSource.NewFrame -= VideoSource_NewFrame;
         }
 
         #endregion
-
-
-
-        public void NewFrame(Image img)
-        {
-            if (isSave)
-            {
-                this.Save(img);
-                isSave = false;
-            }
-        }
     }
 }

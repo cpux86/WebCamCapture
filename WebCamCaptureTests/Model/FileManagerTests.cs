@@ -17,7 +17,7 @@ namespace WebCamCapture.Model.Tests
         public void CreateFileNameTest()
         {
             Order.OrderNumber = "10/10111";
-            Snapshot fileManager = new Snapshot();
+            FM fileManager = new FM();
             
             fileManager.CreateFileName();
             var x = fileManager.FileName;

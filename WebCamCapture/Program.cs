@@ -19,11 +19,10 @@ namespace WebCamCapture
             Application.SetCompatibleTextRenderingDefault(false);
             var mainForm = new View.MainForm();
             var settingForm = new View.SettingForm();
-            var devices = new Model.Devices();
-            var fileManager = new Model.Snapshot();
+            var fm = new Model.FM();
             
-            Presenter.MainPresenter mainPresenter = new Presenter.MainPresenter(mainForm, fileManager);
-            Presenter.SettingPresenter settingPresenter = new Presenter.SettingPresenter(mainForm, settingForm, devices);
+            Presenter.MainPresenter mainPresenter = new Presenter.MainPresenter(mainForm, fm);
+            Presenter.SettingPresenter settingPresenter = new Presenter.SettingPresenter(mainForm, settingForm, fm);
             Presenter.OrderPresenter orderPresenter = new Presenter.OrderPresenter(mainForm);
 
             Application.Run(mainForm);

@@ -13,21 +13,21 @@ namespace WebCamCapture.Presenter
     class MainPresenter
     {
         private IVideoPlayerView mainForm;
-        Snapshot fileManager;
-        public MainPresenter(MainForm mainForm, Snapshot fileManager)
+        FM fileManager;
+        public MainPresenter(MainForm mainForm, FM fileManager)
         {
             this.mainForm = mainForm;
             this.fileManager = fileManager;
             mainForm.Load += MainForm_Load;
             mainForm.FormClosing += MainForm_FormClosing;
             mainForm.MakeSnapshot += MainForm_MakeSnapshot;
-            Snapshot.NewImage += FileManager_NewImage;
+            fileManager.NewImage += FileManager_NewImage;
 
         }
 
         private void FileManager_NewImage(string obj)
         {
-
+            mainForm.SnapshotView(obj);
         }
 
         // Обработчик события "Создать снимок"

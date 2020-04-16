@@ -115,7 +115,7 @@
   <ItemGroup>
     <Compile Include="Model\Config.cs" />
     <Compile Include="Model\Devices.cs" />
-    <Compile Include="Model\Snapshot.cs" />
+    <Compile Include="Model\FM.cs" />
     <Compile Include="Model\ManagerAttributes.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Presenter\OrderPresenter.cs" />

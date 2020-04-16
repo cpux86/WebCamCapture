@@ -37,8 +37,8 @@ namespace WebCamCapture.View
         void Start();
         void Stop();
         bool IsRunning { get; }
-        void SnapshotView(Image image);
-        
+        void SnapshotView(string image);
+
 
     }
     public interface IOrderMainForm : IMain
@@ -89,7 +89,7 @@ namespace WebCamCapture.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            WebCamCapture.Model.Snapshot fileManager = new Model.Snapshot();
+            WebCamCapture.Model.FM fileManager = new Model.FM();
             fileManager.Monitor();
 
         }
@@ -125,16 +125,25 @@ namespace WebCamCapture.View
             ShowDeviceManagerPanel();
         }
 
-        public void SnapshotView(Image img)
+
+        public void SnapshotView(string img)
         {
-            Invoke((MethodInvoker)(() => {
+
+            Invoke((MethodInvoker)(() =>
+            {
                 if (snapshotView.Image != null)
                 {
                     snapshotView.Image.Dispose();
                 }
-                snapshotView.Image = img;
+
+                snapshotView.Image = Image.FromFile(img);
+               
+
             }));
+            
+
         }
+
         // Отобразить форму заказа
         private void OrderEditBtn_Click(object sender, EventArgs e)
         {
