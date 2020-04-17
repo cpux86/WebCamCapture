@@ -136,7 +136,7 @@ namespace WebCamCapture.View
                     snapshotView.Image.Dispose();
                 }
 
-                snapshotView.Image = Image.FromFile(img);
+                snapshotView.ImageLocation = img;
                
 
             }));

@@ -30,14 +30,24 @@ namespace WebCamCapture.Model
         }
 
         // путь к отслеживаемому каталогу
-        private string path = @"d:\C#\WebCamCapture\WebCamCapture\bin\Debug\";
+        private string path = Config.SnapshotDir;
 
+        /// <summary>
+        /// Путь отслеживания изменеия содержимого
+        /// </summary>
+        /// <param name="newPath"></param>
+        public void WatcherPath(string newPath)
+        {
+            watcher.Path = newPath;
+        }
+
+        FileSystemWatcher watcher;
         /// <summary>
         /// Отслеживает содержимого каталога
         /// </summary>
         public void Monitor()
         {
-            FileSystemWatcher watcher = new FileSystemWatcher();
+            watcher = new FileSystemWatcher();
 
             watcher.Path = path;
             watcher.Filter = "*.jpg";
@@ -45,6 +55,7 @@ namespace WebCamCapture.Model
             //watcher.Deleted += Watcher_Created;
             watcher.EnableRaisingEvents = true;
             watcher.IncludeSubdirectories = true;
+            
         }
         // Обработчик события изменения содержимого каталога
         public void Watcher_Created(object sender, FileSystemEventArgs e)
@@ -79,6 +90,7 @@ namespace WebCamCapture.Model
         /// <returns></returns>
         private string Validation(string s)
         {
+            if (s == null) return s;
             // Массив не допустимых символов
             string[] symbols = new string[] { "/", ":", "+" };
 
@@ -91,9 +103,21 @@ namespace WebCamCapture.Model
 
         private void Save(Image img)
         {
+            // генерируем имя для файла
             this.Name = this.CreateFileName();
-            img.Save(this.Name, System.Drawing.Imaging.ImageFormat.Jpeg);
-            // тест
+            // имя каталога для файла
+            string folder = this.Validation(Order.OrderNumber);
+            // корневая дериктория для хранения снимков, берется из настроек
+            string rootDir = Config.SnapshotDir;
+            // 
+
+            string path = String.Format("{0}\\{1}\\{2}", rootDir, folder, this.Name);
+            if ()
+            {
+
+            }
+            
+            img.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
            
         }
 

@@ -52,15 +52,6 @@ namespace WebCamCapture.Presenter
             set => Properties.Settings.Default.SelectedMode = value;
         }
 
-        /// <summary>
-        /// путь к снимкам из настроек
-        /// </summary>
-        string SnapshotDir
-        {
-            get => Properties.Settings.Default.FileDir;
-            set => Properties.Settings.Default.FileDir = value;
-        }
-
         #endregion
 
 
@@ -68,14 +59,14 @@ namespace WebCamCapture.Presenter
         readonly ISettingView settingView;
         private VideoCaptureDevice VideoSource { get => devices.VideoSource; }
         readonly IDevices devices;
-        readonly IDevice device;
+        readonly FM device;
 
-        public SettingPresenter(IVideoPlayerView playerMainView, ISettingView settingView, IDevices devices)
+        public SettingPresenter(IVideoPlayerView playerMainView, ISettingView settingView, FM devices)
         {
             this.devices = devices;
             this.device = devices;
 
-
+            
             this.PlayerMainView = playerMainView;
             this.settingView = settingView;
 
@@ -90,14 +81,12 @@ namespace WebCamCapture.Presenter
 
             this.Init();
 
-            //
-            //this.PlayerMainView.MakeSnapshot += PlayerMainView_makeSnapshot;
-
         }
         // Обработчик выбора каталога сохранения снимков
         private void SettingView_SnapshotDirChange(string path)
         {
-            this.SnapshotDir = path;
+            Config.SnapshotDir = path;
+            device.WatcherPath(path);
         }
 
         // Выбор устройства
@@ -129,7 +118,7 @@ namespace WebCamCapture.Presenter
             // получаем идентификатор режима из настроек
             this.ModeId = ModesList.IndexOf(this.SelectedMode);
             // получаем путь к снимкам
-            this.settingView.SnapshotFolder = this.SnapshotDir;
+            this.settingView.SnapshotFolder = Config.SnapshotDir;
 
             this.settingView.DeviceList = this.DevicesNameList.ToArray();
             this.settingView.ModesList = this.ModesList.ToArray();
@@ -203,27 +192,6 @@ namespace WebCamCapture.Presenter
 
         #endregion
 
-
-        //// Создать снимок
-        //private void PlayerMainView_makeSnapshot()
-        //{
-        //    //VideoSource.NewFrame -= SaveSnapshot;
-        //    //VideoSource.NewFrame += SaveSnapshot;
-
-
-        //}
-
-        //private void SaveSnapshot(object sender, AForge.Video.NewFrameEventArgs eventArgs)
-        //{
-        //    PlayerMainView.SnapshotView((Bitmap)eventArgs.Frame.Clone());
-        //    WebCamCapture.Model.Snapshot fileManager = new Model.Snapshot();
-
-        //    var name = fileManager.CreateFileName();
-        //    Image image = (Bitmap)eventArgs.Frame.Clone();
-        //    image.Save(name, System.Drawing.Imaging.ImageFormat.Jpeg);
-        //    image.Dispose();
-
-        //}
 
 
     }
