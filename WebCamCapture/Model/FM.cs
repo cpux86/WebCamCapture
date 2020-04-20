@@ -26,7 +26,10 @@ namespace WebCamCapture.Model
 
         public FM()
         {
-            this.Monitor();
+            if (Directory.Exists(path)) {
+                this.Monitor();
+            }
+            
         }
 
         // путь к отслеживаемому каталогу
@@ -107,17 +110,29 @@ namespace WebCamCapture.Model
             this.Name = this.CreateFileName();
             // имя каталога для файла
             string folder = this.Validation(Order.OrderNumber);
-            // корневая дериктория для хранения снимков, берется из настроек
+            // корневая дериктория для хранения снимков, берется из настроек [D:\\папка со снимками\]
             string rootDir = Config.SnapshotDir;
-            // 
-
-            string path = String.Format("{0}\\{1}\\{2}", rootDir, folder, this.Name);
-            if ()
+            // путь к каталогу файлов [D:\\папка со снимками\номер заказа\]
+            string path = String.Format("{0}\\{1}", rootDir, folder);
+            // полный куть к файлу [D:\\папка со снимками\номер заказа\имя файла.jpg]
+            string fullPath = String.Format("{0}\\{1}\\{2}", rootDir, folder, this.Name);
+            try
+            {
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                img.Save(fullPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+            }
+            catch (Exception)
             {
 
+                throw;
             }
+
             
-            img.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
+            
+            //img.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
            
         }
 
