@@ -14,7 +14,7 @@ namespace WebCamCapture
         /// </summary>
         [STAThread]
         static void Main()
-        {
+        {          
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var mainForm = new View.MainForm();
@@ -24,7 +24,6 @@ namespace WebCamCapture
             Presenter.MainPresenter mainPresenter = new Presenter.MainPresenter(mainForm, fm);
             Presenter.SettingPresenter settingPresenter = new Presenter.SettingPresenter(mainForm, settingForm, fm);
             Presenter.OrderPresenter orderPresenter = new Presenter.OrderPresenter(mainForm);
-
             Application.Run(mainForm);
         }
     }

@@ -20,6 +20,7 @@ namespace WebCamCapture.View
 {
     public interface IMain
     {
+        string AppRoot { get; }
         bool DeviceManagerItem { set; }
         event EventHandler Load;
         event FormClosingEventHandler FormClosing;
@@ -29,6 +30,7 @@ namespace WebCamCapture.View
         event Action MakeSnapshot;
         event Action ShowAppSetting;
         event Action ShowDeviceManagerPanel;
+        
 
     }
     interface IVideoPlayerView : IMain
@@ -61,7 +63,7 @@ namespace WebCamCapture.View
             
         }
 
-
+        
 
         #region Сведения о заказе
         public string OrderNumber { set => TextOrderMainForm.Text = value; }
@@ -81,6 +83,11 @@ namespace WebCamCapture.View
         public event Action ShowAppSetting;
         public event Action ShowDeviceManagerPanel;
         public event Action ShowOrderForm;
+
+        /// <summary>
+        /// Корневой каталог приложения
+        /// </summary>
+        public string AppRoot { get => Application.StartupPath; }
 
         private void makeSnapshotBtn_Click(object sender, EventArgs e)
         {

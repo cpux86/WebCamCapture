@@ -26,8 +26,9 @@ namespace WebCamCapture.Model
 
         public FM()
         {
-            if (Directory.Exists(path)) {
+            if (!Directory.Exists(path)) {
                 this.Monitor();
+                this.WatcherPath("\\");
             }
             
         }
@@ -63,7 +64,6 @@ namespace WebCamCapture.Model
         // Обработчик события изменения содержимого каталога
         public void Watcher_Created(object sender, FileSystemEventArgs e)
         {
-            //System.Windows.Forms.MessageBox.Show(e.FullPath);
             this.NewImage(e.FullPath);
         }
 
@@ -130,9 +130,7 @@ namespace WebCamCapture.Model
                 throw;
             }
 
-            
-            
-            //img.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
+           
            
         }
 
