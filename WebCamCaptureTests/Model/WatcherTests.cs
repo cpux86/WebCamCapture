@@ -5,23 +5,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebCamCapture.Presenter;
-
 
 namespace WebCamCapture.Model.Tests
 {
     [TestClass()]
-    public class FileManagerTests
+    public class WatcherTests
     {
         [TestMethod()]
-        public void CreateFileNameTest()
+        public void WatcherTest()
         {
-            Order.OrderNumber = "10/10111";
-            FM fileManager = new FM();
-            
-            fileManager.CreateFileName();
-            var x = fileManager.FileName;
+            //Assert.Fail();
+        }
 
+        [TestMethod()]
+        public void RunTest()
+        {
+            Watcher watcher = new Watcher();
+            watcher.Run();
         }
     }
 }

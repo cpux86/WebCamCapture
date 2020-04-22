@@ -117,6 +117,7 @@
     <Compile Include="Model\Devices.cs" />
     <Compile Include="Model\FM.cs" />
     <Compile Include="Model\ManagerAttributes.cs" />
+    <Compile Include="Model\Watcher.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Presenter\OrderPresenter.cs" />
     <Compile Include="Presenter\SettingPresenter.cs" />

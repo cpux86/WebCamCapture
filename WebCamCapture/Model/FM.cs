@@ -26,9 +26,8 @@ namespace WebCamCapture.Model
 
         public FM()
         {
-            if (!Directory.Exists(path)) {
+            if (Directory.Exists(path)) {
                 this.Monitor();
-                this.WatcherPath("\\");
             }
             
         }

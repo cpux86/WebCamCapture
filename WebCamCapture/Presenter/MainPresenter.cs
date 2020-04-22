@@ -23,6 +23,7 @@ namespace WebCamCapture.Presenter
             mainForm.MakeSnapshot += MainForm_MakeSnapshot;
             fm.NewImage += FileManager_NewImage;
 
+
         }
         // Обработчик события поступления снимка для отображения 
         private void FileManager_NewImage(string img)
