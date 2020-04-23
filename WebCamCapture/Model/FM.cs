@@ -23,7 +23,10 @@ namespace WebCamCapture.Model
     {
         public string Name { get; set; }
         public Image Image { get; set; }
-        public event Action<string> NewImage;
+        /// <summary>
+        /// Новый кадр
+        /// </summary>
+        public event Action<Image> NewFrame;
 
         public FM()
         {
@@ -65,8 +68,8 @@ namespace WebCamCapture.Model
         public void Watcher_Created(object sender, FileSystemEventArgs e)
         {
             //дожидаемся когда файл полностью сохранится на диске
-            Thread.Sleep(500);
-            this.NewImage(e.FullPath);
+            //Thread.Sleep(500);
+            //this.NewImage(e.FullPath);
         }
 
         /// <summary>
@@ -118,7 +121,7 @@ namespace WebCamCapture.Model
             string path = String.Format("{0}\\{1}", rootDir, folder);
             // полный куть к файлу [D:\\папка со снимками\номер заказа\имя файла.jpg]
             string fullPath = String.Format("{0}\\{1}\\{2}", rootDir, folder, this.Name);
-            // Текст повверх изображения
+            // Текст поверх изображения
             string metadata = String.Format("{0} {1} {2} {3} {4}", Order.OrderNumber, DateTime.Now, Order.Roller,Order.Process, Order.User);
             try
             {
@@ -126,15 +129,23 @@ namespace WebCamCapture.Model
                 {
                     Directory.CreateDirectory(path);
                 }
-                Graphics g = Graphics.FromImage(img);
-                g.DrawString(metadata, new Font("Verdana", (float)20), new SolidBrush(Color.White), 15, img.Height - 50);
+                // уведомляем о новом снимке
+                this.NewFrame(img);
+                // разрешен ли водяной текст
+                if (Config.WaterText)
+                {
+                    Config.WaterText = true; 
+                    Graphics g = Graphics.FromImage(img);
+                    //g.DrawString(metadata, new Font("Verdana", (float)12), new SolidBrush(Color.White), 15, img.Height - 50);
+                    g.DrawString(metadata, Config.Font, new SolidBrush(Color.White), 15, img.Height - 50);                   
+                    g.Dispose();
+                }
+                // сохраняем снимок 
                 img.Save(fullPath, System.Drawing.Imaging.ImageFormat.Jpeg);
-                g.Dispose();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                throw;
+                System.Windows.Forms.MessageBox.Show(e.Message);
             }
 
            

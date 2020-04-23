@@ -21,15 +21,23 @@ namespace WebCamCapture.Presenter
             mainForm.Load += MainForm_Load;
             mainForm.FormClosing += MainForm_FormClosing;
             mainForm.MakeSnapshot += MainForm_MakeSnapshot;
-            fm.NewImage += FileManager_NewImage;
+            //fm.NewImage += FileManager_NewImage;
+            fm.NewFrame += Fm_NewFrame;
 
 
         }
+
         // Обработчик события поступления снимка для отображения 
-        private void FileManager_NewImage(string img)
+        private void Fm_NewFrame(Image obj)
         {
-            mainForm.SnapshotView(img);
+            mainForm.ShowSnapshot(obj);
         }
+
+        //// Обработчик события поступления снимка для отображения 
+        //private void FileManager_NewImage(string img)
+        //{
+        //    //mainForm.SnapshotView(img);
+        //}
 
         // Обработчик события "Создать снимок"
         private void MainForm_MakeSnapshot()

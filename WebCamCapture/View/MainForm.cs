@@ -39,7 +39,8 @@ namespace WebCamCapture.View
         void Start();
         void Stop();
         bool IsRunning { get; }
-        void SnapshotView(string image);
+
+        void ShowSnapshot(Image img);
 
 
     }
@@ -61,9 +62,7 @@ namespace WebCamCapture.View
             InitializeComponent();
             this.KeyPreview = true;
             
-        }
-
-        
+        }       
 
         #region Сведения о заказе
         public string OrderNumber { set => TextOrderMainForm.Text = value; }
@@ -133,22 +132,20 @@ namespace WebCamCapture.View
         }
 
 
-        public void SnapshotView(string img)
+        public void ShowSnapshot(Image img)
         {
-
             Invoke((MethodInvoker)(() =>
             {
                 if (snapshotView.Image != null)
                 {
                     snapshotView.Image.Dispose();
+                    snapshotView.Image = null;
                 }
 
-                snapshotView.ImageLocation = img;
-               
+                snapshotView.Image = (Bitmap)img.Clone();
+
 
             }));
-            
-
         }
 
         // Отобразить форму заказа
@@ -156,6 +153,8 @@ namespace WebCamCapture.View
         {
             ShowOrderForm();
         }
+
+        
     }
 
    
