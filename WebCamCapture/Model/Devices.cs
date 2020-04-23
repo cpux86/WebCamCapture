@@ -29,6 +29,12 @@ namespace WebCamCapture.Model
         #region Список имен и режимов
         private FilterInfoCollection videoDevices;
 
+        public Devices()
+        {
+            // заглушка, создает пустой источник. Благодаря этому возможно кликать на кнопу "Создать снимок" не выбрав источник 
+            videoSource = new VideoCaptureDevice();
+        }
+
         public VideoCaptureDevice VideoSource => videoSource;
 
         /// <summary>

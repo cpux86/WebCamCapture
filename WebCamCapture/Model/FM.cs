@@ -9,6 +9,7 @@ using System.Drawing;
 using WebCamCapture.Presenter;
 using AForge.Video;
 using System.Windows.Forms.VisualStyles;
+using System.Threading;
 
 namespace WebCamCapture.Model
 {
@@ -63,6 +64,8 @@ namespace WebCamCapture.Model
         // Обработчик события изменения содержимого каталога
         public void Watcher_Created(object sender, FileSystemEventArgs e)
         {
+            //дожидаемся когда файл полностью сохранится на диске
+            Thread.Sleep(500);
             this.NewImage(e.FullPath);
         }
 
@@ -115,13 +118,18 @@ namespace WebCamCapture.Model
             string path = String.Format("{0}\\{1}", rootDir, folder);
             // полный куть к файлу [D:\\папка со снимками\номер заказа\имя файла.jpg]
             string fullPath = String.Format("{0}\\{1}\\{2}", rootDir, folder, this.Name);
+            // Текст повверх изображения
+            string metadata = String.Format("{0} {1} {2} {3} {4}", Order.OrderNumber, DateTime.Now, Order.Roller,Order.Process, Order.User);
             try
             {
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
+                Graphics g = Graphics.FromImage(img);
+                g.DrawString(metadata, new Font("Verdana", (float)20), new SolidBrush(Color.White), 15, img.Height - 50);
                 img.Save(fullPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                g.Dispose();
             }
             catch (Exception)
             {

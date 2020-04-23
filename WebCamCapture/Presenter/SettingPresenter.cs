@@ -118,8 +118,12 @@ namespace WebCamCapture.Presenter
             // получаем идентификатор режима из настроек
             this.ModeId = ModesList.IndexOf(this.SelectedMode);
             // получаем путь к снимкам
+            //string snapshotPath = Config.SnapshotDir;
+            if (String.IsNullOrEmpty(Config.SnapshotDir))
+            {
+                Config.SnapshotDir = Application.StartupPath+"\\DATA";
+            }
             this.settingView.SnapshotFolder = Config.SnapshotDir;
-
             this.settingView.DeviceList = this.DevicesNameList.ToArray();
             this.settingView.ModesList = this.ModesList.ToArray();
 

@@ -337,7 +337,7 @@
             this.snapshotView.Location = new System.Drawing.Point(12, 27);
             this.snapshotView.Name = "snapshotView";
             this.snapshotView.Size = new System.Drawing.Size(572, 441);
-            this.snapshotView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.snapshotView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.snapshotView.TabIndex = 30;
             this.snapshotView.TabStop = false;
             // 
