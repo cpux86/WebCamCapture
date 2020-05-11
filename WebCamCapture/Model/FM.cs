@@ -1,82 +1,100 @@
-﻿using System;
+﻿using Accord.Video;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
 using System.Drawing;
-
+using System.IO;
 using WebCamCapture.Presenter;
-using AForge.Video;
-using System.Windows.Forms.VisualStyles;
-using System.Threading;
 
 namespace WebCamCapture.Model
 {
-    public interface ISnapshot
+    public class Snapshot
     {
-        void CreateSnapshot();
-        event Action<string> NewImage;
+        /// <summary>
+        /// Имя файла-снимка
+        /// </summary>
+        //public string Name { get; set; }
+        public string FullPath { get; set; }
+
+        public string OrderNumber { get; set; }
+        public string DateCreated { get; set; }
+        public string Roller { get; set; }
+        public string Process { get; set; }
+        public string User { get; set; }
     }
 
     public class FM : Devices
     {
+        /// <summary>
+        /// Имя файла-снимка
+        /// </summary>
         public string Name { get; set; }
-        public Image Image { get; set; }
+       // public Image Image { get; set; }
+
         /// <summary>
         /// Новый кадр
         /// </summary>
-        public event Action<Image> NewFrame;
+        public event Action<Image> NewPhoto;
+
+        List<Snapshot> snapshotsList;
 
         public FM()
         {
-            if (Directory.Exists(path)) {
-                this.Monitor();
+            snapshotsList = new List<Snapshot>();
+        }
+
+        #region API
+
+
+
+        /// <summary>
+        /// Создать снимок
+        /// </summary>
+        public void Create()
+        {
+            VideoSource.NewFrame += VideoSource_NewFrame;
+
+        }
+
+        public Snapshot GetSnapshot(int index)
+        {
+            if (snapshotsList.Count >= index)
+            {
+                return snapshotsList[index];
             }
-            
+            return null;
         }
 
-        // путь к отслеживаемому каталогу
-        private string path = Config.SnapshotDir;
-
-        /// <summary>
-        /// Путь отслеживания изменеия содержимого
-        /// </summary>
-        /// <param name="newPath"></param>
-        public void WatcherPath(string newPath)
+        public List<Snapshot> GetList()
         {
-            watcher.Path = newPath;
+            return snapshotsList;
         }
 
-        FileSystemWatcher watcher;
-        /// <summary>
-        /// Отслеживает содержимого каталога
-        /// </summary>
-        public void Monitor()
+        Snapshot snapshot;
+        private void VideoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            watcher = new FileSystemWatcher();
+            snapshot = new Snapshot();
+            snapshot.OrderNumber = Order.OrderNumber;
+            snapshot.DateCreated = DateTime.Now.ToString();
+            snapshot.Roller = Order.Roller;
+            snapshot.Process = Order.Process;
+            snapshot.User = Order.User;
 
-            watcher.Path = path;
-            watcher.Filter = "*.jpg";
-            watcher.Created += Watcher_Created;
-            //watcher.Deleted += Watcher_Created;
-            watcher.EnableRaisingEvents = true;
-            watcher.IncludeSubdirectories = true;
-            
+            this.Save((Bitmap)eventArgs.Frame);
+            VideoSource.NewFrame -= VideoSource_NewFrame;
+
+            snapshotsList.Add(snapshot);
         }
-        // Обработчик события изменения содержимого каталога
-        public void Watcher_Created(object sender, FileSystemEventArgs e)
-        {
-            //дожидаемся когда файл полностью сохранится на диске
-            //Thread.Sleep(500);
-            //this.NewImage(e.FullPath);
-        }
+
+        #endregion;
+
+
+
 
         /// <summary>
         /// Создает уникальное имя для данного снимка, с текущими параметрами заказа
         /// </summary>
         /// <returns>уникальная строка для снимка</returns>
-        public string CreateFileName()
+        private string CreateFileName()
         {
             string fileName;
             string dateTime = DateTime.Now.ToString("dd.MM.yyyy_HH.mm.ss.ffff");
@@ -121,8 +139,9 @@ namespace WebCamCapture.Model
             string path = String.Format("{0}\\{1}", rootDir, folder);
             // полный куть к файлу [D:\\папка со снимками\номер заказа\имя файла.jpg]
             string fullPath = String.Format("{0}\\{1}\\{2}", rootDir, folder, this.Name);
+            
             // Текст поверх изображения
-            string metadata = String.Format("{0} {1} {2} {3} {4}", Order.OrderNumber, DateTime.Now, Order.Roller,Order.Process, Order.User);
+            string metadata = String.Format("{0} {1} {2} {3} {4}", Order.OrderNumber, snapshot.DateCreated, Order.Roller, Order.Process, Order.User);
             try
             {
                 if (!Directory.Exists(path))
@@ -130,46 +149,28 @@ namespace WebCamCapture.Model
                     Directory.CreateDirectory(path);
                 }
                 // уведомляем о новом снимке
-                this.NewFrame(img);
+                this.NewPhoto(img);
                 // разрешен ли водяной текст
                 if (Config.WaterText)
                 {
-                    Config.WaterText = true; 
+                    Config.WaterText = true;
                     Graphics g = Graphics.FromImage(img);
-                    //g.DrawString(metadata, new Font("Verdana", (float)12), new SolidBrush(Color.White), 15, img.Height - 50);
-                    g.DrawString(metadata, Config.Font, new SolidBrush(Color.White), 15, img.Height - 50);                   
+                    g.DrawString(metadata, Config.Font, new SolidBrush(Color.White), 15, img.Height - 50);
                     g.Dispose();
                 }
                 // сохраняем снимок 
                 img.Save(fullPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+
             }
             catch (Exception e)
             {
                 System.Windows.Forms.MessageBox.Show(e.Message);
             }
 
-           
-           
+            snapshot.FullPath = fullPath;
+
         }
 
-        #region API
 
-        
-
-        /// <summary>
-        /// Создать снимок
-        /// </summary>
-        public void CreateSnapshot()
-        {
-            VideoSource.NewFrame += VideoSource_NewFrame;
-        }
-
-        private void VideoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
-            this.Save((Bitmap)eventArgs.Frame);
-            VideoSource.NewFrame -= VideoSource_NewFrame;
-        }
-
-        #endregion
     }
 }

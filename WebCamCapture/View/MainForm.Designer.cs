@@ -28,15 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.makeSnapshotBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.orderEditBtn = new System.Windows.Forms.Button();
-            this.photoGalleraya = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.OrderPanel__TitleUser = new System.Windows.Forms.Label();
             this.OrderPanel__TitleOpreration = new System.Windows.Forms.Label();
             this.OrderPanel__TitleRoller = new System.Windows.Forms.Label();
@@ -54,12 +51,21 @@
             this.deviceManagerItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.videoPlayer = new AForge.Controls.VideoSourcePlayer();
+            this.videoPlayer = new Accord.Controls.VideoSourcePlayer();
             this.snapshotView = new Accord.Controls.PictureBox();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.order = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.process = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.roller = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.user = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.OrderViewPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snapshotView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // makeSnapshotBtn
@@ -91,8 +97,8 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.orderEditBtn);
-            this.panel1.Controls.Add(this.photoGalleraya);
             this.panel1.Controls.Add(this.makeSnapshotBtn);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Location = new System.Drawing.Point(590, 263);
@@ -112,43 +118,6 @@
             this.orderEditBtn.Text = "Заказ / Правка";
             this.orderEditBtn.UseVisualStyleBackColor = true;
             this.orderEditBtn.Click += new System.EventHandler(this.OrderEditBtn_Click);
-            // 
-            // photoGalleraya
-            // 
-            this.photoGalleraya.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.photoGalleraya.BackColor = System.Drawing.SystemColors.Window;
-            this.photoGalleraya.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
-            this.photoGalleraya.FullRowSelect = true;
-            this.photoGalleraya.HideSelection = false;
-            this.photoGalleraya.Location = new System.Drawing.Point(6, 65);
-            this.photoGalleraya.MultiSelect = false;
-            this.photoGalleraya.Name = "photoGalleraya";
-            this.photoGalleraya.Size = new System.Drawing.Size(350, 297);
-            this.photoGalleraya.TabIndex = 9;
-            this.photoGalleraya.UseCompatibleStateImageBehavior = false;
-            this.photoGalleraya.View = System.Windows.Forms.View.Details;
-            this.photoGalleraya.VirtualListSize = 25;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Изобр.";
-            this.columnHeader1.Width = 100;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "№ Заказа";
-            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader2.Width = 86;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Дата и время";
-            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader3.Width = 97;
             // 
             // OrderPanel__TitleUser
             // 
@@ -341,6 +310,55 @@
             this.snapshotView.TabIndex = 30;
             this.snapshotView.TabStop = false;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.order,
+            this.dateTime,
+            this.process,
+            this.roller,
+            this.user});
+            this.dataGridView1.DataSource = this.bindingSource1;
+            this.dataGridView1.Location = new System.Drawing.Point(7, 55);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(337, 307);
+            this.dataGridView1.TabIndex = 20;
+            // 
+            // order
+            // 
+            this.order.HeaderText = "Заказ";
+            this.order.Name = "order";
+            this.order.ReadOnly = true;
+            // 
+            // dateTime
+            // 
+            this.dateTime.HeaderText = "Дата";
+            this.dateTime.Name = "dateTime";
+            this.dateTime.ReadOnly = true;
+            // 
+            // process
+            // 
+            this.process.HeaderText = "Процесс";
+            this.process.Name = "process";
+            this.process.ReadOnly = true;
+            // 
+            // roller
+            // 
+            this.roller.HeaderText = "Ролик";
+            this.roller.Name = "roller";
+            this.roller.ReadOnly = true;
+            // 
+            // user
+            // 
+            this.user.HeaderText = "Исполнитель";
+            this.user.Name = "user";
+            this.user.ReadOnly = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -362,6 +380,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snapshotView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -371,10 +391,6 @@
         private System.Windows.Forms.Button makeSnapshotBtn;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ListView photoGalleraya;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Button orderEditBtn;
         private System.Windows.Forms.Label OrderPanel__TitleUser;
         private System.Windows.Forms.Label OrderPanel__TitleOpreration;
@@ -392,9 +408,16 @@
         private System.Windows.Forms.ToolStripMenuItem showAppSetting;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private AForge.Controls.VideoSourcePlayer videoPlayer;
+        private Accord.Controls.VideoSourcePlayer videoPlayer;
         private Accord.Controls.PictureBox snapshotView;
         private System.Windows.Forms.ToolStripMenuItem deviceManagerItem;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn order;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn process;
+        private System.Windows.Forms.DataGridViewTextBoxColumn roller;
+        private System.Windows.Forms.DataGridViewTextBoxColumn user;
     }
 }
 

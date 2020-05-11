@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WebCamCapture.View
@@ -49,17 +42,21 @@ namespace WebCamCapture.View
         public event Action ModeIdChange;
         public event Action<string> SnapshotDirChange;
 
-        public string[] DeviceList { 
-            set {
+        public string[] DeviceList
+        {
+            set
+            {
                 deviceList.Items.Clear();
                 deviceList.Items.AddRange(value);
-            }       
+            }
         }
-        public string[] ModesList { 
-            set {
+        public string[] ModesList
+        {
+            set
+            {
                 modesList.Items.Clear();
                 modesList.Items.AddRange(value);
-            } 
+            }
         }
         /// <summary>
         /// Каталог для сохранения снимков
@@ -81,7 +78,7 @@ namespace WebCamCapture.View
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void DirOkBtn_Click(object sender, EventArgs e)
-        {         
+        {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 FileDirView.Text = folderBrowserDialog1.SelectedPath;

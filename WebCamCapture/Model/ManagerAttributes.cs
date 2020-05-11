@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
 
 namespace WebCamCapture.Model
 {
@@ -34,7 +31,7 @@ namespace WebCamCapture.Model
                 int c = listLenght - maxValue;
                 this.attributesList.RemoveRange(i, c);
             }
-            
+
         }
 
         /// <summary>
@@ -48,7 +45,7 @@ namespace WebCamCapture.Model
             if (id == -1 && value != "")
             {
                 // помещаем новый элемент в начало списка
-                this.attributesList.Insert(0,value);
+                this.attributesList.Insert(0, value);
                 // возращаем индекс нового элемента
                 return 0;
             }
@@ -94,7 +91,7 @@ namespace WebCamCapture.Model
         readonly Attribute roller;
         readonly Attribute process;
         readonly Attribute user;
-       
+
 
         private Attributes attributes;
 
@@ -113,9 +110,9 @@ namespace WebCamCapture.Model
             attributes.List.Add(roller);
             attributes.List.Add(process);
             attributes.List.Add(user);
-            
+
             this.Init();
-            
+
         }
         #region Добавить, удалить атрибуты
         public Attribute Order()

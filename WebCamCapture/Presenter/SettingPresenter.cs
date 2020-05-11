@@ -1,15 +1,10 @@
-﻿using System;
+﻿//using Accord.Video.DirectShow;
+using Accord.Video.DirectShow;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebCamCapture.View;
-using WebCamCapture.Model;
-using System.Drawing;
 using System.Windows.Forms;
-//using Accord.Video.DirectShow;
-using AForge.Video.DirectShow;
-using System.Windows.Forms.VisualStyles;
+using WebCamCapture.Model;
+using WebCamCapture.View;
 
 namespace WebCamCapture.Presenter
 {
@@ -66,15 +61,15 @@ namespace WebCamCapture.Presenter
             this.devices = devices;
             this.device = devices;
 
-            
+
             this.PlayerMainView = playerMainView;
             this.settingView = settingView;
 
             this.PlayerMainView.Load += PlayerMainView_Load;
             this.PlayerMainView.ShowAppSetting += PlayerMainView_ShowAppSetting;
             this.PlayerMainView.ShowDeviceManagerPanel += PlayerMainView_ShowDeviceManagerPanel;
-           
-            
+
+
             settingView.DeviceIdChange += SettingView_DeviceIdChange;
             settingView.ModeIdChange += SettingForm_ModeIdChange;
             settingView.SnapshotDirChange += SettingView_SnapshotDirChange;
@@ -86,7 +81,6 @@ namespace WebCamCapture.Presenter
         private void SettingView_SnapshotDirChange(string path)
         {
             Config.SnapshotDir = path;
-            device.WatcherPath(path);
         }
 
         // Выбор устройства
@@ -121,7 +115,7 @@ namespace WebCamCapture.Presenter
             //string snapshotPath = Config.SnapshotDir;
             if (String.IsNullOrEmpty(Config.SnapshotDir))
             {
-                Config.SnapshotDir = Application.StartupPath+"\\DATA";
+                Config.SnapshotDir = Application.StartupPath + "\\DATA";
             }
             this.settingView.SnapshotFolder = Config.SnapshotDir;
             this.settingView.DeviceList = this.DevicesNameList.ToArray();
@@ -172,19 +166,20 @@ namespace WebCamCapture.Presenter
             catch (NotSupportedException e)
             {
                 System.Windows.Forms.MessageBox.Show(e.Message);
-            }         
+            }
         }
 
-        void Run() {
+        void Run()
+        {
             if (DeviceId != -1 && ModeId != -1)
-            {             
+            {
                 if (PlayerMainView.IsRunning) PlayerMainView.Stop();
                 VideoSource.VideoResolution = VideoSource.VideoCapabilities[ModeId];
                 PlayerMainView.VideoSource = VideoSource;
 
                 PlayerMainView.Start();
                 PlayerMainView.DeviceManagerItem = true;
-                
+
             }
         }
 

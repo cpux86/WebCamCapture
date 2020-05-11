@@ -1,23 +1,15 @@
 ﻿
+using Accord.Video;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
-using System.IO;
-using System.Threading;
-using System.Resources;
-
 using System.Windows.Forms;
-using AForge.Video;
-using AForge.Video.DirectShow;
+using WebCamCapture.Model;
+using WebCamCapture.Presenter;
 
 namespace WebCamCapture.View
 {
+
     public interface IMain
     {
         string AppRoot { get; }
@@ -30,7 +22,6 @@ namespace WebCamCapture.View
         event Action MakeSnapshot;
         event Action ShowAppSetting;
         event Action ShowDeviceManagerPanel;
-        
 
     }
     interface IVideoPlayerView : IMain
@@ -55,14 +46,22 @@ namespace WebCamCapture.View
         /// </summary>
         event Action ShowOrderForm;
     }
-    internal partial class MainForm : Form, IMain, IVideoPlayerView, IOrderMainForm
+
+    public interface IGallery : IMain
+    {
+        int Count { get; }
+        void Add(List<Snapshot> list);
+        void Remove();
+        void Clear();
+    }
+
+    internal partial class MainForm : Form, IVideoPlayerView, IOrderMainForm, IGallery
     {
         public MainForm()
         {
             InitializeComponent();
             this.KeyPreview = true;
-            
-        }       
+        }
 
         #region Сведения о заказе
         public string OrderNumber { set => TextOrderMainForm.Text = value; }
@@ -93,14 +92,11 @@ namespace WebCamCapture.View
             MakeSnapshot();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            WebCamCapture.Model.FM fileManager = new Model.FM();
-            fileManager.Monitor();
 
-        }
 
         public bool IsRunning { get => videoPlayer.IsRunning; }
+
+        public int Count => throw new NotImplementedException();
 
         public void Start()
         {
@@ -109,7 +105,8 @@ namespace WebCamCapture.View
 
         public void Stop()
         {
-            Invoke((MethodInvoker)(() => {
+            Invoke((MethodInvoker)(() =>
+            {
                 if (videoPlayer.VideoSource != null)
                 {
                     videoPlayer.SignalToStop();
@@ -118,7 +115,7 @@ namespace WebCamCapture.View
                     videoPlayer.VideoSource = null;
                 }
             }));
-          
+
         }
 
         private void ShowAppSetting_Click(object sender, EventArgs e)
@@ -154,8 +151,32 @@ namespace WebCamCapture.View
             ShowOrderForm();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        #region Фотогалерея
+
+        public void Add(List<Snapshot> list)
+        {
+          
+        }
+
+        public void Remove()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
+
         
+
+        #endregion
     }
 
-   
+
 }

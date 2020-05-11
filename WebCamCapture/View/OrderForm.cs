@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.ComponentModel.DataAnnotations;
+using System.Windows.Forms;
 
 namespace WebCamCapture.View
 {
@@ -40,7 +34,7 @@ namespace WebCamCapture.View
         /// <summary>
         /// Данные для атозаполнения списка процессов
         /// </summary>
-        string[] ProcessListAutoComplete { set; }      
+        string[] ProcessListAutoComplete { set; }
         /// <summary>
         /// Данные для атозаполнения списка пользователей
         /// </summary>
@@ -84,7 +78,7 @@ namespace WebCamCapture.View
         [Required]
         [StringLength(50, MinimumLength = 3)]
         public string User { get => userNameCbox.Text; set => userNameCbox.Text = value; }
-       
+
 
         public event Action BtnOkOrderClick;
 
@@ -129,9 +123,9 @@ namespace WebCamCapture.View
             char number = e.KeyChar;
             if (!Char.IsLetter(number) && number != 8 && !Char.IsWhiteSpace(number) && number != 46)
             {
-                
+
                 e.Handled = true;
-                
+
             }
             // преобразуем каждый введенный символ в врехний регистр.
             //e.KeyChar = Char.ToUpper(e.KeyChar);
@@ -156,7 +150,7 @@ namespace WebCamCapture.View
             {
                 foreach (var error in results)
                 {
-                   // MessageBox.Show(error.ErrorMessage);
+                    // MessageBox.Show(error.ErrorMessage);
                 }
             }
 

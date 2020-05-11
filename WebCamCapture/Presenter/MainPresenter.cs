@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms;
 using WebCamCapture.Model;
 using WebCamCapture.View;
 
@@ -12,42 +8,34 @@ namespace WebCamCapture.Presenter
 {
     class MainPresenter
     {
-        readonly IVideoPlayerView mainForm;
-        readonly FM fileManager;
-        public MainPresenter(MainForm mainForm, FM fm)
+        //readonly IVideoPlayerView mainForm;
+        readonly MainForm mainForm;
+        readonly FM fm;
+        public MainPresenter(MainForm mainForm, FM img)
         {
             this.mainForm = mainForm;
-            this.fileManager = fm;
-            mainForm.Load += MainForm_Load;
+            this.fm = img;
             mainForm.FormClosing += MainForm_FormClosing;
             mainForm.MakeSnapshot += MainForm_MakeSnapshot;
-            //fm.NewImage += FileManager_NewImage;
-            fm.NewFrame += Fm_NewFrame;
-
-
+            fm.NewPhoto += Fm_NewPhoto;
         }
+
+
 
         // Обработчик события поступления снимка для отображения 
-        private void Fm_NewFrame(Image obj)
+        private void Fm_NewPhoto(Image obj)
         {
             mainForm.ShowSnapshot(obj);
+            
         }
 
-        //// Обработчик события поступления снимка для отображения 
-        //private void FileManager_NewImage(string img)
-        //{
-        //    //mainForm.SnapshotView(img);
-        //}
 
         // Обработчик события "Создать снимок"
         private void MainForm_MakeSnapshot()
         {
-            this.fileManager.CreateSnapshot();
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
+            this.fm.Create();
+            mainForm.Add(this.fm.GetList());
+            
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -56,6 +44,6 @@ namespace WebCamCapture.Presenter
             Properties.Settings.Default.Save();
         }
 
-        
+
     }
 }
