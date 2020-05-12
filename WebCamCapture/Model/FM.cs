@@ -8,21 +8,35 @@ using WebCamCapture.Presenter;
 
 namespace WebCamCapture.Model
 {
-    public class Snapshot
+    public class Snapshot : ISnapshot
     {
         /// <summary>
-        /// Имя файла-снимка
+        /// Текущий снимок
         /// </summary>
-        //public string Name { get; set; }
-        // Текущий снимок
         public Image Image { get; set; }
-
+        /// <summary>
+        /// Путь к файлу-снимку
+        /// </summary>
         public string FullPath { get; set; }
-
+        /// <summary>
+        /// Номер заказа
+        /// </summary>
         public string OrderNumber { get; set; }
+        /// <summary>
+        /// Дата создания снимка
+        /// </summary>
         public string DateCreated { get; set; }
+        /// <summary>
+        /// Номер ролика
+        /// </summary>
         public string Roller { get; set; }
+        /// <summary>
+        /// Текущий процесс
+        /// </summary>
         public string Process { get; set; }
+        /// <summary>
+        /// Ф.И.О исполнителя
+        /// </summary>
         public string User { get; set; }
     }
 
@@ -31,13 +45,16 @@ namespace WebCamCapture.Model
         /// <summary>
         /// Имя файла-снимка
         /// </summary>
-        public string Name { get; set; }
-       // public Image Image { get; set; }
+        private string _name;
 
         /// <summary>
-        /// Новый кадр
+        /// Новый снимок
         /// </summary>
-        public event Action<Snapshot> NewPhoto;
+        public event Action<ISnapshot> NewPhoto;
+        /// <summary>
+        /// Снимок загружен 
+        /// </summary>
+        public event Action<ISnapshot> Photo;
 
 
         #region API
@@ -113,7 +130,7 @@ namespace WebCamCapture.Model
         {
             snapshot.Image = img;
             // генерируем имя для файла
-            this.Name = this.CreateFileName();
+            _name = this.CreateFileName();
             // имя каталога для файла
             string folder = this.Validation(Order.OrderNumber);
             // корневая дериктория для хранения снимков, берется из настроек [D:\\папка со снимками\]
@@ -121,7 +138,7 @@ namespace WebCamCapture.Model
             // путь к каталогу файлов [D:\\папка со снимками\номер заказа\]
             string path = String.Format("{0}\\{1}", rootDir, folder);
             // полный куть к файлу [D:\\папка со снимками\номер заказа\имя файла.jpg]
-            string fullPath = String.Format("{0}\\{1}\\{2}", rootDir, folder, this.Name);
+            string fullPath = String.Format("{0}\\{1}\\{2}", rootDir, folder, _name);
             
             // Текст поверх изображения
             string metadata = String.Format("{0} {1} {2} {3} {4}", Order.OrderNumber, snapshot.DateCreated, Order.Roller, Order.Process, Order.User);
@@ -131,8 +148,7 @@ namespace WebCamCapture.Model
                 {
                     Directory.CreateDirectory(path);
                 }
-                // уведомляем о новом снимке
-                
+                // уведомляем о новом снимке               
                 this.NewPhoto(snapshot);
                 // разрешен ли водяной текст
                 if (Config.WaterText)

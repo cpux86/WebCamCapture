@@ -20,9 +20,17 @@ namespace WebCamCapture.Presenter
             fm.NewPhoto += Fm_NewPhoto;
         }
         // Обработчик события поступления снимка для отображения 
-        private void Fm_NewPhoto(Snapshot s)
+        private void Fm_NewPhoto(ISnapshot s)
         {
-            mainForm.ShowSnapshot(s.Image);
+            // 
+            this.ShowSnapshot(s);
+        }
+        // Получить снимок для отображения
+        private void ShowSnapshot(ISnapshot s)
+        {
+            //mainForm.ShowSnapshot(s.Image);
+            //mainForm.OrderNumber = s.OrderNumber;
+            mainForm.ShowSnapshot(s);
         }
 
 

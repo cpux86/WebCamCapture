@@ -1,19 +1,16 @@
-﻿
-using Accord.Video;
+﻿using Accord.Video;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using WebCamCapture.Model;
-using WebCamCapture.Presenter;
 
 namespace WebCamCapture.View
 {
 
     public interface IMain
     {
-        string AppRoot { get; }
+        //string AppRoot { get; }
         bool DeviceManagerItem { set; }
         event EventHandler Load;
         event FormClosingEventHandler FormClosing;
@@ -32,7 +29,8 @@ namespace WebCamCapture.View
         void Stop();
         bool IsRunning { get; }
 
-        void ShowSnapshot(Image img);
+        //void ShowSnapshot(Image img);
+        void ShowSnapshot(ISnapshot img);
 
 
     }
@@ -48,9 +46,9 @@ namespace WebCamCapture.View
         event Action ShowOrderForm;
     }
 
-    public interface IGallery : IMain
+    public interface IGallery
     {
-        int Count { get; }
+        //int Count { get; }
         void Add(BindingList<Snapshot> list);
         void Remove();
         void Clear();
@@ -65,10 +63,10 @@ namespace WebCamCapture.View
         }
 
         #region Сведения о заказе
-        public string OrderNumber { set => TextOrderMainForm.Text = value; }
-        public string Roller { set => TextRollerMainForm.Text = value; }
-        public string Process { set => TextOprerationMainForm.Text = value; }
-        public string User { set => OperatorFullNameMainForm.Text = value; }
+        public string OrderNumber { set => orderLbl.Text = value; }
+        public string Roller { set => rollerLbl.Text = value; }
+        public string Process { set => processLbl.Text = value; }
+        public string User { set => userLbl.Text = value; }
 
 
 
@@ -86,7 +84,7 @@ namespace WebCamCapture.View
         /// <summary>
         /// Корневой каталог приложения
         /// </summary>
-        public string AppRoot { get => Application.StartupPath; }
+        //public string AppRoot { get => Application.StartupPath; }
 
         private void makeSnapshotBtn_Click(object sender, EventArgs e)
         {
@@ -97,7 +95,6 @@ namespace WebCamCapture.View
 
         public bool IsRunning { get => videoPlayer.IsRunning; }
 
-        public int Count => throw new NotImplementedException();
 
         public void Start()
         {
@@ -130,7 +127,27 @@ namespace WebCamCapture.View
         }
 
 
-        public void ShowSnapshot(Image img)
+        //public void ShowSnapshot(Image img)
+        //{
+        //    Invoke((MethodInvoker)(() =>
+        //    {
+        //        if (snapshotView.Image != null)
+        //        {
+        //            snapshotView.Image.Dispose();
+        //            snapshotView.Image = null;
+        //        }
+
+        //        snapshotView.Image = (Bitmap)img.Clone();
+
+
+        //    }));
+        //}
+
+        /// <summary>
+        /// Отобразить снимок и сведения о заказе
+        /// </summary>
+        /// <param name="s"></param>
+        public void ShowSnapshot(ISnapshot s)
         {
             Invoke((MethodInvoker)(() =>
             {
@@ -140,9 +157,11 @@ namespace WebCamCapture.View
                     snapshotView.Image = null;
                 }
 
-                snapshotView.Image = (Bitmap)img.Clone();
-
-
+                snapshotView.Image = (Bitmap)s.Image.Clone();
+                orderLbl.Text = s.OrderNumber;
+                rollerLbl.Text = s.Roller;
+                processLbl.Text = s.Process;
+                userLbl.Text = s.User;
             }));
         }
 
@@ -154,6 +173,7 @@ namespace WebCamCapture.View
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
         }
 
         #region Фотогалерея
