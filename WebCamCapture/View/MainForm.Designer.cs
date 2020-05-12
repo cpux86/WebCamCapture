@@ -33,6 +33,13 @@
             this.makeSnapshotBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.order = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.process = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.roller = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.user = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.orderEditBtn = new System.Windows.Forms.Button();
             this.OrderPanel__TitleUser = new System.Windows.Forms.Label();
             this.OrderPanel__TitleOpreration = new System.Windows.Forms.Label();
@@ -53,19 +60,12 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.videoPlayer = new Accord.Controls.VideoSourcePlayer();
             this.snapshotView = new Accord.Controls.PictureBox();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.order = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.process = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.roller = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.user = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.OrderViewPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snapshotView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // makeSnapshotBtn
@@ -105,6 +105,59 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(350, 365);
             this.panel1.TabIndex = 10;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.order,
+            this.dateTime,
+            this.process,
+            this.roller,
+            this.user});
+            this.dataGridView1.DataSource = this.bindingSource1;
+            this.dataGridView1.Location = new System.Drawing.Point(7, 55);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(337, 307);
+            this.dataGridView1.TabIndex = 20;
+            // 
+            // order
+            // 
+            this.order.HeaderText = "Заказ";
+            this.order.Name = "order";
+            this.order.ReadOnly = true;
+            // 
+            // dateTime
+            // 
+            this.dateTime.HeaderText = "Дата";
+            this.dateTime.Name = "dateTime";
+            this.dateTime.ReadOnly = true;
+            // 
+            // process
+            // 
+            this.process.HeaderText = "Процесс";
+            this.process.Name = "process";
+            this.process.ReadOnly = true;
+            // 
+            // roller
+            // 
+            this.roller.HeaderText = "Ролик";
+            this.roller.Name = "roller";
+            this.roller.ReadOnly = true;
+            // 
+            // user
+            // 
+            this.user.HeaderText = "Исполнитель";
+            this.user.Name = "user";
+            this.user.ReadOnly = true;
             // 
             // orderEditBtn
             // 
@@ -233,13 +286,13 @@
             // новыйЗаказToolStripMenuItem
             // 
             this.новыйЗаказToolStripMenuItem.Name = "новыйЗаказToolStripMenuItem";
-            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.новыйЗаказToolStripMenuItem.Text = "Новый заказ";
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             // 
             // настройкиToolStripMenuItem1
@@ -254,7 +307,7 @@
             // showAppSetting
             // 
             this.showAppSetting.Name = "showAppSetting";
-            this.showAppSetting.Size = new System.Drawing.Size(140, 22);
+            this.showAppSetting.Size = new System.Drawing.Size(141, 22);
             this.showAppSetting.Text = "Общие";
             this.showAppSetting.Click += new System.EventHandler(this.ShowAppSetting_Click);
             // 
@@ -262,7 +315,7 @@
             // 
             this.deviceManagerItem.Enabled = false;
             this.deviceManagerItem.Name = "deviceManagerItem";
-            this.deviceManagerItem.Size = new System.Drawing.Size(140, 22);
+            this.deviceManagerItem.Size = new System.Drawing.Size(141, 22);
             this.deviceManagerItem.Text = "Управление";
             this.deviceManagerItem.Click += new System.EventHandler(this.ShowDeviceManagerPanel_Click);
             // 
@@ -310,55 +363,6 @@
             this.snapshotView.TabIndex = 30;
             this.snapshotView.TabStop = false;
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.order,
-            this.dateTime,
-            this.process,
-            this.roller,
-            this.user});
-            this.dataGridView1.DataSource = this.bindingSource1;
-            this.dataGridView1.Location = new System.Drawing.Point(7, 55);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(337, 307);
-            this.dataGridView1.TabIndex = 20;
-            // 
-            // order
-            // 
-            this.order.HeaderText = "Заказ";
-            this.order.Name = "order";
-            this.order.ReadOnly = true;
-            // 
-            // dateTime
-            // 
-            this.dateTime.HeaderText = "Дата";
-            this.dateTime.Name = "dateTime";
-            this.dateTime.ReadOnly = true;
-            // 
-            // process
-            // 
-            this.process.HeaderText = "Процесс";
-            this.process.Name = "process";
-            this.process.ReadOnly = true;
-            // 
-            // roller
-            // 
-            this.roller.HeaderText = "Ролик";
-            this.roller.Name = "roller";
-            this.roller.ReadOnly = true;
-            // 
-            // user
-            // 
-            this.user.HeaderText = "Исполнитель";
-            this.user.Name = "user";
-            this.user.ReadOnly = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -375,13 +379,13 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebCamCapture";
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.OrderViewPanel.ResumeLayout(false);
             this.OrderViewPanel.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snapshotView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -2,6 +2,7 @@
 using Accord.Video;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using WebCamCapture.Model;
@@ -50,7 +51,7 @@ namespace WebCamCapture.View
     public interface IGallery : IMain
     {
         int Count { get; }
-        void Add(List<Snapshot> list);
+        void Add(BindingList<Snapshot> list);
         void Remove();
         void Clear();
     }
@@ -153,14 +154,17 @@ namespace WebCamCapture.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
         }
 
         #region Фотогалерея
 
-        public void Add(List<Snapshot> list)
+        public void Add(BindingList<Snapshot> list)
         {
-          
+            Invoke((MethodInvoker)(() =>
+            {
+                dataGridView1.DataSource = list;
+            }));
+            
         }
 
         public void Remove()

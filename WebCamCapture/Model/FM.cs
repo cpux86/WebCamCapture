@@ -1,6 +1,7 @@
 ﻿using Accord.Video;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using WebCamCapture.Presenter;
@@ -13,6 +14,9 @@ namespace WebCamCapture.Model
         /// Имя файла-снимка
         /// </summary>
         //public string Name { get; set; }
+        // Текущий снимок
+        public Image Image { get; set; }
+
         public string FullPath { get; set; }
 
         public string OrderNumber { get; set; }
@@ -33,14 +37,8 @@ namespace WebCamCapture.Model
         /// <summary>
         /// Новый кадр
         /// </summary>
-        public event Action<Image> NewPhoto;
+        public event Action<Snapshot> NewPhoto;
 
-        List<Snapshot> snapshotsList;
-
-        public FM()
-        {
-            snapshotsList = new List<Snapshot>();
-        }
 
         #region API
 
@@ -55,20 +53,6 @@ namespace WebCamCapture.Model
 
         }
 
-        public Snapshot GetSnapshot(int index)
-        {
-            if (snapshotsList.Count >= index)
-            {
-                return snapshotsList[index];
-            }
-            return null;
-        }
-
-        public List<Snapshot> GetList()
-        {
-            return snapshotsList;
-        }
-
         Snapshot snapshot;
         private void VideoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
@@ -81,8 +65,6 @@ namespace WebCamCapture.Model
 
             this.Save((Bitmap)eventArgs.Frame);
             VideoSource.NewFrame -= VideoSource_NewFrame;
-
-            snapshotsList.Add(snapshot);
         }
 
         #endregion;
@@ -129,6 +111,7 @@ namespace WebCamCapture.Model
 
         private void Save(Image img)
         {
+            snapshot.Image = img;
             // генерируем имя для файла
             this.Name = this.CreateFileName();
             // имя каталога для файла
@@ -149,7 +132,8 @@ namespace WebCamCapture.Model
                     Directory.CreateDirectory(path);
                 }
                 // уведомляем о новом снимке
-                this.NewPhoto(img);
+                
+                this.NewPhoto(snapshot);
                 // разрешен ли водяной текст
                 if (Config.WaterText)
                 {
