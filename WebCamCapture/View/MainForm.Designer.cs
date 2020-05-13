@@ -85,12 +85,15 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(151, 17);
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.BackgroundImage = global::WebCamCapture.Properties.Resources.Фон1;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.button1.Location = new System.Drawing.Point(563, 39);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(46, 30);
+            this.button1.Size = new System.Drawing.Size(51, 44);
             this.button1.TabIndex = 8;
-            this.button1.Text = "TEST";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
@@ -100,7 +103,6 @@
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.orderEditBtn);
             this.panel1.Controls.Add(this.makeSnapshotBtn);
-            this.panel1.Controls.Add(this.button1);
             this.panel1.Location = new System.Drawing.Point(590, 263);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(350, 365);
@@ -234,43 +236,43 @@
             this.OrderViewPanel.Size = new System.Drawing.Size(572, 145);
             this.OrderViewPanel.TabIndex = 28;
             // 
-            // OperatorFullNameMainForm
+            // userLbl
             // 
             this.userLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.userLbl.AutoSize = true;
             this.userLbl.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.userLbl.Location = new System.Drawing.Point(135, 111);
-            this.userLbl.Name = "OperatorFullNameMainForm";
+            this.userLbl.Name = "userLbl";
             this.userLbl.Size = new System.Drawing.Size(0, 21);
             this.userLbl.TabIndex = 31;
             // 
-            // TextOprerationMainForm
+            // processLbl
             // 
             this.processLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.processLbl.AutoSize = true;
             this.processLbl.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.processLbl.Location = new System.Drawing.Point(135, 78);
-            this.processLbl.Name = "TextOprerationMainForm";
+            this.processLbl.Name = "processLbl";
             this.processLbl.Size = new System.Drawing.Size(0, 21);
             this.processLbl.TabIndex = 30;
             // 
-            // TextRollerMainForm
+            // rollerLbl
             // 
             this.rollerLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.rollerLbl.AutoSize = true;
             this.rollerLbl.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rollerLbl.Location = new System.Drawing.Point(135, 45);
-            this.rollerLbl.Name = "TextRollerMainForm";
+            this.rollerLbl.Name = "rollerLbl";
             this.rollerLbl.Size = new System.Drawing.Size(0, 21);
             this.rollerLbl.TabIndex = 29;
             // 
-            // TextOrderMainForm
+            // orderLbl
             // 
             this.orderLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.orderLbl.AutoSize = true;
             this.orderLbl.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.orderLbl.Location = new System.Drawing.Point(135, 12);
-            this.orderLbl.Name = "TextOrderMainForm";
+            this.orderLbl.Name = "orderLbl";
             this.orderLbl.Size = new System.Drawing.Size(0, 21);
             this.orderLbl.TabIndex = 28;
             // 
@@ -286,13 +288,13 @@
             // новыйЗаказToolStripMenuItem
             // 
             this.новыйЗаказToolStripMenuItem.Name = "новыйЗаказToolStripMenuItem";
-            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.новыйЗаказToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.новыйЗаказToolStripMenuItem.Text = "Новый заказ";
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             // 
             // настройкиToolStripMenuItem1
@@ -307,7 +309,7 @@
             // showAppSetting
             // 
             this.showAppSetting.Name = "showAppSetting";
-            this.showAppSetting.Size = new System.Drawing.Size(141, 22);
+            this.showAppSetting.Size = new System.Drawing.Size(140, 22);
             this.showAppSetting.Text = "Общие";
             this.showAppSetting.Click += new System.EventHandler(this.ShowAppSetting_Click);
             // 
@@ -315,7 +317,7 @@
             // 
             this.deviceManagerItem.Enabled = false;
             this.deviceManagerItem.Name = "deviceManagerItem";
-            this.deviceManagerItem.Size = new System.Drawing.Size(141, 22);
+            this.deviceManagerItem.Size = new System.Drawing.Size(140, 22);
             this.deviceManagerItem.Text = "Управление";
             this.deviceManagerItem.Click += new System.EventHandler(this.ShowDeviceManagerPanel_Click);
             // 
@@ -368,11 +370,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 627);
-            this.Controls.Add(this.snapshotView);
-            this.Controls.Add(this.videoPlayer);
             this.Controls.Add(this.OrderViewPanel);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.videoPlayer);
+            this.Controls.Add(this.snapshotView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";

@@ -60,6 +60,8 @@ namespace WebCamCapture.View
         {
             InitializeComponent();
             this.KeyPreview = true;
+            //// Отобразить форму заказа
+            //orderEditBtn.Click += (s, e) => { ShowOrderForm(); };
         }
 
         #region Сведения о заказе
@@ -173,7 +175,30 @@ namespace WebCamCapture.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            //snapshotView.Visible = !snapshotView.Visible;
+
+            Size size = videoPlayer.Size;
+            videoPlayer.Size = snapshotView.Size;
+            snapshotView.Size = size;
+
+            AnchorStyles anchor = videoPlayer.Anchor;
+            videoPlayer.Anchor = snapshotView.Anchor;
+            snapshotView.Anchor = anchor;
+
+            Point point = videoPlayer.Location;
+            videoPlayer.Location = snapshotView.Location;
+            snapshotView.Location = point;
+
+            //this.snapshotView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            //| System.Windows.Forms.AnchorStyles.Left)
+            //| System.Windows.Forms.AnchorStyles.Right)));
+            //this.snapshotView.Location = new System.Drawing.Point(12, 27);
+            //this.snapshotView.Size = new System.Drawing.Size(572, 441);
+
+            //this.videoPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            //this.videoPlayer.Location = new System.Drawing.Point(590, 27);
+            //this.videoPlayer.Size = new System.Drawing.Size(350, 230);
+
         }
 
         #region Фотогалерея
@@ -197,9 +222,14 @@ namespace WebCamCapture.View
             throw new NotImplementedException();
         }
 
-        
+
 
         #endregion
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Test");
+        }
     }
 
 

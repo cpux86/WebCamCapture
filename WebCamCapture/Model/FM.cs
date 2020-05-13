@@ -73,12 +73,19 @@ namespace WebCamCapture.Model
         Snapshot snapshot;
         private void VideoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            snapshot = new Snapshot();
-            snapshot.OrderNumber = Order.OrderNumber;
-            snapshot.DateCreated = DateTime.Now.ToString();
-            snapshot.Roller = Order.Roller;
-            snapshot.Process = Order.Process;
-            snapshot.User = Order.User;
+            snapshot = new Snapshot()
+            {
+                OrderNumber = Order.OrderNumber,
+                DateCreated = DateTime.Now.ToString(),
+                Roller = Order.Roller,
+                Process = Order.Process,
+                User = Order.User
+            };
+            //snapshot.OrderNumber = Order.OrderNumber;
+            //snapshot.DateCreated = DateTime.Now.ToString();
+            //snapshot.Roller = Order.Roller;
+            //snapshot.Process = Order.Process;
+            //snapshot.User = Order.User;
 
             this.Save((Bitmap)eventArgs.Frame);
             VideoSource.NewFrame -= VideoSource_NewFrame;
