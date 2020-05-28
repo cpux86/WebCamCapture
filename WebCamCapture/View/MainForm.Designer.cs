@@ -28,18 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.makeSnapshotBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.order = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.process = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.roller = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.user = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.orderEditBtn = new System.Windows.Forms.Button();
             this.OrderPanel__TitleUser = new System.Windows.Forms.Label();
             this.OrderPanel__TitleOpreration = new System.Windows.Forms.Label();
@@ -60,23 +52,37 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.videoPlayer = new Accord.Controls.VideoSourcePlayer();
             this.snapshotView = new Accord.Controls.PictureBox();
+            this.snapshotTable = new System.Windows.Forms.ListView();
+            this.orderColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dateColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.rollerColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.processColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.userColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.OrderViewPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snapshotView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // makeSnapshotBtn
             // 
-            this.makeSnapshotBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.makeSnapshotBtn.Dock = System.Windows.Forms.DockStyle.Top;
             this.makeSnapshotBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.makeSnapshotBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.makeSnapshotBtn.ForeColor = System.Drawing.Color.Black;
-            this.makeSnapshotBtn.Location = new System.Drawing.Point(7, 17);
+            this.makeSnapshotBtn.Location = new System.Drawing.Point(0, 0);
             this.makeSnapshotBtn.Name = "makeSnapshotBtn";
-            this.makeSnapshotBtn.Size = new System.Drawing.Size(141, 30);
+            this.makeSnapshotBtn.Size = new System.Drawing.Size(325, 30);
             this.makeSnapshotBtn.TabIndex = 3;
             this.makeSnapshotBtn.Text = "Снимок";
             this.makeSnapshotBtn.UseVisualStyleBackColor = true;
@@ -89,7 +95,7 @@
             this.button1.BackgroundImage = global::WebCamCapture.Properties.Resources.Фон1;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.button1.Location = new System.Drawing.Point(563, 39);
+            this.button1.Location = new System.Drawing.Point(625, 39);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(51, 44);
             this.button1.TabIndex = 8;
@@ -98,77 +104,24 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.dataGridView1);
+            this.panel1.Controls.Add(this.snapshotTable);
             this.panel1.Controls.Add(this.orderEditBtn);
             this.panel1.Controls.Add(this.makeSnapshotBtn);
-            this.panel1.Location = new System.Drawing.Point(590, 263);
+            this.panel1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(350, 365);
+            this.panel1.Size = new System.Drawing.Size(325, 347);
             this.panel1.TabIndex = 10;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.order,
-            this.dateTime,
-            this.process,
-            this.roller,
-            this.user});
-            this.dataGridView1.DataSource = this.bindingSource1;
-            this.dataGridView1.Location = new System.Drawing.Point(7, 55);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(337, 307);
-            this.dataGridView1.TabIndex = 20;
-            // 
-            // order
-            // 
-            this.order.HeaderText = "Заказ";
-            this.order.Name = "order";
-            this.order.ReadOnly = true;
-            // 
-            // dateTime
-            // 
-            this.dateTime.HeaderText = "Дата";
-            this.dateTime.Name = "dateTime";
-            this.dateTime.ReadOnly = true;
-            // 
-            // process
-            // 
-            this.process.HeaderText = "Процесс";
-            this.process.Name = "process";
-            this.process.ReadOnly = true;
-            // 
-            // roller
-            // 
-            this.roller.HeaderText = "Ролик";
-            this.roller.Name = "roller";
-            this.roller.ReadOnly = true;
-            // 
-            // user
-            // 
-            this.user.HeaderText = "Исполнитель";
-            this.user.Name = "user";
-            this.user.ReadOnly = true;
             // 
             // orderEditBtn
             // 
-            this.orderEditBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.orderEditBtn.Dock = System.Windows.Forms.DockStyle.Top;
             this.orderEditBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.orderEditBtn.ForeColor = System.Drawing.Color.Black;
-            this.orderEditBtn.Location = new System.Drawing.Point(203, 17);
+            this.orderEditBtn.Location = new System.Drawing.Point(0, 30);
             this.orderEditBtn.Name = "orderEditBtn";
-            this.orderEditBtn.Size = new System.Drawing.Size(141, 30);
+            this.orderEditBtn.Size = new System.Drawing.Size(325, 30);
             this.orderEditBtn.TabIndex = 19;
             this.orderEditBtn.Text = "Заказ / Правка";
             this.orderEditBtn.UseVisualStyleBackColor = true;
@@ -220,8 +173,6 @@
             // 
             // OrderViewPanel
             // 
-            this.OrderViewPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.OrderViewPanel.BackColor = System.Drawing.SystemColors.Control;
             this.OrderViewPanel.Controls.Add(this.userLbl);
             this.OrderViewPanel.Controls.Add(this.processLbl);
@@ -231,9 +182,10 @@
             this.OrderViewPanel.Controls.Add(this.OrderPanel__TitleRoller);
             this.OrderViewPanel.Controls.Add(this.OrderPanel__TitleOpreration);
             this.OrderViewPanel.Controls.Add(this.OrderPanel__TitleOrder);
-            this.OrderViewPanel.Location = new System.Drawing.Point(12, 474);
+            this.OrderViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.OrderViewPanel.Location = new System.Drawing.Point(0, 561);
             this.OrderViewPanel.Name = "OrderViewPanel";
-            this.OrderViewPanel.Size = new System.Drawing.Size(572, 145);
+            this.OrderViewPanel.Size = new System.Drawing.Size(671, 145);
             this.OrderViewPanel.TabIndex = 28;
             // 
             // userLbl
@@ -336,59 +288,148 @@
             this.оПрограммеToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(946, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1008, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // videoPlayer
             // 
-            this.videoPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.videoPlayer.BackColor = System.Drawing.Color.Black;
-            this.videoPlayer.Location = new System.Drawing.Point(590, 27);
+            this.videoPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.videoPlayer.KeepAspectRatio = true;
+            this.videoPlayer.Location = new System.Drawing.Point(0, 0);
             this.videoPlayer.Name = "videoPlayer";
-            this.videoPlayer.Size = new System.Drawing.Size(350, 230);
+            this.videoPlayer.Size = new System.Drawing.Size(325, 351);
             this.videoPlayer.TabIndex = 29;
             this.videoPlayer.Text = "videoSourcePlayer1";
             this.videoPlayer.VideoSource = null;
             // 
             // snapshotView
             // 
-            this.snapshotView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.snapshotView.BackColor = System.Drawing.Color.Black;
+            this.snapshotView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.snapshotView.Image = null;
-            this.snapshotView.Location = new System.Drawing.Point(12, 27);
+            this.snapshotView.Location = new System.Drawing.Point(0, 0);
             this.snapshotView.Name = "snapshotView";
-            this.snapshotView.Size = new System.Drawing.Size(572, 441);
-            this.snapshotView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.snapshotView.Size = new System.Drawing.Size(671, 561);
+            this.snapshotView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.snapshotView.TabIndex = 30;
             this.snapshotView.TabStop = false;
+            // 
+            // snapshotTable
+            // 
+            this.snapshotTable.AllowColumnReorder = true;
+            this.snapshotTable.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.orderColumnHeader,
+            this.dateColumnHeader,
+            this.rollerColumnHeader,
+            this.processColumnHeader,
+            this.userColumnHeader});
+            this.snapshotTable.Cursor = System.Windows.Forms.Cursors.Default;
+            this.snapshotTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.snapshotTable.FullRowSelect = true;
+            this.snapshotTable.GridLines = true;
+            this.snapshotTable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.snapshotTable.HideSelection = false;
+            this.snapshotTable.Location = new System.Drawing.Point(0, 60);
+            this.snapshotTable.Name = "snapshotTable";
+            this.snapshotTable.Size = new System.Drawing.Size(325, 287);
+            this.snapshotTable.TabIndex = 20;
+            this.snapshotTable.UseCompatibleStateImageBehavior = false;
+            this.snapshotTable.View = System.Windows.Forms.View.Details;
+            // 
+            // orderColumnHeader
+            // 
+            this.orderColumnHeader.Text = "Заказ";
+            this.orderColumnHeader.Width = 0;
+            // 
+            // dateColumnHeader
+            // 
+            this.dateColumnHeader.Text = "Дата";
+            this.dateColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dateColumnHeader.Width = 86;
+            // 
+            // rollerColumnHeader
+            // 
+            this.rollerColumnHeader.Text = "Ролик";
+            this.rollerColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.rollerColumnHeader.Width = 75;
+            // 
+            // processColumnHeader
+            // 
+            this.processColumnHeader.Text = "Процесс";
+            this.processColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.processColumnHeader.Width = 89;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.snapshotView);
+            this.splitContainer1.Panel1.Controls.Add(this.OrderViewPanel);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+            this.splitContainer1.Size = new System.Drawing.Size(1008, 710);
+            this.splitContainer1.SplitterDistance = 675;
+            this.splitContainer1.TabIndex = 31;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.videoPlayer);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.panel1);
+            this.splitContainer2.Size = new System.Drawing.Size(329, 710);
+            this.splitContainer2.SplitterDistance = 355;
+            this.splitContainer2.TabIndex = 30;
+            // 
+            // userColumnHeader
+            // 
+            this.userColumnHeader.Text = "Исполнитель";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(946, 627);
-            this.Controls.Add(this.OrderViewPanel);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(1008, 734);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.videoPlayer);
-            this.Controls.Add(this.snapshotView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebCamCapture";
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.OrderViewPanel.ResumeLayout(false);
             this.OrderViewPanel.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snapshotView)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -418,13 +459,14 @@
         private Accord.Controls.VideoSourcePlayer videoPlayer;
         private Accord.Controls.PictureBox snapshotView;
         private System.Windows.Forms.ToolStripMenuItem deviceManagerItem;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.BindingSource bindingSource1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn order;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn process;
-        private System.Windows.Forms.DataGridViewTextBoxColumn roller;
-        private System.Windows.Forms.DataGridViewTextBoxColumn user;
+        private System.Windows.Forms.ListView snapshotTable;
+        private System.Windows.Forms.ColumnHeader orderColumnHeader;
+        private System.Windows.Forms.ColumnHeader dateColumnHeader;
+        private System.Windows.Forms.ColumnHeader rollerColumnHeader;
+        private System.Windows.Forms.ColumnHeader processColumnHeader;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.ColumnHeader userColumnHeader;
     }
 }
 

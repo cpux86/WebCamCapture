@@ -62,6 +62,9 @@ namespace WebCamCapture.View
             this.KeyPreview = true;
             //// Отобразить форму заказа
             //orderEditBtn.Click += (s, e) => { ShowOrderForm(); };
+            //snapshotTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            //snapshotTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            
         }
 
         #region Сведения о заказе
@@ -203,11 +206,11 @@ namespace WebCamCapture.View
 
         #region Фотогалерея
 
-        public void Add(BindingList<Snapshot> list)
+        public void Add(Snapshot s)
         {
             Invoke((MethodInvoker)(() =>
             {
-                dataGridView1.DataSource = list;
+                ListViewItem item = new ListViewItem();
             }));
             
         }
@@ -230,6 +233,7 @@ namespace WebCamCapture.View
         {
             MessageBox.Show("Test");
         }
+
     }
 
 

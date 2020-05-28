@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using WebCamCapture.Model;
@@ -9,6 +10,7 @@ namespace WebCamCapture.Presenter
     class MainPresenter
     {
         //readonly IVideoPlayerView mainForm;
+        readonly List<ISnapshot> _snapshots;
         readonly MainForm mainForm;
         readonly FM fm;
         public MainPresenter(MainForm mainForm, FM img)
@@ -18,12 +20,14 @@ namespace WebCamCapture.Presenter
             mainForm.FormClosing += MainForm_FormClosing;
             mainForm.MakeSnapshot += MainForm_MakeSnapshot;
             fm.NewPhoto += Fm_NewPhoto;
+            _snapshots = new List<ISnapshot>();
         }
-        // Обработчик события поступления снимка для отображения 
+        // Обработчик события поступления снимка
         private void Fm_NewPhoto(ISnapshot s)
         {
             // 
             this.ShowSnapshot(s);
+            _snapshots.Add(s);
         }
         // Получить снимок для отображения
         private void ShowSnapshot(ISnapshot s)
