@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using WebCamCapture.Model;
 using WebCamCapture.View;
@@ -21,13 +22,32 @@ namespace WebCamCapture.Presenter
             mainForm.MakeSnapshot += MainForm_MakeSnapshot;
             fm.NewPhoto += Fm_NewPhoto;
             _snapshots = new List<ISnapshot>();
+            mainForm.SelectedRow += MainForm_SelectedRow;
         }
+
+        private void MainForm_SelectedRow(int i)
+        {
+            ISnapshot snapshot = _snapshots[i];
+            if (File.Exists(snapshot.FullPath))
+            {
+                snapshot.Image = Image.FromFile(snapshot.FullPath);
+                this.ShowSnapshot(snapshot);
+                snapshot.Image.Dispose();
+            }
+            else
+            {
+                mainForm.Remove(i);
+                _snapshots.RemoveAt(i);              
+            }           
+        }
+
         // Обработчик события поступления снимка
         private void Fm_NewPhoto(ISnapshot s)
         {
             // 
             this.ShowSnapshot(s);
-            _snapshots.Add(s);
+            _snapshots.Insert(0, s);
+            mainForm.Add(s);
         }
         // Отобразить синмок и данные о заказе
         private void ShowSnapshot(ISnapshot s)

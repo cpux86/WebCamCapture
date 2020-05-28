@@ -50,8 +50,12 @@ namespace WebCamCapture.View
     {
         //int Count { get; }
         //void Add(BindingList<Snapshot> list);
-        void Remove();
+        void Remove(int i);
         void Clear();
+        /// <summary>
+        /// Возникает когда пользователь выбрал сторку в списке снимков
+        /// </summary>
+        event Action<int> SelectedRow;
     }
 
     internal partial class MainForm : Form, IVideoPlayerView, IOrderMainForm, IGallery
@@ -62,9 +66,8 @@ namespace WebCamCapture.View
             this.KeyPreview = true;
             //// Отобразить форму заказа
             //orderEditBtn.Click += (s, e) => { ShowOrderForm(); };
-            //snapshotTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-            //snapshotTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-            
+            snapshotTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            snapshotTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);            
         }
 
         #region Сведения о заказе
@@ -85,6 +88,7 @@ namespace WebCamCapture.View
         public event Action ShowAppSetting;
         public event Action ShowDeviceManagerPanel;
         public event Action ShowOrderForm;
+        public event Action<int> SelectedRow;
 
         /// <summary>
         /// Корневой каталог приложения
@@ -191,33 +195,23 @@ namespace WebCamCapture.View
             Point point = videoPlayer.Location;
             videoPlayer.Location = snapshotView.Location;
             snapshotView.Location = point;
-
-            //this.snapshotView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            //| System.Windows.Forms.AnchorStyles.Left)
-            //| System.Windows.Forms.AnchorStyles.Right)));
-            //this.snapshotView.Location = new System.Drawing.Point(12, 27);
-            //this.snapshotView.Size = new System.Drawing.Size(572, 441);
-
-            //this.videoPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            //this.videoPlayer.Location = new System.Drawing.Point(590, 27);
-            //this.videoPlayer.Size = new System.Drawing.Size(350, 230);
-
         }
 
         #region Фотогалерея
 
-        public void Add(Snapshot s)
+        public void Add(ISnapshot s)
         {
             Invoke((MethodInvoker)(() =>
             {
-                ListViewItem item = new ListViewItem();
+                ListViewItem item = new ListViewItem(new string[] { s.OrderNumber, s.DateCreated, s.Roller, s.Process, s.User }) ;
+                snapshotTable.Items.Insert(0, item);
             }));
             
         }
 
-        public void Remove()
+        public void Remove(int i)
         {
-            throw new NotImplementedException();
+            snapshotTable.Items.RemoveAt(i);
         }
 
         public void Clear()
@@ -227,9 +221,14 @@ namespace WebCamCapture.View
 
 
 
+
         #endregion
 
 
+        private void snapshotTable_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            SelectedRow(e.ItemIndex);
+        }
     }
 
 
