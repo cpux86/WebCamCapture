@@ -155,8 +155,7 @@ namespace WebCamCapture.Model
                 {
                     Directory.CreateDirectory(path);
                 }
-                // уведомляем о новом снимке               
-                this.NewPhoto(snapshot);
+
                 // разрешен ли водяной текст
                 if (Config.WaterText)
                 {
@@ -167,6 +166,9 @@ namespace WebCamCapture.Model
                 }
                 // сохраняем снимок 
                 img.Save(fullPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                snapshot.FullPath = fullPath;
+                // уведомляем о новом снимке               
+                this.NewPhoto(snapshot);
 
             }
             catch (Exception e)
@@ -174,7 +176,7 @@ namespace WebCamCapture.Model
                 System.Windows.Forms.MessageBox.Show(e.Message);
             }
 
-            snapshot.FullPath = fullPath;
+            
 
         }
 

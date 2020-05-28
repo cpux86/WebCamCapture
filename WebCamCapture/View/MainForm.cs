@@ -49,7 +49,7 @@ namespace WebCamCapture.View
     public interface IGallery
     {
         //int Count { get; }
-        void Add(BindingList<Snapshot> list);
+        //void Add(BindingList<Snapshot> list);
         void Remove();
         void Clear();
     }
@@ -229,10 +229,6 @@ namespace WebCamCapture.View
 
         #endregion
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Test");
-        }
 
     }
 

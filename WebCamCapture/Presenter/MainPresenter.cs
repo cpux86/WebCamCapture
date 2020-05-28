@@ -29,14 +29,13 @@ namespace WebCamCapture.Presenter
             this.ShowSnapshot(s);
             _snapshots.Add(s);
         }
-        // Получить снимок для отображения
+        // Отобразить синмок и данные о заказе
         private void ShowSnapshot(ISnapshot s)
         {
-            //mainForm.ShowSnapshot(s.Image);
-            //mainForm.OrderNumber = s.OrderNumber;
             mainForm.ShowSnapshot(s);
         }
 
+        // получить 
 
         // Обработчик события "Создать снимок"
         private void MainForm_MakeSnapshot()
