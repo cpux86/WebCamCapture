@@ -51,10 +51,6 @@ namespace WebCamCapture.Model
         /// Новый снимок
         /// </summary>
         public event Action<ISnapshot> NewPhoto;
-        /// <summary>
-        /// Снимок загружен 
-        /// </summary>
-        public event Action<ISnapshot> Photo;
 
 
         #region API

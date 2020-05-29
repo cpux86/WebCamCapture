@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Windows.Forms;
 
 namespace WebCamCapture.View
@@ -44,7 +43,7 @@ namespace WebCamCapture.View
 
         DialogResult ShowDialog();
 
-        event Action BtnOkOrderClick;
+        //event Action BtnOkOrderClick;
     }
 
     public partial class OrderForm : Form, IOrderForm
@@ -75,12 +74,10 @@ namespace WebCamCapture.View
         public string OrderNumber { get => orderCbox.Text; }
         public string Roller { get => rollerCbox.Text; }
         public string Process { get => processCbox.Text; }
-        [Required]
-        [StringLength(50, MinimumLength = 3)]
         public string User { get => userNameCbox.Text; set => userNameCbox.Text = value; }
 
 
-        public event Action BtnOkOrderClick;
+        //public event Action BtnOkOrderClick;
 
         public OrderForm()
         {
@@ -142,20 +139,6 @@ namespace WebCamCapture.View
 
         }
 
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            ValidationContext context = new ValidationContext(this);
-            var results = new List<ValidationResult>();
-            if (!Validator.TryValidateObject(this, context, results, true))
-            {
-                foreach (var error in results)
-                {
-                    // MessageBox.Show(error.ErrorMessage);
-                }
-            }
-
-            //BtnOkOrderClick();
-        }
 
         private void OrderForm_KeyUp(object sender, KeyEventArgs e)
         {

@@ -1,6 +1,5 @@
 ﻿using Accord.Video;
 using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using WebCamCapture.Model;
@@ -135,23 +134,6 @@ namespace WebCamCapture.View
             ShowDeviceManagerPanel();
         }
 
-
-        //public void ShowSnapshot(Image img)
-        //{
-        //    Invoke((MethodInvoker)(() =>
-        //    {
-        //        if (snapshotView.Image != null)
-        //        {
-        //            snapshotView.Image.Dispose();
-        //            snapshotView.Image = null;
-        //        }
-
-        //        snapshotView.Image = (Bitmap)img.Clone();
-
-
-        //    }));
-        //}
-
         /// <summary>
         /// Отобразить снимок и сведения о заказе
         /// </summary>
@@ -178,23 +160,6 @@ namespace WebCamCapture.View
         private void OrderEditBtn_Click(object sender, EventArgs e)
         {
             ShowOrderForm();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //snapshotView.Visible = !snapshotView.Visible;
-
-            Size size = videoPlayer.Size;
-            videoPlayer.Size = snapshotView.Size;
-            snapshotView.Size = size;
-
-            AnchorStyles anchor = videoPlayer.Anchor;
-            videoPlayer.Anchor = snapshotView.Anchor;
-            snapshotView.Anchor = anchor;
-
-            Point point = videoPlayer.Location;
-            videoPlayer.Location = snapshotView.Location;
-            snapshotView.Location = point;
         }
 
         #region Фотогалерея

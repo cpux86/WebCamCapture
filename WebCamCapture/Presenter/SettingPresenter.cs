@@ -1,5 +1,4 @@
-﻿//using Accord.Video.DirectShow;
-using Accord.Video.DirectShow;
+﻿using Accord.Video.DirectShow;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
